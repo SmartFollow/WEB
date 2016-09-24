@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" ng-app="app">
 <head>
   <meta charset="utf-8">
   <title>Connexion</title>
@@ -8,14 +8,14 @@
     <script src="js/angular.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="js/connection.js"></script>
+    <script src="js/connection.angular.js"></script>
 </head>
 	<body>
-		<div class="container">
+		<div class="container" ng-controller="Connection">
 			<div class="card card-container">
 				<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form class="form-signin">
+				<form class="form-signin" ng-submit="submit()">
 					<span id="reauth-email" class="reauth-email"></span>
 					<input type="email" id="inputEmail" class="form-control" placeholder="Adresse e-mail" required autofocus>
 					<input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
