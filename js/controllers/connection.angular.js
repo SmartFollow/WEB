@@ -5,8 +5,8 @@ angular.module('app', [])
        url: "http://api.dev.smartfollow.org/oauth/token",
        method: "POST",
        data: {
-            username: $("#inputEmail").val(),
-            password: $("#inputPassword").val(),
+            username: $scope.inputEmail,
+            password: $scope.inputPassword,
             grant_type: "password",
             client_id: "2",
             client_secret: "BjEebk7a3NP9nXOswW2Y5nJ04V7aRLGjxKYUEV3C",

@@ -2,7 +2,7 @@
 <html lang="fr" ng-app="app">
 <head>
   <meta charset="utf-8">
-  <title>Connexion</title>
+  <title>Smartfollow - Connexion</title>
     <link rel="stylesheet" type="text/css" href="../scss/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../scss/style.css">
     <script src="../js/angular.min.js"></script>
@@ -17,8 +17,8 @@
         <p id="profile-name" class="profile-name-card"></p>
         <form class="form-signin" ng-submit="submit()">
           <span id="reauth-email" class="reauth-email"></span>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Adresse e-mail" required autofocus>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+          <input type="email" id="inputEmail" ng-model="inputEmail" class="form-control" placeholder="Adresse e-mail" required autofocus>
+          <input type="password" id="inputPassword" ng-model="inputPassword" class="form-control" placeholder="Mot de passe" required>
           <div id="remember" class="checkbox">
             <label>
               <input type="checkbox" value="remember-me"> Se souvenir de moi 
