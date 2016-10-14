@@ -1,0 +1,22 @@
+{
+  "name": "smartfollow",
+  "version": "0.1.0",
+  "description": "1. Do not push on `master`\r 2. \"main\" branch is `dev`\r 3. Create a new `feature` branch for each new feature development\r 4. Do not merge `feature` branches with `dev`, create a pull request from `feature` branch to `dev`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/smartfollow/web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/smartfollow/web/issues"
+  },
+  "homepage": "https://gitlab.com/smartfollow/web#README",
+  "dependencies": {
+    "bower": "^1.7.9"
+  }
+}
