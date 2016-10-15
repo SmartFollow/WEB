@@ -1,9 +1,18 @@
 <!doctype html>
 <html lang="fr">
 <head>
-	<title></title>
-	<meta http-equiv="refresh" content="0; url=./app/views/connection.html">
+  <meta charset="utf-8">
+  <title>Smartfollow</title>
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/app/styles/style.css">
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/app/scripts/modules/routerApp.js"></script>
+    <script src="/app/scripts/controllers/connection.angular.js"></script>
 </head>
-<body>
-</body>
+	<body ng-app="routerApp">
+		<div ui-view></div>
+	</body>
 </html>

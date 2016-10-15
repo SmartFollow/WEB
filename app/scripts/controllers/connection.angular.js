@@ -1,4 +1,4 @@
-angular.module('app', [])
+angular.module('connection', [])
 .controller('Connection', ['$scope', '$http', function($scope, $http) {
   $scope.submit = function () {
     $http({
