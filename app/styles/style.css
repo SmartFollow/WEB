@@ -1,8 +1,239 @@
-body, html {
-  height: 100%;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(#c0392b, #e74c3c); }
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic);
+* {
+  box-sizing: border-box; }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%; }
+
+body {
+  font-family: "Lato", Arial, sans-serif;
+  padding-top: 60px;
+  background-color: #e3e8ec; }
+
+.site-body {
+  height: 100%;
+  width: 100%; }
+
+.navbar {
+  border-bottom: none; }
+  .navbar .navbar-header {
+    background-color: #c0392b;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px; }
+    .navbar .navbar-header .title {
+      margin: 0;
+      padding: 0;
+      font-size: 2em;
+      font-weight: lighter;
+      display: inline;
+      color: #ffffff; }
+      .navbar .navbar-header .title strong {
+        font-weight: bold; }
+
+.sidebar {
+  display: none;
+  background-color: #282828;
+  color: #ffffff; }
+  .sidebar .infos-block {
+    background-color: #e74c3c;
+    color: #ffffff;
+    padding: 10px; }
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 8000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; }
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%; }
+body {
+  font-family: "Lato", Arial, sans-serif;
+  padding-top: 60px; }
+
+.site-body {
+  height: 100%;
+  width: 100%; }
+
+.navbar {
+  background-color: #282828;
+  border-bottom: none; }
+  .navbar .navbar-header {
+    background-color: #c0392b;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px; }
+    .navbar .navbar-header .title {
+      margin: 0;
+      padding: 0;
+      font-size: 2em;
+      font-weight: lighter;
+      display: inline;
+      color: #ffffff; }
+      .navbar .navbar-header .title strong {
+        font-weight: bold; }
+    .navbar .navbar-header:after {
+      content: "";
+      position: absolute;
+      z-index: 2000;
+      right: -1px;
+      top: 20px;
+      bottom: 20px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right: 15px solid #282828; }
+  .navbar .navbar-controls {
+    padding: 20px 15px; }
+    .navbar .navbar-controls .page-title {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2em;
+      font-weight: bold;
+      display: inline;
+      color: #ffffff; }
+      .navbar .navbar-controls .page-title .glyphicon {
+        margin-right: 15px; }
+    .navbar .navbar-controls .controls {
+      color: #ffffff; }
+      .navbar .navbar-controls .controls span {
+        margin-left: 15px; }
+      .navbar .navbar-controls .controls a {
+        color: inherit; }
+
+.sidebar {
+  display: none;
+  background-color: #282828;
+  color: #ffffff; }
+  .sidebar .infos-block {
+    background-color: #e74c3c;
+    color: #ffffff;
+    padding: 10px; }
+    .sidebar .infos-block .quick-evaluations .title {
+      font-weight: bold;
+      margin-bottom: 5px; }
+    .sidebar .infos-block .quick-evaluations .glyphicon {
+      margin-right: 10px; }
+  .sidebar .menu {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
+    list-style-type: none; }
+    .sidebar .menu a {
+      display: block;
+      width: 100%;
+      color: inherit;
+      padding: 15px;
+      padding-left: 25px;
+      position: relative; }
+      .sidebar .menu a:hover {
+        background-color: #1f1f1f;
+        text-decoration: none; }
+        .sidebar .menu a:hover span {
+          color: #c0392b; }
+        .sidebar .menu a:hover:before {
+          content: "";
+          width: 4px;
+          background: #c0392b;
+          position: absolute;
+          z-index: 2000;
+          left: 0;
+          top: 0;
+          bottom: 0; }
+      .sidebar .menu a span {
+        margin-right: 15px; }
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; } }
+.main {
+  padding-top: 15px; }
+
+.breadcrumb-container {
+  padding-left: 15px; }
+  .breadcrumb-container .breadcrumb {
+    height: 60px;
+    width: 100%;
+    border-radius: 0;
+    background: #282828;
+    color: #ffffff;
+    font-size: 1.5em;
+    line-height: 60px;
+    padding: 0; }
+    .breadcrumb-container .breadcrumb li {
+      padding: 0;
+      min-width: 150px;
+      text-align: center;
+      position: relative;
+      margin-right: 60px;
+      padding: 0 10px; }
+      .breadcrumb-container .breadcrumb li:before {
+        content: "" !important;
+        position: absolute;
+        top: 0;
+        left: -60px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 60px 60px;
+        border-color: transparent; }
+      .breadcrumb-container .breadcrumb li:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -60px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 60px 60px 0 0;
+        border-color: transparent; }
+      .breadcrumb-container .breadcrumb li.legend {
+        background: #c0392b;
+        z-index: 500;
+        padding-left: 15px; }
+        .breadcrumb-container .breadcrumb li.legend:before {
+          display: none; }
+        .breadcrumb-container .breadcrumb li.legend:after {
+          border-color: #c0392b transparent transparent transparent; }
+      .breadcrumb-container .breadcrumb li.active {
+        background: #1f1f1f;
+        z-index: 300;
+        color: inherit; }
+        .breadcrumb-container .breadcrumb li.active:before {
+          border-color: transparent transparent #1f1f1f transparent; }
+        .breadcrumb-container .breadcrumb li.active:after {
+          border-color: #1f1f1f transparent transparent transparent; }
+
+@media (max-width: 768px) {
+  .breadcrumb-container {
+    padding: 0; }
+    .breadcrumb-container .breadcrumb li {
+      display: none; }
+      .breadcrumb-container .breadcrumb li.active {
+        display: block;
+        width: 100%; }
+        .breadcrumb-container .breadcrumb li.active:before, .breadcrumb-container .breadcrumb li.active:after {
+          display: none; } }
 .card-container.card {
   max-width: 350px;
   padding: 40px 40px; }
@@ -117,5 +348,13 @@ body, html {
 .forgot-password:active,
 .forgot-password:focus {
   color: #0c6121; }
+
+.background-connection {
+  margin-top: -9.1vh;
+  height: 103.1vh;
+  width: 100%;
+  background-color: #c0392b;
+  position: absolute;
+  z-index: -1; }
 
 /*# sourceMappingURL=style.css.map */

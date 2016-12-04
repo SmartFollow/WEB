@@ -1,0 +1,143 @@
+/*  MARGIN et PADDING */
+
+.mts {
+	margin-top: 10px;
+}
+
+.mtm {
+	margin-top: 20px;
+}
+
+.mtl {
+	margin-top: 30px;
+}
+
+.mtxl {
+	margin-top: 40px;
+}
+
+.mbs {
+	margin-bottom: 10px;
+}
+
+.mbm {
+	margin-bottom: 20px;
+}
+
+.mbl {
+	margin-bottom: 30px;
+}
+
+.mbxl {
+	margin-bottom: 40px;
+}
+
+.mrs {
+	margin-right: 10px;
+}
+
+.mrm {
+	margin-right: 20px;
+}
+
+.mrl {
+	margin-right: 30px;
+}
+
+.mrxl {
+	margin-right: 40px;
+}
+
+.mls {
+	margin-left: 10px;
+}
+
+.mlm {
+	margin-left: 20px;
+}
+
+.mll {
+	margin-left: 30px;
+}
+
+.mlxl {
+	margin-left: 40px;
+}
+
+.pts {
+	padding-top: 10px;
+}
+
+.ptm {
+	padding-top: 20px;
+}
+
+.ptl {
+	padding-top: 30px;
+}
+
+.ptxl {
+	padding-top: 40px;
+}
+
+.pbs {
+	padding-bottom: 10px;
+}
+
+.pbm {
+	padding-bottom: 20px;
+}
+
+.pbl {
+	padding-bottom: 30px;
+}
+
+.pbxl {
+	padding-bottom: 40px;
+}
+
+.prs {
+	padding-right: 10px;
+}
+
+.prm {
+	padding-right: 20px;
+}
+
+.prl {
+	padding-right: 30px;
+}
+
+.prxl {
+	padding-right: 40px;
+}
+
+.pls {
+	padding-left: 10px;
+}
+
+.plm {
+	padding-left: 20px;
+}
+
+.pll {
+	padding-left: 30px;
+}
+
+.plxl {
+	padding-left: 40px;
+}
+
+/* UTILITIES */
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
