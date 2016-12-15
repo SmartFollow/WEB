@@ -9,12 +9,11 @@ angular.module('oauthApp', ['routerApp', 'user', 'ngCookies', 'angular-oauth2'])
       else
         $state.go('profil-teacher');
     })
-    //$http.defaults.headers.common.Authorization = 'Bearer ' + OAuthToken.getAccessToken();
   }
    OAuth.configure({
     baseUrl: "http://smartfollow.api/",
     clientId: "2",
-    clientSecret: "r2yiOu2YIKymJr0VBMxQC6QySCwniFMId8QqDefm"
+    clientSecret: "P3McuCqh4escpmAGCOulHhSszahMxIYtsW1FLliH"
   });
   $scope.submit = function () {
     $cookies.put('username', $scope.inputEmail);
@@ -39,6 +38,18 @@ angular.module('oauthApp', ['routerApp', 'user', 'ngCookies', 'angular-oauth2'])
       $window.location.reload();
     }
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

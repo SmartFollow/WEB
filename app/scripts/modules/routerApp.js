@@ -53,6 +53,23 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             css: '/app/styles/lesson.css',
             templateUrl: 'app/views/lesson.php'
         })
+        // Lesson evaluation view
+        .state('lesson-evaluation', {
+            url: '/lesson-evaluation',
+            parent: 'root',
+            controller: 'profil',
+            data:{ pageTitle: 'Déroulement du cours' },
+            css: '/app/styles/lesson.css',
+            templateUrl: 'app/views/lesson.php'
+        })
+        // Reservations rooms
+        .state('reservations', {
+            url: '/reservations',
+            parent: 'root',
+            controller: 'reservation',
+            data:{ pageTitle: 'Réservation salle' },
+            templateUrl: 'app/views/reservations.php'
+        })
         // Evaluation view
         .state('evaluation', {
             url: '/evaluation',

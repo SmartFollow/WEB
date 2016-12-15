@@ -49,10 +49,16 @@
                             <a ui-sref="planning"><span class="glyphicon glyphicon-calendar"></span> Planning</a>
                         </li>
                         <li ng-show="!showEval">
-                            <a ui-sref="lesson"><span class="glyphicon glyphicon-inbox"></span> Déroulement du cours</a>
+                            <a ui-sref="lesson"><span class="glyphicon glyphicon-inbox"></span> Gestion des leçons</a>
+                        </li>
+                        <li ng-show="!showEval">
+                            <a ui-sref="lesson-evaluation"><span class="glyphicon glyphicon-inbox"></span> Evaluations d'un cours</a>
                         </li>
                         <li ng-show="!showEval">
                             <a ui-sref="evaluation"><span class="glyphicon glyphicon-bookmark"></span> Création d'une évaluation</a>
+                        </li>
+                        <li ng-show="!showEval">
+                            <a ui-sref="reservations"><span class="glyphicon glyphicon-bookmark"></span> Réservation d'une salle</a>
                         </li>
                     </ul>
                 </div>

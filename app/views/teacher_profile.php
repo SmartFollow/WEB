@@ -38,15 +38,15 @@ $page_title = "Votre profil";
                                 <div class="row">
                                     <a href="#/profil/4" class="block-lesson col-sm-4"> 
                                         <img src="/app/images/profil 2/bechad_p.bmp" class="img-circle img-lesson"><br>
-                                        <span class="text-lesson">Duane Williamson</span>
+                                        <span class="text-lesson">Ahmad Hudson</span>
                                     </a>
                                     <a href="#/profil/5" class="block-lesson col-sm-4"> 
                                         <img src="/app/images/profil 2/diafou_j.bmp" class="img-circle img-lesson"><br>
-                                        <span class="text-lesson">Emmitt Kreiger</span>
+                                        <span class="text-lesson">Gay Champlin</span>
                                     </a>
                                     <a href="#/profil/6" class="block-lesson col-sm-4"> 
                                         <img src="/app/images/profil 2/rio_s.bmp" class="img-circle img-lesson"><br>
-                                        <span class="text-lesson">Viviane Willms</span>
+                                        <span class="text-lesson">Paige Russel</span>
                                     </a>
                                 </div>
                             </div>

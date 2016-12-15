@@ -1,4 +1,4 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user'])
+angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker'])
 .controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', function(users, $http, $rootScope, $scope, OAuth, $state) {
 	if (!OAuth.isAuthenticated())
     	$state.go('login');
@@ -32,4 +32,13 @@ angular.module('app', ['routerApp', 'oauthApp', 'user'])
 	    		$scope.imgUser = "/app/images/profil 2/rio_s.bmp";
 	    })
     }
+}])
+.controller('reservation', ['$scope', '$state', '$rootScope', '$http', function ($scope, $state, $rootScope, $http) {
+	if ($state.current.data != null)
+    	$rootScope.pageTitle = $state.current.data.pageTitle;
+	$http({
+		method: 'POST',
+		url: "http://smartfollow.api/api/reservations",
+		data: "room_id=angular.element('#room_id').val()&time_start=angular.element('#time_start').val()&time_end=angular.element('#time_end').val()&date_start=angular.element('#room_id').val()&date_end=angular.element('#room_id').val()&day=angular.element('#room_id').val()"
+	});
 }]);
