@@ -1,24 +1,29 @@
 <div class="row">
 <div class="col-md-6" style="background-color: white;margin-left: 20px;margin-top: 20px;">
   <div class="col-md-6" style="margin-top:20px; margin-bottom: 10px;     background-color: rgba(192, 57, 43, 0.02);">
-    Date de début
-    <datetimepicker data-ng-model="data.date1"></datetimepicker>
+    Date de début<br>
+    <span class="edit" id="edit1">
+      Le {{reservation.date_start}} à {{reservation.time_start}}
+      <button class="btn btn-info" ng-click="editDate1()" style="margin-left: 10px;">modifier</button>
+    </span>
+    <datetimepicker id="date1" data-ng-model="data.date1"></datetimepicker>
   </div>
   <div class="col-md-6" style="margin-top:20px; margin-bottom: 20px;     background-color: rgba(192, 57, 43, 0.02);">
-    Date de fin
-    <datetimepicker data-ng-model="data.date2"></datetimepicker>
+    Date de fin<br>
+    <span class="edit" id="edit2">
+      Le {{reservation.date_end}} à {{reservation.time_end}}
+      <button class="btn btn-info" ng-click="editDate2()" style="margin-left: 10px;">modifier</button>
+    </span>
+    <datetimepicker id="date2" data-ng-model="data.date2"></datetimepicker>
   </div>
   <div class="col-md-12" style="margin-bottom: 20px">
-    <select class="form-control">
-      <option>D301</option>
-      <option>D302</option>
-      <option>D303</option>
-      <option>D304</option>
-      <option>D305</option>
+    <select class="form-control" id="room_id">
+      <option value="1">C302</option>
+      <option value="2">D301</option>
     </select>
   </div>
   <div class="col-md-2" style="margin-bottom: 20px">
-    <button type="button" class="btn btn-danger">Créer</button>
+    <button type="button" class="btn btn-danger" ng-click="create()">{{button}}</button>
   </div>
 </div>
 </div>

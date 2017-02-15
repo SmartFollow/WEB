@@ -44,23 +44,32 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             css: '/app/styles/teacher_profile.css',
             templateUrl: 'app/views/teacher_profile.php'
         })
-        // Lesson view
-        .state('lesson', {
-            url: '/lesson',
+        // Lessons creation & edition
+        .state('lessons', {
+            url: '/lessons',
             parent: 'root',
-            controller: 'profil',
-            data:{ pageTitle: 'Déroulement du cours' },
+            controller: 'lessons',
+            data:{ pageTitle: 'Lessons' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lesson.php'
+            templateUrl: 'app/views/lessons.php'
         })
-        // Lesson evaluation view
-        .state('lesson-evaluation', {
-            url: '/lesson-evaluation',
+        // Lesson view
+        .state('lessons_id', {
+            url: '/lessons/{id:int}',
             parent: 'root',
-            controller: 'profil',
+            controller: 'lessonsId',
             data:{ pageTitle: 'Déroulement du cours' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lesson.php'
+            templateUrl: 'app/views/lessons_id.php'
+        })
+        // Lesson view
+        .state('lessons_id_student', {
+            url: '/lessons-student/{id:int}',
+            parent: 'root',
+            controller: 'lessonsIdStudent',
+            data:{ pageTitle: 'Déroulement du cours' },
+            css: '/app/styles/lesson.css',
+            templateUrl: 'app/views/lessons_id_student.php'
         })
         // Reservations rooms
         .state('reservations', {
@@ -68,6 +77,14 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'root',
             controller: 'reservation',
             data:{ pageTitle: 'Réservation salle' },
+            templateUrl: 'app/views/reservations.php'
+        })
+        // Reservations rooms by Id
+        .state('reservations_id', {
+            url: '/reservations/{id:int}',
+            parent: 'root',
+            controller: 'reservationsId',
+            data:{ pageTitle: 'Réservation' },
             templateUrl: 'app/views/reservations.php'
         })
         // Evaluation view
