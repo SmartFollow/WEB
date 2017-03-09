@@ -30,6 +30,31 @@
       </div>
     </div>
 
+      <div id="modal-file-{{key}}" class="modal fade" tabindex="-1" role="dialog" ng-repeat="(key, document) in lesson.documents">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{document.name}}</h4>
+          </div>
+          <div class="modal-body text-center">
+            <label class="control-label">Nom</label>
+            <div>{{document.name}}</div>
+            <br>
+            <label class="control-label">Description</label>
+            <div>{{document.description}}</div>
+            <br>
+            <label class="control-label">Document</label>
+            <br>
+            <img src="http://localhost/api/storage/app/{{document.path}}" height="150px"></img>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="modal-upload-homework" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -152,11 +177,11 @@
 	<div class="col-md-4 lesson-documents">
 		<div class="list-group documents-list">
 			<strong class="title">Documents liés au cours :</strong>
-      <li href="#" class="list-group-item" ng-repeat="document in lesson.documents">
+      <li href="#" class="list-group-item" ng-repeat="(key, document) in lesson.documents">
         {{document.name}}
         <div class="pull-left">
           <a href="http://localhost/api/storage/app/{{document.path}}" download="{{document.filename}}{{document.extension}}"><i class="document-type glyphicon glyphicon-download-alt"></i></a>
-          <a id="pdf-tpe" data-toggle="modal" data-target="#modal-file-{{document.name}}"><i class="document-type glyphicon glyphicon-eye-open"></i></a>
+          <a id="pdf-tpe" data-toggle="modal" data-target="#modal-file-{{key}}"><i class="document-type glyphicon glyphicon-eye-open"></i></a>
         </div>
         <div class="pull-right">
           <i class="document-type glyphicon glyphicon-file"></i>
