@@ -8,14 +8,13 @@ angular.module('g1b.datetime-range', []).
     scope: {
       start: '=',
       end: '=',
-      presets: '=?',
       onChange: '&?',
       onChangeStart: '&?',
       onChangeEnd: '&?',
       onClose: '&?',
     },
     replace: true,
-    templateUrl: './datetime-range.html',
+    templateUrl: '/bower_components/angular-datetime-range/src/datetime-range.html',
     compile: function () {
       return {
         pre: function preLink() {},
@@ -24,22 +23,6 @@ angular.module('g1b.datetime-range', []).
           // Get current date
           scope.current = moment();
 
-          // Convert start datetime to moment.js if its not a moment object yet
-          if ( scope.start && !scope.start._isAMomentObject ) {
-            scope.start = moment(scope.start);
-          }
-
-          // Convert end datetime to moment.js if its not a moment object yet
-          if ( scope.end && !scope.end._isAMomentObject ) {
-            scope.end = moment(scope.end);
-          }
-
-          // Get number of weeks in month
-          scope.getNumWeeks = function () {
-            if ( !scope.calendar ) { return; }
-            return Math.floor(scope.calendar.clone().endOf('month').endOf('week').diff(scope.calendar.clone().startOf('month').startOf('week'), 'days') / 7) + 1;
-          }
-
           // Set selected date
           scope.selectDate = function (date) {
             if ( scope.selected === date ) {
@@ -47,7 +30,6 @@ angular.module('g1b.datetime-range', []).
             } else {
               scope.selected = date;
               scope.calendar = scope.selected.clone();
-              scope.presetsActive = false;
             }
           };
 
@@ -59,13 +41,7 @@ angular.module('g1b.datetime-range', []).
               if ( (scope.selected.clone().startOf('week').month() !== scope.calendar.month() && scope.selected.clone().endOf('week').month() !== scope.calendar.month()) || calendar_update ) {
                 scope.calendar = scope.selected.clone();
               }
-              if ( scope.selected === scope.start ) {
-                scope.callbackStart();
-              }
-              if ( scope.selected === scope.end ) {
-                scope.callbackEnd();
-              }
-              scope.callbackAll();
+              scope.callback();
             } else {
               scope.warning = ( scope.selected === scope.start ) ? 'end' : 'start';
               $timeout(function () {
@@ -74,82 +50,52 @@ angular.module('g1b.datetime-range', []).
             }
           };
 
-          // Set start and end datetime objects to the selected preset
-          scope.selectPreset = function (preset) {
-            // Hide presets menu on select
-            scope.close();
-
-            // Don't do anything if nothing is changed
-            if ( scope.start.isSame(preset.start) && scope.end.isSame(preset.end) ) { return; }
-
-            // Update start datetime object if changed
-            if ( !scope.start.isSame(preset.start) ) {
-              scope.start = preset.start.clone();
-              scope.callbackStart();
-            }
-
-            // Update end datetime object if changed
-            if ( !scope.end.isSame(preset.end) ) {
-              scope.end = preset.end.clone();
-              scope.callbackEnd();
-            }
-
-            // Something has definitely changed, fire ambiguous callback
-            scope.callbackAll();
-          };
-
-          // Callbacks fired on change of start datetime object
-          scope.callbackStart = function () {
-            if ( !!scope.onChangeStart ) {
-              $timeout(function () {
-                scope.onChangeStart();
-              });
-            }
-          };
-
-          // Callbacks fired on change of end datetime object
-          scope.callbackEnd = function () {
-            if ( !!scope.onChangeEnd ) {
-              $timeout(function () {
-                scope.onChangeEnd();
-              });
-            }
-          };
-
           // Callbacks fired on change of start and/or end datetime objects
-          scope.callbackAll = function () {
+          scope.callback = function () {
+            if ( !!scope.onChangeStart && scope.selected === scope.start ) {
+              scope.onChangeStart();
+            }
+            if ( !!scope.onChangeEnd && scope.selected === scope.end ) {
+              scope.onChangeEnd();
+            }
             if ( !!scope.onChange ) {
-              $timeout(function () {
-                scope.onChange();
-              });
+              scope.onChange();
             }
           };
+
+          // Convert start datetime to moment.js if its not a moment object yet
+          if ( scope.start && !scope.start._isAMomentObject ) {
+            scope.start = moment(scope.start);
+          }
+
+          // Convert end datetime to moment.js if its not a moment object yet
+          if ( scope.end && !scope.end._isAMomentObject ) {
+            scope.end = moment(scope.end);
+          }
 
           // Close edit popover
           scope.close = function () {
             scope.selected = '';
-            scope.presetsActive = false;
-            scope.calendarActive = false;
-
-            if ( !!scope.onClose ) {
-              scope.onClose();
-            }
+            scope.calendar_active = false;
+            scope.onClose();
           }
 
           // Bind click events outside directive to close edit popover
           $document.on('mousedown', function (e) {
-            if ( !element[0].contains(e.target) && (!!scope.presetsActive || !!scope.selected) ) {
+            if ( !!scope.selected && !element[0].contains(e.target) ) {
               scope.$apply(function () {
-                scope.close();
+                scope.selected = '';
+                scope.calendar_active = false;
               });
             }
           });
 
-          // Bind 'esc' keyup event to close edit popover
           $document.on('keyup', function (e) {
-            if ( e.keyCode === 27 && (!!scope.presetsActive || !!scope.selected) ) {
+            if ( e.keyCode === 27 && !!scope.selected ) {
               scope.$apply(function () {
-                scope.close();
+                scope.selected = '';
+                scope.calendar_active = false;
+                scope.onClose();
               });
             }
           });
@@ -159,7 +105,6 @@ angular.module('g1b.datetime-range', []).
   };
 }]);
 
-// Scroll up directive
 angular.module('g1b.datetime-range').
   directive('scrollUp', function () {
   return {
@@ -168,7 +113,7 @@ angular.module('g1b.datetime-range').
       return {
         pre: function preLink() {},
         post: function postLink(scope, element, attrs) {
-          element.bind('mousewheel wheel', function (ev) {
+          element.bind('DOMMouseScroll mousewheel wheel', function (ev) {
             ev = ev.originalEvent || ev;
             var delta = ev.wheelDelta || (-1 * ev.deltaY) || 0;
             if ( delta > 0 ) {
@@ -184,7 +129,6 @@ angular.module('g1b.datetime-range').
   };
 });
 
-// Scroll down directive
 angular.module('g1b.datetime-range').
   directive('scrollDown', function () {
   return {
@@ -193,7 +137,7 @@ angular.module('g1b.datetime-range').
       return {
         pre: function preLink() {},
         post: function postLink(scope, element, attrs) {
-          element.bind('mousewheel wheel', function (ev) {
+          element.bind('DOMMouseScroll mousewheel wheel', function (ev) {
             ev = ev.originalEvent || ev;
             var delta = ev.wheelDelta || (-1 * ev.deltaY) || 0;
             if ( delta < 0 ) {
