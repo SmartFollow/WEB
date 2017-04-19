@@ -36,6 +36,9 @@
 
  * Open hosts file in `C:/Windows/System32/drivers/etc/` and add the following line ( Don't delete anything ) 
 	`127.0.0.1 smartfollow.web`
-
 7. Restart your server.
-8. Go to [http://smartfollow.web/](http://smartfollow.web/)
+8. Edit `\app\scripts\controllers\oauth.js` and change baseUrl, clientId and clientSecret
+	```baseUrl: "http://smartfollow.api/",
+    clientId: "2",
+    clientSecret: "YXVobXmgaz6xl0YWAkpw2t7MWT59IftlwUbk0Uis"```
+9. Go to [http://smartfollow.web/](http://smartfollow.web/)
