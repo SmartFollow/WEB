@@ -1,4 +1,4 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker'])
+angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker', 'constants'])
 .controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'OAuth', function(users, $http, $rootScope, $scope, OAuth, $state) {
 	if (!OAuth.isAuthenticated())
     	$state.go('login');
@@ -33,7 +33,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 	    })
     }
 }])
-.controller('lessons', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', function (users, $scope, $state, $rootScope, $http, $filter) {
+.controller('lessons', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', function (users, $scope, $state, $rootScope, $http, $filter, config) {
 	$("#selectedLevel").hide();
 	$("#selectedSubject").hide();
 	$("#selectedClasse").hide();
@@ -44,7 +44,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 
     $http({
 			method: 'GET',
-			url: "http://api.dev.smartfollow.org/api/lessons/create"
+			url: config.apiUrl + "api/lessons/create"
 		}).then(function successCallback(response) {
 			$scope.lessons = response.data;
 			$("#selectedLevel").show();
@@ -68,7 +68,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
     $scope.create = function () {    	
     	$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/lessons",
+			url: config.apiUrl + "api/lessons",
 			data: {
 				subject_id: $scope.selectedSubject.id,
 				reservation_id: $("#reservation").val(),
@@ -81,10 +81,10 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 		});
     };
 }])
-.controller('lessonsId', [ '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', function ($scope, $state, $rootScope, $http, $filter, $stateParams) {
+.controller('lessonsId', [ '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
     $http({
 			method: 'GET',
-			url: "http://api.dev.smartfollow.org/api/lessons/"+$stateParams.id
+			url: config.apiUrl + "api/lessons/"+$stateParams.id
 		}).then(function successCallback(response) {
 			$scope.lesson = response.data;
 			console.log(response);
@@ -100,7 +100,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
 		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/lessons/"+$stateParams.id+"/documents",
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/documents",
 			data: file
 		}).then(function successCallback(response) {
 			$state.reload();
@@ -117,7 +117,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
 		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/lessons/"+$stateParams.id+"/homeworks",
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/homeworks",
 			data: file
 		}).then(function successCallback(response) {
 			$state.reload();
@@ -137,7 +137,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
 		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/lessons/"+$stateParams.id+"/exam",
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/exam",
 			data: file
 		}).then(function successCallback(response) {
 			$state.reload();
@@ -157,7 +157,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
 			$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/lessons/"+$stateParams.id+"/evaluations",
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/evaluations",
 			data: file
 			}).then(function successCallback(response) {
 				console.log(response);
@@ -180,10 +180,10 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 		}
 	};
 }])
-.controller('lessonsIdStudent', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', function (users, $scope, $state, $rootScope, $http, $filter, $stateParams) {
+.controller('lessonsIdStudent', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function (users, $scope, $state, $rootScope, $http, $filter, $stateParams, config) {
     $http({
 			method: 'GET',
-			url: "http://api.dev.smartfollow.org/api/lessons/"+$stateParams.id
+			url: config.apiUrl + "api/lessons/"+$stateParams.id
 		}).then(function successCallback(response) {
 			$scope.lesson = response.data;
 			if ($scope.lesson.exam.type == "home")
@@ -193,7 +193,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 			console.log(response);
 	});
 }])
-.controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', function ($scope, $state, $rootScope, $http, $filter) {
+.controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config', function ($scope, $state, $rootScope, $http, $filter, config) {
 	$scope.button = "Créer";
 	$(".edit").hide();
 	if ($state.current.data != null)
@@ -215,7 +215,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
    		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/reservations",
+			url: config.apiUrl + "api/reservations",
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
@@ -224,13 +224,13 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 		});
 	};
 }])
-.controller('reservationsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', function ($scope, $state, $rootScope, $http, $filter, $stateParams) {
+.controller('reservationsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 	$scope.button = "Editer";
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
     $http({
 			method: 'GET',
-			url: "http://api.dev.smartfollow.org/api/reservations/" + $stateParams.id
+			url: config.apiUrl + "api/reservations/" + $stateParams.id
 		}).then(function successCallback(response) {
 			$scope.reservation = response.data;
 			$("#room_id").val(response.data.id);
@@ -268,7 +268,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
    		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/reservations",
+			url: config.apiUrl + "api/reservations",
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);

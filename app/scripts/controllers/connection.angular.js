@@ -1,3 +1,6 @@
+/*
+** N'est plus utilisé
+*/
 angular.module('connection', [])
 .controller('Connection', ['$scope', '$http', 'OAuth', function($scope, $http) {
   $scope.submit = function () {

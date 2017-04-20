@@ -1,5 +1,5 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker'])
-.controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', function ($scope, $state, $rootScope, $http, $filter) {
+angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker', 'constants'])
+.controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config' function ($scope, $state, $rootScope, $http, $filter, config) {
 	$scope.button = "Créer";
 	$(".edit").hide();
 	if ($state.current.data != null)
@@ -18,7 +18,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 
    		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/reservations",
+			url: config.apiUrl + "api/reservations",
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
@@ -27,13 +27,13 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 		});
 	};
 }])
-.controller('reservationsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', function ($scope, $state, $rootScope, $http, $filter, $stateParams) {
+.controller('reservationsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 	$scope.button = "Editer";
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
     $http({
 			method: 'GET',
-			url: "http://api.dev.smartfollow.org/api/reservations/" + $stateParams.id
+			url: config.apiUrl + "api/reservations/" + $stateParams.id
 		}).then(function successCallback(response) {
 			$scope.reservation = response.data;
 			$("#room_id").val(response.data.id);
@@ -71,7 +71,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
    		$http({
 			method: 'POST',
-			url: "http://api.dev.smartfollow.org/api/reservations",
+			url: config.apiUrl + "api/reservations",
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);

@@ -1,5 +1,5 @@
-angular.module('oauthApp', ['routerApp', 'user', 'ngCookies', 'angular-oauth2'])
-.controller('login', ['OAuth', 'OAuthToken', '$scope', '$http', '$state', '$window', '$cookies', '$rootScope', 'users', function(OAuth, OAuthToken, $scope, $http, $state, $window, $cookies, $rootScope, users) {
+angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angular-oauth2'])
+.controller('login', ['OAuth', 'OAuthToken', '$scope', '$http', '$state', '$window', '$cookies', '$rootScope', 'users', 'config', function(OAuth, OAuthToken, $scope, $http, $state, $window, $cookies, $rootScope, users, config) {
   if (OAuth.isAuthenticated())
   {
     users.getUserFromData(function (response) {
@@ -11,9 +11,9 @@ angular.module('oauthApp', ['routerApp', 'user', 'ngCookies', 'angular-oauth2'])
     })
   }
    OAuth.configure({
-    baseUrl: "http://api.dev.smartfollow.org/",
-    clientId: "2",
-    clientSecret: "IT1tAxoBLlzOJeE5gOoNqq2LOZws1EV5rfc7tZW2"
+    baseUrl: config.apiUrl,
+    clientId: config.clientId,
+    clientSecret: config.clientSecret
   });
   $scope.submit = function () {
     $cookies.put('username', $scope.inputEmail);
