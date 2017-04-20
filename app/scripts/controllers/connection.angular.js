@@ -1,5 +1,5 @@
 angular.module('connection', [])
-.controller('Connection', ['$scope', '$http', function($scope, $http) {
+.controller('Connection', ['$scope', '$http', 'OAuth', function($scope, $http) {
   $scope.submit = function () {
     $http({
        url: "http://api.dev.smartfollow.org/oauth/token",
@@ -9,7 +9,7 @@ angular.module('connection', [])
             password: $scope.inputPassword,
             grant_type: "password",
             client_id: "2",
-            client_secret: "BjEebk7a3NP9nXOswW2Y5nJ04V7aRLGjxKYUEV3C",
+            client_secret: "IT1tAxoBLlzOJeE5gOoNqq2LOZws1EV5rfc7tZW2",
             scope: ""
        }
       }).then(function successCallback(response) {

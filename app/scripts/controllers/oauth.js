@@ -11,9 +11,9 @@ angular.module('oauthApp', ['routerApp', 'user', 'ngCookies', 'angular-oauth2'])
     })
   }
    OAuth.configure({
-    baseUrl: "http://smartfollow.api/",
+    baseUrl: "http://api.dev.smartfollow.org/",
     clientId: "2",
-    clientSecret: "P3McuCqh4escpmAGCOulHhSszahMxIYtsW1FLliH"
+    clientSecret: "IT1tAxoBLlzOJeE5gOoNqq2LOZws1EV5rfc7tZW2"
   });
   $scope.submit = function () {
     $cookies.put('username', $scope.inputEmail);

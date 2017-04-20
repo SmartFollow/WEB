@@ -18,7 +18,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 
    		$http({
 			method: 'POST',
-			url: "http://smartfollow.api/api/reservations",
+			url: "http://api.dev.smartfollow.org/api/reservations",
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
@@ -33,7 +33,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
     	$rootScope.pageTitle = $state.current.data.pageTitle;
     $http({
 			method: 'GET',
-			url: "http://smartfollow.api/api/reservations/" + $stateParams.id
+			url: "http://api.dev.smartfollow.org/api/reservations/" + $stateParams.id
 		}).then(function successCallback(response) {
 			$scope.reservation = response.data;
 			$("#room_id").val(response.data.id);
@@ -71,7 +71,7 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 				};
    		$http({
 			method: 'POST',
-			url: "http://smartfollow.api/api/reservations",
+			url: "http://api.dev.smartfollow.org/api/reservations",
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
