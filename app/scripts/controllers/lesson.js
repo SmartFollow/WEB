@@ -1,5 +1,4 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker', 'constants'])
-.controller('lessons', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', function (users, $scope, $state, $rootScope, $http, $filter, config) {
+angular.module('app').controller('lessons', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', function (users, $scope, $state, $rootScope, $http, $filter, config) {
 	$("#selectedLevel").hide();
 	$("#selectedSubject").hide();
 	$("#selectedClasse").hide();
@@ -158,4 +157,4 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 		}, function errorCallback(response) {
 			console.log(response);
 	});
-}])
+}]);

@@ -1,11 +1,14 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker', 'constants'])
-.controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config' function ($scope, $state, $rootScope, $http, $filter, config) {
+angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config', function ($scope, $state, $rootScope, $http, $filter, config) {
 	$scope.button = "Créer";
 	$(".edit").hide();
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
-
     $scope.create = function () {
+    	console.log($filter('date')($scope.data.date1, 'yyyy-MM-dd'));
+    	console.log($filter('date')($scope.data.date1, 'HH:mm'));
+    	console.log($filter('date')($scope.data.date2, 'yyyy-MM-dd'));
+    	console.log($filter('date')($scope.data.date2, 'HH:mm'));
+    	console.log($filter('date')(new Date(), 'EEEE').toUpperCase());
     	var room = $('#room_id').val();
     	var reservation = {
 					room_id: room,
@@ -15,7 +18,6 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 					date_end: $filter('date')($scope.data.date2, 'yyyy-MM-dd'),
 					day: $filter('date')(new Date(), 'EEEE').toUpperCase()
 				};
-
    		$http({
 			method: 'POST',
 			url: config.apiUrl + "api/reservations",

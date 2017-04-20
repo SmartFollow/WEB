@@ -1,5 +1,4 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker'])
-.controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', function(users, $http, $rootScope, $scope, OAuth, $state) {
+angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'OAuth', function(users, $http, $rootScope, $scope, OAuth, $state) {
 	if (!OAuth.isAuthenticated())
     	$state.go('login');
     else {
@@ -32,4 +31,4 @@ angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepi
 	    		$scope.imgUser = "/app/images/profil 2/rio_s.bmp";
 	    })
     }
-}])
+}]);
