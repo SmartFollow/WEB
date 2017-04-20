@@ -62,9 +62,9 @@
         }
     }
     var defaults = {
-        baseUrl: "",
-        clientId: "",
-        clientSecret: "",
+        baseUrl: null,
+        clientId: null,
+        clientSecret: null,
         grantPath: "/oauth/token",
         revokePath: "/oauth/revoke"
     };
@@ -116,8 +116,7 @@
                     value: function getAccessToken(data, options) {
                         data = angular.extend({
                             client_id: this.config.clientId,
-                            grant_type: "password",
-							scope: ""
+                            grant_type: "password"
                         }, data);
                         if (null !== this.config.clientSecret) {
                             data.client_secret = this.config.clientSecret;
@@ -131,7 +130,6 @@
                         }, options);
                         return $http.post("" + this.config.baseUrl + this.config.grantPath, data, options).then(function(response) {
                             OAuthToken.setToken(response.data);
-							console.log(response);
                             return response;
                         });
                     }
