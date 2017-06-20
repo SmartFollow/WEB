@@ -104,4 +104,13 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'profil',
             templateUrl: 'app/views/planning.php'
         })
+        // Messaging view
+        .state('messaging', {
+            url: '/messaging',
+            parent: 'root',
+            data:{ pageTitle: 'Messagerie' },
+            controller: 'messaging',
+            css: '/app/styles/messaging.css',
+            templateUrl: 'app/views/messaging.php'
+        })
 });

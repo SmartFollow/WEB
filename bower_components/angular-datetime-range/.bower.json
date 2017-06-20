@@ -1,15 +1,20 @@
 {
   "name": "angular-datetime-range",
-  "version": "0.2.2",
-  "authors": [
-    "Gleb <git@gleb.nl>"
-  ],
+  "version": "0.2.13",
   "description": "UI widget for datetime range input, converted to an angular directive for your convenience.",
+  "homepage": "https://github.com/g1eb/angular-datetime-range",
+  "authors": [
+    "g1eb <mail@g1eb.com> (https://g1eb.com)"
+  ],
+  "license": "MIT",
   "main": [
     "dist/datetime-range.js",
     "dist/datetime-range.css"
   ],
-  "moduleType": [],
+  "dependencies": {
+    "angular": "^1.5.6",
+    "moment": "^2.13.0"
+  },
   "keywords": [
     "angular",
     "angularjs",
@@ -24,8 +29,6 @@
     "dateinput",
     "timeinput"
   ],
-  "license": "MIT",
-  "homepage": "https://github.com/g1eb/angular-datetime-range",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -33,18 +36,13 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "angular": "^1.5.6",
-    "moment": "^2.13.0"
-  },
-  "_release": "0.2.2",
+  "_release": "0.2.13",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.2",
-    "commit": "3e0c81287741738fce6895a56382e057c9d262af"
+    "tag": "v0.2.13",
+    "commit": "6704a0c345a8dac617f4fe8691bed2d50b1f5edb"
   },
   "_source": "https://github.com/g1eb/angular-datetime-range.git",
-  "_target": "^0.2.2",
-  "_originalSource": "angular-datetime-range",
-  "_direct": true
+  "_target": "^0.2.12",
+  "_originalSource": "angular-datetime-range"
 }

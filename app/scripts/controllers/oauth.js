@@ -1,4 +1,4 @@
-angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angular-oauth2'])
+angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angular-oauth2', 'ngTagsInput'])
 .controller('login', ['OAuth', 'OAuthToken', '$scope', '$http', '$state', '$window', '$cookies', '$rootScope', 'users', 'config', function(OAuth, OAuthToken, $scope, $http, $state, $window, $cookies, $rootScope, users, config) {
   if (OAuth.isAuthenticated())
   {
@@ -27,6 +27,7 @@ angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angu
     } 
     var data = OAuth.getAccessToken(user, options);
     data.then(function(data) {
+        //console.log(data);
         $window.location.reload();
     });
   }	

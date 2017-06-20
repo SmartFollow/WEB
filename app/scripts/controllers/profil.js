@@ -10,6 +10,16 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
     			$rootScope.showEval = true;
 		})
     }
+
+        $http({
+			method: 'GET',
+			url: "http://smartfollow.api/api/conversations"
+		}).then(function successCallback(response) {
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+	});
+
     $scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
     $rootScope.pageTitle = 'Votre profil';
     if ($state.current.data != null)

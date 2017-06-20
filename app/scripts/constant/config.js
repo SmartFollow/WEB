@@ -1,6 +1,6 @@
 angular.module('constants', [])
 .constant('config', {
-	apiUrl: "http://api.dev.smartfollow.org/",
+	apiUrl: "http://smartfollow.api/",
 	clientId: "2",
-	clientSecret: "IT1tAxoBLlzOJeE5gOoNqq2LOZws1EV5rfc7tZW2"
+	clientSecret: "P3McuCqh4escpmAGCOulHhSszahMxIYtsW1FLliH"
 });
