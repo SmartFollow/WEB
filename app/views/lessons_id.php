@@ -243,9 +243,9 @@
 <div class="row breadcrumb-container">
 	<ol class="breadcrumb">
 		<li class="legend">Déroulement du cours</li>
-		<li class="clickable active">Appel</li>
-		<li class="clickable">Cours</li>
-		<li class="clickable">Fin</li>
+		<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
+		<li data-toggle="tab" href="#cours" class="clickable" ng-click="tabClick(2)">Cours</li>
+		<!--<li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li>-->
 	</ol>
 </div>
 
@@ -262,7 +262,7 @@
       </div>
     </div>
 
-    <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <div id="modal-{{student.id}}" class="modal fade" tabindex="-1" role="dialog" ng-repeat="(key, student) in lesson.student_class.students">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -270,15 +270,8 @@
             <h4 class="modal-title"></h4>
           </div>
           <div id="popup-body" class="modal-body">
-            <div class="icon-lesson text-center" style="margin-bottom: 40px;">
-                <div class="participation col-md-4 col-sm-4 col-xs-3"><span class="glyphicon glyphicon-star"></span><span class="text"> 0</span></div>
-                <div class="chat comment col-md-4 col-sm-4 col-xs-3"><span class="glyphicon glyphicon-comment"></span><span class="text"> 0</span></div>
-                <div class="homework col-md-4 col-sm-4 col-xs-3"><span class="glyphicon glyphicon-book"></span><span class="text"> 0</span></div>
-            </div>
-            <button type="button" class="participation btn btn-success btn-lg btn-block">Participe</button>
-            <button type="button" class="chat btn btn-warning btn-lg btn-block">Bavarde</button>
-            <button type="button" class="homework btn btn-danger btn-lg btn-block">Devoir non fait</button>
-            <button type="button" class="reset btn btn-secondary btn-lg btn-block">Réinitialiser</button>
+            <button ng-repeat="criteria in student.criteria" ng-click="createEvaluationsByCriteria(criteria, student)" ng-if="criteria.impact == 'positive'" type="button" id="{{criteria.id}}" class="participation btn btn-success btn-lg btn-block">{{criteria.name}} - {{criteria.value}}</button>
+            <button ng-repeat="criteria in student.criteria" ng-click="createEvaluationsByCriteria(criteria, student)" ng-if="criteria.impact == 'negative'" type="button" id="{{criteria.id}}" class="participation btn btn-danger btn-lg btn-block">{{criteria.name}} - {{criteria.value}}</button>
           </div>
         </div>
       </div>
@@ -294,9 +287,9 @@
     </div>
 
     <div class="tab col-xs-8 col-sm-8 col-md-10">
-        <div class="subtab appel on">
+        <div id="appel" class="tab-pane fade in active">
             <div class="row trombi">
-              <div ng-click="evaluations(key, student)" ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}"class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
+              <div ng-click="createEvaluations(key, student)" ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}" class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
                     <div class="cross-lesson glyphicon glyphicon-remove"></div>
                     <div class="time-lesson glyphicon glyphicon-time"></div>
                     <img src="/app/images/profil 2/no-image.png" class="img-circle img-lesson"><br>
@@ -306,12 +299,19 @@
                  </div>
             </div>
         </div>
-        <div class="subtab cours" style="display: none">
+        <div id="cours" class="tab-pane fade">
             <div class="row trombi">
+                    <div data-toggle="modal" data-target="#modal-{{student.id}}" ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}" class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
+                    <img src="/app/images/profil 2/no-image.png" class="img-circle img-lesson"><br>
+                    <div class="icon-lesson">
+                    </div><br>
+                    <span class="text-lesson">{{student.firstname}} {{student.lastname}}</span>
+                 </div>
             </div>
         </div>
-        <div class="subtab" style="display: none">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div id="fin" class="tab-pane fade">
+
+            <!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
               <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingOne">
                   <h4 class="panel-title">
@@ -343,7 +343,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -355,3 +355,4 @@
         </div>
     </div>
 </div>
+
