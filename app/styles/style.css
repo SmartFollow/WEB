@@ -357,4 +357,8 @@ body {
   position: absolute;
   z-index: -1; }
 
+#error-auth {
+  text-align: center;
+  color: red; }
+
 /*# sourceMappingURL=style.css.map */
