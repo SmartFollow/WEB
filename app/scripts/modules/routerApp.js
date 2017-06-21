@@ -44,14 +44,30 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             css: '/app/styles/teacher_profile.css',
             templateUrl: 'app/views/teacher_profile.php'
         })
-        // Lessons creation & edition
-        .state('lessons', {
-            url: '/lessons',
+        // Lessons create
+        .state('lessons-create', {
+            url: '/lessons/create',
             parent: 'root',
-            controller: 'lessons',
+            controller: 'lessonsCreate',
             data:{ pageTitle: 'Lessons' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lessons.php'
+            templateUrl: 'app/views/lessons_create.php'
+        })
+        // Lessons edit
+        .state('lessons-edition', {
+            url: '/lessons/{id:int}/edit',
+            parent: 'root',
+            controller: 'lessonsEdit',
+            data:{ pageTitle: 'Lessons' },
+            css: '/app/styles/lesson.css',
+            templateUrl: 'app/views/lessons_edit.php'
+        })
+        // Lessons delete
+        .state('lessons-delete', {
+            url: '/lessons/{id:int}/delete',
+            parent: 'root',
+            controller: 'lessonsDelete',
+            data:{ pageTitle: 'Lessons' }
         })
         // Lesson view
         .state('lessons_id', {
@@ -73,7 +89,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         })
         // Reservations rooms
         .state('reservations', {
-            url: '/reservations',
+            url: '/reservations/create',
             parent: 'root',
             controller: 'reservation',
             data:{ pageTitle: 'Réservation salle' },
@@ -81,11 +97,18 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         })
         // Reservations rooms by Id
         .state('reservations_id', {
-            url: '/reservations/{id:int}',
+            url: '/reservations/{id:int}/edit',
             parent: 'root',
-            controller: 'reservationsId',
+            controller: 'reservationsEdit',
             data:{ pageTitle: 'Réservation' },
             templateUrl: 'app/views/reservations.php'
+        })
+        // Reservations rooms by Id
+        .state('reservations_delete', {
+            url: '/reservations/{id:int}/delete',
+            parent: 'root',
+            controller: 'reservationsDelete',
+            data:{ pageTitle: 'Réservation' }
         })
         // Evaluation view
         .state('evaluation', {

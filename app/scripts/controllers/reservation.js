@@ -29,7 +29,7 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 		});
 	};
 }])
-.controller('reservationsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+.controller('reservationsEdit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 	$scope.button = "Editer";
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
@@ -72,8 +72,8 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 					day: $filter('date')(new Date(), 'EEEE').toUpperCase()
 				};
    		$http({
-			method: 'POST',
-			url: config.apiUrl + "api/reservations",
+			method: 'PUT',
+			url: config.apiUrl + "api/reservations/" + $stateParams.id,
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
@@ -81,4 +81,14 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 			console.log(response);
 		});
 	};
+}])
+.controller('reservationsDelete', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	   	$http({
+			method: 'DELETE',
+			url: config.apiUrl + "api/reservations/" + $stateParams.id
+		}).then(function successCallback(response) {
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+		});
 }]);

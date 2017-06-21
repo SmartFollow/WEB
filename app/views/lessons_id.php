@@ -23,7 +23,33 @@
             <input type="file" name="pic" accept=".jpg, .png, .pdf" id="document" style="margin-left: auto;margin-right: auto;">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" ng-click="create();">Ajoutez</button>
+            <button type="button" class="btn btn-primary" ng-click="createDocument();">Ajoutez</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-upload-edit-{{document.id}}" class="modal fade" tabindex="-1" role="dialog" ng-repeat="(key, document) in lesson.documents">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Editez un document</h4>
+          </div>
+          <div class="modal-body text-center">
+            <label class="control-label">Nom</label>
+            <input type="text" class="form-control" id="name" value="{{document.name}}">
+            <br>
+            <label class="control-label">Description</label>
+            <textarea class="form-control" rows="2" id="description">{{document.description}}</textarea>
+            <br>
+            <label class="control-label">Document</label>
+            <br>
+            <input type="file" name="pic" accept=".jpg, .png, .pdf" id="document" style="margin-left: auto;margin-right: auto;">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="editDocument(document, 'send')">Editez</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
           </div>
         </div>
@@ -78,6 +104,7 @@
       </div>
     </div>
 
+
     <div id="modal-homework-{{key}}" class="modal fade" tabindex="-1" role="dialog" ng-repeat="(key, document) in lesson.homeworks">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -101,7 +128,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Examen N°1</h4>
+            <h4 class="modal-title">Examen</h4>
           </div>
           <div class="modal-body text-center">
             <label class="control-label">Description</label>
@@ -182,6 +209,8 @@
         <div class="pull-left">
           <a href="http://localhost/api/storage/app/{{document.path}}" download="{{document.filename}}{{document.extension}}"><i class="document-type glyphicon glyphicon-download-alt"></i></a>
           <a id="pdf-tpe" data-toggle="modal" data-target="#modal-file-{{key}}"><i class="document-type glyphicon glyphicon-eye-open"></i></a>
+          <a href="" ng-click="editDocument(document, 'modal')"><i class="document-type glyphicon glyphicon-pencil"></i></a>
+          <a href="" ng-click="deleteDocument(document)"><i class="document-type glyphicon glyphicon-remove"></i></a>
         </div>
         <div class="pull-right">
           <i class="document-type glyphicon glyphicon-file"></i>
@@ -197,10 +226,12 @@
         </li>
       </a>
       <strong class="title">Devoirs à la maison :</strong>
-      <li href="#" class="list-group-item" ng-repeat="(key, document) in lesson.homeworks">
+      <li href="#" class="list-group-item" ng-repeat="(key, homework) in lesson.homeworks">
         Devoir à la maison N°{{key+1}}
         <div class="pull-left">
           <a id="pdf-tpe" data-toggle="modal" data-target="#modal-homework-{{key}}"><i class="document-type glyphicon glyphicon-eye-open"></i></a>
+          <a href="" ng-click="editHW(homework, 'modal')"><i class="document-type glyphicon glyphicon-pencil"></i></a>
+          <a href="" ng-click="deleteHW(homework)"><i class="document-type glyphicon glyphicon-remove"></i></a>
         </div>
         <div class="pull-right">
           <i class="document-type glyphicon glyphicon-file"></i>
@@ -217,9 +248,11 @@
       </a>
       <strong class="title">Examens :</strong>
       <li href="#" class="list-group-item" ng-show="lesson.exam">
-        Examen N°1
+        Examen
         <div class="pull-left">
           <a id="pdf-tpe" data-toggle="modal" data-target="#modal-exam-1"><i class="document-type glyphicon glyphicon-eye-open"></i></a>
+          <a href="" ng-click="editExam()"><i class="document-type glyphicon glyphicon-pencil"></i></a>
+          <a href="" ng-click="deleteExam()"><i class="document-type glyphicon glyphicon-remove"></i></a>
         </div>
         <div class="pull-right">
           <i class="document-type glyphicon glyphicon-file"></i>

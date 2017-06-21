@@ -1,4 +1,5 @@
-angular.module('app').controller('lessons', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', function (users, $scope, $state, $rootScope, $http, $filter, config) {
+angular.module('app')
+.controller('lessonsCreate', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', function (users, $scope, $state, $rootScope, $http, $filter, config) {
 	$("#selectedLevel").hide();
 	$("#selectedSubject").hide();
 	$("#selectedClasse").hide();
@@ -46,6 +47,79 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 		});
     };
 }])
+.controller('lessonsEdit', [ '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+
+	if ($state.current.data != null)
+    	$rootScope.pageTitle = $state.current.data.pageTitle;
+
+    $http({
+			method: 'GET',
+			url: config.apiUrl + "api/lessons/create"
+		}).then(function successCallback(response) {
+			$scope.lessons = response.data;
+
+			$http({
+					method: 'GET',
+					url: config.apiUrl + "api/lessons/" + $stateParams.id
+				}).then(function successCallback(response) {
+					$scope.lesson = response.data;
+					var level = getObjectById($scope.lessons.levels, response.data.student_class.level_id);
+					$scope.selectedLevel = level;
+					console.log(level);
+					var subject = getObjectById(level.subjects, response.data.subject_id);
+					$scope.selectedSubject = subject;
+					$scope.selectedClasse = getObjectById(subject.student_classes, response.data.student_class_id);
+					console.log(response);
+				}, function errorCallback(response) {
+					console.log(response);
+			});
+
+
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+	});
+
+	function getObjectById(objects, id)
+	{
+		 for (var i = 0; i < objects.length++; i++) {
+			if (objects[i].id == id)
+			{
+				return (objects[i]);
+			}
+		};
+		return (null);
+	}
+
+    $scope.edit = function () {    	
+    	$http({
+			method: 'PUT',
+			url: config.apiUrl + "api/lessons/" + $stateParams.id,
+			data: {
+				subject_id: $scope.selectedSubject.id,
+				reservation_id: $("#reservation").val(),
+				student_class_id: $scope.selectedClasse.id,
+				id: $stateParams.id
+			}
+		}).then(function successCallback(response) {
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+    };
+}])
+.controller('lessonsDelete', [ '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	$http({
+			method: 'DELETE',
+			url: config.apiUrl + "api/lessons/" + $stateParams.id,
+			data: {id: $stateParams.id}
+		}).then(function successCallback(response) {
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+	});
+
+}])
 .controller('lessonsId', [ '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
     $http({
 			method: 'GET',
@@ -53,24 +127,26 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 		}).then(function successCallback(response) {
 			$scope.lesson = response.data;
 			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
-	});
 
-	$http({
-			method: 'GET',
-			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/evaluations/create"
-		}).then(function successCallback(response) {
-			$scope.evaluations = response.data;
-			angular.forEach($scope.lesson.student_class.students, function(student, key) {
-			  student.criteria = angular.copy($scope.evaluations.criteria);
-			  angular.forEach(student.criteria, function(criteria, key) {
-			  	criteria.value = 0;
-			  });
+			$http({
+					method: 'GET',
+					url: config.apiUrl + "api/lessons/"+$stateParams.id+"/evaluations/create"
+				}).then(function successCallback(response) {
+					$scope.evaluations = response.data;
+					angular.forEach($scope.lesson.student_class.students, function(student, key) {
+					  student.criteria = angular.copy($scope.evaluations.criteria);
+					  angular.forEach(student.criteria, function(criteria, key) {
+					  	criteria.value = 0;
+					  });
+					});
+					console.log(response);
+				}, function errorCallback(response) {
+					console.log(response);
 			});
-			console.log(response);
 		}, function errorCallback(response) {
 			console.log(response);
+			//$("").html(response.data.error);
+			//$("").html(response.data.message);
 	});
 
 	 $scope.tabClick = function (nb) {
@@ -87,7 +163,7 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 	    }
 	};
 
-	$scope.create = function () {
+	$scope.createDocument = function () {
 		var file = {
 					name: $("#name").val(),
 					description: $("#description").val(),
@@ -97,6 +173,48 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 			method: 'POST',
 			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/documents",
 			data: file
+		}).then(function successCallback(response) {
+			$state.reload();
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
+	$scope.editDocument = function (document, type) {
+		if (type == "modal")
+		{
+			$('#modal-upload-edit-'+document.id).modal();
+		}
+		else if (type == "send")
+		{
+			var file = {
+				name: $("#name").val(),
+				description: $("#description").val(),
+				document: $("#document")[0].files[0],
+				id: document.id
+			};
+			$http({
+				method: 'PUT',
+				url: config.apiUrl + "api/lessons/"+$stateParams.id+"/documents",
+				data: file
+			}).then(function successCallback(response) {
+				$state.reload();
+				console.log(response);
+			}, function errorCallback(response) {
+				console.log(response);
+			});
+		}
+	};
+
+	$scope.deleteDocument = function (document) {
+		var param = {
+			id: document.id
+		};
+		$http({
+			method: 'DELETE',
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/documents",
+			data: param
 		}).then(function successCallback(response) {
 			$state.reload();
 			console.log(response);
@@ -122,6 +240,49 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 		});
 	};
 
+	$scope.editHW = function (homework, type) {
+		$("#HWdescription").val(homework.description);
+		
+
+		if (type == "modal")
+		{
+			$('#modal-upload-homework-'+homework.id).modal();
+		}
+		else if (type == "send")
+		{
+			var file = {
+						description: $("#HWdescription").val(),
+						id: homework.id
+					};
+			$http({
+				method: 'PUT',
+				url: config.apiUrl + "api/lessons/"+$stateParams.id+"/homeworks",
+				data: file
+			}).then(function successCallback(response) {
+				$state.reload();
+				console.log(response);
+			}, function errorCallback(response) {
+				console.log(response);
+			});
+		}
+	};
+
+	$scope.deleteHW = function (homework) {
+		var param = {
+					id: homework.id
+				};
+		$http({
+			method: 'DELETE',
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/homeworks",
+			data: param
+		}).then(function successCallback(response) {
+			$state.reload();
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
 	$scope.createExam = function () {
 		console.log($("#examDescription").val());
 		var file = {
@@ -134,6 +295,18 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 			method: 'POST',
 			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/exam",
 			data: file
+		}).then(function successCallback(response) {
+			$state.reload();
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
+	$scope.deleteExam = function () {
+		$http({
+			method: 'DELETE',
+			url: config.apiUrl + "api/lessons/"+$stateParams.id+"/exam"
 		}).then(function successCallback(response) {
 			$state.reload();
 			console.log(response);
@@ -186,7 +359,39 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 	{
 		if ($("#student-"+key).find('.time-lesson').is(":hidden") && $("#student-"+key).find('.cross-lesson').is(":hidden"))
 			{
+				// Si absent
+				$("#student-"+key).find('.cross-lesson').show();
+
+				$http({
+					method: 'POST',
+					url: config.apiUrl + "api/evaluations/"+student.evaluation.id+"/absences"
+				}).then(function successCallback(response) {
+					console.log(response);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
+		else if ($("#student-"+key).find('.time-lesson').is(":visible") && $("#student-"+key).find('.cross-lesson').is(":hidden"))
+			{
+				// Annulation de l'absence
+				$("#student-"+key).find('.time-lesson').hide();
+				$("#student-"+key).find('.cross-lesson').hide();
+				$http({
+					method: 'DELETE',
+					url: config.apiUrl + "api/evaluations/"+student.evaluation.id+"/delays",
+					data: {
+						id: student.evaluation.id
+					}
+				}).then(function successCallback(response) {
+					console.log(response);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
+		else
+			{
 				// Si en retard
+				$("#student-"+key).find('.cross-lesson').hide();
 				$("#student-"+key).find('.time-lesson').show();
 				
 				var currentTime = new Date();
@@ -197,28 +402,6 @@ angular.module('app').controller('lessons', ['users', '$scope', '$state', '$root
 					data: {
 						arrived_at: currentTime.getHours() + ":" + currentTime.getMinutes()
 					}
-				}).then(function successCallback(response) {
-					console.log(response);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-
-			}
-		else if ($("#student-"+key).find('.time-lesson').is(":hidden") && $("#student-"+key).find('.cross-lesson').is(":visible"))
-			{
-				// Annulation de l'absence
-				$("#student-"+key).find('.time-lesson').hide();
-				$("#student-"+key).find('.cross-lesson').hide();
-			}
-		else
-			{
-				// Si absent
-				$("#student-"+key).find('.time-lesson').hide();
-				$("#student-"+key).find('.cross-lesson').show();
-
-				$http({
-					method: 'POST',
-					url: config.apiUrl + "api/evaluations/"+student.evaluation.id+"/absences"
 				}).then(function successCallback(response) {
 					console.log(response);
 				}, function errorCallback(response) {
