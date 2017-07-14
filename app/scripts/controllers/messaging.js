@@ -3,7 +3,6 @@ angular.module('app').controller('messaging', ['users', '$scope', '$state', '$ro
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
 
-
 	$http.get(config.apiUrl + "api/users").success(function (data) {
 		console.log(data);
 		$scope.users = data;
@@ -195,11 +194,6 @@ $scope.loadMyScript = function()
     cols.hideSidebar();
   });
 
-  // Disable links
-
-  $('a').on('click', function(e) {
-    e.preventDefault();
-  });
 
   // Search box responsive stuff
 

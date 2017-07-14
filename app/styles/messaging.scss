@@ -96,7 +96,7 @@ a:hover {
   top: 0;
   left: 0;
   height: 100%;
-  width: 300px;
+  width: 15%;
   background: #1D2127;
   transition-duration: .3s;
   z-index: 5;
@@ -226,7 +226,7 @@ a:hover {
 #main {
   position: fixed;
   top: 0;
-  left: 300px;
+  left: 15%;
   bottom: 0;
   right: 0;
   z-index: 4;
@@ -693,7 +693,7 @@ a:hover {
     transform: none;
   }
   .show-sidebar #main {
-    transform: translateX(300px);
+    transform: translateX(15%);
   }
   .show-message #main {
     margin-right: 0;

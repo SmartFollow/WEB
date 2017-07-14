@@ -1,17 +1,12 @@
 <main id="main">
   <div class="overlay"></div>
   <header class="header">
-    <div class="search-box">
-      <input placeholder="Search..."><span class="icon glyphicon glyphicon-search"></span>
-    </div>
-    <h1 class="page-title"><a class="sidebar-toggle-btn trigger-toggle-sidebar"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line line-angle1"></span><span class="line line-angle2"></span></a>Inbox<a><span class="icon glyphicon glyphicon-chevron-down"></span></a></h1>
+    <h1 class="page-title"><a class="sidebar-toggle-btn trigger-toggle-sidebar"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line line-angle1"></span><span class="line line-angle2"></span></a>Messagerie<a></a></h1>
   </header>
   <div class="action-bar">
     <ul class="no-bullets">
       <li><a class="icon circle-icon glyphicon glyphicon-plus" ng-click="displayCreateConversation()"></a></li>
-      <li><a class="icon circle-icon glyphicon glyphicon-refresh"></a></li>
       <li><a class="icon circle-icon red glyphicon glyphicon-remove" ng-click="deleteConversation()"></a></li>
-      <li><a class="icon circle-icon red glyphicon glyphicon-flag"></a></li>
     </ul>
   </div>
   <div id="main-nano-wrapper" class="nano">
@@ -35,14 +30,14 @@
               <input type="checkbox" id="chk1">
               <label for="chk1" class="toggle" style="margin-bottom: 0px;"></label>
             </div>
-            <p class="title"><span ng-if="!$first" ng-repeat="participant in conversation.participants">{{participant.firstname}} {{participant.lastname}}<span ng-if="!$last">, </span></span></p><span class="star-toggle glyphicon glyphicon-star-empty"></span>
+            <p class="title"><span ng-if="!$first" ng-repeat="participant in conversation.participants">{{participant.firstname}} {{participant.lastname}}<span ng-if="!$last">, </span></span></p>
           </div>
           <div class="col col-2">
             <div class="subject">{{conversation.subject}}</div>
             <div class="date">{{formatDate(conversation.updated_at) | date:'HH:mm MM-dd'}}</div>
           </div>
         </li>
-      </ul><a href="#" class="load-more-link">Show more messages</a>
+      </ul>
     </div>
   </div>
 </main>

@@ -1,4 +1,4 @@
-angular.module('app').controller('HwrkMod', function ($scope, $filter) {
+angular.module('app').controller('HwrkMod', '$scope','$filter', function ($scope, $filter) {
 
     // init
     $scope.sort = {

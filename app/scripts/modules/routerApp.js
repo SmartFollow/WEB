@@ -1,7 +1,7 @@
 var routerApp = angular.module('routerApp', ['ui.router', 'angularCSS', 'app']);
  
 routerApp.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('login');
+    $urlRouterProvider.otherwise('profil-teacher');
     $stateProvider
         // Login view
         .state('login', {
@@ -78,7 +78,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             css: '/app/styles/lesson.css',
             templateUrl: 'app/views/lessons_id.php'
         })
-        // Lesson view
+        // Lesson student view
         .state('lessons_id_student', {
             url: '/lessons-student/{id:int}',
             parent: 'root',

@@ -15,7 +15,7 @@ $page_title = "Votre profil";
                                 <img src="/app/images/profile_pict.jpg" class="img-circle profile_picture"><br>
                            </div>
                            <div class="col-md-7 mtl pll">
-                                <h2><span class="uppercase prs">{{user.firstname}}</span>{{user.lastname}}</h2>
+                                <h2><span class="uppercase prs">{{profile.firstname}}</span>{{profile.lastname}}</h2>
                                 <h3 class="title_h3">Professeur</h3><br>
                                 <span class="glyphicon glyphicon-phone mrs mbs" aria-hidden="true"></span>06.63.63.63.63<br>
                                 <span class="glyphicon glyphicon-envelope mrs" aria-hidden="true"></span>{{user.email}}

@@ -145,8 +145,8 @@ angular.module('app')
 			});
 		}, function errorCallback(response) {
 			console.log(response);
-			//$("").html(response.data.error);
-			//$("").html(response.data.message);
+			alert("Sorry, the lesson you are looking for could not be found.");
+			$state.go('profil-teacher');
 	});
 
 	 $scope.tabClick = function (nb) {

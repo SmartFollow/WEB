@@ -1,4 +1,4 @@
-angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'OAuth', function(users, $http, $rootScope, $scope, OAuth, $state) {
+angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function(users, $http, $rootScope, $scope, OAuth, $state, config) {
 	if (!OAuth.isAuthenticated())
     	$state.go('login');
     else {
@@ -11,10 +11,12 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
 		})
     }
 
-        $http({
+    // Get profile
+    $http({
 			method: 'GET',
-			url: "http://smartfollow.api/api/conversations"
+			url: config.apiUrl + "api/users/profile"
 		}).then(function successCallback(response) {
+			$scope.profile = response.data;
 			console.log(response);
 		}, function errorCallback(response) {
 			console.log(response);
