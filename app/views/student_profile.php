@@ -190,6 +190,118 @@ $page_title = "Profil de Pierre Bechad";
         </div>
       </div>
       <!-- Past activities -->
+
+      <!-- Devoirs -->
+      <div class="margb20">
+        <div class="std-block center-block">
+          <div class="component">
+            <h2 class="title-h2 mtl">Devoirs</h2>
+            <div class="sticky-wrap">
+              <div ng-controller="HwrkMod">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                    <th class="Date" custom-sort order="'Date'" sort="sort">Date&nbsp;</th>
+                    <th class="Matiere" custom-sort order="'Matiere'" sort="sort">Matière&nbsp;</th>
+                    <th class="Exercices" custom-sort order="'Exercices'" sort="sort">Exercices&nbsp;</th>
+                  </tr>
+                  </thead>
+                  <tfoot>
+                  <td colspan="6">
+                    <div class="pagination pull-right">
+                      <ul>
+                        <li ng-class="{disabled: currentPage == 0}">
+                          <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+
+                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                            ng-class="{active: n == currentPage}"
+                            ng-click="setPage()">
+                          <a href ng-bind="n + 1">1</a>
+                        </li>
+
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                          <a href ng-click="nextPage()">›</a>
+                        </li>
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
+                          <a href>»</a>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </td>
+                  </tfoot>
+                  <tbody>
+                  <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
+                  <td>{{item.id}}</td>
+                  <td>{{item.Date}}</td>
+                  <td>{{item.Matiere}}</td>
+                  <td>{{item.Exercices}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Devoirs -->
+      <!--Notif-->
+      <div class="margb20">
+        <div class="std-block center-block">
+          <div class="component">
+            <h2 class="title-h2 mtl">Notifications</h2>
+            <div class="sticky-wrap">
+              <div ng-controller="NotifMod">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                    <th class="Type" custom-sort order="'Type'" sort="sort">Type&nbsp;</th>
+                    <th class="Message" custom-sort order="'Message'" sort="sort">Message&nbsp;</th>
+                  </tr>
+                  </thead>
+                  <tfoot>
+                  <td colspan="6">
+                    <div class="pagination pull-right">
+                      <ul>
+                        <li ng-class="{disabled: currentPage == 0}">
+                          <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+
+                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                            ng-class="{active: n == currentPage}"
+                            ng-click="setPage()">
+                          <a href ng-bind="n + 1">1</a>
+                        </li>
+
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                          <a href ng-click="nextPage()">›</a>
+                        </li>
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
+                          <a href>»</a>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </td>
+                  </tfoot>
+                  <tbody>
+                  <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
+                  <td>{{item.id}}</td>
+                  <td>{{item.Type}}</td>
+                  <td>{{item.Message}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Notif-->
+
     </div>
     <!-- Left -->
     <!-- Right -->
@@ -257,6 +369,64 @@ $page_title = "Profil de Pierre Bechad";
         </div>
 
       </div>
+      <!-- Notes -->
+      <div class="margb20">
+        <div class="std-block center-block">
+          <div class="component">
+            <h2 class="title-h2 mtl">Notes</h2>
+            <div class="sticky-wrap">
+              <div ng-controller="NoteMod">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                    <th class="Matiere" custom-sort order="'Matiere'" sort="sort">Matière&nbsp;</th>
+                    <th class="Date" custom-sort order="'Date'" sort="sort">Date&nbsp;</th>
+                    <th class="Note" custom-sort order="'Note'" sort="sort">Note&nbsp;</th>
+                    <th class="Commentaire" custom-sort order="'Commentaire'" sort="sort">Commentaire&nbsp;</th>
+                  </tr>
+                  </thead>
+                  <tfoot>
+                  <td colspan="6">
+                    <div class="pagination pull-right">
+                      <ul>
+                        <li ng-class="{disabled: currentPage == 0}">
+                          <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+
+                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                            ng-class="{active: n == currentPage}"
+                            ng-click="setPage()">
+                          <a href ng-bind="n + 1">1</a>
+                        </li>
+
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                          <a href ng-click="nextPage()">›</a>
+                        </li>
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
+                          <a href>»</a>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </td>
+                  </tfoot>
+                  <tbody>
+                  <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Note >= 15, warning : item.Note < 15 && item.Note >= 10 , danger : item.Note < 10}"/>
+                  <td>{{item.id}}</td>
+                  <td>{{item.Matiere}}</td>
+                  <td>{{item.Date}}</td>
+                  <td>{{item.Note}}</td>
+                  <td>{{item.Commentaire}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Notes -->
       <!-- Notification -->
     </div>
     <!-- Right -->

@@ -96,13 +96,60 @@ $page_title = "Votre profil";
             </div>
             <div class="col-md-6">
                 <div class="row pbm">
+                    <!-- Notif -->
                     <div class="col-md-12">
                         <div class="center-block block_notif pts">
-                            <h2 class="title_h2 mts mbm pbs">Notifications</h2>
-                            <p class="pbs ft17 text-center"><span class="glyphicon glyphicon-alert mrs warning" aria-hidden="true"></span> <b>20/02/2016</b> : Conseil de classe à 18h30 pour la classe de TS 5</p>
-                            <p class="ft17 text-center"><span class="glyphicon glyphicon-user mrs" aria-hidden="true"></span> <b>23/02/2016</b> : Rendez-vous avec la famille pour l'élève BRUNNER Steven</p>
+                            <div class="component">
+                                <h2 class="title-h2 mtl">Notifications</h2>
+                                <div class="sticky-wrap">
+                                    <div ng-controller="NotifMod">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                                                <th class="Type" custom-sort order="'Type'" sort="sort">Type&nbsp;</th>
+                                                <th class="Message" custom-sort order="'Message'" sort="sort">Message&nbsp;</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <td colspan="6">
+                                                <div class="pagination pull-right">
+                                                    <ul>
+                                                        <li ng-class="{disabled: currentPage == 0}">
+                                                            <a href ng-click="prevPage()">« Prev</a>
+                                                        </li>
+
+                                                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                                                            ng-class="{active: n == currentPage}"
+                                                            ng-click="setPage()">
+                                                            <a href ng-bind="n + 1">1</a>
+                                                        </li>
+
+                                                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                                                            <a href ng-click="nextPage()">›</a>
+                                                        </li>
+                                                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
+                                                            <a href>»</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            </tfoot>
+                                            <tbody>
+                                            <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.Type}}</td>
+                                            <td>{{item.Message}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- END Notif -->
                 </div>
                 <div class="row pbl">
                     <div class="col-md-12">
