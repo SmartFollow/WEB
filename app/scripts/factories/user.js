@@ -7,6 +7,9 @@ angular.module('user', ['constants'])
 	var service = {
         setUser: function (data) {
             return new setUser(data);
+        },
+        setAccessRules: function (data) {
+        	return new setAccessRules(data);
         }
     };
 
@@ -26,10 +29,19 @@ angular.module('user', ['constants'])
             return this.first_name || null;
         }
     }
+
+    function setAccessRules(data) {
+        if(data) {
+        	this.access_rules = data;
+        }
+    }
 })
 .factory('users', ['user', '$http', 'OAuthToken', '$cookies', 'config',
 	function(user, $http, OAuthToken, $cookies, config){
 		var _users;
+		var _user;
+		var _rules;
+		
 		var service = {
 		    getUsers: function (data) {
 		        return new getUsers(data);
@@ -45,8 +57,10 @@ angular.module('user', ['constants'])
 		    },
 		    getUserFromData: function (callback) {
 		        return getUserFromData(callback);
+		    },
+		    getUserAccessRules: function (callback) {
+		    	return getUserAccessRules(callback);
 		    }
-
 		};
 
 		return service;
@@ -89,10 +103,38 @@ angular.module('user', ['constants'])
 
 		function getUserFromData(callback)
 		{
-			$http.get(config.apiUrl + "api/users/profile").success(function (data) {
-					user.setUser(data);
-					callback(data);
-			});
+			if (_user)
+				callback(_user);
+			else
+			{
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/users/profile"
+				}).then(function successCallback(response) {
+					_user = response.data;
+					callback(_user);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
+		}
+
+		function getUserAccessRules(callback)
+		{
+			if (_rules)
+				callback(_rules);
+			else
+			{
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/users/profile/access-rules"
+				}).then(function successCallback(response) {
+					_rules = response.data;
+					callback(_rules);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
 		}
 	}
 ])

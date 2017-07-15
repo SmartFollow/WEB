@@ -6,14 +6,9 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
 			$rootScope.showEval = true;
 	});
     // Get profile
-    $http({
-			method: 'GET',
-			url: config.apiUrl + "api/users/profile"
-		}).then(function successCallback(response) {
-			$scope.profile = response.data;
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
+	users.getUserFromData(function (response) {
+		$scope.profile = response;
+		console.log(response);
 	});
 
     $scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
