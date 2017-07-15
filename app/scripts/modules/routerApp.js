@@ -18,6 +18,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         // Menu
         .state('root', {
             abstract: true,
+            controller: 'user',
             templateUrl: 'app/views/menu.html'
         })
         // Temporary student profil view
@@ -124,7 +125,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/planning',
             parent: 'root',
             data:{ pageTitle: 'Planning' },
-            controller: 'profil',
+            controller: 'planning',
             templateUrl: 'app/views/planning.php'
         })
         // Messaging view
