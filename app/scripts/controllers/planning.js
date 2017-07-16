@@ -76,7 +76,6 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
         height: 820,
         defaultView:'agendaWeek',
         minTime: '08:00:00',
-        events: $scope.lessons,
         customButtons: {
 			lesson: {
 				text: 'Ajouter une leçon',
@@ -99,5 +98,5 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
       }
     };
 
-     $scope.eventSources = [$scope.lessons, $scope.reservations];
+     $scope.eventSources = [$scope.reservations, $scope.lessons];
 }]);

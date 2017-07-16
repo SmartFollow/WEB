@@ -1,5 +1,11 @@
 <div class="row">
-  <div class="col-md-6" style="background-color: white;margin-left: 20px;margin-top: 20px;padding-top: 10px;padding-bottom: 10px;">   
+  <div class="col-md-6" style="background-color: white;margin-left: 20px;margin-top: 20px;padding-top: 10px;padding-bottom: 10px;"> 
+    <div class="alert alert-success" style="display:none;">
+      <strong>Succès !</strong> Votre leçon a été ajouté avec succès, vous allez être redirigé vers le planning. 
+    </div>
+    <div class="alert alert-danger" style="display:none;">
+      <strong>Erreur !</strong> Une erreur c'est produite lors de l'ajout de la leçon, veuillez réessayer ou contactez un administrateur.
+    </div>  
     <div class="col-md-12" style="margin-top: 20px" id="selectedLevel">
       Niveau:<br>
       <select class="selectedLevel form-control"

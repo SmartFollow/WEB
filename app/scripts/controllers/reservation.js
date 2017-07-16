@@ -34,7 +34,7 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 		});
 	};
 }])
-.controller('reservationsEdit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+.controller('reservationsEdit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config, $timeout) {
 	$scope.button = "Editer";
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
@@ -81,8 +81,13 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 			url: config.apiUrl + "api/reservations/" + $stateParams.id,
 			data: reservation
 		}).then(function successCallback(response) {
+			$(".alert-success").show();
+			$timeout(function() {
+		      $state.go('planning');
+		    }, 3000);
 			console.log(response);
 		}, function errorCallback(response) {
+			$(".alert-danger").show();
 			console.log(response);
 		});
 	};

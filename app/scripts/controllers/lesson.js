@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('lessonsCreate', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', function (users, $scope, $state, $rootScope, $http, $filter, config) {
+.controller('lessonsCreate', ['users', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$timeout', function (users, $scope, $state, $rootScope, $http, $filter, config, $timeout) {
 	$("#selectedLevel").hide();
 	$("#selectedSubject").hide();
 	$("#selectedClasse").hide();
@@ -41,8 +41,13 @@ angular.module('app')
 				student_class_id: $scope.selectedClasse.id
 			}
 		}).then(function successCallback(response) {
+			$(".alert-success").show();
+			$timeout(function() {
+		      $state.go('planning');
+		    }, 3000);
 			console.log(response);
 		}, function errorCallback(response) {
+			$(".alert-danger").show();
 			console.log(response);
 		});
     };

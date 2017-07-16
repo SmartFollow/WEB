@@ -53,7 +53,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/lessons/create',
             parent: 'root',
             controller: 'lessonsCreate',
-            data:{ pageTitle: 'Lessons' },
+            data:{ pageTitle: 'Ajouter une leçon' },
             css: '/app/styles/lesson.css',
             templateUrl: 'app/views/lessons_create.php',
             group_id: '2'
@@ -63,7 +63,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/lessons/{id:int}/edit',
             parent: 'root',
             controller: 'lessonsEdit',
-            data:{ pageTitle: 'Lessons' },
+            data:{ pageTitle: 'Editer une leçon' },
             css: '/app/styles/lesson.css',
             templateUrl: 'app/views/lessons_edit.php',
             group_id: '2'
@@ -73,7 +73,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/lessons/{id:int}/delete',
             parent: 'root',
             controller: 'lessonsDelete',
-            data:{ pageTitle: 'Lessons' },
+            data:{ pageTitle: 'Supprimer une leçon' },
             group_id: '2'
         })
         // Lesson view
@@ -152,7 +152,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             group_id: '4'
         })
 })
-routerApp.run(['$rootScope', '$state', 'OAuth', 'users', function($rootScope, $state, OAuth, users)  {
+routerApp.run(['$rootScope', '$state', 'OAuth', 'users', '$http', 'config', function($rootScope, $state, OAuth, users, $http, config)  {
   $rootScope.$on('$stateChangeStart', function (event, next, current) {
     if (!OAuth.isAuthenticated()) {
         $state.go('login');
