@@ -1,4 +1,4 @@
-angular.module('app').controller('HwrkMod', '$scope','$filter', function ($scope, $filter) {
+angular.module('app').controller('HwrkMod', ['$scope','$filter', '$http', 'config', function ($scope, $filter, $http, config)    {
 
     // init
     $scope.sort = {
@@ -6,166 +6,32 @@ angular.module('app').controller('HwrkMod', '$scope','$filter', function ($scope
         reverse : false
     };
 
-    var hwrkJson = {
-        "id": 7,
-        "email": "edythe86@example.net",
-        "created_at": "2017-01-08 06:05:31",
-        "updated_at": "2017-01-08 06:05:31",
-        "firstname": "Verona",
-        "lastname": "Schuster",
-        "class_id": 4,
-        "group_id": 4,
-        "homeworks": [
+    $http({
+        method: 'GET',
+        url: config.apiUrl + "api/users/profile"
+    }).then(function successCallback(response) {
+        $scope.profile = response.data;
+        console.log(response);
+        var i = 0;
+        var j = 0;
+        while (i < $scope.profile.homeworks.length)
+        {
+            j = 0;
+            while (j < $scope.profile.homeworks[i].homeworks.length)
             {
-                "id": 1,
-                "subject_id": 6,
-                "reservation_id": 2,
-                "description": null,
-                "created_at": "2017-03-23 01:00:59",
-                "updated_at": "2017-03-23 01:00:59",
-                "deleted_at": null,
-                "student_class_id": 4,
-                "start": "2017-07-11 10:25:18",
-                "end": "2017-07-11 11:25:18",
-                "homeworks": [
-                    {
-                        "id": 2,
-                        "description": "devoir de test 2",
-                        "lesson_id": 1,
-                        "document_id": 1,
-                        "created_at": "2017-01-08 06:40:13",
-                        "updated_at": "2017-01-08 06:40:13"
-                    },
-                    {
-                        "id": 3,
-                        "description": "devoir de test 3",
-                        "lesson_id": 1,
-                        "document_id": null,
-                        "created_at": "2017-02-15 14:44:43",
-                        "updated_at": "2017-02-15 14:44:43"
-                    },
-                    {
-                        "id": 4,
-                        "description": "fais tes devoirs lol",
-                        "lesson_id": 1,
-                        "document_id": null,
-                        "created_at": null,
-                        "updated_at": null
-                    }
-                ],
-                "subject": {
-                    "id": 6,
-                    "level_id": 1,
-                    "name": "Anglais",
-                    "description": null,
-                    "teacher_id": 2,
-                    "created_at": "2017-01-08 06:05:34",
-                    "updated_at": "2017-01-08 06:05:34",
-                    "deleted_at": null
-                }
+                $scope.items.push({
+                    id: $scope.profile.homeworks[i].homeworks[j].id,
+                    Date: $scope.profile.homeworks[i].start,
+                    Matiere: $scope.profile.homeworks[i].subject.name,
+                    Exercices:$scope.profile.homeworks[i].homeworks[j].description,
+                });
+                j++;
             }
-        ],
-        "group": {
-            "id": 4,
-            "name": "Students",
-            "description": "Students of the school",
-            "deletable": false,
-            "created_at": "2017-01-08 06:05:31",
-            "updated_at": "2017-01-08 06:05:31",
-            "editable": false
-        },
-        "student_class": {
-            "id": 4,
-            "level_id": 1,
-            "name": "TES 1",
-            "created_at": "2017-01-08 06:05:32",
-            "updated_at": "2017-01-08 06:05:32",
-            "deleted_at": null
-        },
-        "taught_subjects": [],
-        "marks": [
-            {
-                "id": 2,
-                "exam_id": 1,
-                "student_id": 7,
-                "mark": 14,
-                "comment": null,
-                "created_at": null,
-                "updated_at": null,
-                "exam": {
-                    "id": 1,
-                    "lesson_id": 1,
-                    "description": "1er quizz de test",
-                    "min_mark": 0,
-                    "max_mark": 20,
-                    "created_at": "2017-04-11 17:57:08",
-                    "updated_at": "2017-04-11 17:57:08",
-                    "type": "class",
-                    "document_id": null,
-                    "lesson": {
-                        "id": 1,
-                        "subject_id": 6,
-                        "reservation_id": 2,
-                        "description": null,
-                        "created_at": "2017-03-23 01:00:59",
-                        "updated_at": "2017-03-23 01:00:59",
-                        "deleted_at": null,
-                        "student_class_id": 4,
-                        "start": "2017-07-11 10:25:18",
-                        "end": "2017-07-11 11:25:18",
-                        "subject": {
-                            "id": 6,
-                            "level_id": 1,
-                            "name": "Anglais",
-                            "description": null,
-                            "teacher_id": 2,
-                            "created_at": "2017-01-08 06:05:34",
-                            "updated_at": "2017-01-08 06:05:34",
-                            "deleted_at": null
-                        }
-                    }
-                }
-            }
-        ],
-        "criteria_averages": [
-            {
-                "id": 1,
-                "user_id": 7,
-                "criterion_id": 1,
-                "average": "2.50",
-                "week_start": "2017-06-05",
-                "week_end": "2017-06-11",
-                "created_at": "2017-06-18 03:02:49",
-                "updated_at": "2017-06-18 03:15:55",
-                "week": 24,
-                "year": 2017
-            },
-            {
-                "id": 2,
-                "user_id": 7,
-                "criterion_id": 2,
-                "average": "0.50",
-                "week_start": "2017-06-05",
-                "week_end": "2017-06-11",
-                "created_at": "2017-06-18 03:02:49",
-                "updated_at": "2017-06-18 03:15:55",
-                "week": 24,
-                "year": 2017
-            },
-            {
-                "id": 3,
-                "user_id": 7,
-                "criterion_id": 3,
-                "average": "0.50",
-                "week_start": "2017-06-05",
-                "week_end": "2017-06-11",
-                "created_at": "2017-06-18 03:02:49",
-                "updated_at": "2017-06-18 03:15:55",
-                "week": 24,
-                "year": 2017
-            }
-        ]
-    };
+            i++
+        };
+    }, function errorCallback(response) {
+        console.log(response);
+    });
 
     $scope.gap = 5;
 
@@ -175,26 +41,7 @@ angular.module('app').controller('HwrkMod', '$scope','$filter', function ($scope
     $scope.pagedItems = [];
     $scope.currentPage = 0;
     $scope.items = [];
-//        {"id":1,"Date":"date 1","Matiere":"Matiere 1", "Exercices":"Exercices 1"},
-//    ];
-
-    var i = 0;
-    var j = 0;
-    while (hwrkJson.homeworks[i])
-    {
-        j = 0;
-        while (hwrkJson.homeworks[i].homeworks[j])
-        {
-            $scope.items.push({
-                id: hwrkJson.homeworks[i].homeworks[j].id,
-                Date: hwrkJson.homeworks[i].start,
-                Matiere: hwrkJson.homeworks[i].subject.name,
-                Exercices:hwrkJson.homeworks[i].homeworks[j].description,
-            });
-            j++;
-        }
-        i++
-    };
+    
 
     var searchMatch = function (haystack, needle) {
         if (!needle) {
@@ -279,46 +126,4 @@ angular.module('app').controller('HwrkMod', '$scope','$filter', function ($scope
 
 
 
-});
-
-
-$inject = ['$scope', '$filter']
-
-    .directive("customSort", function() {
-        return {
-            restrict: 'A',
-            transclude: true,
-            scope: {
-                order: '=',
-                sort: '='
-            },
-            template :
-            ' <a ng-click="sort_by(order)" style="color: #555555;">'+
-            '    <span ng-transclude></span>'+
-            '    <i ng-class="selectedCls(order)"></i>'+
-            '</a>',
-            link: function(scope) {
-
-                // change sorting order
-                scope.sort_by = function(newSortingOrder) {
-                    var sort = scope.sort;
-
-                    if (sort.sortingOrder == newSortingOrder){
-                        sort.reverse = !sort.reverse;
-                    }
-
-                    sort.sortingOrder = newSortingOrder;
-                };
-
-
-                scope.selectedCls = function(column) {
-                    if(column == scope.sort.sortingOrder){
-                        return ('icon-chevron-' + ((scope.sort.reverse) ? 'down' : 'up'));
-                    }
-                    else{
-                        return'icon-sort'
-                    }
-                };
-            }// end link
-        }
-    });
+}]);

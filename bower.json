@@ -10,7 +10,8 @@
     "angular-ui-router": "^0.3.2",
     "angular-css": "^1.0.8",
     "query-string": "^1.0.0",
-    "angular-datetime-range": "^0.2.12"
+    "angular-datetime-range": "^0.2.12",
+    "chart.js": "^2.6.0"
   },
   "appPath": "app",
   "moduleName": "smartfollow"
