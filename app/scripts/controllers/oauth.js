@@ -4,7 +4,7 @@ angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angu
   {
     users.getUserFromData(function (response) {
       $rootScope.user = response;
-      if ($rootScope.user.id == 4)
+      if ($rootScope.user.group_id == 4)
         $state.go('profil-student');
       else
         $state.go('profil-teacher');

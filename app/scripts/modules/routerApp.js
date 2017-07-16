@@ -152,7 +152,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             group_id: '4'
         })
 })
-routerApp.run(['$rootScope', '$state', 'OAuth', 'users', '$http', 'config', function($rootScope, $state, OAuth, users, $http, config)  {
+routerApp.run(['$rootScope', '$state', 'OAuth', 'users', function($rootScope, $state, OAuth, users)  {
   $rootScope.$on('$stateChangeStart', function (event, next, current) {
     if (!OAuth.isAuthenticated()) {
         $state.go('login');
@@ -162,6 +162,7 @@ routerApp.run(['$rootScope', '$state', 'OAuth', 'users', '$http', 'config', func
         // Get User profile && Permissions
         users.getUserFromData(function (user) {
             $rootScope.user = user;
+            console.log(next.name);
             if (user.group_id > next.group_id)
             {
                 $state.go('login');
