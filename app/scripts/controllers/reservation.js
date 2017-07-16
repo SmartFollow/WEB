@@ -1,4 +1,4 @@
-angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config', function ($scope, $state, $rootScope, $http, $filter, config) {
+angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, config, $timeout) {
 	$scope.button = "Créer";
 	$(".edit").hide();
 	if ($state.current.data != null)
@@ -24,7 +24,12 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
+			$(".alert-success").show();
+			$timeout(function() {
+		      $state.go('planning');
+		    }, 3000);
 		}, function errorCallback(response) {
+			$(".alert-danger").show();
 			console.log(response);
 		});
 	};

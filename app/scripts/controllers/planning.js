@@ -16,14 +16,17 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 				console.log(response);
 				events = [];
 				angular.forEach( response.data, function(lesson, key) {
-					this.push({
-						id: lesson.id,
-						title: lesson.description,
-						start: lesson.start,
-						end: lesson.end,
-						url: "http://smartfollow.web/#/lessons/"+lesson.id,
-						stick: true
-					});
+					if ($rootScope.user.group_id <= 2 || $rootScope.user.class_id == lesson.student_class_id)
+					{
+						this.push({
+							id: lesson.id,
+							title: lesson.description,
+							start: lesson.start,
+							end: lesson.end,
+							url: "http://smartfollow.web/#/lessons/"+lesson.id,
+							stick: true
+						});
+					}
 				}, events);
 				console.log(events);
 				lessons = events;
@@ -45,15 +48,18 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 				console.log(response);
 				events = [];
 				angular.forEach( response.data, function(reservation, key) {
-					this.push({
-						id: reservation.id,
-						title: "Reservation de la salle: "+reservation.room_id,
-						start: reservation.date_start + " " + reservation.time_start,
-						end: reservation.date_end + " " + reservation.time_end,
-						url: "http://smartfollow.web/#/reservations/"+reservation.id+"/edit",
-						stick: true,
-						color: "#888888"
-					});
+					if ($rootScope.user.group_id <= 2)
+					{
+						this.push({
+							id: reservation.id,
+							title: reservation.room_id == 1 ? 'Reservation de la salle C302' : 'Reservation de la salle D301',
+							start: reservation.date_start + " " + reservation.time_start,
+							end: reservation.date_end + " " + reservation.time_end,
+							url: "http://smartfollow.web/#/reservations/"+reservation.id+"/edit",
+							stick: true,
+							color: "#888888"
+						});
+					}
 				}, events);
 				console.log(events);
 				reservations = events;
