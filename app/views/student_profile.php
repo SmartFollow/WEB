@@ -14,12 +14,11 @@ $page_title = "Profil de Pierre Bechad";
             </div>
             <div class="col-lg-7 col-md-6">
               <div class="row center-block">
-                <h3 class="title-h3 title-h2">{{user.firstname}} {{user.lastname}}</h3>
-                <h4 class="title-h3 title-h2">Terminale S-4</h4><br><br>
+                <h3 class="title-h3 title-h2">{{profile.firstname}} {{profile.lastname}}</h3>
+                <h4 class="title-h3 title-h2">{{profile.group.description}}</h4><br><br>
               </div>
               <div class="row center-block title-h2">
-                <span class="glyphicon glyphicon-phone mrs" aria-hidden="true"></span> 06.63.63.63.63<br>
-                <span class="glyphicon glyphicon-envelope mrs" aria-hidden="true"></span> {{user.email}}
+                <span class="glyphicon glyphicon-envelope mrs" aria-hidden="true"></span> {{profile.email}}
               </div><br>
             </div>
           </div>

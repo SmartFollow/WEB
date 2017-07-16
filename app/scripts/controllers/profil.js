@@ -1,25 +1,14 @@
 angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function(users, $http, $rootScope, $scope, OAuth, $state, config) {
-	if (!OAuth.isAuthenticated())
-    	$state.go('login');
-    else {
-    	users.getUserFromData(function (response) {
-			$rootScope.user = response;
-			if ($rootScope.user.id != 4)
-    			$rootScope.showEval = false;
-    		else
-    			$rootScope.showEval = true;
-		})
-    }
-
+	users.getUserFromData(function (response) {
+		if ($rootScope.user.id != 4)
+			$rootScope.showEval = false;
+		else
+			$rootScope.showEval = true;
+	});
     // Get profile
-    $http({
-			method: 'GET',
-			url: config.apiUrl + "api/users/profile"
-		}).then(function successCallback(response) {
-			$scope.profile = response.data;
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
+	users.getUserFromData(function (response) {
+		$scope.profile = response;
+		console.log(response);
 	});
 
     $scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
