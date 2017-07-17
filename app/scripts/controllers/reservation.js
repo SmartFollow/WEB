@@ -36,6 +36,7 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 }])
 .controller('reservationsEdit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config, $timeout) {
 	$scope.button = "Editer";
+	$(".delete").show();
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
     $http({
@@ -97,6 +98,7 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 			method: 'DELETE',
 			url: config.apiUrl + "api/reservations/" + $stateParams.id
 		}).then(function successCallback(response) {
+			$state.go('planning');
 			console.log(response);
 		}, function errorCallback(response) {
 			console.log(response);

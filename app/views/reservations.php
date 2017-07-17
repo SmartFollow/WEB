@@ -24,12 +24,15 @@
   </div>
   <div class="col-md-12" style="margin-bottom: 20px">
     <select class="form-control" id="room_id">
-      <option value="1">C302</option>
-      <option value="2">D301</option>
+      <option value="1">D301</option>
+      <option value="2">D302</option>
     </select>
   </div>
   <div class="col-md-2" style="margin-bottom: 20px">
     <button type="button" class="btn btn-danger" ng-click="create()">{{button}}</button>
+  </div>
+  <div class="col-md-offset-8 col-md-2 delete" style="margin-bottom: 20px;display:none;">
+    <a type="button" class="btn btn-default" href="#/reservations/{{reservation.id}}/delete">Supprimer</a>
   </div>
 </div>
 </div>
