@@ -1,4 +1,4 @@
-<div class="row lesson-infos">
+<div class="row lesson-infos display-table" style="background-color: #ffffff;padding-top: 10px;padding-bottom: 10px;margin-top: 40px;">
       <div id="modal-file-{{document.name}}" class="modal fade" tabindex="-1" role="dialog" ng-repeat="document in lesson.documents">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -60,10 +60,10 @@
       </div>
     </div>
 
-	<div class="col-md-1 hidden-xs teacher-image">
+	<div class="col-md-1 hidden-xs teacher-image display-cell">
 		<img src="/app/images/profile_pict.jpg" class="img-circle" />
 	</div>
-	<div class="col-md-4 col-md-offset-1 lesson-details">
+	<div class="col-md-4 col-md-offset-1 lesson-details display-cell">
 		<dl class="">
 			<dt>Professeur</dt>
 			<dd><a href="#"><span id="teacher">{{lesson.subject.teacher.firstname}} {{lesson.subject.teacher.lastname}}</span></a></dd>
@@ -81,8 +81,8 @@
 			<dd>Le {{lesson.reservation.date_start}} à {{lesson.reservation.time_start}} au {{lesson.reservation.date_end}} à {{lesson.reservation.time_end}}</dd>
 		</dl>
 	</div>
-	<div class="col-md-3"></div>
-	<div class="col-md-4 lesson-documents">
+	<div class="col-md-3 display-cell"></div>
+	<div class="col-md-4 lesson-documents display-cell">
 		<div class="list-group documents-list">
 			<strong class="title">Documents liés au cours :</strong>
       <li href="#" class="list-group-item" ng-repeat="document in lesson.documents">

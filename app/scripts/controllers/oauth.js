@@ -27,8 +27,7 @@ angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angu
     } 
     var data = OAuth.getAccessToken(user, options);
     data.then(function successCallback(data) {
-        //$window.location.reload();
-      users.getUserFromData(function (response) {
+      users.getNewUserFromData(function (response) {
           $rootScope.user = response;
           if ($rootScope.user.group_id == 4)
             $state.go('profil-student');
@@ -45,6 +44,6 @@ angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angu
 .controller('disconnect', ['OAuthToken', '$scope', '$state','$window', function(OAuthToken, $scope, $state, $window) {
     $scope.disconnect = function () {
       OAuthToken.removeToken();
-      $window.location.reload();
+      $state.go('login');
     }
 }]);

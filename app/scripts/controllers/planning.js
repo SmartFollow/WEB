@@ -23,7 +23,7 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 							title: lesson.description,
 							start: lesson.start,
 							end: lesson.end,
-							url: "http://smartfollow.web/#/lessons/"+lesson.id,
+							url:  $rootScope.user && $rootScope.user.group_id <=2 ? "#/lessons/"+lesson.id : "#/lessons-student/"+lesson.id,
 							stick: true
 						});
 					}
@@ -55,7 +55,7 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 							title: reservation.room_id == 1 ? 'Reservation de la salle C302' : 'Reservation de la salle D301',
 							start: reservation.date_start + " " + reservation.time_start,
 							end: reservation.date_end + " " + reservation.time_end,
-							url: "http://smartfollow.web/#/reservations/"+reservation.id+"/edit",
+							url: "#/reservations/"+reservation.id+"/edit",
 							stick: true,
 							color: "#888888"
 						});

@@ -169,6 +169,7 @@ angular.module('app')
 	};
 
 	$scope.createDocument = function () {
+		console.log($("#document")[0].files[0]);
 		var file = {
 					name: $("#name").val(),
 					description: $("#description").val(),

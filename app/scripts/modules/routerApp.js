@@ -84,7 +84,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             data:{ pageTitle: 'Déroulement du cours' },
             css: '/app/styles/lesson.css',
             templateUrl: 'app/views/lessons_id.php',
-            group_id: '4'
+            group_id: '2'
         })
         // Lesson student view
         .state('lessons_id_student', {

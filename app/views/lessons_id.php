@@ -1,9 +1,3 @@
-<div class="row row-eq-height lesson-infos">
-	<div class="col-md-1 hidden-xs teacher-image">
-		<img src="/app/images/profile_pict.jpg" class="img-circle" />
-	</div>
-
-	<div class="col-md-4 col-md-offset-1 lesson-details">
     <div id="modal-upload" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -182,8 +176,13 @@
         </div>
       </div>
     </div>
+<div class="row row-eq-height lesson-infos display-table">
+	<div class="col-md-1 hidden-xs teacher-image display-cell">
+		<img src="/app/images/profile_pict.jpg" class="img-circle" />
+	</div>
 
-		<dl class="" style="margin-top: 17%;">
+	<div class="col-md-4 col-md-offset-1 lesson-details display-cell">
+		<dl class="" style="margin-top: 20px;">
 			<dt>Professeur</dt>
 			<dd><a href="#"><span id="teacher">{{lesson.subject.teacher.firstname}} {{lesson.subject.teacher.lastname}}</span></a></dd>
 
@@ -200,8 +199,8 @@
 			<dd>Le {{lesson.reservation.date_start}} à {{lesson.reservation.time_start}} au {{lesson.reservation.date_end}} à {{lesson.reservation.time_end}}</dd>
 		</dl>
 	</div>
-	<div class="col-md-3"></div>
-	<div class="col-md-4 lesson-documents">
+	<div class="col-md-3 display-cell"></div>
+	<div class="col-md-4 lesson-documents display-cell">
 		<div class="list-group documents-list">
 			<strong class="title">Documents liés au cours :</strong>
       <li href="#" class="list-group-item" ng-repeat="(key, document) in lesson.documents">
@@ -259,7 +258,7 @@
           <i class="document-type glyphicon glyphicon-time" data-toggle="tooltip" data-placement="top" title="{{lesson.exam.updated_at}}"></i>
         </div>
       </li>
-      <a data-toggle="modal" data-target="#modal-upload-exam">
+      <a data-toggle="modal" data-target="#modal-upload-exam" ng-show="!lesson.exam">
         <li class="list-group-item" style="text-align:center">
           Ajouter un examen
           <div class="pull-left">
@@ -379,13 +378,13 @@
             </div>-->
         </div>
     </div>
-
+    <!--
     <div class="col-xs-2 col-sm-2 col-md-1">
         <div class="text-center">
             <div class="next-lesson">
                 <div class="icon-next glyphicon glyphicon-chevron-right"></div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 

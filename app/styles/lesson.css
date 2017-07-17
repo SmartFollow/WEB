@@ -71,10 +71,6 @@
   text-align: center;
   position: relative; }
 
-#popup-body .icon-lesson {
-  margin-bottom: 40px;
-}
-
 .block-lesson:hover {
   cursor: pointer; }
 
@@ -147,7 +143,6 @@
     margin-bottom: 0; }
   .lesson-infos .teacher-image {
     text-align: center;
-    position: absolute;
     top: 0;
     bottom: 0;
     max-height: 100%;

@@ -17,19 +17,16 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
     	$rootScope.pageTitle = $state.current.data.pageTitle;
 }])
 .controller('profilId', ['users', '$http', '$rootScope', '$scope', '$stateParams', 'OAuth', function(users, $http, $rootScope, $scope, $stateParams, OAuth) {
-	if (!OAuth.isAuthenticated())
-    	$state.go('login');
-    else {
-    	users.getUserFromData(function (response) {
-			$rootScope.user = response;
-	    	var tmpUser = users.getUserById($stateParams.id);
-	    	$rootScope.pageTitle = 'Profil de ' + tmpUser.firstname + ' ' + tmpUser.lastname;
-	    	$scope.user = tmpUser;
-	    	$scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
-	    	if (tmpUser.id == 5)
-	    		$scope.imgUser = "/app/images/profil 2/diafou_j.bmp";
-	    	else if (tmpUser.id == 6)
-	    		$scope.imgUser = "/app/images/profil 2/rio_s.bmp";
-	    })
-    }
+	users.getUsersFromData(function (response) {
+		$rootScope.user = response;
+    	var tmpUser = users.getUserById($stateParams.id);
+    	$rootScope.pageTitle = 'Profil de ' + tmpUser.firstname + ' ' + tmpUser.lastname;
+    	$scope.user = tmpUser;
+    	$scope.profile = tmpUser;
+    	$scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
+    	if (tmpUser.id == 5)
+    		$scope.imgUser = "/app/images/profil 2/diafou_j.bmp";
+    	else if (tmpUser.id == 6)
+    		$scope.imgUser = "/app/images/profil 2/rio_s.bmp";
+    })
 }]);

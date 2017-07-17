@@ -366,4 +366,14 @@ body {
   margin-top: 15px;
   padding: 10px; }
 
+.display-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%; }
+
+.display-cell {
+  display: table-cell;
+  vertical-align: middle;
+  float: none; }
+
 /*# sourceMappingURL=style.css.map */

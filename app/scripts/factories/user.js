@@ -58,6 +58,9 @@ angular.module('user', ['constants'])
 		    getUserFromData: function (callback) {
 		        return getUserFromData(callback);
 		    },
+		   	getNewUserFromData: function (callback) {
+		        return getNewUserFromData(callback);
+		    },
 		    getUserAccessRules: function (callback) {
 		    	return getUserAccessRules(callback);
 		    }
@@ -117,6 +120,19 @@ angular.module('user', ['constants'])
 					console.log(response);
 				});
 			}
+		}
+
+		function getNewUserFromData(callback)
+		{
+			$http({
+				method: 'GET',
+				url: config.apiUrl + "api/users/profile"
+			}).then(function successCallback(response) {
+				_user = response.data;
+				callback(_user);
+			}, function errorCallback(response) {
+				console.log(response);
+			});
 		}
 
 		function getUserAccessRules(callback)
