@@ -154,11 +154,11 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
 })
 routerApp.run(['$rootScope', '$state', 'OAuth', 'users', function($rootScope, $state, OAuth, users)  {
   $rootScope.$on('$stateChangeStart', function (event, next, current) {
-    if (!OAuth.isAuthenticated()) {
+    if (!OAuth.isAuthenticated() && next.name != 'login') {
         $state.go('login');
         event.preventDefault();
     }
-    else {
+    else if (next.name != 'login') {
         // Get User profile && Permissions
         users.getUserFromData(function (user) {
             $rootScope.user = user;

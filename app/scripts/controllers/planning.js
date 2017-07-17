@@ -92,7 +92,7 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 		},
         header:{
           left: 'title',
-          center: 'lesson reservation',
+          center: $rootScope.user && $rootScope.user.group_id <=2 ? 'lesson reservation' : '',
           right: 'today prev,next'
         }
       }

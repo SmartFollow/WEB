@@ -3,10 +3,11 @@ angular.module('app').controller('messaging', ['users', '$scope', '$state', '$ro
 	if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
 
-	$http.get(config.apiUrl + "api/users").success(function (data) {
-		console.log(data);
-		$scope.users = data;
-	});
+  /*
+  $http.get(config.apiUrl + "api/users").success(function (data) {
+  	console.log(data);
+  	$scope.users = data;
+  });*/
 
     $http({
 			method: 'GET',
@@ -40,8 +41,7 @@ angular.module('app').controller('messaging', ['users', '$scope', '$state', '$ro
 	$scope.createConversation = function(){
 		var ids = [];
 		angular.forEach($scope.tags, function(tag, key) {
-			user = getUserByEmail(tag.email, $scope.users);
-		  	this.push(user.id);
+		  	this.push(tag.id);
 		}, ids);
 		var message = {
 					subject: $("#subject").val(),
@@ -61,7 +61,7 @@ angular.module('app').controller('messaging', ['users', '$scope', '$state', '$ro
 	$scope.deleteConversation = function(){
 	$http({
 			method: 'DELETE',
-			url: config.apiUrl + "api/conversations/" + $scope.conversations[0].id
+			url: config.apiUrl + "api/conversations/" + $(".ng-scope .selected").attr('id')
 		}).then(function successCallback(response) {
 			$state.reload();
 		}, function errorCallback(response) {
@@ -136,9 +136,12 @@ $scope.loadMyScript = function()
   $('#main .message-list li').on('click', function(e) {
     var item = $(this),
       target = $(e.target);
-
+    if (item.is('li#create_conversation'))
+      return(null);
     if(target.is('label')) {
-      item.toggleClass('selected');
+      {
+        item.toggleClass('selected');
+      }
     } else {
       if(messageIsOpen && item.is('.active')) {
         cols.hideMessage();
