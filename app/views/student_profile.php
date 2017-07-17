@@ -33,22 +33,10 @@ $page_title = "Profil de Pierre Bechad";
           </div>
         </div>
         <div class="row center-block">
-          <div class="col-md-4 text-center c-white">
-            <div class="a-ab-block center-block">
-              <h3 class="title-h3 mtl">Absences</h3>
-              <p class="stats">1</p>
-            </div>
-          </div>
-          <div class="col-md-4 text-center c-white">
-            <div class="a-bav-block center-block">
-              <h3 class="title-h3 mtl">Bavardages</h3>
-              <p class="stats">3</p>
-            </div>
-          </div>
-          <div class="col-md-4 text-center c-white">
-            <div class="a-ret-block  center-block">
-              <h3 class="title-h3 mtl">Devoirs non faits</h3>
-              <p class="stats">2</p>
+          <div class="col-md-4 text-center c-white" ng-repeat="criteria_sum in profile.criteria_sums">
+            <div class="{{criteria_sum.criterion.impact == 'positive' ? 'a-bav-block' : 'a-ab-block'}} center-block">
+              <h3 class="title-h3 mtl">{{criteria_sum.criterion.name}}</h3>
+              <p class="stats">{{criteria_sum.sum}}</p>
             </div>
           </div>
         </div>
@@ -236,31 +224,6 @@ $page_title = "Profil de Pierre Bechad";
                     <th class="Message" custom-sort order="'Message'" sort="sort">Message&nbsp;</th>
                   </tr>
                   </thead>
-                  <tfoot>
-                  <td colspan="6">
-                    <div class="pagination pull-right">
-                      <ul>
-                        <li ng-class="{disabled: currentPage == 0}">
-                          <a href ng-click="prevPage()">« Prev</a>
-                        </li>
-
-                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-                            ng-class="{active: n == currentPage}"
-                            ng-click="setPage()">
-                          <a href ng-bind="n + 1">1</a>
-                        </li>
-
-                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-                          <a href ng-click="nextPage()">›</a>
-                        </li>
-                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
-                          <a href>»</a>
-                        </li>
-
-                      </ul>
-                    </div>
-                  </td>
-                  </tfoot>
                   <tbody>
                   <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
                   <td>{{item.id}}</td>

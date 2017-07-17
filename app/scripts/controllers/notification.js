@@ -1,4 +1,4 @@
-angular.module('app').controller('NotifMod',['$scope','$filter', function ($scope, $filter) {
+angular.module('app').controller('NotifMod',['$scope','$filter','users', function ($scope, $filter, users) {
 
     // init
     $scope.sort = {
@@ -104,7 +104,5 @@ angular.module('app').controller('NotifMod',['$scope','$filter', function ($scop
 
     // functions have been describe process the data for display
     $scope.search();
-
-
 
 }]);
