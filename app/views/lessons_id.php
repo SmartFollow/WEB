@@ -98,6 +98,25 @@
       </div>
     </div>
 
+    <div id="modal-upload-homework-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"  ng-repeat="(key, document) in lesson.homeworks">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Devoir à la maison N°{{key+1}}</h4>
+          </div>
+          <div class="modal-body text-center">
+            <label class="control-label">Description</label>
+            <textarea class="form-control" rows="5" id="HWdescription">{{document.description}}</textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editHW(document, 'send')">Editer</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <div id="modal-homework-{{key}}" class="modal fade" tabindex="-1" role="dialog" ng-repeat="(key, document) in lesson.homeworks">
       <div class="modal-dialog modal-lg">

@@ -249,7 +249,6 @@ angular.module('app')
 	$scope.editHW = function (homework, type) {
 		$("#HWdescription").val(homework.description);
 		
-
 		if (type == "modal")
 		{
 			$('#modal-upload-homework-'+homework.id).modal();
