@@ -23,9 +23,22 @@
     <datetimepicker id="date2" data-ng-model="data.date2"></datetimepicker>
   </div>
   <div class="col-md-12" style="margin-bottom: 20px">
+    Salle<br>
     <select class="form-control" id="room_id">
-      <option value="1">D301</option>
-      <option value="2">D302</option>
+      <option ng-repeat="room in reservations.rooms" value="{{room.id}}">{{room.identifier}} ({{room.seats}} places)</option>
+    </select>
+  </div>
+  <div class="col-md-12" style="margin-bottom: 20px">
+    Récurrence<br>
+    <select class="form-control" id="day">
+      <option value="">Aucune</option>
+      <option value="MONDAY">Lundi</option>
+      <option value="TUESDAY">Mardi</option>
+      <option value="WEDNESDAY">Mercredi</option>
+      <option value="THURSDAY">Jeudi</option>
+      <option value="FRIDAY">Vendredi</option>'
+      <option value="SATURDAY">Samedi</option>
+      <option value="SUNDAY">Dimanche</option>
     </select>
   </div>
   <div class="col-md-2" style="margin-bottom: 20px">
