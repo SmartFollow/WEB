@@ -38,6 +38,14 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 	};
 
 	$scope.reservations = function (start, end, timezone, callback) {
+		var weekday=new Array(7);
+		weekday["SUNDAY"]=0;
+		weekday["MONDAY"]=1;
+		weekday["TUESDAY"]=2;
+		weekday["WEDNESDAY"]=3;
+		weekday["THURSDAY"]=4;
+		weekday["FRIDAY"]=5;
+		weekday["SATURDAY"]=6;
 		if (reservations)
 			callback(reservations);
 		else {
@@ -53,11 +61,13 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 						this.push({
 							id: reservation.id,
 							title: reservation.room_id == 1 ? 'Reservation de la salle D301' : 'Reservation de la salle D302',
-							start: reservation.date_start + " " + reservation.time_start,
-							end: reservation.date_end + " " + reservation.time_end,
+							start: reservation.time_start,
+							end: reservation.time_end,
 							url: "#/reservations/"+reservation.id+"/edit",
 							stick: true,
-							color: "#888888"
+							color: "#888888",
+							dow: [weekday[reservation.day]],
+							ranges: [{start: reservation.date_start, end: reservation.date_end}]
 						});
 					}
 				}, events);
@@ -94,7 +104,14 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
           left: 'title',
           center: $rootScope.user && $rootScope.user.group_id <=2 ? 'lesson reservation' : '',
           right: 'today prev,next'
-        }
+        },
+            eventRender: function(event, element, view){
+
+		        return (event.ranges.filter(function(range){
+		            return (event.start.subtract(1, 'days').isSameOrBefore(range.end) &&
+		                    event.end.add(1, 'days').isSameOrAfter(range.start));
+		        }).length)>0;
+		    },
       }
     };
 
