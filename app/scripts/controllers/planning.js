@@ -4,6 +4,14 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 
 	var lessons;
 	var reservations;
+	var weekday=new Array(7);
+		weekday["SUNDAY"]=0;
+		weekday["MONDAY"]=1;
+		weekday["TUESDAY"]=2;
+		weekday["WEDNESDAY"]=3;
+		weekday["THURSDAY"]=4;
+		weekday["FRIDAY"]=5;
+		weekday["SATURDAY"]=6;
 
 	$scope.lessons = function (start, end, timezone, callback) {
 		if (lessons)
@@ -21,10 +29,12 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 						this.push({
 							id: lesson.id,
 							title: lesson.subject.name + " en " + lesson.reservation.room.identifier,
-							start: lesson.start,
-							end: lesson.end,
+							start: lesson.start.split(" ")[1],
+							end: lesson.end.split(" ")[1],
 							url:  $rootScope.user && $rootScope.user.group_id <=2 ? "#/lessons/"+lesson.id : "#/lessons-student/"+lesson.id,
-							stick: true
+							stick: true,
+							dow: [new Date(lesson.start).getDay()],
+							ranges: [{start: lesson.start.split(" ")[0], end: lesson.end.split(" ")[0]}]
 						});
 					}
 				}, events);
@@ -38,14 +48,6 @@ angular.module('app').controller('planning', ['users', '$http', '$rootScope', '$
 	};
 
 	$scope.reservations = function (start, end, timezone, callback) {
-		var weekday=new Array(7);
-		weekday["SUNDAY"]=0;
-		weekday["MONDAY"]=1;
-		weekday["TUESDAY"]=2;
-		weekday["WEDNESDAY"]=3;
-		weekday["THURSDAY"]=4;
-		weekday["FRIDAY"]=5;
-		weekday["SATURDAY"]=6;
 		if (reservations)
 			callback(reservations);
 		else {
