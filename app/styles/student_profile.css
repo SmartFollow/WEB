@@ -1,0 +1,173 @@
+.main-student_profile {
+  background-color: #e3e8ec; }
+
+.header-block {
+  background-color: white;
+  min-height: 270px;
+  display: block;
+  padding: 0px; }
+
+.pad15 {
+  padding: 15px; }
+  .pad15 .header-block {
+    background-color: white;
+    min-height: 250px;
+    display: block;
+    padding: 0px; }
+    .pad15 .header-block .relate {
+      position: relative; }
+    .pad15 .header-block .absole {
+      position: absolute; }
+    .pad15 .header-block .center-header {
+      margin-top: 1.5vw; }
+    .pad15 .header-block .profile-picture {
+      border: 4px solid #e3e8eC;
+      z-index: 4;
+      max-width: 100%; }
+    .pad15 .header-block .header-sep {
+      border: 2px solid #e3e8ec;
+      z-index: 2;
+      margin-top: 130px;
+      position: initial; }
+    .pad15 .header-block .title-h2 {
+      text-align: center; }
+    .pad15 .header-block .a-ab-block {
+      border-radius: 6px;
+      background-color: #D9534F; }
+    .pad15 .header-block .a-ret-block {
+      border-radius: 6px;
+      background-color: #F0AD4E; }
+    .pad15 .header-block .a-bav-block {
+      border-radius: 6px;
+      background-color: #5BC0DE; }
+    .pad15 .header-block .c-white {
+      color: white; }
+      .pad15 .header-block .c-white .stats {
+        font-size: 40px; }
+      .pad15 .header-block .c-white .title-h3 {
+        font-size: 14px;
+        margin-top: 5px !important;
+        font-style: italic; }
+  .pad15 .title-h2 {
+    text-align: center; }
+  .pad15 .std-block {
+    background-color: white;
+    /* For appearance */
+    /* Not needed for sticky header/column functionality */ }
+    .pad15 .std-block .title-h2 {
+      text-align: center; }
+    .pad15 .std-block .btn-group {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle; }
+    .pad15 .std-block .btn-group.open {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle; }
+    .pad15 .std-block .stats {
+      font-size: 40px; }
+    .pad15 .std-block .component {
+      line-height: 1.5em;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1000px;
+      overflow: hidden; }
+    .pad15 .std-block table {
+      border-collapse: collapse;
+      margin-bottom: 3em;
+      width: 100%;
+      background: #fff; }
+    .pad15 .std-block td, .pad15 .std-block th {
+      padding: 0.75em 1.5em;
+      text-align: left;
+      color: #7c8d87; }
+    .pad15 .std-block td.err {
+      background-color: #e992b9;
+      color: #fff;
+      font-size: 0.75em;
+      text-align: center;
+      line-height: 1; }
+    .pad15 .std-block th {
+      background-color: #2980B9;
+      font-weight: bold;
+      color: #fff;
+      white-space: nowrap; }
+    .pad15 .std-block tbody th {
+      background-color: #2ea879; }
+    .pad15 .std-block tbody tr:nth-child(2n-1) {
+      background-color: #f5f5f5;
+      transition: all .125s ease-in-out; }
+    .pad15 .std-block tbody tr:hover {
+      background-color: rgba(41, 128, 185, 0.3); }
+    .pad15 .std-block .sticky-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin: 3em 0;
+      width: 100%; }
+    .pad15 .std-block .sticky-wrap .sticky-thead,
+    .pad15 .std-block .sticky-wrap .sticky-col,
+    .pad15 .std-block .sticky-wrap .sticky-intersect {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: all .125s ease-in-out;
+      z-index: 50;
+      width: auto;
+      /* Prevent table from stretching to full size */ }
+    .pad15 .std-block .sticky-wrap .sticky-thead {
+      box-shadow: 0 0.25em 0.1em -0.1em rgba(0, 0, 0, 0.125);
+      z-index: 100;
+      width: 100%;
+      /* Force stretch */ }
+    .pad15 .std-block .sticky-wrap .sticky-intersect {
+      opacity: 1;
+      z-index: 150; }
+    .pad15 .std-block .sticky-wrap .sticky-intersect th {
+      background-color: #666;
+      color: #eee; }
+    .pad15 .std-block .sticky-wrap td,
+    .pad15 .std-block .sticky-wrap th {
+      box-sizing: border-box; }
+    .pad15 .std-block td.user-name {
+      text-transform: capitalize; }
+    .pad15 .std-block .sticky-wrap.overflow-y {
+      overflow-y: auto;
+      max-height: 50vh; }
+
+.icon {
+  margin: 0px;
+  padding: 0px; }
+
+.margb20 {
+  margin-bottom: 20px; }
+
+.margr5 {
+  margin-right: 5px; }
+
+.c-warning {
+  color: #F0AD4E; }
+
+.c-danger {
+  color: #D9534F; }
+
+.c-info {
+  color: #5BC0DE; }
+
+.c-active {
+  color: #F5F5F5; }
+
+.c-success {
+  color: #DFF0D8; }
+
+.c-blue {
+  background-color: #2980B9;
+  color: white; }
+
+.c-grey {
+  color: #ddd; }
+
+.c-black {
+  color: #000; }
+
+/*# sourceMappingURL=student_profile.css.map */

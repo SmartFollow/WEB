@@ -1,0 +1,61 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navbar-header col-sm-3 col-md-3 col-lg-2 hidden-xs">
+                    <h1 class="title">
+                    <strong>Smart</strong>Follow
+                    </h1>
+                </div>
+                <div class="navbar-controls col-md-9 col-sm-9 col-lg-10">
+                    <h2 class="page-title">
+                    <span class="glyphicon glyphicon-adjust"></span>
+                    {{ pageTitle }}
+                    </h2>
+                    <div class="controls pull-right">
+                        <span>{{user.firstname}} {{user.lastname}}</span>
+                        <span><a href="#" class="glyphicon glyphicon-user"></a></span>
+                        <span><a href="#" ng-controller="disconnect" ng-click="disconnect()" class="glyphicon glyphicon-off"></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-2 sidebar">
+                <div class="row">
+                    <div class="infos-block"  ng-show="showEval">
+                        <div class="row quick-evaluations">
+                            <div class="col-md-12 title">Vos évaluations de la semaine :</div>
+                            <div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top"
+                                title="Participation"><span class="glyphicon glyphicon-star"></span> 0
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top" title="Bavardage">
+                                <span class="glyphicon glyphicon-comment"></span> 0
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top"
+                                title="Devoirs non réalisés"><span class="glyphicon glyphicon-book"></span> 0
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top"
+                                title="Avertissements"><span class="glyphicon glyphicon-alert"></span> 0
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="menu">
+                        <li>
+                            <a ui-sref="profil-teacher"><span class="glyphicon glyphicon-user"></span> Profil</a>
+                        </li>
+                        <li>
+                            <a ui-sref="planning"><span class="glyphicon glyphicon-calendar"></span> Planning</a>
+                        </li>
+                        <li>
+                            <a ui-sref="messaging"><span class="glyphicon glyphicon-envelope"></span> Messagerie</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 main-<?= $page; ?>">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>

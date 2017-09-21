@@ -9,10 +9,7 @@
 
 ## Installation
 
-1. Install node.js from [https://nodejs.org/](https://nodejs.org/)
-2. Open a console and type: `npm install`
-3. Followed by: `bower install`
-4. Create a local virtual host
+1. Create a local virtual host
  * Go to `C:\wamp\bin\apache\Apache2.2.17\conf\`
 	open `httpd.conf` file and change
 	`#Include conf/extra/httpd-vhosts.conf`
@@ -37,5 +34,11 @@
  * Open hosts file in `C:/Windows/System32/drivers/etc/` and add the following line ( Don't delete anything ) 
 	`127.0.0.1 smartfollow.web`
 
-7. Restart your server.
-8. Go to [http://smartfollow.web/](http://smartfollow.web/)
+2. Restart your server.
+3. (optional) Edit the configuration file of the website `\app\scripts\constant\config.js` and change apiUrl, clientId and clientSecret
+	```
+	apiUrl: "http://api.dev.smartfollow.org/",
+	clientId: "2",
+	clientSecret: "IT1tAxoBLlzOJeE5gOoNqq2LOZws1EV5rfc7tZW2"
+    ```
+4. Go to [http://smartfollow.web/](http://smartfollow.web/)
