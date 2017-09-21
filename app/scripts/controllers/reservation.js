@@ -17,9 +17,9 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
     	console.log($filter('date')($scope.data.date1, 'HH:mm'));
     	console.log($filter('date')($scope.data.date2, 'yyyy-MM-dd'));
     	console.log($filter('date')($scope.data.date2, 'HH:mm'));
-    	console.log($('#day').val());
     	var room = $('#room_id').val();
-    	var day = $('#day').val() != "" ? $('#day').val() : $filter('date')(new Date(), 'EEEE').toUpperCase();
+    	var day = $('#day').val() != "" ? $('#day').val() : $filter('date')($scope.data.date1, 'EEEE').toUpperCase();
+    	console.log(day);
     	var reservation = {
 					room_id: room,
 					time_start: $filter('date')($scope.data.date1, 'HH:mm'),
@@ -70,8 +70,11 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 			url: config.apiUrl + "api/reservations/" + $stateParams.id
 		}).then(function successCallback(response) {
 			$scope.reservation = response.data;
-			$("#room_id").val(response.data.id);
 			$("#day").val(response.data.day);
+			$scope.data = {
+				date1 : response.data.date_start + " " + response.data.time_start,
+				date2 : response.data.date_end + " " + response.data.time_end
+			};
 			$("#date1").hide();
 			$("#date2").hide();
 			console.log(response);
@@ -90,19 +93,19 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 	};
 
     $scope.create = function () {
-    	console.log($filter('date')($scope.data.date1, 'yyyy-MM-dd'));
-    	console.log($filter('date')($scope.data.date1, 'HH:mm'));
-    	console.log($filter('date')($scope.data.date2, 'yyyy-MM-dd'));
-    	console.log($filter('date')($scope.data.date2, 'HH:mm'));
-    	console.log($('#day').val());
+    	console.log(moment($scope.data.date1).format('YYYY-MM-DD'));
+    	console.log(moment($scope.data.date1).format('HH:MM'));
+    	console.log(moment($scope.data.date2).format('YYYY-MM-DD'));
+    	console.log(moment($scope.data.date2).format('HH:MM'));
     	var room = $('#room_id').val();
-    	var day = $('#day').val();
+    	var day = $('#day').val() != "" ? $('#day').val() : moment($scope.data.date1).format('dddd').toUpperCase();
+    	console.log(day);
     	var reservation = {
 					room_id: room,
-					time_start: $filter('date')($scope.data.date1, 'HH:mm'),
-					time_end: $filter('date')($scope.data.date2, 'HH:mm'),
-					date_start: $filter('date')($scope.data.date1, 'yyyy-MM-dd'),
-					date_end: $filter('date')($scope.data.date2, 'yyyy-MM-dd'),
+					time_start: moment($scope.data.date1).format('HH:MM'),
+					time_end: moment($scope.data.date2).format('HH:MM'),
+					date_start: moment($scope.data.date1).format('YYYY-MM-DD'),
+					date_end: moment($scope.data.date2).format('YYYY-MM-DD'),
 					day: day
 				};
    		$http({

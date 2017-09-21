@@ -8,5 +8,6 @@ angular.module('constants', [])
 /*
 jimmy.goodwin@example.net = admin
 kertzmann.jude@example.com = prof
+rahul.fay@example.com = etudiant
 sharon.quigley@example.org = etudiant
 */

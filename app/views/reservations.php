@@ -25,7 +25,7 @@
   <div class="col-md-12" style="margin-bottom: 20px">
     Salle<br>
     <select class="form-control" id="room_id">
-      <option ng-repeat="room in reservations.rooms" value="{{room.id}}">{{room.identifier}} ({{room.seats}} places)</option>
+      <option selected="{{room.id == reservation.id}}" ng-repeat="room in reservations.rooms" value="{{room.id}}">{{room.identifier}} ({{room.seats}} places)</option>
     </select>
   </div>
   <div class="col-md-12" style="margin-bottom: 20px">
