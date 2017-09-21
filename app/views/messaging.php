@@ -63,8 +63,8 @@
             </div>
             <div class="right">{{formatDate(message.updated_at) | date:'medium'}}</div>
           </div>
-          <div class="message">{{message.content}}</div>
-          <div class="tool-box"><a href="" class="circle-icon small glyphicon glyphicon-share-alt"></a><a href="" class="circle-icon small red-hover glyphicon glyphicon-remove"></a><a href="" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>
+          <div class="message" style="white-space: pre-wrap;">{{message.content}}</div>
+          <div class="tool-box"><a href="" class="circle-icon small red-hover glyphicon glyphicon-flag"></a></div>
         </li>
       </ul>
     </div>

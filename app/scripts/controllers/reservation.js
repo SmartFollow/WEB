@@ -24,6 +24,13 @@ angular.module('app').controller('reservation', ['$scope', '$state', '$rootScope
 			data: reservation
 		}).then(function successCallback(response) {
 			console.log(response);
+			if (response.data.error)
+			{
+				if (response.data.error == "reservations.conflict")
+					$(".alert-danger").html("<strong>Erreur !</strong> La salle que vous essayez de réserver l'est déjà à cette horaire.");
+				$(".alert-danger").show();
+				return;
+			}
 			$(".alert-success").show();
 			$timeout(function() {
 		      $state.go('planning');
