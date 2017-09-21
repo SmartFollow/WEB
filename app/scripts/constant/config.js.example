@@ -1,0 +1,6 @@
+angular.module('constants', [])
+	.constant('config', {
+		apiUrl: "url_to_api",
+		clientId: "client_id",
+		clientSecret: "client_secret"
+	});
