@@ -36,7 +36,7 @@ $page_title = "Profil de Pierre Bechad";
           <div class="col-md-4 text-center c-white" ng-repeat="criteria_sum in profile.criteria_sums">
             <div class="{{criteria_sum.criterion.impact == 'positive' ? 'a-bav-block' : 'a-ab-block'}} center-block">
               <h3 class="title-h3 mtl">{{criteria_sum.criterion.name}}</h3>
-              <p class="stats">{{criteria_sum.sum}}</p>
+              <p class="stats">{{ criteria_sum.sum | number : 0 }}</p>
             </div>
           </div>
         </div>
