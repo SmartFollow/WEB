@@ -10,7 +10,7 @@ $page_title = "Profil de Pierre Bechad";
         <div class="row">
           <div class="center-header">
             <div class="col-lg-5 col-md-6">
-          		<img src="{{imgUser}}" class="img-circle img-responsive profile-picture center-block "></img>
+          		<img src="{{ config.apiUrl + profile.avatar }}" class="img-circle img-responsive profile-picture center-block" />
             </div>
             <div class="col-lg-7 col-md-6">
               <div class="row center-block">

@@ -8,10 +8,9 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
     // Get profile
 	users.getUserFromData(function (response) {
 		$scope.profile = response;
-		console.log(response);
+		$scope.config = config;
 	});
 
-    $scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
     $rootScope.pageTitle = 'Votre profil';
     if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
@@ -23,10 +22,6 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
     	$rootScope.pageTitle = 'Profil de ' + tmpUser.firstname + ' ' + tmpUser.lastname;
     	$scope.user = tmpUser;
     	$scope.profile = tmpUser;
-    	$scope.imgUser = "/app/images/profil 2/bechad_p.bmp";
-    	if (tmpUser.id == 5)
-    		$scope.imgUser = "/app/images/profil 2/diafou_j.bmp";
-    	else if (tmpUser.id == 6)
-    		$scope.imgUser = "/app/images/profil 2/rio_s.bmp";
+		$scope.imgUser = config.apiUrl + tmpUser.avatar;
     })
 }]);

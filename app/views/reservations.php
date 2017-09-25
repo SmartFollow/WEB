@@ -29,9 +29,8 @@
     </select>
   </div>
   <div class="col-md-12" style="margin-bottom: 20px">
-    Récurrence<br>
+    Jour de la semaine<br>
     <select class="form-control" id="day">
-      <option value="">Aucune</option>
       <option value="MONDAY">Lundi</option>
       <option value="TUESDAY">Mardi</option>
       <option value="WEDNESDAY">Mercredi</option>

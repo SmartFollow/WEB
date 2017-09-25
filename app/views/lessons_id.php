@@ -66,7 +66,7 @@
             <br>
             <label class="control-label">Document</label>
             <br>
-            <img src="http://localhost/api/storage/app/{{document.path}}" height="150px"></img>
+	          <a href="{{ config.apiUrl + document.path}}" download="{{document.filename}}.{{document.extension}}"><i class="document-type glyphicon glyphicon-download-alt"></i></a>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -197,7 +197,7 @@
     </div>
 <div class="row row-eq-height lesson-infos display-table">
 	<div class="col-md-1 hidden-xs teacher-image display-cell">
-		<img src="/app/images/profile_pict.jpg" class="img-circle" />
+		<img src="{{ config.apiUrl + lesson.subject.teacher.avatar }}" class="img-circle" />
 	</div>
 
 	<div class="col-md-4 col-md-offset-1 lesson-details display-cell">
@@ -225,7 +225,7 @@
       <li href="#" class="list-group-item" ng-repeat="(key, document) in lesson.documents">
         {{document.name}}
         <div class="pull-left">
-          <a href="http://localhost/api/storage/app/{{document.path}}" download="{{document.filename}}{{document.extension}}"><i class="document-type glyphicon glyphicon-download-alt"></i></a>
+          <a href="{{ config.apiUrl + document.path}}" download="{{document.filename}}.{{document.extension}}"><i class="document-type glyphicon glyphicon-download-alt"></i></a>
           <a id="pdf-tpe" data-toggle="modal" data-target="#modal-file-{{key}}"><i class="document-type glyphicon glyphicon-eye-open"></i></a>
           <a href="" ng-click="editDocument(document, 'modal')"><i class="document-type glyphicon glyphicon-pencil"></i></a>
           <a href="" ng-click="deleteDocument(document)"><i class="document-type glyphicon glyphicon-remove"></i></a>
@@ -343,7 +343,7 @@
               <div ng-click="createEvaluations(key, student)" ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}" class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
                     <div class="cross-lesson glyphicon glyphicon-remove"></div>
                     <div class="time-lesson glyphicon glyphicon-time"></div>
-                    <img src="/app/images/profil 2/no-image.png" class="img-circle img-lesson"><br>
+                    <img src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
                     <div class="icon-lesson">
                     </div><br>
                     <span class="text-lesson">{{student.firstname}} {{student.lastname}}</span>
@@ -353,7 +353,7 @@
         <div id="cours" class="tab-pane fade">
             <div class="row trombi">
                     <div data-toggle="modal" data-target="#modal-{{student.id}}" ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}" class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
-                    <img src="/app/images/profil 2/no-image.png" class="img-circle img-lesson"><br>
+                    <img src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
                     <div class="icon-lesson">
                     </div><br>
                     <span class="text-lesson">{{student.firstname}} {{student.lastname}}</span>

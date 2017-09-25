@@ -11,7 +11,7 @@ $page_title = "Votre profil";
                 <div class="row">
                     <div class="">
                         <div class="col-md-5 sepa">
-                            <img src="/app/images/profile_pict.jpg" class="img-circle profile_picture"><br>
+                            <img src="{{ config.apiUrl + profile.avatar }}" class="img-circle profile_picture"><br>
                        </div>
                        <div class="col-md-7 mtl pll">
                             <h2><span class="uppercase prs">{{profile.firstname}}</span>{{profile.lastname}}</h2>
@@ -36,15 +36,15 @@ $page_title = "Votre profil";
                             <div class="row">
                                 <a href="#/profil/4" class="block-lesson col-sm-4">
                                     <img src="/app/images/profil 2/bechad_p.bmp" class="img-circle img-lesson"><br>
-                                    <span class="text-lesson">Ahmad Hudson</span>
+                                    <span class="text-lesson">Raegan Schmeler</span>
                                 </a>
                                 <a href="#/profil/5" class="block-lesson col-sm-4">
                                     <img src="/app/images/profil 2/diafou_j.bmp" class="img-circle img-lesson"><br>
-                                    <span class="text-lesson">Gay Champlin</span>
+                                    <span class="text-lesson">Naomi Aufderhar</span>
                                 </a>
                                 <a href="#/profil/6" class="block-lesson col-sm-4">
                                     <img src="/app/images/profil 2/rio_s.bmp" class="img-circle img-lesson"><br>
-                                    <span class="text-lesson">Paige Russel</span>
+                                    <span class="text-lesson">Macy Wunsch</span>
                                 </a>
                             </div>
                         </div>

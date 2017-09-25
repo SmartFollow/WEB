@@ -131,6 +131,7 @@ angular.module('app')
 			url: config.apiUrl + "api/lessons/"+$stateParams.id
 		}).then(function successCallback(response) {
 			$scope.lesson = response.data;
+		    $scope.config = config;
 			console.log(response);
 
 			$http({
