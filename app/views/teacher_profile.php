@@ -113,7 +113,7 @@ $page_title = "Votre profil";
                                             <tfoot>
                                             <td colspan="6">
                                                 <div class="pagination pull-right">
-                                                    <ul>
+                                                    <ul class="pagination">
                                                         <li ng-class="{disabled: currentPage == 0}">
                                                             <a href ng-click="prevPage()">« Prev</a>
                                                         </li>
@@ -137,9 +137,9 @@ $page_title = "Votre profil";
                                             </tfoot>
                                             <tbody>
                                             <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
-                                            <td>{{item.id}}</td>
-                                            <td>{{item.Type}}</td>
-                                            <td>{{item.Message}}</td>
+	                                            <td>{{item.id}}</td>
+	                                            <td>{{item.Type}}</td>
+	                                            <td>{{item.Message}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

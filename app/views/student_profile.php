@@ -143,7 +143,7 @@ $page_title = "Profil de Pierre Bechad";
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td class="user-hours">19/01/16</td><td class="user-classroom">Musique</td><td class="user-room">B206</td>
+                  <tr><td class="user-hours">19/01/16</td><td class="user-classroom">B206</td><td class="user-room">Musique</td>
                     <td class="user-date">
                       <div class="row">
                         <div class="col-md-3 col-sm-3 col-xs-3 glyphicon glyphicon-comment c-warning icon"></div>
@@ -152,7 +152,7 @@ $page_title = "Profil de Pierre Bechad";
                       </div>
                     </td>
                   </tr>
-                  <tr><td class="user-hours">19/01/16</td><td class="user-classroom">Français</td><td class="user-room">A305</td>
+                  <tr><td class="user-hours">19/01/16</td><td class="user-classroom">A305</td><td class="user-room">Français</td>
                     <td class="user-date">
                       <div class="row">
                         <div class="col-md-3 col-sm-3 col-xs-3 glyphicon glyphicon-comment c-grey icon"></div>
@@ -161,7 +161,7 @@ $page_title = "Profil de Pierre Bechad";
                       </div>
                     </td>
                   </tr>
-                  <tr><td class="user-hours">19/01/16</td><td class="user-classroom">Histoire</td><td class="user-room">B301</td>
+                  <tr><td class="user-hours">19/01/16</td><td class="user-classroom">B301</td><td class="user-room">Histoire</td>
                     <td class="user-date">
                       <div class="row">
                         <div class="col-md-3 col-sm-3 col-xs-3 glyphicon glyphicon-comment c-warning icon"></div>
