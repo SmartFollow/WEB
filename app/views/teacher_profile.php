@@ -57,7 +57,7 @@ $page_title = "Votre profil";
 <!-- END HEADER -->
 
 <!-- START BODY -->
-        <div class="row center-block">
+        <div class="row">
             <div class="col-md-6">
                 <div class="row pbl">
                     <div class="col-md-12">
