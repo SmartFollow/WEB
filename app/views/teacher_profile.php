@@ -1,7 +1,3 @@
-<?php
-$page_title = "Votre profil";
-?>
-
 <div class="mainbg">
 
 <!-- START HEADER -->

@@ -1,11 +1,5 @@
-angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function(users, $http, $rootScope, $scope, OAuth, $state, config) {
-	users.getUserFromData(function (response) {
-		if ($rootScope.user.id != 4)
-			$rootScope.showEval = false;
-		else
-			$rootScope.showEval = true;
-	});
-    // Get profile
+angular.module('app')
+.controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function(users, $http, $rootScope, $scope, OAuth, $state, config) {
 	users.getUserFromData(function (response) {
 		$scope.profile = response;
 		$scope.config = config;
@@ -22,6 +16,5 @@ angular.module('app').controller('profil', ['users', '$http', '$rootScope', '$sc
     	$rootScope.pageTitle = 'Profil de ' + tmpUser.firstname + ' ' + tmpUser.lastname;
     	$scope.user = tmpUser;
     	$scope.profile = tmpUser;
-		$scope.imgUser = config.apiUrl + tmpUser.avatar;
     })
 }]);

@@ -23,6 +23,7 @@ angular.module('user', ['constants'])
             this.lastname = data.lastname;
             this.class_id = data.class_id;
     		this.group_id = data.group_id;
+    		this.avatar = data.avatar;
         }
 
         this.getFirstName = function () {
