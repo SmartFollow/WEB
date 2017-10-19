@@ -61,15 +61,15 @@
 				        <h2 class="title_h2">Elèves en difficultés</h2>
 				        <div class="row">
 					        <a href="#/profil/20" class="block-lesson col-sm-4">
-						        <img src="/app/images/profil 2/bechad_p.bmp" class="img-circle img-lesson"><br>
+						        <img src="/app/images/20.jpg" class="img-circle img-lesson"><br>
 						        <span class="text-lesson">Kris Kunde</span>
 					        </a>
 					        <a href="#/profil/18" class="block-lesson col-sm-4">
-						        <img src="/app/images/profil 2/diafou_j.bmp" class="img-circle img-lesson"><br>
+						        <img src="/app/images/18.jpg" class="img-circle img-lesson"><br>
 						        <span class="text-lesson">Paxton Collier</span>
 					        </a>
 					        <a href="#/profil/72" class="block-lesson col-sm-4">
-						        <img src="/app/images/profil 2/rio_s.bmp" class="img-circle img-lesson"><br>
+						        <img src="/app/images/72.jpg" class="img-circle img-lesson"><br>
 						        <span class="text-lesson">Miles Prosacco</span>
 					        </a>
 				        </div>
