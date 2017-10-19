@@ -34,6 +34,17 @@
     transition: all .125s ease-in-out; }
   .block tbody tr:hover {
     background-color: rgba(231, 76, 60, 0.3); }
+  .block .table > thead > tr > th,
+  .block .table > tbody > tr > td {
+    border: none; }
+  .block table tr.success .glyphicon {
+    color: green; }
+  .block table tr.info .glyphicon {
+    color: dodgerblue; }
+  .block table tr.warning .glyphicon {
+    color: orange; }
+  .block table tr.danger .glyphicon {
+    color: red; }
 
 .pad15 {
   padding-top: 15px;

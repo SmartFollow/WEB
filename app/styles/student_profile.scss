@@ -48,6 +48,14 @@
   tbody tr:hover {
     background-color: rgba(231,76,60,.3);
   }
+  .table > thead > tr > th,
+  .table > tbody > tr > td {
+    border: none;
+  }
+  table tr.success .glyphicon { color: green; }
+  table tr.info .glyphicon { color: dodgerblue; }
+  table tr.warning .glyphicon { color: orange; }
+  table tr.danger .glyphicon { color: red; }
 }
 
 .pad15 {

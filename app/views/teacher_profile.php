@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="block">
                         <h2 class="title_h2">Evènements du jour</h2>
-                        <table>
+	                    <table class="table">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -84,20 +84,20 @@
                         <div ng-controller="NotifMod">
                             <div class="row">
 	                            <div class="col-md-12">
-		                            <table>
+		                            <table class="table">
 			                            <thead>
 			                            <tr>
-				                            <th class="id" custom-sort order="'id'" sort="sort">#&nbsp;</th>
-				                            <th class="Type" custom-sort order="'Type'" sort="sort">Type&nbsp;</th>
-				                            <th class="Message" custom-sort order="'Message'" sort="sort">Message&nbsp;</th>
+				                            <th>#</th>
+				                            <th>Type</th>
+				                            <th>Message</th>
 			                            </tr>
 			                            </thead>
 			                            <tbody>
-				                            <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
-				                            <td>{{item.id}}</td>
-				                            <td>{{item.Type}}</td>
-				                            <td>{{item.Message}}</td>
-			                            </tr>
+				                            <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'ok', danger : item.Type == 'remove', warning : item.Type == 'warning', info : item.Type == 'info'}"/>
+					                            <td>{{item.id}}</td>
+					                            <td class="text-center"><span class="glyphicon glyphicon-{{item.Type}}-sign" aria-hidden="true"></span></td>
+					                            <td>{{item.Message}}</td>
+			                                </tr>
 			                            </tbody>
 		                            </table>
 	                            </div>
@@ -105,7 +105,7 @@
 
                             <div class="row">
 	                            <div class="col-md-12 text-right">
-		                            <ul class="pagination" style="margin: 15px 0 0 0;">
+		                            <ul class="pagination" style="margin: 0;">
 			                            <li ng-class="{disabled: currentPage == 0}">
 				                            <a href ng-click="prevPage()">« Prev</a>
 			                            </li>

@@ -41,56 +41,56 @@
 							</div>
 						</div>
 
-						<table>
+						<table class="table">
 							<thead>
-							<tr>
-								<th>Heure</th>
-								<th>Matiere</th>
-								<th>Salle</th>
-								<th>Devoirs</th>
-							</tr>
+								<tr>
+									<th>Heure</th>
+									<th>Matiere</th>
+									<th>Salle</th>
+									<th>Devoirs</th>
+								</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>de 10h à 12h</td>
-								<td>Français</td>
-								<td>A305</td>
-								<td>
-									<a href="#">
-										<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>De 14h à 16h</td>
-								<td>Math</td>
-								<td>B206</td>
-								<td>
-									<a href="#">
-										<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>De 16h à 17h</td>
-								<td>Histoire</td>
-								<td>B301</td>
-								<td>
-									<a href="#">
-										<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>De 15h à 17h</td>
-								<td>Math</td>
-								<td>B206</td>
-								<td>
-									<a href="#">
-										<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
-									</a>
-								</td>
-							</tr>
+								<tr>
+									<td>de 10h à 12h</td>
+									<td>Français</td>
+									<td>A305</td>
+									<td>
+										<a href="#">
+											<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>De 14h à 16h</td>
+									<td>Math</td>
+									<td>B206</td>
+									<td>
+										<a href="#">
+											<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>De 16h à 17h</td>
+									<td>Histoire</td>
+									<td>B301</td>
+									<td>
+										<a href="#">
+											<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>De 15h à 17h</td>
+									<td>Math</td>
+									<td>B206</td>
+									<td>
+										<a href="#">
+											<span class="glyphicon glyphicon-chevron-right"></span> Voir les devoirs
+										</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -102,7 +102,7 @@
 					<div class="block">
 						<h2 class="title_h2">Devoirs</h2>
 						<div ng-controller="HwrkMod">
-							<table>
+							<table class="table">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -167,18 +167,18 @@
 						<div ng-controller="NotifMod">
 							<div class="row">
 								<div class="col-md-12">
-									<table>
+									<table class="table">
 										<thead>
 											<tr>
-												<th class="id" custom-sort order="'id'" sort="sort">#&nbsp;</th>
-												<th class="Type" custom-sort order="'Type'" sort="sort">Type&nbsp;</th>
-												<th class="Message" custom-sort order="'Message'" sort="sort">Message&nbsp;</th>
+												<th>#</th>
+												<th>Type</th>
+												<th>Message</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'Success!', danger : item.Type == 'Alerte!', warning : item.Type == 'Warning!', info : item.Type == 'Info!'}"/>
+											<tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse" ng-class="{success : item.Type == 'ok', danger : item.Type == 'remove', warning : item.Type == 'warning', info : item.Type == 'info'}"/>
 												<td>{{item.id}}</td>
-												<td>{{item.Type}}</td>
+												<td class="text-center"><span class="glyphicon glyphicon-{{item.Type}}-sign" aria-hidden="true"></span></td>
 												<td>{{item.Message}}</td>
 											</tr>
 										</tbody>
@@ -188,7 +188,7 @@
 
 							<div class="row">
 								<div class="col-md-12 text-right">
-									<ul class="pagination" style="margin: 15px 0 0 0;">
+									<ul class="pagination" style="margin: 0;">
 										<li ng-class="{disabled: currentPage == 0}">
 											<a href ng-click="prevPage()">« Prev</a>
 										</li>
@@ -216,7 +216,7 @@
 					<div class="block">
 						<h2 class="title_h2">Activités passées</h2>
 
-						<table>
+						<table class="table">
 							<thead>
 								<tr>
 									<th>Date</th>
@@ -273,7 +273,7 @@
 					<div class="block">
 						<h2 class="title_h2">Notes</h2>
 						<div ng-controller="NoteMod">
-							<table>
+							<table class="table">
 								<thead>
 									<tr>
 										<th>#</th>
