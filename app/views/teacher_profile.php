@@ -1,6 +1,6 @@
 <div class="mainbg">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" style="padding-right: 7.5px;">
 	        <div class="row">
 		        <div class="col-md-12">
 			        <div class="block center-block">
@@ -50,11 +50,10 @@
                 <div id="my-chart" style="text-align: center; padding: 50px 0;">
 	                <strong><em>Aucune donnée à afficher</em></strong>
                 </div>
-                <!-- <h3 class="title_h3 text-center pts">Evolution du nombre de retard par semaine</h3> -->
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" style="padding-left: 7.5px;">
 	        <div class="row">
 		        <div class="col-md-12">
 			        <div class="block">
@@ -133,7 +132,6 @@
                 <div id="difficult" style="text-align: center; padding: 50px 0;">
 	                <strong><em>Aucune donnée à afficher</em></strong>
                 </div>
-                <!-- <h3 class="title_h3 text-center pts">Evolution du nombre d'élèves en difficultés chaque mois</h3> -->
             </div>
         </div>
     </div>

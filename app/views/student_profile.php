@@ -1,6 +1,6 @@
 <div class="pad15">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6" style="padding-right: 7.5px;">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block center-block">
@@ -140,7 +140,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-6" style="padding-left: 7.5px;">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block">
