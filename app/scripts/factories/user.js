@@ -24,6 +24,7 @@ angular.module('user', ['constants'])
             this.class_id = data.class_id;
     		this.group_id = data.group_id;
     		this.avatar = data.avatar;
+    		this.criteria_sums = data.criteria_sums;
         }
 
         this.getFirstName = function () {
@@ -47,8 +48,8 @@ angular.module('user', ['constants'])
 		    getUsers: function (data) {
 		        return new getUsers(data);
 		    },
-		    getUserById: function (id) {
-		        return getUserById(id);
+		    getUserById: function (id, callback) {
+		        return getUserByIdFromData(id, callback);
 		    },
 		   	getUserByEmail: function (email) {
 		        return getUserByEmail(email);
@@ -105,22 +106,30 @@ angular.module('user', ['constants'])
 			});
 		}
 
+		function getUserByIdFromData(id, callback)
+		{
+			$http({
+				method: 'GET',
+				url: config.apiUrl + "api/users/" + id
+			}).then(function successCallback(response) {
+				_user = response.data;
+				callback(_user);
+			}, function errorCallback(response) {
+				console.log(response);
+			});
+		}
+
 		function getUserFromData(callback)
 		{
-			if (_user)
+			$http({
+				method: 'GET',
+				url: config.apiUrl + "api/users/profile"
+			}).then(function successCallback(response) {
+				_user = response.data;
 				callback(_user);
-			else
-			{
-				$http({
-					method: 'GET',
-					url: config.apiUrl + "api/users/profile"
-				}).then(function successCallback(response) {
-					_user = response.data;
-					callback(_user);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
+			}, function errorCallback(response) {
+				console.log(response);
+			});
 		}
 
 		function getNewUserFromData(callback)
@@ -154,7 +163,7 @@ angular.module('user', ['constants'])
 			}
 		}
 	}
-])
+]);
 
 // smartfollow.api
 /*$http({

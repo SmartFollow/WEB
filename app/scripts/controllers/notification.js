@@ -14,15 +14,15 @@ angular.module('app').controller('NotifMod',['$scope','$filter','users', functio
     $scope.pagedItems = [];
     $scope.currentPage = 0;
     $scope.items = [
-        {"id":1,"Type":"Warning!","Message":"Notes en Mathématiques sont en baisse"},
-        {"id":2,"Type":"Info!","Message":"Mr. X ne pourra assurer ses cours le 12 janvier"},
-        {"id":3,"Type":"Warning!","Message":"commentaire 3"},
-        {"id":4,"Type":"Alerte!","Message":"Baisse des notes en Histoire et manque de rigueur"},
-        {"id":5,"Type":"Info!","Message":"Le cours de Mathématiques du 10 janvier est déplacé en salle 104"},
-        {"id":6,"Type":"Warning!","Message":"commentaire 6"},
-        {"id":7,"Type":"Success!","Message":"Notes en SVT sont en train de remonter. Bon travail!"},
-        {"id":8,"Type":"Success!","Message":"commentaire 9"},
-        {"id":9 ,"Type":"Alerte!","Message":"commentaire 10"},
+        {"id":1,"Type":"Warning","Message":"Notes en Mathématiques en baisse"},
+        {"id":2,"Type":"Info","Message":"M. Xavier ne pourra assurer ses cours le 12 janvier"},
+        {"id":3,"Type":"Success","Message":"Notes en SVT entrain de remonter. Bon travail !"},
+        {"id":4,"Type":"Alerte","Message":"Baisse des notes en Histoire et manque de rigueur"},
+        {"id":5,"Type":"Info","Message":"Le cours de Mathématiques du 10 janvier est déplacé en salle 104"},
+        {"id":6,"Type":"Warning","Message":"commentaire 6"},
+        {"id":7,"Type":"Success","Message":"Notes en SVT en train de remonter. Bon travail !"},
+        {"id":8,"Type":"Success","Message":"commentaire 9"},
+        {"id":9 ,"Type":"Alerte","Message":"commentaire 10"},
     ];
     var searchMatch = function (haystack, needle) {
         if (!needle) {
@@ -65,7 +65,6 @@ angular.module('app').controller('NotifMod',['$scope','$filter','users', functio
 
     $scope.range = function (size,start, end) {
         var ret = [];
-        console.log(size,start, end);
 
         if (size < end) {
             end = size;

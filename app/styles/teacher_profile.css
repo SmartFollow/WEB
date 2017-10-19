@@ -27,39 +27,10 @@
     margin-top: 20px;
 }
 
-.block_profile {
-	min-height: 270px;
+.block {
 	background-color: white;
-}
-
-.block_event {
-	min-height: 500px;
-	background-color: white;
-}
-
-.block_notif {
-	min-height: 200px;
-	background-color: white;
-}
-
-.block_doc {
-	min-height: 600px;
-	background-color: white;
-}
-
-.block_help {
-	min-height: 270px;
-	background-color: white;
-}
-
-.block_graph1 {
-	min-height: 300px;
-	background-color: white;
-}
-
-.block_graph2 {
-	min-height: 300px;
-	background-color: white;
+	padding: 15px;
+	margin-bottom: 15px;
 }
 
 .warning {
@@ -95,6 +66,8 @@
 
 .title_h2 {
 	text-align: center;
+	margin-top: 0;
+	margin-bottom: 15px;
 }
 
 .title_h3 {
@@ -218,18 +191,8 @@
 }
 
 /* SCRIPT TABLEAU */
-
-.component {
-	line-height: 1.5em;
-	margin: 0 auto;
-	width: 90%;
-	max-width: 1000px;
-	overflow: hidden;
-}
-
 table {
     border-collapse: collapse;
-    margin-bottom: 3em;
     width: 100%;
     background: #fff;
 }

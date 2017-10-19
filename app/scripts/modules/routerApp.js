@@ -162,7 +162,7 @@ routerApp.run(['$rootScope', '$state', 'OAuth', 'users', function($rootScope, $s
         // Get User profile && Permissions
         users.getUserFromData(function (user) {
             $rootScope.user = user;
-            console.log(next.name);
+
             if (user.group_id > next.group_id)
             {
                 $state.go('login');

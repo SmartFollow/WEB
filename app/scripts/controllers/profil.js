@@ -9,12 +9,13 @@ angular.module('app')
     if ($state.current.data != null)
     	$rootScope.pageTitle = $state.current.data.pageTitle;
 }])
-.controller('profilId', ['users', '$http', '$rootScope', '$scope', '$stateParams', 'OAuth', function(users, $http, $rootScope, $scope, $stateParams, OAuth) {
-	users.getUsersFromData(function (response) {
-		$rootScope.user = response;
-    	var tmpUser = users.getUserById($stateParams.id);
-    	$rootScope.pageTitle = 'Profil de ' + tmpUser.firstname + ' ' + tmpUser.lastname;
-    	$scope.user = tmpUser;
-    	$scope.profile = tmpUser;
-    })
+.controller('profilId', ['users', '$http', '$rootScope', '$scope', '$stateParams', 'config', function(users, $http, $rootScope, $scope, $stateParams, config) {
+	$scope.config = config;
+	console.log($stateParams.id);
+
+	users.getUserById($stateParams.id, function (response) {
+		$scope.profile = response;
+
+		$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;
+	});
 }]);
