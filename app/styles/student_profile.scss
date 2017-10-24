@@ -18,6 +18,10 @@
 		border-collapse: collapse;
 		width: 100%;
 		background: #fff;
+
+		&.table {
+			margin-bottom: 0;
+		}
 	}
 	td, th {
 		padding: 0.75em 1.5em;

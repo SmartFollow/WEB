@@ -192,7 +192,8 @@ body {
             padding-left: $block-padding + 15px;
             position: relative;
 
-            &:hover {
+            &:hover,
+            &.active {
                 background-color: $darker-background;
                 text-decoration: none;
 

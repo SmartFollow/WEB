@@ -4,10 +4,7 @@ angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angu
   {
     users.getUserFromData(function (response) {
       $rootScope.user = response;
-      if ($rootScope.user.group_id == 4)
-        $state.go('profil-student');
-      else
-        $state.go('profil-teacher');
+	  $state.go('profile');
     })
   }
    OAuth.configure({
@@ -29,10 +26,7 @@ angular.module('oauthApp', ['routerApp', 'constants', 'user', 'ngCookies', 'angu
     data.then(function successCallback(data) {
       users.getNewUserFromData(function (response) {
           $rootScope.user = response;
-          if ($rootScope.user.group_id == 4)
-            $state.go('profil-student');
-          else
-            $state.go('profil-teacher');
+          $state.go('profile');
         })
       }, function errorCallback(response) {
           $("#error-auth .error").html(response.data.error);

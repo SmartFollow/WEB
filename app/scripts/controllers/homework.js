@@ -28,7 +28,7 @@ angular.module('app').controller('HwrkMod', ['$scope','$filter', '$http', 'confi
                 j++;
             }
             i++
-        };
+        }
     }, function errorCallback(response) {
         console.log(response);
     });

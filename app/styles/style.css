@@ -139,12 +139,12 @@ body {
       padding: 15px;
       padding-left: 25px;
       position: relative; }
-      .sidebar .menu a:hover {
+      .sidebar .menu a:hover, .sidebar .menu a.active {
         background-color: #1f1f1f;
         text-decoration: none; }
-        .sidebar .menu a:hover span {
+        .sidebar .menu a:hover span, .sidebar .menu a.active span {
           color: #c0392b; }
-        .sidebar .menu a:hover:before {
+        .sidebar .menu a:hover:before, .sidebar .menu a.active:before {
           content: "";
           width: 4px;
           background: #c0392b;

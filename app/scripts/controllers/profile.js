@@ -1,8 +1,9 @@
 angular.module('app')
-.controller('profil', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function(users, $http, $rootScope, $scope, OAuth, $state, config) {
+.controller('ProfileController', ['users', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function(users, $http, $rootScope, $scope, OAuth, $state, config) {
 	users.getUserFromData(function (response) {
 		$scope.profile = response;
 		$scope.config = config;
+		console.log($rootScope.accessRules);
 	});
 
     $rootScope.pageTitle = 'Votre profil';

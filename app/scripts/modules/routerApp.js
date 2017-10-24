@@ -1,7 +1,7 @@
 var routerApp = angular.module('routerApp', ['ui.router', 'angularCSS', 'app']);
  
 routerApp.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('profil-teacher');
+    $urlRouterProvider.otherwise('profile');
     $stateProvider
         // Login view
         .state('login', {
@@ -21,32 +21,21 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'user',
             templateUrl: 'app/views/menu.html'
         })
-        // Temporary student profil view
-        .state('profil-student', {
-            url: '/profil-student',
+        // User profile
+        .state('profile', {
+            url: '/profile',
             parent: 'root',
-            controller: 'profil',
-            css: '/app/styles/student_profile.css',
-            templateUrl: 'app/views/student_profile.php',
-            group_id: '4'
+            controller: 'ProfileController',
+            css: '/app/styles/profile.css',
+            templateUrl: 'app/views/profile.html'
         })
         // Temporary student profil view
         .state('profil', {
-            url: '/profil/{id:int}',
+            url: '/users/{id:int}',
             parent: 'root',
             controller: 'profilId',
             css: '/app/styles/student_profile.css',
-            templateUrl: 'app/views/student_profile.php',
-            group_id: '2'
-        })
-        // Temporary teacher profil view
-        .state('profil-teacher', {
-            url: '/profil-teacher',
-            parent: 'root',
-            controller: 'profil',
-            css: '/app/styles/teacher_profile.css',
-            templateUrl: 'app/views/teacher_profile.php',
-            group_id: '2'
+            templateUrl: 'app/views/student_profile.html'
         })
         // Lessons create
         .state('lessons-create', {
@@ -55,8 +44,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'lessonsCreate',
             data:{ pageTitle: 'Ajouter une leçon' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lessons_create.php',
-            group_id: '2'
+            templateUrl: 'app/views/lessons_create.html'
         })
         // Lessons edit
         .state('lessons-edition', {
@@ -65,16 +53,14 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'lessonsEdit',
             data:{ pageTitle: 'Editer une leçon' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lessons_edit.php',
-            group_id: '2'
+            templateUrl: 'app/views/lessons_edit.html'
         })
         // Lessons delete
         .state('lessons-delete', {
             url: '/lessons/{id:int}/delete',
             parent: 'root',
             controller: 'lessonsDelete',
-            data:{ pageTitle: 'Supprimer une leçon' },
-            group_id: '2'
+            data:{ pageTitle: 'Supprimer une leçon' }
         })
         // Lesson view
         .state('lessons_id', {
@@ -83,8 +69,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'lessonsId',
             data:{ pageTitle: 'Déroulement du cours' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lessons_id.php',
-            group_id: '2'
+            templateUrl: 'app/views/lessons_id.html'
         })
         // Lesson student view
         .state('lessons_id_student', {
@@ -93,8 +78,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'lessonsIdStudent',
             data:{ pageTitle: 'Déroulement du cours' },
             css: '/app/styles/lesson.css',
-            templateUrl: 'app/views/lessons_id_student.php',
-            group_id: '4'
+            templateUrl: 'app/views/lessons_id_student.html'
         })
         // Reservations rooms
         .state('reservations', {
@@ -102,8 +86,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'root',
             controller: 'reservation',
             data:{ pageTitle: 'Réservation salle' },
-            templateUrl: 'app/views/reservations.php',
-            group_id: '2'
+            templateUrl: 'app/views/reservations.html'
         })
         // Reservations rooms by Id
         .state('reservations_id', {
@@ -111,16 +94,14 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'root',
             controller: 'reservationsEdit',
             data:{ pageTitle: 'Réservation' },
-            templateUrl: 'app/views/reservations.php',
-            group_id: '2'
+            templateUrl: 'app/views/reservations.html'
         })
         // Reservations rooms by Id
         .state('reservations_delete', {
             url: '/reservations/{id:int}/delete',
             parent: 'root',
             controller: 'reservationsDelete',
-            data:{ pageTitle: 'Réservation' },
-            group_id: '2'
+            data:{ pageTitle: 'Réservation' }
         })
         // Evaluation view
         .state('evaluation', {
@@ -129,8 +110,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'profil',
             data:{ pageTitle: "Création d'une évaluation" },
             css: '/app/styles/evaluation.css',
-            templateUrl: 'app/views/evaluation.php',
-            group_id: '2'
+            templateUrl: 'app/views/evaluation.html'
         })
         // Planning view
         .state('planning', {
@@ -138,8 +118,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'root',
             data:{ pageTitle: 'Planning' },
             controller: 'planning',
-            templateUrl: 'app/views/planning.php',
-            group_id: '4'
+            templateUrl: 'app/views/planning.html'
         })
         // Messaging view
         .state('messaging', {
@@ -148,30 +127,31 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             data:{ pageTitle: 'Messagerie' },
             controller: 'messaging',
             css: '/app/styles/messaging.css',
-            templateUrl: 'app/views/messaging.php',
-            group_id: '4'
+            templateUrl: 'app/views/messaging.html'
         })
-})
+});
+
 routerApp.run(['$rootScope', '$state', 'OAuth', 'users', function($rootScope, $state, OAuth, users)  {
-  $rootScope.$on('$stateChangeStart', function (event, next, current) {
-    if (!OAuth.isAuthenticated() && next.name != 'login') {
-        $state.go('login');
-        event.preventDefault();
-    }
-    else if (next.name != 'login') {
-        // Get User profile && Permissions
-        users.getUserFromData(function (user) {
-            $rootScope.user = user;
+    $rootScope.$on('$stateChangeStart', function (event, next, current) {
+		if (!OAuth.isAuthenticated() && next.name != 'login') {
+		    $state.go('login');
+		    event.preventDefault();
+		}
+		else if (next.name != 'login') {
+		    // Get User profile && Permissions
+		    users.getUserFromData(function (user) {
+		        $rootScope.user = user;
 
-            if (user.group_id > next.group_id)
-            {
-                $state.go('login');
-                event.preventDefault();
-            }
-        });
+		        if (user.group_id > next.group_id)
+		        {
+		            $state.go('login');
+		            event.preventDefault();
+		        }
+		    });
 
-        users.getUserAccessRules(function (response) {
-        });
-    }
-  });
+		    users.getUserAccessRules(function (response) {
+			    $rootScope.accessRules = response;
+		    });
+		}
+    });
 }]);
