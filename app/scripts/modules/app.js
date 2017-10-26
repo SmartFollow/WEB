@@ -1,1 +1,1 @@
-angular.module('app', ['routerApp', 'oauthApp', 'user', 'ui.bootstrap.datetimepicker', 'constants', 'ui.calendar']);
+angular.module('app', ['RouterModule', 'OAuthModule', 'ui.bootstrap.datetimepicker', 'constants', 'ui.calendar']);

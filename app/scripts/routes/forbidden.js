@@ -1,17 +1,17 @@
 (function () {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('forbidden')
-    .config(config);
+	angular
+		.module('forbidden')
+		.config(config);
 
-  function config($stateProvider) {
-    $stateProvider
-      .state('forbidden', {
-        url: '/forbidden',
-        templateUrl: 'views/forbidden.html',
-        controller: 'ForbiddenCtrl',
-        controllerAs: 'forbidden'
-      });
-  }
+	function config($stateProvider) {
+		$stateProvider
+			.state('forbidden', {
+				url: '/forbidden',
+				templateUrl: 'views/forbidden.html',
+				controller: 'ForbiddenCtrl',
+				controllerAs: 'forbidden'
+			});
+	}
 }());

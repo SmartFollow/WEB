@@ -235,6 +235,13 @@ body {
 
 .main {
     padding-top: 15px;
+    padding-bottom: 15px;
+
+    .page-block {
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
 }
 
 .breadcrumb-container {

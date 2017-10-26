@@ -1,4 +1,5 @@
-angular.module('app').controller('HwrkMod', ['$scope','$filter', '$http', 'config', function ($scope, $filter, $http, config)    {
+angular.module('app')
+    .controller('HomeworkController', ['$scope','$filter', '$http', 'config', function ($scope, $filter, $http, config)    {
 
     // init
     $scope.sort = {

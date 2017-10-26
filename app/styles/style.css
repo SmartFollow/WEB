@@ -167,7 +167,12 @@ body {
     overflow-x: hidden;
     overflow-y: auto; } }
 .main {
-  padding-top: 15px; }
+  padding-top: 15px;
+  padding-bottom: 15px; }
+  .main .page-block {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px; }
 
 .breadcrumb-container {
   padding-left: 15px; }

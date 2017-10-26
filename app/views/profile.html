@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="main">
 	<!-- Main row for the page -->
 	<div class="row">
 		<!-- Left column -->
@@ -12,8 +12,18 @@
 					</div>
 					<div class="col-md-7">
 						<h2 class="text-left">{{profile.firstname}} <span class="uppercase">{{profile.lastname}}</span></h2>
-						<h3>{{profile.group.description}}</h3><br>
-						<span class="glyphicon glyphicon-envelope mrs" aria-hidden="true"></span>{{profile.email}}
+						<dl>
+							<dt>Groupe</dt>
+							<dd>{{ profile.group.description }}</dd>
+
+							<div ng-if="profile.student_class !== null">
+								<dt>Classe</dt>
+								<dd>{{ profile.student_class.name }}</dd>
+							</div>
+
+							<dt>Email</dt>
+							<dd>{{ profile.email }}</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
@@ -45,7 +55,7 @@
 			<!-- Homeworks -->
 			<div class="block" ng-if="accessRules.includes('users.profile.homeworks')">
 				<h2>Devoirs</h2>
-				<div ng-controller="HwrkMod">
+				<div ng-controller="HomeworkController">
 					<table class="table">
 						<thead>
 							<tr>
@@ -103,7 +113,7 @@
 			<div class="block" ng-if="accessRules.includes('notifications.self.index')">
 				<h2>Notifications</h2>
 
-				<div ng-controller="NotifMod">
+				<div ng-controller="NotificationController">
 					<div class="row">
 						<div class="col-md-12">
 							<table class="table">
@@ -154,7 +164,7 @@
 			<!-- Marks -->
 			<div class="block" ng-if="accessRules.includes('marks.self.index')">
 				<h2>Notes</h2>
-				<div ng-controller="NoteMod">
+				<div ng-controller="MarkController">
 					<table class="table">
 						<thead>
 						<tr>

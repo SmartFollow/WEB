@@ -1,0 +1,29 @@
+table.table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 0; }
+  table.table td, table.table th {
+    padding: 0.75em 1.5em;
+    color: #7c8d87;
+    border: none; }
+  table.table th {
+    background-color: #e74c3c;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap; }
+  table.table tbody tr:nth-child(2n-1) {
+    background-color: #f5f5f5;
+    transition: all .125s ease-in-out; }
+  table.table tbody tr:hover {
+    background-color: rgba(231, 76, 60, 0.3); }
+  table.table tbody tr.success .glyphicon {
+    color: green; }
+  table.table tbody tr.info .glyphicon {
+    color: dodgerblue; }
+  table.table tbody tr.warning .glyphicon {
+    color: orange; }
+  table.table tbody tr.danger .glyphicon {
+    color: red; }
+
+/*# sourceMappingURL=groups.css.map */
