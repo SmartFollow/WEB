@@ -7,7 +7,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 	// Login view
 		.state('login', {
 			url: '/login',
-			controller: 'loginController',
+			controller: 'LoginController',
 			templateUrl: 'app/views/login.html'
 		})
 		// Menu

@@ -61,7 +61,7 @@ angular.module('app')
 					if ($rootScope.user.group_id <= 2) {
 						this.push({
 							id: reservation.id,
-							title: reservation.room_id == 1 ? 'Reservation de la salle D301' : 'Reservation de la salle D302',
+							title: "Reservation de la salle " + reservation.room.identifier,
 							start: reservation.time_start,
 							end: reservation.time_end,
 							url: "#/reservations/" + reservation.id + "/edit",
