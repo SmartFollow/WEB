@@ -125,6 +125,8 @@ angular.module('app')
 
 	}])
 	.controller('lessonsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+		$rootScope.pageTitle = "Déroulement du cours";
+
 		$http({
 			method: 'GET',
 			url: config.apiUrl + "api/lessons/" + $stateParams.id
