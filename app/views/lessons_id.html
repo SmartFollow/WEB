@@ -218,13 +218,13 @@
 </div>
 <div class="row row-eq-height lesson-infos display-table">
 	<div class="col-md-1 hidden-xs teacher-image display-cell">
-		<img src="{{ config.apiUrl + lesson.subject.teacher.avatar }}" class="img-circle"/>
+		<img ng-src="{{ config.apiUrl + lesson.subject.teacher.avatar }}" class="img-circle"/>
 	</div>
 
 	<div class="col-md-4 col-md-offset-1 lesson-details display-cell">
 		<dl class="" style="margin-top: 20px;">
 			<dt>Professeur</dt>
-			<dd><a href="#"><span
+			<dd><a ui-sref="users-show({ id : lesson.subject.teacher.id })"><span
 					id="teacher">{{lesson.subject.teacher.firstname}} {{lesson.subject.teacher.lastname}}</span></a>
 			</dd>
 
@@ -238,8 +238,8 @@
 			<dd><span id="room">{{lesson.reservation.room.identifier}}</span></dd>
 
 			<dt>Date</dt>
-			<dd>Le {{lesson.reservation.date_start}} à {{lesson.reservation.time_start}} au
-				{{lesson.reservation.date_end}} à {{lesson.reservation.time_end}}
+			<dd>Du {{ lesson.start | date: "dd/MM/yyyy 'à' HH'h'mm" }} au
+				{{ lesson.end | date: "dd/MM/yyyy 'à' HH'h'mm" }}
 			</dd>
 		</dl>
 	</div>
@@ -392,7 +392,7 @@
 				     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
 					<div class="cross-lesson glyphicon glyphicon-remove"></div>
 					<div class="time-lesson glyphicon glyphicon-time"></div>
-					<img src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
+					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
 					<div class="icon-lesson">
 					</div>
 					<br>
@@ -405,7 +405,7 @@
 				<div data-toggle="modal" data-target="#modal-{{student.id}}"
 				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}"
 				     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
-					<img src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
+					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
 					<div class="icon-lesson">
 					</div>
 					<br>

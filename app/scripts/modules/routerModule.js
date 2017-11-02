@@ -1,7 +1,7 @@
-var routerApp = angular.module('RouterModule', ['ui.router', 'angularCSS', 'app']);
+var routerModule = angular.module('RouterModule', ['ui.router', 'angularCSS', 'app']);
 
-routerApp.config(function ($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('profile');
+routerModule.config(function ($stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('users.profile');
 
 	$stateProvider
 	// Login view
@@ -13,25 +13,32 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 		// Menu
 		.state('root', {
 			abstract: true,
-			controller: 'userController',
+			controller: 'UserController',
 			templateUrl: 'app/views/menu.html'
 		})
+		/**
+		 * User-related states
+		 */
+		.state('users', {})
 		// User profile
-		.state('profile', {
+		.state('users.profile', {
 			url: '/profile',
 			parent: 'root',
 			controller: 'ProfileController',
 			css: '/app/styles/profile.css',
 			templateUrl: 'app/views/profile.html'
 		})
-		// Temporary student profil view
-		.state('profil', {
+		// User show
+		.state('users.show', {
 			url: '/users/{id:int}',
 			parent: 'root',
 			controller: 'profilId',
 			css: '/app/styles/student_profile.css',
 			templateUrl: 'app/views/student_profile.html'
 		})
+		/**
+		 * Group-related states
+		 */
 		.state('groups', {
 			url: '/groups',
 			parent: 'root',
@@ -124,7 +131,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 		})
 });
 
-routerApp.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($rootScope, $state, OAuth, UserFactory) {
+routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($rootScope, $state, OAuth, UserFactory) {
 	$rootScope.$on('$stateChangeStart', function (event, next, current) {
 		if (!OAuth.isAuthenticated() && next.name != 'login') {
 			$state.go('login');

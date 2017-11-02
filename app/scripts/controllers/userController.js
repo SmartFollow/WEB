@@ -1,4 +1,4 @@
-angular.module('app')
-	.controller('userController', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config) {
+angular.module('UsersModule')
+	.controller('UserController', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config) {
 
 	}]);

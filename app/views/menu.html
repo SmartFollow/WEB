@@ -11,7 +11,7 @@
 				</h2>
 				<div class="controls pull-right">
 					<span>{{ user.firstname }} {{ user.lastname }}</span>
-					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="profile" class="glyphicon glyphicon-user"></a></span>
+					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile" class="glyphicon glyphicon-user"></a></span>
 					<span><a href="#" ng-controller="LogoutController" ng-click="logout()" class="glyphicon glyphicon-off"></a></span>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 				-->
 				<ul class="menu">
 					<li ng-if="accessRules.includes('users.profile')">
-						<a ui-sref="profile" ui-sref-active="active">
+						<a ui-sref="users.profile" ui-sref-active="active">
 							<span class="glyphicon glyphicon-user"></span> Votre profil
 						</a>
 					</li>

@@ -1,9 +1,8 @@
-angular.module('app')
+angular.module('UsersModule')
 	.controller('ProfileController', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config) {
 		UserFactory.getUserFromData(function (response) {
 			$scope.profile = response;
 			$scope.config = config;
-			console.log($rootScope.accessRules);
 		});
 
 		$rootScope.pageTitle = 'Votre profil';
@@ -12,7 +11,6 @@ angular.module('app')
 	}])
 	.controller('profilId', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $http, $rootScope, $scope, $stateParams, config) {
 		$scope.config = config;
-		console.log($stateParams.id);
 
 		UserFactory.getUserById($stateParams.id, function (response) {
 			$scope.profile = response;

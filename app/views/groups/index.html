@@ -6,13 +6,19 @@
 					<th>#</th>
 					<th>Nom</th>
 					<th>Description</th>
+					<th>Voir</th>
 					<th>Modifier</th>
 					<th>Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-
+				<tr ng-repeat="group in groups track by group.id">
+					<td>{{ group.id }}</td>
+					<td>{{ group.name }}</td>
+					<td>{{ group.description }}</td>
+					<td><a ui-sref="#">Voir</a></td>
+					<td><a ui-sref="#">Modifier</a></td>
+					<td><a ui-sref="#">Supprimer</a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -1,12 +1,12 @@
-angular.module('groups', ['constants'])
-	.factory('GroupFactory', ['$http', '$rootScope', '$scope', 'OAuth', 'config', function ($http, $rootScope, $scope, OAuth, config) {
+angular.module('GroupsModule')
+	.factory('GroupFactory', ['$http', 'OAuth', 'config', function ($http, OAuth, config) {
 		return {
 			getGroups: function (callback) {
 				$http({
 					method: 'GET',
 					url: config.apiUrl + "api/groups"
 				}).then(function successCallback(response) {
-					callback(response);
+					callback(response.data);
 				}, function errorCallback(response) {
 					console.log(response);
 				});

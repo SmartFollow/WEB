@@ -126,13 +126,15 @@ angular.module('app')
 	}])
 	.controller('lessonsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 		$rootScope.pageTitle = "Déroulement du cours";
+		$scope.config = config;
 
 		$http({
 			method: 'GET',
 			url: config.apiUrl + "api/lessons/" + $stateParams.id
 		}).then(function successCallback(response) {
 			$scope.lesson = response.data;
-			$scope.config = config;
+			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
+			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
 			console.log(response);
 
 			$http({
