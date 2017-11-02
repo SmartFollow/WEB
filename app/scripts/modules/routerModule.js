@@ -13,7 +13,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		// Menu
 		.state('root', {
 			abstract: true,
-			controller: 'UserController',
+			controller: 'MenuController',
 			templateUrl: 'app/views/menu.html'
 		})
 		/**
@@ -24,17 +24,17 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		.state('users.profile', {
 			url: '/profile',
 			parent: 'root',
-			controller: 'ProfileController',
+			controller: 'UserController@profile',
 			css: '/app/styles/profile.css',
-			templateUrl: 'app/views/profile.html'
+			templateUrl: 'app/views/users/show.html'
 		})
 		// User show
 		.state('users.show', {
 			url: '/users/{id:int}',
 			parent: 'root',
-			controller: 'profilId',
+			controller: 'UserController@show',
 			css: '/app/styles/student_profile.css',
-			templateUrl: 'app/views/student_profile.html'
+			templateUrl: 'app/views/users/show.html'
 		})
 		/**
 		 * Group-related states
@@ -42,43 +42,47 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		.state('groups', {
 			url: '/groups',
 			parent: 'root',
-			controller: 'GroupController',
+			controller: 'GroupController@index',
 			css: '/app/styles/groups.css',
 			templateUrl: 'app/views/groups/index.html'
 		})
+		/**
+		 * Lesson-related states
+		 */
+		.state('lessons', {})
 		// Lessons create
-		.state('lessons-create', {
+		.state('lessons.create', {
 			url: '/lessons/create',
 			parent: 'root',
 			controller: 'lessonsCreate',
 			data: {pageTitle: 'Ajouter une leçon'},
 			css: '/app/styles/lesson.css',
-			templateUrl: 'app/views/lessons_create.html'
+			templateUrl: 'app/views/lessons/create.html'
 		})
 		// Lessons edit
-		.state('lessons-edition', {
+		.state('lessons.edit', {
 			url: '/lessons/{id:int}/edit',
 			parent: 'root',
 			controller: 'lessonsEdit',
 			data: {pageTitle: 'Editer une leçon'},
 			css: '/app/styles/lesson.css',
-			templateUrl: 'app/views/lessons_edit.html'
+			templateUrl: 'app/views/lessons/edit.html'
 		})
 		// Lessons delete
-		.state('lessons-delete', {
+		.state('lessons.delete', {
 			url: '/lessons/{id:int}/delete',
 			parent: 'root',
 			controller: 'lessonsDelete',
-			data: {pageTitle: 'Supprimer une leçon'}
+			data: { pageTitle: 'Supprimer une leçon' }
 		})
 		// Lesson view
-		.state('lessons_id', {
+		.state('lessons.show', {
 			url: '/lessons/{id:int}',
 			parent: 'root',
 			controller: 'lessonsId',
 			data: {pageTitle: 'Déroulement du cours'},
 			css: '/app/styles/lesson.css',
-			templateUrl: 'app/views/lessons_id.html'
+			templateUrl: 'app/views/lessons/show.html'
 		})
 		// Lesson student view
 		.state('lessons_id_student', {
