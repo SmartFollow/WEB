@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('lessonsCreate', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$timeout', function (UserFactory, $scope, $state, $rootScope, $http, $filter, config, $timeout) {
+	.controller('LessonController@create', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$timeout', function (UserFactory, $scope, $state, $rootScope, $http, $filter, config, $timeout) {
 		$("#selectedLevel").hide();
 		$("#selectedSubject").hide();
 		$("#selectedClasse").hide();
@@ -14,7 +14,6 @@ angular.module('app')
 		}).then(function successCallback(response) {
 			$scope.lessons = response.data;
 			$("#selectedLevel").show();
-			console.log(response);
 		}, function errorCallback(response) {
 			console.log(response);
 		});
@@ -45,14 +44,12 @@ angular.module('app')
 				$timeout(function () {
 					$state.go('planning');
 				}, 3000);
-				console.log(response);
 			}, function errorCallback(response) {
 				$(".alert-danger").show();
-				console.log(response);
 			});
 		};
 	}])
-	.controller('lessonsEdit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	.controller('LessonController@edit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 
 		if ($state.current.data != null)
 			$rootScope.pageTitle = $state.current.data.pageTitle;
@@ -112,7 +109,7 @@ angular.module('app')
 			});
 		};
 	}])
-	.controller('lessonsDelete', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	.controller('LessonController@delete', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 		$http({
 			method: 'DELETE',
 			url: config.apiUrl + "api/lessons/" + $stateParams.id,
@@ -124,7 +121,7 @@ angular.module('app')
 		});
 
 	}])
-	.controller('lessonsId', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	.controller('LessonController@show', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 		$rootScope.pageTitle = "Déroulement du cours";
 		$scope.config = config;
 

@@ -1,26 +1,29 @@
 var routerModule = angular.module('RouterModule', ['ui.router', 'angularCSS', 'app']);
 
 routerModule.config(function ($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('users.profile');
+	$urlRouterProvider.otherwise('/profile');
 
 	$stateProvider
-	// Login view
-		.state('login', {
-			url: '/login',
-			controller: 'LoginController',
-			templateUrl: 'app/views/login.html'
-		})
-		// Menu
+
 		.state('root', {
 			abstract: true,
 			controller: 'MenuController',
 			templateUrl: 'app/views/menu.html'
 		})
+
 		/**
-		 * User-related states
+		 * Authentication related routes
+		 */
+		.state('login', {
+			url: '/login',
+			controller: 'AuthController@login',
+			templateUrl: 'app/views/login.html'
+		})
+
+		/**
+		 * Users-related states
 		 */
 		.state('users', {})
-		// User profile
 		.state('users.profile', {
 			url: '/profile',
 			parent: 'root',
@@ -28,7 +31,6 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/app/styles/profile.css',
 			templateUrl: 'app/views/users/show.html'
 		})
-		// User show
 		.state('users.show', {
 			url: '/users/{id:int}',
 			parent: 'root',
@@ -36,8 +38,9 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/app/styles/student_profile.css',
 			templateUrl: 'app/views/users/show.html'
 		})
+
 		/**
-		 * Group-related states
+		 * Groups-related states
 		 */
 		.state('groups', {
 			url: '/groups',
@@ -46,46 +49,42 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/app/styles/groups.css',
 			templateUrl: 'app/views/groups/index.html'
 		})
+
 		/**
-		 * Lesson-related states
+		 * Lessons-related states
 		 */
 		.state('lessons', {})
-		// Lessons create
 		.state('lessons.create', {
 			url: '/lessons/create',
 			parent: 'root',
-			controller: 'lessonsCreate',
+			controller: 'LessonController@create',
 			data: {pageTitle: 'Ajouter une leçon'},
 			css: '/app/styles/lesson.css',
 			templateUrl: 'app/views/lessons/create.html'
 		})
-		// Lessons edit
 		.state('lessons.edit', {
 			url: '/lessons/{id:int}/edit',
 			parent: 'root',
-			controller: 'lessonsEdit',
-			data: {pageTitle: 'Editer une leçon'},
+			controller: 'LessonController@edit',
+			data: {pageTitle: 'Modifier une leçon'},
 			css: '/app/styles/lesson.css',
 			templateUrl: 'app/views/lessons/edit.html'
 		})
-		// Lessons delete
 		.state('lessons.delete', {
 			url: '/lessons/{id:int}/delete',
 			parent: 'root',
-			controller: 'lessonsDelete',
+			controller: 'LessonController@delete',
 			data: { pageTitle: 'Supprimer une leçon' }
 		})
-		// Lesson view
 		.state('lessons.show', {
 			url: '/lessons/{id:int}',
 			parent: 'root',
-			controller: 'lessonsId',
+			controller: 'LessonController@show',
 			data: {pageTitle: 'Déroulement du cours'},
 			css: '/app/styles/lesson.css',
 			templateUrl: 'app/views/lessons/show.html'
 		})
-		// Lesson student view
-		.state('lessons_id_student', {
+		.state('lessons_id_student', { // ToDo: Replace by access-rules management
 			url: '/lessons-student/{id:int}',
 			parent: 'root',
 			controller: 'lessonsIdStudent',
@@ -93,29 +92,31 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/app/styles/lesson.css',
 			templateUrl: 'app/views/lessons_id_student.html'
 		})
-		// Reservations rooms
-		.state('reservations', {
+
+		/**
+		 * Reservations-related states
+		 */
+		.state('reservations', {})
+		.state('reservations.create', {
 			url: '/reservations/create',
 			parent: 'root',
-			controller: 'ReservationController',
-			data: {pageTitle: 'Réservation salle'},
-			templateUrl: 'app/views/reservations.html'
+			controller: 'ReservationController@create',
+			data: { pageTitle: 'Réserver une salle' },
+			templateUrl: 'app/views/reservations/create.html'
 		})
-		// Reservations rooms by Id
-		.state('reservations_id', {
+		.state('reservations.edit', {
 			url: '/reservations/{id:int}/edit',
 			parent: 'root',
-			controller: 'reservationsEdit',
-			data: {pageTitle: 'Réservation'},
-			templateUrl: 'app/views/reservations.html'
+			controller: 'ReservationController@edit',
+			data: { pageTitle: 'Modifier une réservation' },
+			templateUrl: 'app/views/reservations/create.html'
 		})
-		// Reservations rooms by Id
-		.state('reservations_delete', {
+		.state('reservations.delete', {
 			url: '/reservations/{id:int}/delete',
 			parent: 'root',
-			controller: 'reservationsDelete',
-			data: {pageTitle: 'Réservation'}
+			controller: 'ReservationController@delete'
 		})
+
 		// Planning view
 		.state('planning', {
 			url: '/planning',
@@ -138,12 +139,12 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($rootScope, $state, OAuth, UserFactory) {
 	$rootScope.$on('$stateChangeStart', function (event, next, current) {
 		if (!OAuth.isAuthenticated() && next.name != 'login') {
-			$state.go('login');
 			event.preventDefault();
+			$state.go('login');
 		}
 		else if (next.name != 'login') {
-			// Get User profile && Permissions
-			UserFactory.getUserFromData(function (user) {
+			// Get user profile
+			UserFactory.getProfile(function (user) {
 				$rootScope.user = user;
 
 				if (user.group_id > next.group_id) {
@@ -152,6 +153,7 @@ routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($roo
 				}
 			});
 
+			// Get user permissions
 			UserFactory.getUserAccessRules(function (response) {
 				$rootScope.accessRules = response;
 			});

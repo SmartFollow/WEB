@@ -1,7 +1,7 @@
 angular.module('app', [
 	'constants',
 	'RouterModule',
-	'OAuthModule',
+	'AuthModule',
 	'UsersModule',
 	'GroupsModule',
 	'ui.bootstrap.datetimepicker',

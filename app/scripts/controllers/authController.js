@@ -1,16 +1,18 @@
-angular.module('OAuthModule', ['RouterModule', 'constants', 'UsersModule', 'ngCookies', 'angular-oauth2', 'ngTagsInput'])
-	.controller('LoginController', ['OAuth', 'OAuthToken', '$scope', '$http', '$state', '$window', '$cookies', '$rootScope', 'UserFactory', 'config', function (OAuth, OAuthToken, $scope, $http, $state, $window, $cookies, $rootScope, UserFactory, config) {
+angular.module('AuthModule', ['RouterModule', 'constants', 'UsersModule', 'ngCookies', 'angular-oauth2', 'ngTagsInput'])
+	.controller('AuthController@login', ['OAuth', 'OAuthToken', '$scope', '$http', '$state', '$window', '$cookies', '$rootScope', 'UserFactory', 'config', function (OAuth, OAuthToken, $scope, $http, $state, $window, $cookies, $rootScope, UserFactory, config) {
 		if (OAuth.isAuthenticated()) {
-			UserFactory.getUserFromData(function (response) {
+			UserFactory.getProfile(function (response) {
 				$rootScope.user = response;
-				$state.go('profile');
+				$state.go('users.profile');
 			})
 		}
+
 		OAuth.configure({
 			baseUrl: config.apiUrl,
 			clientId: config.clientId,
 			clientSecret: config.clientSecret
 		});
+
 		$scope.submit = function () {
 			$cookies.put('username', $scope.inputEmail);
 			var user = {
@@ -23,9 +25,9 @@ angular.module('OAuthModule', ['RouterModule', 'constants', 'UsersModule', 'ngCo
 			}
 			var data = OAuth.getAccessToken(user, options);
 			data.then(function successCallback(data) {
-				UserFactory.getNewUserFromData(function (response) {
+				UserFactory.getProfile(function (response) {
 					$rootScope.user = response;
-					$state.go('profile');
+					$state.go('users.profile');
 				})
 			}, function errorCallback(response) {
 				$("#error-auth .error").html(response.data.error);
@@ -33,7 +35,7 @@ angular.module('OAuthModule', ['RouterModule', 'constants', 'UsersModule', 'ngCo
 			});
 		}
 	}])
-	.controller('LogoutController', ['OAuthToken', '$scope', '$state', '$window', function (OAuthToken, $scope, $state, $window) {
+	.controller('AuthController@logout', ['OAuthToken', '$scope', '$state', '$window', function (OAuthToken, $scope, $state, $window) {
 		$scope.logout = function () {
 			OAuthToken.removeToken();
 			$state.go('login');

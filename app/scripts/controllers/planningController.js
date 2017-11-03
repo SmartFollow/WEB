@@ -91,13 +91,13 @@ angular.module('app')
 				lesson: {
 					text: 'Ajouter une leçon',
 					click: function () {
-						$state.go('lessons-create');
+						$state.go('lessons.create');
 					}
 				},
 				reservation: {
 					text: 'Réserver une salle',
 					click: function () {
-						$state.go('reservations');
+						$state.go('reservations.create');
 					}
 				}
 			},

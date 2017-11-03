@@ -1,6 +1,6 @@
 angular.module('UsersModule')
 	.controller('UserController@profile', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config) {
-		UserFactory.getUserFromData(function (response) {
+		UserFactory.getProfile(function (response) {
 			$scope.profile = response;
 			$scope.config = config;
 		});
@@ -12,7 +12,7 @@ angular.module('UsersModule')
 	.controller('UserController@show', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $http, $rootScope, $scope, $stateParams, config) {
 		$scope.config = config;
 
-		UserFactory.getUserById($stateParams.id, function (response) {
+		UserFactory.getUser($stateParams.id, function (response) {
 			$scope.profile = response;
 
 			$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;

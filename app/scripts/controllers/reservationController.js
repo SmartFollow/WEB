@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('ReservationController', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, config, $timeout) {
+	.controller('ReservationController@create', ['$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, config, $timeout) {
 		$scope.button = "Créer";
 		$(".edit").hide();
 		if ($state.current.data != null)
@@ -51,7 +51,7 @@ angular.module('app')
 			});
 		};
 	}])
-	.controller('reservationsEdit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config, $timeout) {
+	.controller('ReservationController@edit', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', '$timeout', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config, $timeout) {
 		$scope.button = "Editer";
 		$(".delete").show();
 		if ($state.current.data != null)
@@ -124,7 +124,7 @@ angular.module('app')
 			});
 		};
 	}])
-	.controller('reservationsDelete', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	.controller('ReservationController@delete', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 		$http({
 			method: 'DELETE',
 			url: config.apiUrl + "api/reservations/" + $stateParams.id

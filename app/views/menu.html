@@ -12,7 +12,7 @@
 				<div class="controls pull-right">
 					<span>{{ user.firstname }} {{ user.lastname }}</span>
 					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile" class="glyphicon glyphicon-user"></a></span>
-					<span><a href="#" ng-controller="LogoutController" ng-click="logout()" class="glyphicon glyphicon-off"></a></span>
+					<span><a href="#" ng-controller="AuthController@logout" ng-click="logout()" class="glyphicon glyphicon-off"></a></span>
 				</div>
 			</div>
 		</div>
