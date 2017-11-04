@@ -42,12 +42,28 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		/**
 		 * Groups-related states
 		 */
-		.state('groups', {
+		.state('groups', {})
+		.state('groups.index', {
 			url: '/groups',
 			parent: 'root',
 			controller: 'GroupController@index',
 			css: '/app/styles/groups.css',
 			templateUrl: 'app/views/groups/index.html'
+		})
+		.state('groups.create', {
+			url: '/groups/create',
+			parent: 'root',
+			controller: 'GroupController@create',
+			controllerAs: 'GroupCtrl',
+			css: '/app/styles/groups.css',
+			templateUrl: 'app/views/groups/create.html'
+		})
+		.state('groups.show', {
+			url: '/groups/{id:int}',
+			parent: 'root',
+			controller: 'GroupController@show',
+			css: '/app/styles/groups.css',
+			templateUrl: 'app/views/groups/show.html'
 		})
 
 		/**

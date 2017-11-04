@@ -1,5 +1,11 @@
 <div class="main">
 	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="groups.create" class="btn btn-danger">Ajouter un groupe</a>
+			</div>
+		</div>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -16,7 +22,7 @@
 					<td>{{ group.id }}</td>
 					<td>{{ group.name }}</td>
 					<td>{{ group.description }}</td>
-					<td><a ui-sref="#">Voir</a></td>
+					<td><a ui-sref="groups.show({ id: group.id })">Voir</a></td>
 					<td><a ui-sref="#">Modifier</a></td>
 					<td><a ui-sref="#">Supprimer</a></td>
 				</tr>

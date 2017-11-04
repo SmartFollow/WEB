@@ -14,10 +14,6 @@ angular.module('app')
 			console.log(response);
 		});
 		$scope.create = function () {
-			console.log($filter('date')($scope.data.date1, 'yyyy-MM-dd'));
-			console.log($filter('date')($scope.data.date1, 'HH:mm'));
-			console.log($filter('date')($scope.data.date2, 'yyyy-MM-dd'));
-			console.log($filter('date')($scope.data.date2, 'HH:mm'));
 			var room = $('#room_id').val();
 			var day = $('#day').val() != "" ? $('#day').val() : $filter('date')($scope.data.date1, 'EEEE').toUpperCase();
 			console.log(day);
