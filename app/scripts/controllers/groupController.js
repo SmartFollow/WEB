@@ -14,15 +14,15 @@ angular.module('GroupsModule')
 		};
 
 		GroupFactory.getCreateFormData(function (data) {
-			$scope.accessRules = data.access_rules;
+			$scope.accessRulesList = data.access_rules;
 		});
 
 		$scope.createGroup = function () {
 			var name = $('input[name="name"]').val();
 			var description = $('input[name="description"]').val();
-			var accessRules = $scope.accessRules.filter(accessRule => accessRule.selected).map(accessRule => accessRule.id);
+			var accessRules = $scope.accessRulesList.filter(accessRule => accessRule.selected).map(accessRule => accessRule.id);
 
-			GroupFactory.postGroup({
+			GroupFactory.storeGroup({
 				name: name,
 				description: description,
 				access_rules: accessRules
@@ -45,5 +45,50 @@ angular.module('GroupsModule')
 			$scope.group = group;
 
 			$rootScope.pageTitle = "Affichage d'un groupe : " + $scope.group.name;
+		});
+	}])
+	.controller('GroupController@edit', ['$rootScope', '$scope', '$state', '$stateParams', '$timeout', 'GroupFactory', function ($rootScope, $scope, $state, $stateParams, $timeout, GroupFactory) {
+		$rootScope.pageTitle = "Modification d'un groupe";
+		$scope.alerts = {
+			success: {},
+			danger: {}
+		};
+
+		GroupFactory.getEditFormData($stateParams.id, function (data) {
+			$scope.group = data.group;
+			$scope.accessRulesList = data.access_rules;
+
+			var activeRulesIds = $scope.group.access_rules.map(rule => rule.id);
+			for (var i = 0; i < $scope.accessRulesList.length; i++) {
+				$scope.accessRulesList[i].selected = activeRulesIds.includes($scope.accessRulesList[i].id);
+			}
+
+			$rootScope.pageTitle = "Modification d'un groupe : " + $scope.group.name;
+		});
+
+		$scope.editGroup = function () {
+			var name = $('input[name="name"]').val();
+			var description = $('input[name="description"]').val();
+			var accessRules = $scope.accessRulesList.filter(accessRule => accessRule.selected).map(accessRule => accessRule.id);
+
+			GroupFactory.updateGroup($stateParams.id, {
+				name: name,
+				description: description,
+				access_rules: accessRules
+			}, function (group) {
+				$scope.alerts.success = {
+					show: true,
+					text: "Votre groupe a bien été modifié, vous allez être redirigé vers sa page."
+				};
+
+				$timeout(function () {
+					$state.go('groups.show', { id: group.id });
+				}, 3000);
+			});
+		}
+	}])
+	.controller('GroupController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'GroupFactory', function ($rootScope, $scope, $state, $stateParams, GroupFactory) {
+		GroupFactory.deleteGroup($stateParams.id, function () {
+			$state.go('groups.index');
 		});
 	}]);

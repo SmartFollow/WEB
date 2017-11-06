@@ -8,7 +8,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		.state('root', {
 			abstract: true,
 			controller: 'MenuController',
-			templateUrl: 'app/views/menu.html'
+			templateUrl: 'app/views/layouts/main.html'
 		})
 
 		/**
@@ -17,7 +17,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		.state('login', {
 			url: '/login',
 			controller: 'AuthController@login',
-			templateUrl: 'app/views/login.html'
+			templateUrl: 'app/views/auth/login.html'
 		})
 
 		/**
@@ -35,7 +35,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/users/{id:int}',
 			parent: 'root',
 			controller: 'UserController@show',
-			css: '/app/styles/student_profile.css',
+			css: '/app/styles/profile.css',
 			templateUrl: 'app/views/users/show.html'
 		})
 
@@ -64,6 +64,18 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'GroupController@show',
 			css: '/app/styles/groups.css',
 			templateUrl: 'app/views/groups/show.html'
+		})
+		.state('groups.edit', {
+			url: '/groups/{id:int}/edit',
+			parent: 'root',
+			controller: 'GroupController@edit',
+			css: '/app/styles/groups.css',
+			templateUrl: 'app/views/groups/edit.html'
+		})
+		.state('groups.delete', {
+			url: '/groups/{id:int}/delete',
+			parent: 'root',
+			controller: 'GroupController@delete'
 		})
 
 		/**
@@ -131,6 +143,37 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/reservations/{id:int}/delete',
 			parent: 'root',
 			controller: 'ReservationController@delete'
+		})
+
+		/**
+		 * Rooms-related states
+		 */
+		.state('rooms', {})
+		.state('rooms.index', {
+			url: '/rooms',
+			parent: 'root',
+			controller: 'RoomController@index',
+			css: '/app/styles/rooms.css',
+			templateUrl: 'app/views/rooms/index.html'
+		})
+		.state('rooms.create', {
+			url: '/rooms/create',
+			parent: 'root',
+			controller: 'RoomController@create',
+			css: '/app/styles/rooms.css',
+			templateUrl: 'app/views/rooms/create.html'
+		})
+		.state('rooms.edit', {
+			url: '/rooms/{id:int}/edit',
+			parent: 'root',
+			controller: 'RoomController@edit',
+			css: '/app/styles/rooms.css',
+			templateUrl: 'app/views/rooms/edit.html'
+		})
+		.state('rooms.delete', {
+			url: '/rooms/{id:int}/delete',
+			parent: 'root',
+			controller: 'RoomController@delete'
 		})
 
 		// Planning view

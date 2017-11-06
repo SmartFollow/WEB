@@ -1,8 +1,8 @@
 <div class="main">
 	<div class="page-block">
-		<div class="row" style="margin-bottom: 15px;">
+		<div class="row">
 			<div class="col-md-6 col-md-offset-6 text-right">
-				<a ui-sref="groups.create" class="btn btn-danger">Ajouter un groupe</a>
+				<a ui-sref="groups.create" class="btn btn-danger" ng-if="accessRules.includes('groups.create')" style="margin-bottom: 15px;">Ajouter un groupe</a>
 			</div>
 		</div>
 
@@ -13,8 +13,8 @@
 					<th>Nom</th>
 					<th>Description</th>
 					<th>Voir</th>
-					<th>Modifier</th>
-					<th>Supprimer</th>
+					<th ng-if="accessRules.includes('groups.edit')">Modifier</th>
+					<th ng-if="accessRules.includes('groups.destroy')">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,8 +23,14 @@
 					<td>{{ group.name }}</td>
 					<td>{{ group.description }}</td>
 					<td><a ui-sref="groups.show({ id: group.id })">Voir</a></td>
-					<td><a ui-sref="#">Modifier</a></td>
-					<td><a ui-sref="#">Supprimer</a></td>
+					<td ng-if="accessRules.includes('groups.edit')">
+						<a ui-sref="groups.edit({ id: group.id })" ng-if="group.editable">Modifier</a>
+						{{ !group.editable ? 'Non modifiable' : '' }}
+					</td>
+					<td ng-if="accessRules.includes('groups.destroy')">
+						<a ui-sref="groups.delete({ id: group.id })" ng-if="group.editable">Supprimer</a>
+						{{ !group.editable ? 'Non supprimable' : '' }}
+					</td>
 				</tr>
 			</tbody>
 		</table>
