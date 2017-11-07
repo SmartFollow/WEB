@@ -11,8 +11,10 @@
 				</h2>
 				<div class="controls pull-right">
 					<span>{{ user.firstname }} {{ user.lastname }}</span>
-					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile" class="glyphicon glyphicon-user"></a></span>
-					<span><a href="#" ng-controller="AuthController@logout" ng-click="logout()" class="glyphicon glyphicon-off"></a></span>
+					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile"
+					                                                       class="glyphicon glyphicon-user"></a></span>
+					<span><a href="#" ng-controller="AuthController@logout" ng-click="logout()"
+					         class="glyphicon glyphicon-off"></a></span>
 				</div>
 			</div>
 		</div>
@@ -103,6 +105,42 @@
 						</a>
 					</li>
 				</ul>
+			</div>
+
+			<div class="notifications" ng-if="accessRules.includes('notifications.self.index')">
+				<button class="row header collapsed" role="button" data-toggle="collapse"
+				        data-target="#notifications-list-collapse" aria-expanded="false"
+				        aria-controls="notifications-list-collapse">
+					<span class="glyphicon glyphicon glyphicon-th-list"></span> Vos notifications ({{ notifications
+					? notifications.length : '0' }})
+
+					<div class="pull-right">
+						<span class="glyphicon glyphicon glyphicon-plus collapsed"></span>
+						<span class="glyphicon glyphicon glyphicon-minus expanded"></span>
+					</div>
+				</button>
+				<div class="row notifications-list collapse" id="notifications-list-collapse">
+					<div class="col-md-12 notification" ng-repeat="notification in notifications">
+						<div class="info">
+							<strong>Envoyé par</strong>
+							{{ notification.transmitter.firstname }} {{ notification.transmitter.lastname }}
+							<span ng-if="notification.updated_at">
+								<strong>le</strong>
+								<em>{{ notification.updated_at | date: "dd/mm 'à' HH'h'mm" }}</em>
+							</span>
+						</div>
+						<div class="resource" ng-if="notification.resource_link">
+							<strong>Activité concernée :</strong>
+							<a href="{{ notification.resource_link }}">lien</a>
+						</div>
+						<div class="message">
+							{{ notification.message }}
+						</div>
+						<a href="#" class="mark-as-read" ng-click="markAsRead(notification)">
+							<span>marquer comme lue </span><span class="glyphicon glyphicon-check"></span>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2">

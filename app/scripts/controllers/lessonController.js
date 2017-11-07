@@ -132,7 +132,6 @@ angular.module('app')
 			$scope.lesson = response.data;
 			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
 			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
-			console.log(response);
 
 			$http({
 				method: 'GET',
