@@ -1,0 +1,39 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="groups.index">Voir la liste des groupes <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name" ng-model="name" placeholder="Nom du groupe" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<input type="text" name="description" id="description" ng-model="description" placeholder="Courte description" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Droits d'accès</label>
+				<div class="row">
+					<div class="col-md-2 col-sm-4" ng-repeat="accessRule in accessRulesList | orderBy: 'accessRule.route'">
+						<div class="checkbox" style="margin: 0;">
+							<label>
+								<input type="checkbox" name="accessRules[]" ng-model="accessRule.selected" value="{{ accessRule.id }}"> {{ accessRule.name }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button ng-click="createGroup()" class="btn btn-danger">Créer le groupe</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>

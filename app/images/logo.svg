@@ -1,0 +1,93 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1000" height="1000" version="1.1"
+xmlns="http://www.w3.org/2000/svg">
+	<title>Logo SmartFollow</title>
+
+	<style type="text/css">
+		.red-1 { fill: #a02f24; }
+		.red-2 { fill: #ce4739; }
+		.red-3 { fill: #c0392b; }
+		.red-4 { fill: #b13023; }
+		.red-5 { fill: #b34135; }
+
+		.grey-1 { fill: #282828; }
+		.grey-2 { fill: #3a3a3a; }
+		.grey-3 { fill: #1f1f1f; }
+		.grey-4 { fill: #2e2e2e; }
+		.grey-5 { fill: #1b1b1b; }
+
+		text.main {
+			fill: #ffffff;
+			font-size: 780px;
+			font-family: 'Trebuchet MS', sans-serif;
+		}
+	</style>
+
+	<defs>
+		<clipPath id="cut-off-exterior">
+			<path d="M147,853 a450,450 0 0,0 706,-706" class="grey-1"></path>
+  			<path d="M147,853 a450,450 0 0,1 706,-706" class="red-3"></path>
+		</clipPath>
+	</defs>
+
+	<g> <!-- Background -->
+	  	<path d="M147,853 a450,450 0 0,1 706,-706" class="red-3"></path>
+	  	<path d="M147,853 a450,450 0 0,0 706,-706" class="grey-"></path>
+	</g>
+
+	<g clip-path="url(#cut-off-exterior)"> <!-- Red parts -->
+		<polygon points="631,1 500,160 828,95" class="red-1" />
+		<polygon points="631,1 500,160 449,0" class="red-2" />
+		<polygon points="270,36 500,160 450,0" class="red-3" />
+		<polygon points="800,100 500,160 680,320" class="red-3" />
+		<polygon points="290,46 500,160 267,160" class="red-4" />
+		<polygon points="296,19 267,160 95,160" class="red-5" />
+		<polygon points="134,160 500,160 410,375" class="red-1" />
+		<polygon points="410,375 500,160 584,413" class="red-2" />
+		<polygon points="410,375 182,423 234,238" class="red-2" />
+		<polygon points="584,413 500,160 680,320" class="red-4" />
+		<polygon points="182,423 410,375 340,630" class="red-5" />
+		<polygon points="584,413 410,375 460,575" class="red-3" />
+		<polygon points="340,630 410,375 460,575" class="red-1" />
+		<polygon points="42,300 134,160 234,238" class="red-3" />
+		<polygon points="803,94 680,320 960,190" class="red-2" />
+		<polygon points="41,295 182,423 234,238" class="red-1" />
+		<polygon points="23,304 109,140 234,238" class="red-3" />
+		<polygon points="212,580 182,423 0,500" class="red-3" />
+		<polygon points="27,282 182,423 -8,504" class="red-4" />
+		<polygon points="245,770 182,423 340,630" class="red-4" />
+		<polygon points="212,580 17,727 -8,497" class="red-2" />
+		<polygon points="212,580 45,706 245,770" class="red-1" />
+		<polygon points="113,854 17,697 245,770" class="red-5" />
+	</g>
+
+	<g clip-path="url(#cut-off-exterior)"> <!-- Grey parts -->
+		<polygon points="245,770 500,840 172,905" class="grey-5" />
+		<polygon points="369,999 500,840 172,905" class="grey-1" />
+		<polygon points="369,999 500,840 551,1000" class="grey-2" />
+		<polygon points="730,964 500,840 550,1000" class="grey-3" />
+		<polygon points="245,770 500,840 340,630" class="grey-3" />
+		<polygon points="710,954 500,840 733,840" class="grey-4" />
+		<polygon points="704,981 733,840 905,840" class="grey-5" />
+		<polygon points="866,840 500,840 590,625" class="grey-1" />
+		<polygon points="590,625 500,840 460,575" class="grey-2" />
+		<polygon points="590,625 818,577 766,762" class="grey-2" />
+		<polygon points="460,575 500,840 340,630" class="grey-4" />
+		<polygon points="818,577 590,625 680,320" class="grey-5" />
+		<polygon points="460,575 590,625 584,413" class="grey-3" />
+		<polygon points="680,320 590,625 584,413" class="grey-1" />
+		<polygon points="958,700 866,840 766,762" class="grey-3" />
+		<polygon points="197,906 245,770 40,810" class="grey-2" />
+		<polygon points="959,705 818,577 766,762" class="grey-1" />
+		<polygon points="977,696 891,860 766,762" class="grey-3" />
+		<polygon points="812,432 818,577 1000,500" class="grey-3" />
+		<polygon points="973,718 818,577 1008,496" class="grey-4" />
+		<polygon points="808,260 818,577 680,320" class="grey-4" />
+		<polygon points="813,433 983,273 1008,503" class="grey-2" />
+		<polygon points="813,433 958,297 808,260" class="grey-1" />
+		<polygon points="887,146 983,305 808,260" class="grey-5" />
+	</g>
+
+	<text class="main" text-anchor="middle" alignment-baseline="central" x="500" y="500">S</text>
+</svg>

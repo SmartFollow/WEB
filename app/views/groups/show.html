@@ -1,0 +1,64 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6">
+				<a ui-sref="groups.edit({ id: group.id })" class="btn btn-info" ng-if="accessRules.includes('groups.update')">Modifier le groupe</a>
+				<a ui-sref="groups.delete({ id: group.id })" class="btn btn-danger" ng-if="accessRules.includes('groups.destroy')">Supprimer le groupe</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="groups.index" ng-if="accessRules.includes('groups.index')">Voir la liste des groupes <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<dl class="spaced">
+			<dt>Nom</dt>
+			<dd>{{ group.name }}</dd>
+
+			<dt>Description</dt>
+			<dd>{{ group.description }}</dd>
+
+			<dt>Droits d'accès</dt>
+			<dd>
+				<div class="row">
+					<div class="col-md-2 col-sm-4" ng-repeat="accessRule in group.access_rules | orderBy: 'accessRule.route'">
+						<div class="checkbox" style="margin: 0;">
+							<label>
+								<input type="checkbox" checked="checked" disabled="disabled"> {{ accessRule.name }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</dd>
+
+			<dt>Membres du groupe ({{ group.users.length }})</dt>
+			<dd>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Prénom</th>
+							<th>Nom</th>
+							<th>Classe</th>
+							<th>Voir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in group.users | orderBy: ['lastname', 'firstname']">
+							<td>{{ user.id }}</td>
+							<td>{{ user.firstname }}</td>
+							<td>{{ user.lastname }}</td>
+							<td>{{ user.student_class.name || '-' }}</td>
+							<td>
+								<a ui-sref="users.show({ id: user.id })">Voir</a>
+							</td>
+						</tr>
+						<tr ng-if="group.users.length == 0">
+							<td colspan="5" class="text-center">Le groupe ne comporte aucun membre</td>
+						</tr>
+					</tbody>
+				</table>
+			</dd>
+		</dl>
+
+	</div>
+</div>
