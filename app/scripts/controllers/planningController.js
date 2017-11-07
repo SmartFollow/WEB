@@ -22,24 +22,25 @@ angular.module('app')
 				method: 'GET',
 				url: config.apiUrl + "api/lessons"
 			}).then(function successCallback(response) {
-				console.log(response);
 				events = [];
-				angular.forEach(response.data, function (lesson, key) {
-					if ($rootScope.user.group_id <= 2 || $rootScope.user.class_id == lesson.student_class_id) {
-						this.push({
-							id: lesson.id,
-							title: lesson.subject.name + " en " + lesson.reservation.room.identifier,
-							start: lesson.start.split(" ")[1],
-							end: lesson.end.split(" ")[1],
-							url: $rootScope.user && $rootScope.user.group_id <= 2 ? "#/lessons/" + lesson.id : "#/lessons-student/" + lesson.id,
-							stick: true,
-							dow: [new Date(lesson.start).getDay()],
-							ranges: [{start: lesson.start.split(" ")[0], end: lesson.end.split(" ")[0]}]
-						});
-					}
-				}, events);
-				console.log(events);
+				response.data.forEach(function (lesson) {
+					var title = lesson.subject.name;
+					title += lesson.reservation != null ? (" en " + lesson.reservation.room.identifier) : (" - salle non définie");
+
+					events.push({
+						id: lesson.id,
+						title: title,
+						start: lesson.start.split(" ")[1],
+						end: lesson.end.split(" ")[1],
+						url: $rootScope.user && $rootScope.user.group_id <= 2 ? "#/lessons/" + lesson.id : "#/lessons-student/" + lesson.id,
+						stick: true,
+						dow: [new Date(lesson.start).getDay()],
+						ranges: [{start: lesson.start.split(" ")[0], end: lesson.end.split(" ")[0]}]
+					});
+				});
+
 				lessons = events;
+
 				callback(events);
 			}, function errorCallback(response) {
 				console.log(response);
@@ -55,24 +56,21 @@ angular.module('app')
 				method: 'GET',
 				url: config.apiUrl + "api/reservations"
 			}).then(function successCallback(response) {
-				console.log(response);
 				events = [];
-				angular.forEach(response.data, function (reservation, key) {
-					if ($rootScope.user.group_id <= 2) {
-						this.push({
-							id: reservation.id,
-							title: "Reservation de la salle " + reservation.room.identifier,
-							start: reservation.time_start,
-							end: reservation.time_end,
-							url: "#/reservations/" + reservation.id + "/edit",
-							stick: true,
-							color: "#888888",
-							dow: [weekday[reservation.day]],
-							ranges: [{start: reservation.date_start, end: reservation.date_end}]
-						});
-					}
-				}, events);
-				console.log(events);
+				response.data.forEach(function (reservation) {
+					events.push({
+						id: reservation.id,
+						title: "Reservation de la salle " + reservation.room.identifier,
+						start: reservation.time_start,
+						end: reservation.time_end,
+						url: "#/reservations/" + reservation.id + "/edit",
+						stick: true,
+						color: "#888888",
+						dow: [weekday[reservation.day]],
+						ranges: [{start: reservation.date_start, end: reservation.date_end}]
+					});
+				});
+
 				reservations = events;
 				callback(events);
 			}, function errorCallback(response) {
@@ -86,7 +84,8 @@ angular.module('app')
 			lang: 'fr',
 			height: 820,
 			defaultView: 'agendaWeek',
-			minTime: '08:00:00',
+			minTime: '07:00:00',
+			maxTime: '22:00:00',
 			customButtons: {
 				lesson: {
 					text: 'Ajouter une leçon',
