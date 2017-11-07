@@ -147,6 +147,7 @@ table.table {
 			width: 100%;
 			text-align: left;
 			outline: none;
+			box-sizing: content-box;
 
 			&:active, &:focus, &:hover {
 				text-decoration: none;

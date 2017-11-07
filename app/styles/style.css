@@ -110,7 +110,8 @@ table.table {
       border: none;
       width: 100%;
       text-align: left;
-      outline: none; }
+      outline: none;
+      box-sizing: content-box; }
       .sidebar .notifications .header:active, .sidebar .notifications .header:focus, .sidebar .notifications .header:hover {
         text-decoration: none; }
       .sidebar .notifications .header .glyphicon.collapsed {
