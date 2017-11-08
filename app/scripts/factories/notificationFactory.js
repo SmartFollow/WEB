@@ -21,10 +21,20 @@ angular.module('NotificationsModule')
 					console.log(response);
 				});
 			},
-			getCreateNotification: function (callback) {
+			getCreateNotifications: function (callback) {
 				$http({
 					method: 'GET',
 					url: config.apiUrl + "api/notifications/create"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
+			getNotification: function (id, callback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/notifications/"+ id
 				}).then(function successCallback(response) {
 					callback(response.data);
 				}, function errorCallback(response) {

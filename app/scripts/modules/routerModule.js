@@ -177,6 +177,40 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		/**
+		 * Notifications-related states
+		 */
+		.state('notifications', {})
+		.state('notifications.index', {
+			url: '/notifications',
+			parent: 'root',
+			controller: 'NotificationController@index',
+			templateUrl: 'app/views/notifications/index.html'
+		})
+		.state('notifications.create', {
+			url: '/notifications/create',
+			parent: 'root',
+			controller: 'NotificationController@create',
+			templateUrl: 'app/views/notifications/create.html'
+		})
+		.state('notifications.show', {
+			url: '/notifications/{id:int}',
+			parent: 'root',
+			controller: 'NotificationController@show',
+			templateUrl: 'app/views/notifications/show.html'
+		})
+		.state('notifications.edit', {
+			url: '/notifications/{id:int}/edit',
+			parent: 'root',
+			controller: 'NotificationController@edit',
+			templateUrl: 'app/views/notifications/edit.html'
+		})
+		.state('notifications.delete', {
+			url: '/notifications/{id:int}/delete',
+			parent: 'root',
+			controller: 'NotificationController@delete'
+		})
+
+		/**
 		 * Student classes-related states
 		 */
 		.state('classes', {})

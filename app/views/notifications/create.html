@@ -1,0 +1,26 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="notifications.index">Voir la liste des notifications <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="name">Message</label>
+				<textarea name="message" id="message" ng-model="message" rows="1" placeholder="message de la notification" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="description">Récepteur</label>
+			</div>
+			<button ng-click="createNotification()" class="btn btn-danger">Créer la notification</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>

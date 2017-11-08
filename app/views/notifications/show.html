@@ -1,0 +1,48 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6">
+				<a ui-sref="notifications.edit({ id: notification.id })" class="btn btn-info" ng-if="accessRules.includes('notifications.update')">Modifier la notification</a>
+				<a ui-sref="notifications.delete({ id: notification.id })" class="btn btn-danger" ng-if="accessRules.includes('notifications.destroy')">Supprimer  la notification</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="notifications.index" ng-if="accessRules.includes('notifications.index')">Voir la liste des notifications <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<dl class="spaced">
+			<dt>Emetteur</dt>
+			<dd>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Prénom</th>
+							<th>Nom</th>
+							<th>Email</th>
+							<th>Voir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ user.id }}</td>
+							<td>{{ user.firstname }}</td>
+							<td>{{ user.lastname }}</td>
+							<td>{{ user.email || '-' }}</td>
+							<td>
+								<a ui-sref="users.show({ id: user.id })">Voir</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</dd>
+
+			<dt>Message</dt>
+			<dd>{{ notification.message }}</dd>
+			
+			<dt ng-if="notification.resource_link" >Lien</dt>
+			<dd ng-if="notification.resource_link"><a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a></dd>
+		</dl>
+
+	</div>
+</div>

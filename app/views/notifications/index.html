@@ -1,0 +1,40 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="notifications.create" class="btn btn-danger" ng-if="accessRules.includes('notifications.create')" style="margin-bottom: 15px;">Créer une notification</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Emetteur</th>
+					<th>Récepteur</th>
+					<th>Message</th>
+					<th>Lien</th>
+					<th>Voir</th>
+					<th ng-if="accessRules.includes('notifications.edit')">Modifier</th>
+					<th ng-if="accessRules.includes('notifications.destroy')">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="notification in notifications track by notification.id">
+					<td>{{ notification.id }}</td>
+					<td>{{ notification.transmitter.lastname }} {{ notification.transmitter.lastname }}</td>
+					<td>{{ notification.pivot.user_id }}</td>
+					<td>{{ notification.message }}</td>
+					<td><a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a></td>
+					<td><a ui-sref="notifications.show({ id: notification.id })">Voir</a></td>
+					<td ng-if="accessRules.includes('notifications.edit')">
+						<a ui-sref="notifications.edit({ id: notification.id })">Modifier</a>
+					</td>
+					<td ng-if="accessRules.includes('notifications.destroy')">
+						<a ui-sref="notifications.delete({ id: notification.id })">Supprimer</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
