@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('NotificationController', ['$scope', '$filter', 'UserFactory', function ($scope, $filter, UserFactory) {
+	.controller('AlertController', ['$scope', '$filter', function ($scope, $filter) {
 
 	// init
 	$scope.sort = {
@@ -16,10 +16,8 @@ angular.module('app')
 	$scope.currentPage = 0;
 	$scope.items = [
 		{"id": 1, "Type": "warning", "Message": "Notes en Mathématiques en baisse"},
-		{"id": 2, "Type": "info", "Message": "M. Xavier ne pourra assurer ses cours le 12 janvier"},
 		{"id": 3, "Type": "ok", "Message": "Notes en SVT entrain de remonter. Bon travail !"},
 		{"id": 4, "Type": "remove", "Message": "Baisse des notes en Histoire et manque de rigueur"},
-		{"id": 5, "Type": "info", "Message": "Le cours de Mathématiques du 10 janvier est déplacé en salle 104"},
 		{"id": 6, "Type": "warning", "Message": "commentaire 6"},
 		{"id": 7, "Type": "ok", "Message": "Notes en SVT en train de remonter. Bon travail !"},
 		{"id": 8, "Type": "ok", "Message": "commentaire 9"},
