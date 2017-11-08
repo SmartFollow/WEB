@@ -4,6 +4,7 @@ angular.module('app', [
 	'AuthModule',
 	'UsersModule',
 	'GroupsModule',
+	'ClassesModule',
 	'RoomsModule',
 	'NotificationsModule',
 	'ui.bootstrap.datetimepicker',
