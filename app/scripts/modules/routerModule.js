@@ -29,7 +29,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'UserController@profile',
 			css: '/app/styles/profile.css',
-			templateUrl: 'app/views/users/show.html'
+			templateUrl: 'app/views/users/profile.html'
 		})
 		.state('users.show', {
 			url: '/users/{id:int}',

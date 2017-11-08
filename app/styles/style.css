@@ -89,11 +89,90 @@ table.table {
 .sidebar {
   display: none;
   background-color: #282828;
-  color: #ffffff; }
+  color: #ffffff;
+  position: relative; }
   .sidebar .infos-block {
     background-color: #e74c3c;
     color: #ffffff;
     padding: 10px; }
+  .sidebar .notifications {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    color: #333; }
+    .sidebar .notifications .header {
+      display: block;
+      background-color: #c0392b;
+      padding: 15px;
+      color: #ffffff;
+      font-weight: bold;
+      border: none;
+      width: 100%;
+      text-align: left;
+      outline: none;
+      box-sizing: content-box; }
+      .sidebar .notifications .header:active, .sidebar .notifications .header:focus, .sidebar .notifications .header:hover {
+        text-decoration: none; }
+      .sidebar .notifications .header .glyphicon.collapsed {
+        display: none; }
+      .sidebar .notifications .header .glyphicon.expanded {
+        display: inline-block; }
+      .sidebar .notifications .header.collapsed .glyphicon.collapsed {
+        display: inline-block; }
+      .sidebar .notifications .header.collapsed .glyphicon.expanded {
+        display: none; }
+    .sidebar .notifications .notification {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 0.9em;
+      background-color: #282828;
+      color: #ffffff;
+      position: relative; }
+      .sidebar .notifications .notification a {
+        color: #ffffff;
+        text-decoration: underline; }
+      .sidebar .notifications .notification .message {
+        padding: 10px;
+        position: relative;
+        display: inline-block;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        -o-hyphens: auto;
+        hyphens: auto; }
+        .sidebar .notifications .notification .message:before, .sidebar .notifications .notification .message:after {
+          content: "\"";
+          position: absolute;
+          font-size: 1.5em;
+          font-style: italic; }
+        .sidebar .notifications .notification .message:before {
+          top: 0;
+          left: 0; }
+        .sidebar .notifications .notification .message:after {
+          top: 0;
+          right: 0; }
+      .sidebar .notifications .notification .mark-as-read {
+        position: absolute;
+        right: 8px;
+        bottom: 5px;
+        display: inline-block;
+        opacity: 0.3; }
+        .sidebar .notifications .notification .mark-as-read span {
+          display: none; }
+        .sidebar .notifications .notification .mark-as-read span.glyphicon {
+          display: inline-block;
+          padding-left: 15px;
+          padding-top: 15px; }
+        .sidebar .notifications .notification .mark-as-read:hover {
+          color: #3c763d;
+          opacity: 1; }
+          .sidebar .notifications .notification .mark-as-read:hover span {
+            display: inline-block; }
+          .sidebar .notifications .notification .mark-as-read:hover span.glyphicon {
+            padding-left: 5px; }
+      .sidebar .notifications .notification:nth-child(2n-1) {
+        background-color: #1f1f1f; }
 
 @media (min-width: 768px) {
   .sidebar {
