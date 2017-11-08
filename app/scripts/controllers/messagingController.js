@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('messagingController', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$q', function (UserFactory, $scope, $state, $rootScope, $http, $filter, config, $q) {
+	.controller('MessagingController', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$q', function (UserFactory, $scope, $state, $rootScope, $http, $filter, config, $q) {
 
 	if ($state.current.data != null)
 		$rootScope.pageTitle = $state.current.data.pageTitle;

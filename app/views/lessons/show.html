@@ -153,6 +153,45 @@
 	</div>
 </div>
 
+<div id="modal-exam-mark" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Noter l'examen</h4>
+			</div>
+			<div class="modal-body text-center">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nom Prénom</th>
+						<th>Note</th>
+						<th>Commentaire</th>
+						<th>Valider</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="student in lesson.student_class.students" class="ng-scope" id="student-{{student.id}}-mark">
+						<td class="ng-binding">{{student.lastname}} {{student.firstname}}</td>
+						<td class="ng-binding">
+						    <select ng-model="student.mark.mark" ng-change="enableBtnForChanges(student.id)" class="form-control mark">
+						      <option ng-repeat="n in range(lesson.exam.min_mark, lesson.exam.max_mark)" ng-selected="student.mark.mark == n" value="{{n}}">{{n}}</option>
+						    </select>
+						</td>
+						<td class="ng-binding"><textarea ng-model="student.mark.comment" ng-change="enableBtnForChanges(student.id)" class="form-control comment" rows="1">{{student.mark.comment}}</textarea></td>
+						<td class="ng-binding"><button type="submit" class="valid btn btn-danger disabled" ng-click="postExam(lesson.exam.id, student.id, student.mark.mark, student.mark.comment)">valider</button></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="modal-exam-1" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -224,12 +263,12 @@
 	<div class="col-md-4 col-md-offset-1 lesson-details display-cell">
 		<dl class="" style="margin-top: 20px;">
 			<dt>Professeur</dt>
-			<dd><a ui-sref="users-show({ id : lesson.subject.teacher.id })"><span
+			<dd><a ui-sref="users.show({ id : lesson.subject.teacher.id })"><span
 					id="teacher">{{lesson.subject.teacher.firstname}} {{lesson.subject.teacher.lastname}}</span></a>
 			</dd>
 
 			<dt>Classe</dt>
-			<dd><a href="#">{{lesson.student_class.name}}</a></dd>
+			<dd><a ui-sref="classes.show({ id : lesson.student_class.id })">{{lesson.student_class.name}}</a></dd>
 
 			<dt>Cours</dt>
 			<dd><span id="title">{{lesson.subject.name}}</span></dd>
@@ -307,6 +346,7 @@
 							class="document-type glyphicon glyphicon-eye-open"></i></a>
 					<a href="" ng-click="editExam()"><i class="document-type glyphicon glyphicon-pencil"></i></a>
 					<a href="" ng-click="deleteExam()"><i class="document-type glyphicon glyphicon-remove"></i></a>
+					<a href="" data-toggle="modal" data-target="#modal-exam-mark"><i class="document-type glyphicon glyphicon-check"></i></a>
 				</div>
 				<div class="pull-right">
 					<i class="document-type glyphicon glyphicon-file"></i>
@@ -360,15 +400,15 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div id="popup-body" class="modal-body">
-				<button ng-repeat="criteria in student.criteria"
+				<button ng-repeat="criteria in student.evaluation.criteria"
 				        ng-click="createEvaluationsByCriteria(criteria, student)" ng-if="criteria.impact == 'positive'"
 				        type="button" id="{{criteria.id}}" class="participation btn btn-success btn-lg btn-block">
-					{{criteria.name}} - {{criteria.value}}
+					{{criteria.name}} - {{criteria.pivot.value}}
 				</button>
-				<button ng-repeat="criteria in student.criteria"
+				<button ng-repeat="criteria in student.evaluation.criteria"
 				        ng-click="createEvaluationsByCriteria(criteria, student)" ng-if="criteria.impact == 'negative'"
 				        type="button" id="{{criteria.id}}" class="participation btn btn-danger btn-lg btn-block">
-					{{criteria.name}} - {{criteria.value}}
+					{{criteria.name}} - {{criteria.pivot.value}}
 				</button>
 			</div>
 		</div>
@@ -387,11 +427,11 @@
 	<div class="tab col-xs-8 col-sm-8 col-md-10">
 		<div id="appel" class="tab-pane fade in active">
 			<div class="row trombi">
-				<div ng-click="createEvaluations(key, student)"
-				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}"
+				<div ng-click="createEvaluations(student.id, student)"
+				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{student.id}}"
 				     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
-					<div class="cross-lesson glyphicon glyphicon-remove"></div>
-					<div class="time-lesson glyphicon glyphicon-time"></div>
+					<div ng-show="student.evaluation.absence && student.evaluation.absence != null" class="cross-lesson glyphicon glyphicon-remove"></div>
+					<div ng-show="student.evaluation.delay && student.evaluation.delay != null" class="time-lesson glyphicon glyphicon-time"></div>
 					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
 					<div class="icon-lesson">
 					</div>
@@ -403,7 +443,7 @@
 		<div id="cours" class="tab-pane fade">
 			<div class="row trombi">
 				<div data-toggle="modal" data-target="#modal-{{student.id}}"
-				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{key}}"
+				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{student.id}}"
 				     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
 					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
 					<div class="icon-lesson">

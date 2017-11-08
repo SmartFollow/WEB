@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="row trombi">
+		<div data-toggle="modal" data-target="#modal-{{student.id}}"
+		     ng-repeat="(key, student) in class.students" id="student-{{key}}"
+		     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
+			<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
+			<div class="icon-lesson">
+			</div>
+			<br>
+			<span class="text-lesson">{{student.firstname}} {{student.lastname}}</span>
+		</div>
+	</div>
+</div>
+
