@@ -55,7 +55,7 @@ angular.module('NotificationsModule')
 			updateNotification: function (id, data, callback) {
 				$http({
 					method: 'PUT',
-					url: config.apiUrl + "api/notifications" + id,
+					url: config.apiUrl + "api/notifications/" + id,
 					data: data
 				}).then(function successCallback(response) {
 					callback(response.data);

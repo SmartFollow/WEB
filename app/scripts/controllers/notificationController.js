@@ -16,6 +16,49 @@ angular.module('NotificationsModule')
 			});
 		});
 	}])
+	.controller('NotificationController@edit', ['$scope', '$state', '$rootScope','NotificationFactory', 'UserFactory', 'GroupFactory', 'ClassFactory', '$timeout', '$stateParams', function ($scope, $state, $rootScope, NotificationFactory, UserFactory, GroupFactory, ClassFactory, $timeout, $stateParams) {
+		$rootScope.pageTitle = "Editer une notification";
+		$scope.alerts = {
+			success: {},
+			danger: {}
+		};
+
+		UserFactory.getUsers(function (users) {
+			$scope.users = users;
+		});
+
+		$scope.loadUsers = function($query) {
+			var users = $scope.users;
+			return users.filter(function(user) {
+				return user.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
+			});
+		};
+
+		NotificationFactory.getNotification($stateParams.id, function (notification) {
+			$scope.resource_link = notification.resource_link;
+			$scope.message = notification.message;
+			UserFactory.getUser(notification.transmitter_id, function (user) {
+				$scope.transmittersList = [user];
+			});
+		});
+
+		$scope.updateNotification= function () {
+			NotificationFactory.updateNotification ($stateParams.id, {
+				resource_link: $scope.resource_link,
+				message: $scope.message,
+				transmitter_id: $scope.transmittersList ? $scope.transmittersList.map(a => a.id)[0] : "",
+			}, function (notification) {
+				$scope.alerts.success = {
+					show: true,
+					text: "Votre notification a bien été modifié, vous allez être redirigé vers sa page."
+				};
+
+				$timeout(function () {
+					$state.go('notifications.show', { id: notification.id });
+				}, 3000);
+			});
+		}
+	}])
 	.controller('NotificationController@create', ['$scope', '$state', '$rootScope','NotificationFactory', 'UserFactory', 'GroupFactory', 'ClassFactory', '$timeout', function ($scope, $state, $rootScope, NotificationFactory, UserFactory, GroupFactory, ClassFactory, $timeout) {
 		$rootScope.pageTitle = "Créer une notification";
 		$scope.alerts = {

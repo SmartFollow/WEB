@@ -1,12 +1,8 @@
 <div class="main">
 	<div class="page-block">
-		<div class="row" style="margin-bottom: 15px;">
-			<div class="col-md-6">
-				<a ui-sref="groups.show({ id: group.id })" class="btn btn-info" ng-if="accessRules.includes('groups.show')">Voir le groupe</a>
-				<a ui-sref="groups.delete({ id: group.id })" class="btn btn-danger" ng-if="accessRules.includes('groups.destroy')">Supprimer le groupe</a>
-			</div>
-			<div class="col-md-6 text-right">
-				<a ui-sref="groups.index" ng-if="accessRules.includes('groups.index')">Voir la liste des groupes <span class="glyphicon glyphicon-arrow-right"></span></a>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="notifications.index">Voir la liste des notifications <span class="glyphicon glyphicon-arrow-right"></span></a>
 			</div>
 		</div>
 
@@ -15,26 +11,23 @@
 
 		<form>
 			<div class="form-group">
-				<label for="name">Nom</label>
-				<input type="text" name="name" id="name" ng-model="group.name" placeholder="Nom du groupe" class="form-control">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" ng-model="message" rows="1" placeholder="message de la notification" class="form-control"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="description">Description</label>
-				<input type="text" name="description" id="description" ng-model="group.description" placeholder="Courte description" class="form-control">
+				<label for="resource_link">Lien (optionnel)</label>
+				<input type="text" name="resource_link" id="resource_link" ng-model="resource_link" rows="1" placeholder="lien web" class="form-control">
 			</div>
 			<div class="form-group">
-				<label>Droits d'accès</label>
-				<div class="row">
-					<div class="col-md-2 col-sm-4" ng-repeat="accessRule in accessRulesList | orderBy: 'accessRule.route'">
-						<div class="checkbox" style="margin: 0;">
-							<label>
-								<input type="checkbox" name="accessRules[]" ng-model="accessRule.selected" value="{{ accessRule.id }}"> {{ accessRule.name }}
-							</label>
-						</div>
-					</div>
-				</div>
+				<label for="users">Emetteur</label>
+				  <tags-input ng-model="transmittersList" display-property="email" placeholder="Ajouter un émetteur">
+				  <auto-complete source="loadUsers($query)"
+                     min-length="0"
+                     load-on-focus="true"
+                     max-results-to-show="10"></auto-complete>
+                  </tags-input>
 			</div>
-			<button ng-click="editGroup()" class="btn btn-danger">Modifier le groupe</button>
+			<button ng-click="updateNotification()" class="btn btn-danger">Editer la notification</button>
 		</form>
 		<br />
 		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
