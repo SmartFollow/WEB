@@ -101,7 +101,6 @@
 }
 
 .cross-lesson {
-	display: none;
 	font-size: 7em;
     padding-top: 0.3em;
     z-index: 100;
@@ -114,7 +113,6 @@
 }
 
 .time-lesson {
-	display: none;
 	font-size: 7em;
     padding-top: 0.3em;
     z-index: 100;
@@ -153,6 +151,9 @@
 .on {
 }
 
+#cours {
+	display:none;
+}
 .modal {
   text-align: center;
   padding: 0!important;

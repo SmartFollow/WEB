@@ -133,16 +133,43 @@ angular.module('app')
 			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
 			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
 			console.log(response);
-
 			$http({
 				method: 'GET',
 				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/evaluations/create"
 			}).then(function successCallback(response) {
 				$scope.evaluations = response.data;
 				angular.forEach($scope.lesson.student_class.students, function (student, key) {
-					student.criteria = angular.copy($scope.evaluations.criteria);
-					angular.forEach(student.criteria, function (criteria, key) {
-						criteria.value = 0;
+					$scope.getExistingMark($scope.lesson.exam.id, student.id).then(function(result){
+						if (result == null)
+							student.mark = {
+								mark: -1,
+								comment: ""
+							};
+						else
+							student.mark = result;
+					});
+					student.evaluation = $scope.getEvaluation(student.id);
+					if (student.evaluation == null)
+					{
+						student.evaluation = {
+							criteria : angular.copy($scope.evaluations.criteria),
+							absence : null,
+							delay : null
+						}
+					}
+					angular.forEach($scope.evaluations.criteria, function (criteria, key) {
+						var has = false;
+						angular.forEach(student.evaluation.criteria, function (c, key) {
+							if (c.id == criteria.id)
+								has = true;
+						});
+						if (has == false)
+						{
+							criteria.pivot = {
+								value : 0
+							};
+							student.evaluation.criteria.push(angular.copy(criteria));
+						}
 					});
 				});
 				console.log(response);
@@ -155,9 +182,22 @@ angular.module('app')
 			$state.go('profil-teacher');
 		});
 
+		$scope.range = function(min, max, step) {
+		    step = step || 1;
+		    var input = [];
+		    for (var i = min; i <= max; i += step) {
+		        input.push(i);
+		    }
+		    return input;
+		};
+
+		$scope.enableBtnForChanges = function (id) {
+			$("#student-"+id+"-mark").find(".valid").removeClass("disabled");
+		};
+
 		$scope.tabClick = function (nb) {
 			var button = $(".breadcrumb li").eq(nb);
-			if (!button.hasClass("legend")) {
+			if (!button.hasClass("legend") && !button.hasClass("active")) {
 				var id = $(".breadcrumb li").index(button) - 1;
 				var tab = $(".tab .tab-pane").eq(id);
 				tab.show();
@@ -316,6 +356,76 @@ angular.module('app')
 			});
 		};
 
+		$scope.getExistingMark = function (examId, studentId) {
+			var studentMark = null;
+			if ($scope.existingMark == null)
+			{
+				return ($http({
+					method: 'GET',
+					url: config.apiUrl + "api/exams/"+examId+"/marks"
+				}).then(function successCallback(response) {
+					$scope.existingMark = response.data;
+					angular.forEach($scope.existingMark, function (mark, key) {
+						if (mark.student_id == studentId)
+							studentMark = mark;
+					});
+					return (studentMark);
+				}, function errorCallback(response) {
+					console.log(response);
+				}));
+			}
+			else
+			{
+				angular.forEach($scope.existingMark, function (mark, key) {					
+					if (mark.student_id == studentId)
+						studentMark = mark;
+				});
+			}
+			return (studentMark);
+		};
+
+		$scope.postExam = function (examId, studentId, mark, comment) {
+			/*var studentMark = $scope.getExistingMark(examId, studentId);
+			console.log(studentMark);*/
+			var studentMark = null;
+			if (studentMark == null)
+			{
+				$http({
+					method: 'POST',
+					url: config.apiUrl + "api/exams/"+ examId+"/marks",
+					data: {
+						student_id: studentId,
+						mark: mark,
+						comment: comment
+					}
+				}).then(function successCallback(response) {
+					$("#student-"+studentId+"-mark").find(".valid").addClass("disabled");
+					console.log(response);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
+			else
+				$("#student-"+studentId+"-mark").find(".valid").addClass("disabled");
+			/*else
+			{
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + "api/exams/"+ examId+"/marks",
+					data: {
+						id: mark.id,
+						mark: mark,
+						comment: comment
+					}
+				}).then(function successCallback(response) {
+					$("#student-"+studentId+"-mark").find(".valid").addClass("disabled");
+					console.log(response);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}*/
+		};
+
 		$scope.postEvaluationCriteria = function (criteria, student) {
 			$http({
 				method: 'POST',
@@ -332,8 +442,9 @@ angular.module('app')
 		};
 
 		$scope.createEvaluationsByCriteria = function (criteria, student) {
-			criteria.value += 1;
-			if (angular.isUndefined(student.evaluation)) {
+			criteria.pivot.value += 1;
+			console.log(criteria.pivot.value == 1);
+			if (criteria.pivot.value == 1) {
 				var file = {
 					student_id: student.id,
 					lesson_id: $stateParams.id
@@ -343,7 +454,7 @@ angular.module('app')
 					url: config.apiUrl + "api/evaluations",
 					data: file
 				}).then(function successCallback(response) {
-					student.evaluation = response.data;
+					//student.evaluation = response.data;
 					console.log(response);
 					$scope.postEvaluationCriteria(criteria, student);
 				}, function errorCallback(response) {
@@ -352,13 +463,22 @@ angular.module('app')
 			}
 			else
 				$scope.postEvaluationCriteria(criteria, student);
+		};
 
+		$scope.getEvaluation = function (id) {
+			var result = null;
+    		angular.forEach($scope.lesson.evaluations, function (evaluation, key) {
+    			if (evaluation.student_id == id)
+    				result = evaluation;
+			});
+			return (result);
 		};
 
 		$scope.postEvaluation = function (key, student) {
 			if ($("#student-" + key).find('.time-lesson').is(":hidden") && $("#student-" + key).find('.cross-lesson').is(":hidden")) {
 				// Si absent
-				$("#student-" + key).find('.cross-lesson').show();
+				student.evaluation.absence = true;
+				student.evaluation.delay = null;
 
 				$http({
 					method: 'POST',
@@ -371,8 +491,8 @@ angular.module('app')
 			}
 			else if ($("#student-" + key).find('.time-lesson').is(":visible") && $("#student-" + key).find('.cross-lesson').is(":hidden")) {
 				// Annulation de l'absence
-				$("#student-" + key).find('.time-lesson').hide();
-				$("#student-" + key).find('.cross-lesson').hide();
+				student.evaluation.absence = null;
+				student.evaluation.delay = null;
 				$http({
 					method: 'DELETE',
 					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/delays",
@@ -387,8 +507,8 @@ angular.module('app')
 			}
 			else {
 				// Si en retard
-				$("#student-" + key).find('.cross-lesson').hide();
-				$("#student-" + key).find('.time-lesson').show();
+				student.evaluation.absence = null;
+				student.evaluation.delay = true;
 
 				var currentTime = new Date();
 

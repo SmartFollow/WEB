@@ -176,6 +176,18 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'RoomController@delete'
 		})
 
+		/**
+		 * Student classes-related states
+		 */
+		.state('classes', {})
+		.state('classes.show', {
+			url: '/classes/{id:int}',
+			parent: 'root',
+			controller: 'classController@show',
+			css: '/app/styles/lesson.css',
+			templateUrl: 'app/views/classes/show.html'
+		})
+
 		// Planning view
 		.state('planning', {
 			url: '/planning',
@@ -214,6 +226,7 @@ routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($roo
 
 			// Get user permissions
 			UserFactory.getUserAccessRules(function (response) {
+				console.log(response);
 				$rootScope.accessRules = response;
 			});
 		}

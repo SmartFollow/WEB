@@ -78,7 +78,6 @@
   font-size: 19px; }
 
 .cross-lesson {
-  display: none;
   font-size: 7em;
   padding-top: 0.3em;
   z-index: 100;
@@ -90,7 +89,6 @@
   right: 0; }
 
 .time-lesson {
-  display: none;
   font-size: 7em;
   padding-top: 0.3em;
   z-index: 100;
@@ -117,6 +115,9 @@
 .icon-previous {
   padding-top: 27vh;
   font-size: 5vw; }
+
+#cours {
+  display: none; }
 
 .modal {
   text-align: center;
