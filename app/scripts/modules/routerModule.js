@@ -270,7 +270,6 @@ routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($roo
 
 			// Get user permissions
 			UserFactory.getUserAccessRules(function (response) {
-				console.log(response);
 				$rootScope.accessRules = response;
 			});
 		}

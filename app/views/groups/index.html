@@ -28,8 +28,8 @@
 						{{ !group.editable ? 'Non modifiable' : '' }}
 					</td>
 					<td ng-if="accessRules.includes('groups.destroy')">
-						<a ui-sref="groups.delete({ id: group.id })" ng-if="group.editable">Supprimer</a>
-						{{ !group.editable ? 'Non supprimable' : '' }}
+						<a ui-sref="groups.delete({ id: group.id })" ng-if="group.deletable">Supprimer</a>
+						{{ !group.deletable ? 'Non supprimable' : '' }}
 					</td>
 				</tr>
 			</tbody>

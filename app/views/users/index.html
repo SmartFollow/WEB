@@ -26,8 +26,8 @@
 					<td>{{ user.email }}</td>
 					<td>{{ user.firstname }}</td>
 					<td>{{ user.lastname }}</td>
-					<td>{{ user.class_id }}</td>
-					<td>{{ user.group_id }}</td>
+					<td>{{ user.student_class ? user.student_class.name : '-' }}</td>
+					<td>{{ user.group.name }}</td>
 					<td><a ui-sref="users.show({ id: user.id })">Voir</a></td>
 					<td ng-if="accessRules.includes('users.edit')">
 						<a ui-sref="users.edit({ id: user.id })">Modifier</a>

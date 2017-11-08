@@ -2,8 +2,8 @@
 	<div class="page-block">
 		<div class="row" style="margin-bottom: 15px;">
 			<div class="col-md-6">
-				<a ui-sref="groups.edit({ id: group.id })" class="btn btn-info" ng-if="accessRules.includes('groups.update')">Modifier le groupe</a>
-				<a ui-sref="groups.delete({ id: group.id })" class="btn btn-danger" ng-if="accessRules.includes('groups.destroy')">Supprimer le groupe</a>
+				<a ui-sref="groups.edit({ id: group.id })" class="btn btn-info" ng-if="accessRules.includes('groups.update') && group.editable">Modifier le groupe</a>
+				<a ui-sref="groups.delete({ id: group.id })" class="btn btn-danger" ng-if="accessRules.includes('groups.destroy') && group.deletable">Supprimer le groupe</a>
 			</div>
 			<div class="col-md-6 text-right">
 				<a ui-sref="groups.index" ng-if="accessRules.includes('groups.index')">Voir la liste des groupes <span class="glyphicon glyphicon-arrow-right"></span></a>
