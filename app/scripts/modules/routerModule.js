@@ -38,7 +38,17 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/app/styles/profile.css',
 			templateUrl: 'app/views/users/show.html'
 		})
-
+		.state('users.index', {
+			url: '/users',
+			parent: 'root',
+			controller: 'UserController@index',
+			templateUrl: 'app/views/users/index.html'
+		})
+		.state('users.delete', {
+			url: '/users/{id:int}/delete',
+			parent: 'root',
+			controller: 'UserController@delete'
+		})
 		/**
 		 * Groups-related states
 		 */

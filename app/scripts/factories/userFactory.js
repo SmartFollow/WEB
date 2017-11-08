@@ -12,6 +12,16 @@ angular.module('UsersModule')
 						console.log(response);
 					});
 				},
+				deleteUser: function (id, callback) {
+					$http({
+						method: 'DELETE',
+						url: config.apiUrl + "api/users/" + id
+					}).then(function successCallback(response) {
+						callback(response.data);
+					}, function errorCallback(response) {
+						console.log(response);
+					});
+				},
 				getUsers: function (callback) {
 					$http({
 						method: 'GET',

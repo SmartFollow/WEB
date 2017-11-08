@@ -22,7 +22,7 @@
 			<tbody>
 				<tr ng-repeat="notification in notifications track by notification.id">
 					<td>{{ notification.id }}</td>
-					<td>{{ notification.transmitter.lastname }} {{ notification.transmitter.lastname }}</td>
+					<td>{{ notification.transmitter.lastname }} {{ notification.transmitter.firstname }}</td>
 					<td>{{ notification.pivot.user_id }}</td>
 					<td>{{ notification.message }}</td>
 					<td><a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a></td>

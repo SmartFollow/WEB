@@ -17,4 +17,16 @@ angular.module('UsersModule')
 
 			$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;
 		});
+	}])
+	.controller('UserController@index', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $http, $rootScope, $scope, $stateParams, config) {
+		$rootScope.pageTitle = "Liste des utilisateurs";
+
+		UserFactory.getUsers(function (users) {
+			$scope.users = users;
+		});
+	}])
+	.controller('UserController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'UserFactory', function ($rootScope, $scope, $state, $stateParams, UserFactory) {
+		UserFactory.deleteUser($stateParams.id, function () {
+			$state.go('users.index');
+		});
 	}]);
