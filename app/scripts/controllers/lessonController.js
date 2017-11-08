@@ -177,8 +177,8 @@ angular.module('app')
 			});
 		}, function errorCallback(response) {
 			console.log(response);
-			alert("Sorry, the lesson you are looking for could not be found.");
-			$state.go('profil-teacher');
+			alert("Impossible de trouver la leçon souhaitée, vous allez être redirigé.");
+			$state.go('users.profile');
 		});
 
 		$scope.range = function(min, max, step) {
