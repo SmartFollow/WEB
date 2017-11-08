@@ -223,13 +223,13 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		/**
 		 * Student classes-related states
 		 */
-		.state('classes', {})
-		.state('classes.show', {
-			url: '/classes/{id:int}',
+		.state('student-classes', {})
+		.state('student-classes.show', {
+			url: '/student-classes/{id:int}',
 			parent: 'root',
-			controller: 'classController@show',
+			controller: 'StudentClassController@show',
 			css: '/app/styles/lesson.css',
-			templateUrl: 'app/views/classes/show.html'
+			templateUrl: 'app/views/student-classes/show.html'
 		})
 
 		// Planning view
