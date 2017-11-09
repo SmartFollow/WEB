@@ -16,7 +16,7 @@ angular.module('NotificationsModule')
 			});
 		});
 	}])
-	.controller('NotificationController@edit', ['$scope', '$state', '$rootScope','NotificationFactory', 'UserFactory', 'GroupFactory', 'ClassFactory', '$timeout', '$stateParams', function ($scope, $state, $rootScope, NotificationFactory, UserFactory, GroupFactory, ClassFactory, $timeout, $stateParams) {
+	.controller('NotificationController@edit', ['$scope', '$state', '$rootScope','NotificationFactory', 'UserFactory', 'GroupFactory', 'StudentClassFactory', '$timeout', '$stateParams', function ($scope, $state, $rootScope, NotificationFactory, UserFactory, GroupFactory, StudentClassFactory, $timeout, $stateParams) {
 		$rootScope.pageTitle = "Editer une notification";
 		$scope.alerts = {
 			success: {},
@@ -59,7 +59,7 @@ angular.module('NotificationsModule')
 			});
 		}
 	}])
-	.controller('NotificationController@create', ['$scope', '$state', '$rootScope','NotificationFactory', 'UserFactory', 'GroupFactory', 'ClassFactory', '$timeout', function ($scope, $state, $rootScope, NotificationFactory, UserFactory, GroupFactory, ClassFactory, $timeout) {
+	.controller('NotificationController@create', ['$scope', '$state', '$rootScope','NotificationFactory', 'UserFactory', 'GroupFactory', 'StudentClassFactory', '$timeout', function ($scope, $state, $rootScope, NotificationFactory, UserFactory, GroupFactory, StudentClassFactory, $timeout) {
 		$rootScope.pageTitle = "Créer une notification";
 		$scope.alerts = {
 			success: {},
@@ -74,7 +74,7 @@ angular.module('NotificationsModule')
 			$scope.groups = groups;
 		});
 
-		ClassFactory.getClasses(function (classes) {
+		StudentClassFactory.getStudentClasses(function (classes) {
 			$scope.classes = classes;
 		});
 
