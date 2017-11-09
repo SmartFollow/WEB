@@ -29,6 +29,8 @@ angular.module('UsersModule')
 	.controller('UserController@create', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $http, $rootScope, $scope, $stateParams, config, GroupFactory, StudentClassFactory) {
 		$rootScope.pageTitle = "Créer un utilisateur";
 
+		$scope.user = {};
+
 		GroupFactory.getGroups(function (groups) {
 			$scope.groups = groups;
 		});
