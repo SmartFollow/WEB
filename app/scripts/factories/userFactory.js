@@ -12,6 +12,28 @@ angular.module('UsersModule')
 						console.log(response);
 					});
 				},
+				storeUser: function (data, callback) {
+					$http({
+						method: 'POST',
+						url: config.apiUrl + "api/users",
+						data: data
+					}).then(function successCallback(response) {
+						callback(response.data);
+					}, function errorCallback(response) {
+						console.log(response);
+					});
+				},
+				updateUser: function (id, data, callback) {
+					$http({
+						method: 'PUT',
+						url: config.apiUrl + "api/users/" + id,
+						data: data
+					}).then(function successCallback(response) {
+						callback(response.data);
+					}, function errorCallback(response) {
+						console.log(response);
+					});
+				},
 				deleteUser: function (id, callback) {
 					$http({
 						method: 'DELETE',

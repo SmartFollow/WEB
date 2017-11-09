@@ -44,6 +44,18 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'UserController@index',
 			templateUrl: 'app/views/users/index.html'
 		})
+		.state('users.create', {
+			url: '/users/create',
+			parent: 'root',
+			controller: 'UserController@create',
+			templateUrl: 'app/views/users/create.html'
+		})
+		.state('users.edit', {
+			url: '/users/{id:int}/edit',
+			parent: 'root',
+			controller: 'UserController@edit',
+			templateUrl: 'app/views/users/edit.html'
+		})
 		.state('users.delete', {
 			url: '/users/{id:int}/delete',
 			parent: 'root',

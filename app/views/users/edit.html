@@ -1,0 +1,47 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="users.index">Voir la liste des utilisateurs <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="firstname">Prénom</label>
+				<input type="text" name="firstname" id="firstname" ng-model="user.firstname" placeholder="Nom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="lastname">Nom</label>
+				<input type="text" name="lastname" id="lastname" ng-model="user.lastname" placeholder="Prénom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" ng-model="user.email" placeholder="Nom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="password">Mot de passe</label>
+				<input type="password" name="password" id="password" ng-model="user.password" placeholder="Nom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="group">Groupe</label>
+				<select class="form-control" id="group" ng-model="user.group">
+					<option ng-repeat="group in groups" value="{{group.id}}">{{group.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="studentClass">Classe</label>
+				<select class="form-control" id="studentClass" ng-model="user.studentClass">
+					<option ng-repeat="class in classes" value="{{class.id}}">{{class.name}}</option>
+				</select>
+			</div>
+			<button ng-click="editUser()" class="btn btn-danger">Editer l'utilisateur</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>
