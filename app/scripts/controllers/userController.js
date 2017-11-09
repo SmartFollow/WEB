@@ -76,7 +76,6 @@ angular.module('UsersModule')
 
 		$scope.editUser= function () {
 			UserFactory.updateUser ({
-				id: $stateParams.id,
 				firstname: $scope.user.firstname,
 				lastname: $scope.user.lastname,
 				email: $scope.user.email,
