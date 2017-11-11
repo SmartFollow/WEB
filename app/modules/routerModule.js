@@ -28,14 +28,14 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/profile',
 			parent: 'root',
 			controller: 'UserController@profile',
-			css: '/app/styles/profile.css',
+			css: '/assets/css/profile.css',
 			templateUrl: 'app/views/users/profile.html'
 		})
 		.state('users.show', {
 			url: '/users/{id:int}',
 			parent: 'root',
 			controller: 'UserController@show',
-			css: '/app/styles/profile.css',
+			css: '/assets/css/profile.css',
 			templateUrl: 'app/views/users/show.html'
 		})
 		.state('users.index', {
@@ -57,7 +57,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/groups',
 			parent: 'root',
 			controller: 'GroupController@index',
-			css: '/app/styles/groups.css',
+			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/index.html'
 		})
 		.state('groups.create', {
@@ -65,21 +65,21 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'GroupController@create',
 			controllerAs: 'GroupCtrl',
-			css: '/app/styles/groups.css',
+			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/create.html'
 		})
 		.state('groups.show', {
 			url: '/groups/{id:int}',
 			parent: 'root',
 			controller: 'GroupController@show',
-			css: '/app/styles/groups.css',
+			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/show.html'
 		})
 		.state('groups.edit', {
 			url: '/groups/{id:int}/edit',
 			parent: 'root',
 			controller: 'GroupController@edit',
-			css: '/app/styles/groups.css',
+			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/edit.html'
 		})
 		.state('groups.delete', {
@@ -97,7 +97,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'LessonController@create',
 			data: {pageTitle: 'Ajouter une leçon'},
-			css: '/app/styles/lesson.css',
+			css: '/assets/css/lesson.css',
 			templateUrl: 'app/views/lessons/create.html'
 		})
 		.state('lessons.edit', {
@@ -105,7 +105,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'LessonController@edit',
 			data: {pageTitle: 'Modifier une leçon'},
-			css: '/app/styles/lesson.css',
+			css: '/assets/css/lesson.css',
 			templateUrl: 'app/views/lessons/edit.html'
 		})
 		.state('lessons.delete', {
@@ -119,7 +119,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'LessonController@show',
 			data: {pageTitle: 'Déroulement du cours'},
-			css: '/app/styles/lesson.css',
+			css: '/assets/css/lesson.css',
 			templateUrl: 'app/views/lessons/show.html'
 		})
 		.state('lessons_id_student', { // ToDo: Replace by access-rules management
@@ -127,7 +127,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'lessonsIdStudent',
 			data: {pageTitle: 'Déroulement du cours'},
-			css: '/app/styles/lesson.css',
+			css: '/assets/css/lesson.css',
 			templateUrl: 'app/views/lessons_id_student.html'
 		})
 
@@ -163,21 +163,21 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/rooms',
 			parent: 'root',
 			controller: 'RoomController@index',
-			css: '/app/styles/rooms.css',
+			css: '/assets/css/rooms.css',
 			templateUrl: 'app/views/rooms/index.html'
 		})
 		.state('rooms.create', {
 			url: '/rooms/create',
 			parent: 'root',
 			controller: 'RoomController@create',
-			css: '/app/styles/rooms.css',
+			css: '/assets/css/rooms.css',
 			templateUrl: 'app/views/rooms/create.html'
 		})
 		.state('rooms.edit', {
 			url: '/rooms/{id:int}/edit',
 			parent: 'root',
 			controller: 'RoomController@edit',
-			css: '/app/styles/rooms.css',
+			css: '/assets/css/rooms.css',
 			templateUrl: 'app/views/rooms/edit.html'
 		})
 		.state('rooms.delete', {
@@ -228,7 +228,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/student-classes/{id:int}',
 			parent: 'root',
 			controller: 'StudentClassController@show',
-			css: '/app/styles/lesson.css',
+			css: '/assets/css/lesson.css',
 			templateUrl: 'app/views/student-classes/show.html'
 		})
 
@@ -246,7 +246,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			data: {pageTitle: 'Messagerie'},
 			controller: 'MessagingController',
-			css: '/app/styles/messaging.css',
+			css: '/assets/css/messaging.css',
 			templateUrl: 'app/views/messaging.html'
 		})
 });
