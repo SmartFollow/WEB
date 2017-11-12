@@ -236,11 +236,16 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		 * Student classes-related states
 		 */
 		.state('student-classes', {})
+		.state('student-classes.index', {
+			url: '/student-classes',
+			parent: 'root',
+			controller: 'StudentClassController@index',
+			templateUrl: 'app/views/student-classes/index.html'
+		})
 		.state('student-classes.show', {
 			url: '/student-classes/{id:int}',
 			parent: 'root',
 			controller: 'StudentClassController@show',
-			css: '/assets/css/lesson.css',
 			templateUrl: 'app/views/student-classes/show.html'
 		})
 
