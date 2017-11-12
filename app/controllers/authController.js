@@ -1,4 +1,17 @@
-angular.module('AuthModule', ['RouterModule', 'constants', 'UsersModule', 'ngCookies', 'angular-oauth2', 'ngTagsInput'])
+angular.module('AuthModule')
+	.config(['OAuthProvider', 'OAuthTokenProvider', 'config', function(OAuthProvider, OAuthTokenProvider, config) {
+		OAuthProvider.configure({
+			baseUrl: config.apiUrl,
+			clientId: config.clientId,
+			clientSecret: config.clientSecret,
+			grantPath: '/oauth/token',
+			revokePath: '/oauth/revoke'
+		});
+		OAuthTokenProvider.configure({
+			name: 'token',
+			options: { secure: false }
+		});
+	}])
 	.controller('AuthController@login', ['OAuth', 'OAuthToken', '$scope', '$http', '$state', '$window', '$cookies', '$rootScope', 'UserFactory', 'config', function (OAuth, OAuthToken, $scope, $http, $state, $window, $cookies, $rootScope, UserFactory, config) {
 		if (OAuth.isAuthenticated()) {
 			UserFactory.getProfile(function (response) {
@@ -7,22 +20,16 @@ angular.module('AuthModule', ['RouterModule', 'constants', 'UsersModule', 'ngCoo
 			})
 		}
 
-		OAuth.configure({
-			baseUrl: config.apiUrl,
-			clientId: config.clientId,
-			clientSecret: config.clientSecret
-		});
-
 		$scope.submit = function () {
 			$cookies.put('username', $scope.inputEmail);
 			var user = {
 				username: $scope.inputEmail,
 				password: $scope.inputPassword
-			}
+			};
 			var options = {
 				grant_type: "password",
 				scope: ""
-			}
+			};
 			var data = OAuth.getAccessToken(user, options);
 			data.then(function successCallback(data) {
 				UserFactory.getProfile(function (response) {
