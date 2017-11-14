@@ -88,7 +88,13 @@ angular.module('GroupsModule')
 		}
 	}])
 	.controller('GroupController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'GroupFactory', function ($rootScope, $scope, $state, $stateParams, GroupFactory) {
-		GroupFactory.deleteGroup($stateParams.id, function () {
-			$state.go('groups.index');
-		});
+		if (confirm('Êtes-vous sûr de vouloir supprimer le groupe ?'))
+		{
+			GroupFactory.deleteGroup($stateParams.id, function () {
+				$state.go('groups.index');
+			});
+		}
+		else {
+			$state.go('groups.index')
+		}
 	}]);

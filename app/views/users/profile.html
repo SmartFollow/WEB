@@ -141,50 +141,26 @@
 				<h2>Alertes</h2>
 
 				<div ng-controller="AlertController">
-					<div class="row">
-						<div class="col-md-12">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Type</th>
-										<th>Message</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in pagedItems[currentPage]"
-									    ng-class="{ success : item.Type == 'ok',
-													danger : item.Type == 'remove',
-													warning : item.Type == 'warning',
-													info : item.Type == 'info'}">
-										<td>{{item.id}}</td>
-										<td><span class="glyphicon glyphicon-{{item.Type}}-sign"></span></td>
-										<td>{{item.Message}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-right">
-							<ul class="pagination" style="margin: 15px 0 0 0;">
-								<li ng-class="{disabled: currentPage == 0}">
-									<a href ng-click="prevPage()">« Prev</a>
-								</li>
-								<li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-								    ng-class="{active: n == currentPage}"
-								    ng-click="setPage()">
-									<a href ng-bind="n + 1">1</a>
-								</li>
-								<li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-									<a href ng-click="nextPage()">›</a>
-								</li>
-								<li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
-									<a href>»</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Type</th>
+								<th>Message</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in items"
+							    ng-class="{ success : item.Type == 'ok',
+											danger : item.Type == 'remove',
+											warning : item.Type == 'warning',
+											info : item.Type == 'info'}">
+								<td>{{item.id}}</td>
+								<td><span class="glyphicon glyphicon-{{item.Type}}-sign"></span></td>
+								<td>{{item.Message}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 

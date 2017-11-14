@@ -25,7 +25,10 @@
 					<td>{{ notification.transmitter.lastname }} {{ notification.transmitter.firstname }}</td>
 					<td>{{ notification.pivot.user_id }}</td>
 					<td>{{ notification.message }}</td>
-					<td><a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a></td>
+					<td ng-if="notification.resource_link">
+						<a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a>
+					</td>
+					<td ng-if="!notification.resource_link">-</td>
 					<td><a ui-sref="notifications.show({ id: notification.id })">Voir</a></td>
 					<td ng-if="accessRules.includes('notifications.edit')">
 						<a ui-sref="notifications.edit({ id: notification.id })">Modifier</a>

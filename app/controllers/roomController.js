@@ -65,7 +65,13 @@ angular.module('RoomsModule')
 		}
 	}])
 	.controller('RoomController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'RoomFactory', function ($rootScope, $scope, $state, $stateParams, RoomFactory) {
-		RoomFactory.deleteRoom($stateParams.id, function () {
-			$state.go('rooms.index');
-		});
+		if (confirm('Êtes-vous sûr de vouloir supprimer la salle ?'))
+		{
+			RoomFactory.deleteRoom($stateParams.id, function () {
+				$state.go('rooms.index');
+			});
+		}
+		else {
+			$state.go('rooms.index')
+		}
 	}]);
