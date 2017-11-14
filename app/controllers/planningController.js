@@ -22,7 +22,7 @@ angular.module('app')
 				method: 'GET',
 				url: config.apiUrl + "api/lessons"
 			}).then(function successCallback(response) {
-				events = [];
+				var events = [];
 				response.data.forEach(function (lesson) {
 					var title = lesson.subject.name;
 					title += lesson.reservation != null ? (" en " + lesson.reservation.room.identifier) : (" - salle non définie");
@@ -32,7 +32,7 @@ angular.module('app')
 						title: title,
 						start: lesson.start.split(" ")[1],
 						end: lesson.end.split(" ")[1],
-						url: $rootScope.user && $rootScope.user.group_id <= 2 ? "#/lessons/" + lesson.id : "#/lessons-student/" + lesson.id,
+						url: $rootScope.user && $rootScope.user.group_id <= 2 ? "#!/lessons/" + lesson.id : "#!/lessons-student/" + lesson.id,
 						stick: true,
 						dow: [new Date(lesson.start).getDay()],
 						ranges: [{start: lesson.start.split(" ")[0], end: lesson.end.split(" ")[0]}]
@@ -56,19 +56,21 @@ angular.module('app')
 				method: 'GET',
 				url: config.apiUrl + "api/reservations"
 			}).then(function successCallback(response) {
-				events = [];
+				var events = [];
 				response.data.forEach(function (reservation) {
-					events.push({
-						id: reservation.id,
-						title: "Reservation de la salle " + reservation.room.identifier,
-						start: reservation.time_start,
-						end: reservation.time_end,
-						url: "#/reservations/" + reservation.id + "/edit",
-						stick: true,
-						color: "#888888",
-						dow: [weekday[reservation.day]],
-						ranges: [{start: reservation.date_start, end: reservation.date_end}]
-					});
+					if (!reservation.has_lesson) {
+						events.push({
+							id: reservation.id,
+							title: "Reservation de la salle " + reservation.room.identifier,
+							start: reservation.time_start,
+							end: reservation.time_end,
+							url: "#!/reservations/" + reservation.id + "/edit",
+							stick: true,
+							color: "#888888",
+							dow: [weekday[reservation.day]],
+							ranges: [{start: reservation.date_start, end: reservation.date_end}]
+						});
+					}
 				});
 
 				reservations = events;

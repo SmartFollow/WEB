@@ -1,15 +1,15 @@
 angular.module('UsersModule')
-	.controller('UserController@profile', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config) {
+	.controller('UserController@profile', ['UserFactory', '$rootScope', '$scope', '$state', 'config', function (UserFactory, $rootScope, $scope, $state, config) {
+		$rootScope.pageTitle = 'Votre profil';
+		$scope.config = config;
+
 		UserFactory.getProfile(function (response) {
 			$scope.profile = response;
-			$scope.config = config;
+			console.log($scope.profile);
 		});
-
-		$rootScope.pageTitle = 'Votre profil';
-		if ($state.current.data !== undefined && $state.current.data !== null)
-			$rootScope.pageTitle = $state.current.data.pageTitle;
 	}])
-	.controller('UserController@show', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $http, $rootScope, $scope, $stateParams, config) {
+	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
+		$rootScope.pageTitle = "Voir un utilisateur";
 		$scope.config = config;
 
 		UserFactory.getUser($stateParams.id, function (response) {
@@ -18,7 +18,7 @@ angular.module('UsersModule')
 			$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;
 		});
 	}])
-	.controller('UserController@index', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $http, $rootScope, $scope, $stateParams, config) {
+	.controller('UserController@index', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope) {
 		$rootScope.pageTitle = "Liste des utilisateurs";
 
 		UserFactory.getUsers(function (users) {
@@ -26,7 +26,7 @@ angular.module('UsersModule')
 			$scope.users = users;
 		});
 	}])
-	.controller('UserController@create', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $http, $rootScope, $scope, $stateParams, config, GroupFactory, StudentClassFactory) {
+	.controller('UserController@create', ['UserFactory', '$rootScope', '$scope', '$stateParams', '$timeout', '$state', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $rootScope, $scope, $stateParams, $timeout, $state, config, GroupFactory, StudentClassFactory) {
 		$rootScope.pageTitle = "Créer un utilisateur";
 
 		$scope.user = {};
@@ -39,7 +39,7 @@ angular.module('UsersModule')
 			$scope.classes = classes;
 		});
 
-		$scope.createUser= function () {
+		$scope.createUser = function () {
 			UserFactory.storeUser ({
 				firstname: $scope.user.firstname,
 				lastname: $scope.user.lastname,
@@ -59,7 +59,7 @@ angular.module('UsersModule')
 			});
 		}
 	}])
-	.controller('UserController@edit', ['UserFactory', '$http', '$rootScope', '$scope', '$stateParams', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $http, $rootScope, $scope, $stateParams, config, GroupFactory, StudentClassFactory) {
+	.controller('UserController@edit', ['UserFactory', '$rootScope', '$scope', '$stateParams', '$timeout', '$state', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $rootScope, $scope, $stateParams, $timeout, $state, config, GroupFactory, StudentClassFactory) {
 		$rootScope.pageTitle = "Editer un utilisateur";
 
 		UserFactory.getUser($stateParams.id, function (user) {

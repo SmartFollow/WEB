@@ -24,6 +24,8 @@ table.table {
   width: 100%;
   background: #fff;
   margin-bottom: 0; }
+  table.table > tbody + tbody {
+    border: none; }
   table.table td, table.table th {
     padding: 0.75em 1.5em;
     color: #7c8d87;

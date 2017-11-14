@@ -34,6 +34,11 @@
 						<a ui-sref="notifications.delete({ id: notification.id })">Supprimer</a>
 					</td>
 				</tr>
+				<tr ng-if="notifications.length == 0" class="text-center">
+					<td colspan="{{ 6 + (accessRules.includes('notifications.edit') ? 1 : 0) + (accessRules.includes('notifications.destroy') ? 1 : 0)}}">
+						Aucune notification à afficher
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

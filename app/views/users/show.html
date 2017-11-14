@@ -14,11 +14,13 @@
 						<h2 class="text-left">{{profile.firstname}} <span class="text-uppercase">{{profile.lastname}}</span></h2>
 						<dl>
 							<dt>Groupe</dt>
-							<dd>{{ profile.group.description }}</dd>
+							<dd ng-if="accessRules.includes('groups.show')"><a ui-sref="groups.show({ id: profile.group.id })">{{ profile.group.description }}</a></dd>
+							<dd ng-if="!accessRules.includes('groups.show')">{{ profile.group.description }}</dd>
 
 							<div ng-if="profile.student_class !== null">
 								<dt>Classe</dt>
-								<dd>{{ profile.student_class.name }}</dd>
+								<dd ng-if="accessRules.includes('student-classes.show')"><a ui-sref="student-classes.show({ id: profile.student_class.id })">{{ profile.student_class.name }}</a></dd>
+								<dd ng-if="!accessRules.includes('student-classes.show')">{{ profile.student_class.name }}</dd>
 							</div>
 
 							<dt>Email</dt>

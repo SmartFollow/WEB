@@ -35,6 +35,10 @@ table.table {
 	background: #fff;
 	margin-bottom: 0;
 
+	& > tbody + tbody {
+		border: none;
+	}
+
 	td, th {
 		padding: 0.75em 1.5em;
 		color: #7c8d87;
