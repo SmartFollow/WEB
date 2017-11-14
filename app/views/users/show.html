@@ -57,26 +57,26 @@
 			<!-- Homeworks -->
 			<div class="block" ng-if="accessRules.includes('users.profile.homeworks')">
 				<h2>Devoirs</h2>
-				<div ng-controller="HomeworkController">
+				<div>
 					<table class="table">
 						<thead>
-							<tr>
-								<th>#</th>
-								<th>Date</th>
-								<th>Matière</th>
-								<th>Description</th>
-							</tr>
+						<tr>
+							<th>Leçon</th>
+							<th>Matière</th>
+							<th>Description</th>
+						</tr>
 						</thead>
-						<tbody>
-							<tr ng-repeat="item in items">
-								<td>{{item.id}}</td>
-								<td>{{item.Date}}</td>
-								<td>{{item.Matiere}}</td>
-								<td>{{item.Exercices}}</td>
-							</tr>
-							<tr ng-if="items.length == 0">
-								<td colspan="4" class="text-center">Aucun devoir enregistré</td>
-							</tr>
+						<tbody ng-repeat="lesson in profile.homeworks">
+						<tr ng-repeat="homework in lesson.homeworks">
+							<td><a ui-sref="lessons.show({ id: lesson.id })">Voir la leçon</a></td>
+							<td>{{ lesson.subject.name }}</td>
+							<td>{{ homework.description }}</td>
+						</tr>
+						</tbody>
+						<tbody ng-if="profile.homeworks.length == 0">
+						<tr>
+							<td colspan="4" class="text-center">Aucun devoir enregistré</td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -86,81 +86,81 @@
 		<!-- Right column -->
 		<div class="col-md-6" style="padding-left: 7.5px;">
 
+			<!-- Criteria summary -->
+			<div class="block">
+				<h2 class="title_h2">Résumé des critères récents</h2>
+				<ul class="list-group" ng-if="profile.criteria_sums.length > 0 || profile.criteria_averages.length > 0">
+					<li ng-repeat="criterion_sum in profile.criteria_sums"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}">
+						<strong>{{ criterion_sum.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_sum.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_sum.sum | number: 0 }}
+						</span>
+					</li>
+					<li ng-repeat="criterion_avg in profile.criteria_averages"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_avg.criterion.impact] }}">
+						<strong>{{ criterion_avg.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_avg.sum | number: 1 }}
+						</span>
+					</li>
+				</ul>
+				<div class="text-center" ng-if="profile.criteria_sums.length == 0 && profile.criteria_averages.length == 0">
+					Aucun critère enregistré récemment
+				</div>
+			</div>
+
 			<!-- Alerts -->
 			<div class="block" ng-if="accessRules.includes('notifications.self.index')">
 				<h2>Alertes</h2>
 
 				<div ng-controller="AlertController">
-					<div class="row">
-						<div class="col-md-12">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Type</th>
-										<th>Message</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="item in pagedItems[currentPage]"
-									    ng-class="{ success : item.Type == 'ok',
-													danger : item.Type == 'remove',
-													warning : item.Type == 'warning',
-													info : item.Type == 'info'}">
-										<td>{{item.id}}</td>
-										<td class="text-center"><span class="glyphicon glyphicon-{{item.Type}}-sign"></span></td>
-										<td>{{item.Message}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-right">
-							<ul class="pagination" style="margin: 15px 0 0 0;">
-								<li ng-class="{disabled: currentPage == 0}">
-									<a href ng-click="prevPage()">« Prev</a>
-								</li>
-								<li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-								    ng-class="{active: n == currentPage}"
-								    ng-click="setPage()">
-									<a href ng-bind="n + 1">1</a>
-								</li>
-								<li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-									<a href ng-click="nextPage()">›</a>
-								</li>
-								<li ng-class="{disabled: (currentPage) == pagedItems.length - 1}" ng-show="pagedItems.length > 5" ng-click="setPage(pagedItems.length-1)">
-									<a href>»</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Marks -->
-			<div class="block" ng-if="accessRules.includes('marks.self.index')">
-				<h2>Notes</h2>
-				<div ng-controller="MarkController">
 					<table class="table">
 						<thead>
 						<tr>
 							<th>#</th>
-							<th>Date</th>
+							<th>Type</th>
+							<th>Message</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="item in items"
+						    ng-class="{ success : item.Type == 'ok',
+											danger : item.Type == 'remove',
+											warning : item.Type == 'warning',
+											info : item.Type == 'info'}">
+							<td>{{item.id}}</td>
+							<td><span class="glyphicon glyphicon-{{item.Type}}-sign"></span></td>
+							<td>{{item.Message}}</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Marks -->
+			<div class="block" ng-if="accessRules.includes('marks.index')">
+				<h2>Notes</h2>
+				<div>
+					<table class="table">
+						<thead>
+						<tr>
+							<th>Leçon</th>
 							<th>Matière</th>
 							<th>Note</th>
 							<th>Commentaire</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr ng-repeat="item in items">
-							<td>{{item.id}}</td>
-							<td>{{item.Date}}</td>
-							<td>{{item.Matiere}}</td>
-							<td>{{item.Note}}</td>
-							<td>{{item.Commentaire}}</td>
+						<tr ng-repeat="mark in profile.marks">
+							<td><a ui-sref="lessons.show({ id: mark.exam.lesson.id })">Voir la leçon</a></td>
+							<td>{{ mark.exam.lesson.subject.name }}</td>
+							<td>{{ mark.mark }}</td>
+							<td>{{ mark.comment ? mark.comment : '-' }}</td>
 						</tr>
-						<tr ng-if="items.length == 0">
+						<tr ng-if="profile.marks.length == 0">
 							<td colspan="5" class="text-center">Aucune note enregistrée</td>
 						</tr>
 						</tbody>
