@@ -5,7 +5,6 @@ angular.module('UsersModule')
 
 		UserFactory.getProfile(function (response) {
 			$scope.profile = response;
-			console.log($scope.profile);
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {

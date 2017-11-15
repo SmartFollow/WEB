@@ -1,0 +1,68 @@
+@import "_variables";
+
+.navbar {
+	background-color: $dark-background;
+	border-bottom: none;
+
+	.navbar-header {
+		background-color: $theme-darker-background;
+		color: $theme-text-color;
+		text-align: center;
+		padding: 15px;
+
+		.title {
+			margin: 0;
+			padding: 0;
+			font-size: 2em;
+			font-weight: lighter;
+			display: inline;
+			color: $theme-text-color;
+
+			strong {
+				font-weight: bold;
+			}
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			z-index: 2000;
+			right: -1px;
+			top: 20px;
+			bottom: 20px;
+			width: 0;
+			height: 0;
+			border: 10px solid transparent;
+			border-right: 15px solid $dark-background;
+		}
+	}
+
+	.navbar-controls {
+		padding: 20px 15px;
+
+		.page-title {
+			margin: 0;
+			padding: 0;
+			font-size: 1.2em;
+			font-weight: bold;
+			display: inline;
+			color: $theme-text-color;
+
+			.glyphicon {
+				margin-right: 15px;
+			}
+		}
+
+		.controls {
+			color: $dark-background-text-color;
+
+			span {
+				margin-left: 15px;
+			}
+
+			a {
+				color: inherit;
+			}
+		}
+	}
+}

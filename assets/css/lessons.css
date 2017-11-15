@@ -172,4 +172,59 @@
       padding-left: 10px;
       border-left: 1px solid #c3c3c3; }
 
-/*# sourceMappingURL=lesson.css.map */
+.breadcrumb-container {
+  padding-left: 15px; }
+  .breadcrumb-container .breadcrumb {
+    height: 60px;
+    width: 100%;
+    border-radius: 0;
+    background: #282828;
+    color: #ffffff;
+    font-size: 1.5em;
+    line-height: 60px;
+    padding: 0; }
+    .breadcrumb-container .breadcrumb li {
+      padding: 0;
+      min-width: 150px;
+      text-align: center;
+      position: relative;
+      margin-right: 60px;
+      padding: 0 10px; }
+      .breadcrumb-container .breadcrumb li:before {
+        content: "" !important;
+        position: absolute;
+        top: 0;
+        left: -60px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 60px 60px;
+        border-color: transparent; }
+      .breadcrumb-container .breadcrumb li:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -60px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 60px 60px 0 0;
+        border-color: transparent; }
+      .breadcrumb-container .breadcrumb li.legend {
+        background: #c0392b;
+        z-index: 500;
+        padding-left: 15px; }
+        .breadcrumb-container .breadcrumb li.legend:before {
+          display: none; }
+        .breadcrumb-container .breadcrumb li.legend:after {
+          border-color: #c0392b transparent transparent transparent; }
+      .breadcrumb-container .breadcrumb li.active {
+        background: #1f1f1f;
+        z-index: 300;
+        color: inherit; }
+        .breadcrumb-container .breadcrumb li.active:before {
+          border-color: transparent transparent #1f1f1f transparent; }
+        .breadcrumb-container .breadcrumb li.active:after {
+          border-color: #1f1f1f transparent transparent transparent; }
+
+/*# sourceMappingURL=lessons.css.map */

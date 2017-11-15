@@ -1,0 +1,309 @@
+@import "_variables";
+
+.panel-group .panel {
+	border-radius: 0;
+	box-shadow: none;
+	border-color: #EEEEEE;
+}
+
+.panel-default > .panel-heading {
+	padding: 0;
+	border-radius: 0;
+	color: #212121;
+	background-color: #FAFAFA;
+	border-color: #EEEEEE;
+}
+
+.panel-title {
+	font-size: 14px;
+}
+
+.panel-title > a {
+	display: block;
+	padding: 15px;
+	text-decoration: none;
+}
+
+.more-less {
+	float: right;
+	color: #212121;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+	border-top-color: #EEEEEE;
+}
+
+.modal.large {
+	width: 80%;
+}
+
+.trombi .row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.min-img-lesson {
+	width: 35px
+}
+
+.breadcrumb-container {
+	z-index: 10000;
+}
+
+.icon-lesson-final .participation {
+	color: #5CB85C
+}
+
+.icon-lesson-final .chat {
+	color: #F0AD4E
+}
+
+.icon-lesson-final .homework {
+	color: #D9534F
+}
+
+.icon-lesson .participation {
+	color: #5CB85C
+}
+
+.icon-lesson .chat {
+	color: #F0AD4E
+}
+
+.icon-lesson .homework {
+	color: #D9534F
+}
+
+.icon-lesson {
+	display: none;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.img-lesson {
+	width: 160px;
+	max-width: 100%;
+}
+
+.block-lesson {
+	margin-top: 30px;
+	text-align: center;
+	position: relative;
+}
+
+.block-lesson:hover {
+	cursor: pointer;
+}
+
+.text-lesson {
+	font-size: 19px;
+}
+
+.cross-lesson {
+	font-size: 7em;
+	padding-top: 0.3em;
+	z-index: 100;
+	color: #C0392B;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.time-lesson {
+	font-size: 7em;
+	padding-top: 0.3em;
+	z-index: 100;
+	color: #FFFFFF;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.next-lesson {
+	height: 62vh;
+	cursor: pointer;
+}
+
+.icon-next {
+	padding-top: 27vh;
+	font-size: 5vw;
+}
+
+.previous-lesson {
+	display: none;
+	height: 62vh;
+	cursor: pointer;
+}
+
+.icon-previous {
+	padding-top: 27vh;
+	font-size: 5vw;
+}
+
+.tab {
+}
+
+.on {
+}
+
+#cours {
+	display: none;
+}
+
+.modal {
+	text-align: center;
+	padding: 0 !important;
+}
+
+.modal:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.lesson-infos {
+	margin-bottom: $block-padding + 5;
+	height: 100%;
+	position: relative;
+
+	dl {
+		margin-bottom: 0;
+	}
+
+	.teacher-image {
+		text-align: center;
+		top: 0;
+		bottom: 0;
+		max-height: 100%;
+		height: auto !important;
+		height: 100%;
+		overflow: hidden;
+
+		&:before {
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+			margin-right: -0.25em;
+		}
+
+		img {
+			display: inline-block;
+			vertical-align: middle;
+			max-width: 100%;
+		}
+	}
+
+	.lesson-documents {
+		text-align: right;
+
+		.documents-list {
+			.title {
+				display: block;
+				margin-bottom: 5px;
+			}
+
+			.pull-left {
+				.document-type {
+					margin-right: $block-padding;
+				}
+			}
+
+			.pull-right {
+				.document-type {
+					margin-left: $block-padding;
+					padding-left: $block-padding;
+					border-left: 1px solid #c3c3c3;
+				}
+			}
+		}
+	}
+}
+
+.breadcrumb-container {
+	padding-left: $block-padding + 5px;
+
+	.breadcrumb {
+		height: 60px;
+		width: 100%;
+		border-radius: 0;
+		background: $dark-background;
+		color: $dark-background-text-color;
+		font-size: 1.5em;
+		line-height: 60px;
+		padding: 0;
+
+		li {
+			padding: 0;
+			min-width: 150px;
+			text-align: center;
+			position: relative;
+			margin-right: 60px;
+			padding: 0 $block-padding;
+
+			&:before {
+				content: "" !important;
+				position: absolute;
+				top: 0;
+				left: -60px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0 0 60px 60px;
+				border-color: transparent;
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: -60px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 60px 60px 0 0;
+				border-color: transparent;
+			}
+
+			&.legend {
+				background: $theme-darker-background;
+				z-index: 500;
+				padding-left: $block-padding + 5px;
+
+				&:before {
+					display: none;
+				}
+				&:after {
+					border-color: $theme-darker-background transparent transparent transparent;
+				}
+			}
+
+			&.active {
+				background: $darker-background;
+				z-index: 300;
+				color: inherit;
+
+				&:before {
+					border-color: transparent transparent $darker-background transparent;
+				}
+				&:after {
+					border-color: $darker-background transparent transparent transparent;
+				}
+			}
+		}
+	}
+}

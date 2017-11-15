@@ -17,6 +17,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		.state('login', {
 			url: '/login',
 			controller: 'AuthController@login',
+			css: '/assets/css/auth.css',
 			templateUrl: 'app/views/auth/login.html'
 		})
 
@@ -109,7 +110,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'LessonController@create',
 			data: {pageTitle: 'Ajouter une leçon'},
-			css: '/assets/css/lesson.css',
+			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons/create.html'
 		})
 		.state('lessons.edit', {
@@ -117,7 +118,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'LessonController@edit',
 			data: {pageTitle: 'Modifier une leçon'},
-			css: '/assets/css/lesson.css',
+			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons/edit.html'
 		})
 		.state('lessons.delete', {
@@ -131,7 +132,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'LessonController@show',
 			data: {pageTitle: 'Déroulement du cours'},
-			css: '/assets/css/lesson.css',
+			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons/show.html'
 		})
 		.state('lessons_id_student', { // ToDo: Replace by access-rules management
@@ -139,7 +140,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'lessonsIdStudent',
 			data: {pageTitle: 'Déroulement du cours'},
-			css: '/assets/css/lesson.css',
+			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons_id_student.html'
 		})
 
