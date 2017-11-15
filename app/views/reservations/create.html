@@ -11,8 +11,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6" style="background-color: rgba(192, 57, 43, 0.02);">
-						Date de début<br>
+					<div class="col-md-6 text-center">
+						<strong>Date de début</strong>
+						<br />
 						<span class="edit" id="edit1">
 							Le {{reservation.date_start}} à {{reservation.time_start}}
 							<button class="btn btn-info" ng-click="editDate1()" style="margin-left: 10px;">Modifier</button>
@@ -20,8 +21,9 @@
 						<datetimepicker id="date1" data-ng-model="data.date1"></datetimepicker>
 					</div>
 
-					<div class="col-md-6" style="background-color: rgba(192, 57, 43, 0.02);">
-						Date de fin<br>
+					<div class="col-md-6 text-center">
+						<strong>Date de fin</strong>
+						<br />
 						<span class="edit" id="edit2">
 							Le {{reservation.date_end}} à {{reservation.time_end}}
 							<button class="btn btn-info" ng-click="editDate2()" style="margin-left: 10px;">Modifier</button>

@@ -153,6 +153,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'ReservationController@create',
 			data: { pageTitle: 'Réserver une salle' },
+			css: '/assets/css/reservations.css',
 			templateUrl: 'app/views/reservations/create.html'
 		})
 		.state('reservations.edit', {
@@ -160,6 +161,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'ReservationController@edit',
 			data: { pageTitle: 'Modifier une réservation' },
+			css: '/assets/css/reservations.css',
 			templateUrl: 'app/views/reservations/create.html'
 		})
 		.state('reservations.delete', {
