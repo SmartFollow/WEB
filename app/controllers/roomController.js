@@ -55,7 +55,7 @@ angular.module('RoomsModule')
 			}, function (room) {
 				$scope.alerts.success = {
 					show: true,
-					text: "Votre salle a bien été modifiée, vous allez être redirigé vers sa page."
+					text: "Votre salle a bien été modifiée, vous allez être redirigé vers la liste des salles."
 				};
 
 				$timeout(function () {

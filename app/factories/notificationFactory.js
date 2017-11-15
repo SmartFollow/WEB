@@ -1,7 +1,7 @@
 angular.module('NotificationsModule')
 	.factory('NotificationFactory', ['$http', 'OAuth', 'config', function ($http, OAuth, config) {
 		return {
-			getSetNotifications: function (callback) {
+			getNotifications: function (callback) {
 				$http({
 					method: 'GET',
 					url: config.apiUrl + "api/notifications"
@@ -11,10 +11,10 @@ angular.module('NotificationsModule')
 					console.log(response);
 				});
 			},
-			getNotifications: function (callback) {
+			getUnreadNotifications: function (callback) {
 				$http({
 					method: 'GET',
-					url: config.apiUrl + "api/notifications"
+					url: config.apiUrl + "api/notifications?type=unread"
 				}).then(function successCallback(response) {
 					callback(response.data);
 				}, function errorCallback(response) {
@@ -67,6 +67,16 @@ angular.module('NotificationsModule')
 				$http({
 					method: 'DELETE',
 					url: config.apiUrl + "api/notifications/" + id
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
+			markAsRead: function (id, callback) {
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + 'api/notifications/' + id + '/read'
 				}).then(function successCallback(response) {
 					callback(response.data);
 				}, function errorCallback(response) {
