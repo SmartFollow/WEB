@@ -29,7 +29,7 @@ angular.module('GroupsModule')
 			}, function (group) {
 				$scope.alerts.success = {
 					show: true,
-					text: "Votre groupe a bien été enregistré, vous allez être redirigé vers sa page."
+					text: "Le groupe a bien été enregistré, vous allez être redirigé vers sa page."
 				};
 
 				$timeout(function () {
@@ -78,7 +78,7 @@ angular.module('GroupsModule')
 			}, function (group) {
 				$scope.alerts.success = {
 					show: true,
-					text: "Votre groupe a bien été modifié, vous allez être redirigé vers sa page."
+					text: "Le groupe a bien été modifié, vous allez être redirigé vers sa page."
 				};
 
 				$timeout(function () {

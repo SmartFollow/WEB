@@ -27,6 +27,10 @@ angular.module('UsersModule')
 	}])
 	.controller('UserController@create', ['UserFactory', '$rootScope', '$scope', '$stateParams', '$timeout', '$state', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $rootScope, $scope, $stateParams, $timeout, $state, config, GroupFactory, StudentClassFactory) {
 		$rootScope.pageTitle = "Créer un utilisateur";
+		$scope.alerts = {
+			success: {},
+			danger: {}
+		};
 
 		$scope.user = {};
 
@@ -44,12 +48,12 @@ angular.module('UsersModule')
 				lastname: $scope.user.lastname,
 				email: $scope.user.email,
 				password: $scope.user.password,
-				group: $scope.user.group,
-				studentClass: $scope.user.studentClass
+				group: $scope.user.group_id,
+				student_class: $scope.user.class_id
 			}, function (user) {
 				$scope.alerts.success = {
 					show: true,
-					text: "Votre utilisateur a bien été enregistré, vous allez être redirigé vers sa page."
+					text: "L'utilisateur a bien été enregistré, vous allez être redirigé vers sa page."
 				};
 
 				$timeout(function () {
@@ -60,6 +64,10 @@ angular.module('UsersModule')
 	}])
 	.controller('UserController@edit', ['UserFactory', '$rootScope', '$scope', '$stateParams', '$timeout', '$state', 'config', 'GroupFactory', 'StudentClassFactory', function (UserFactory, $rootScope, $scope, $stateParams, $timeout, $state, config, GroupFactory, StudentClassFactory) {
 		$rootScope.pageTitle = "Editer un utilisateur";
+		$scope.alerts = {
+			success: {},
+			danger: {}
+		};
 
 		UserFactory.getUser($stateParams.id, function (user) {
 			$scope.user = user;
@@ -73,18 +81,18 @@ angular.module('UsersModule')
 			$scope.classes = classes;
 		});
 
-		$scope.editUser= function () {
-			UserFactory.updateUser ({
+		$scope.editUser = function () {
+			UserFactory.updateUser ($scope.user.id, {
 				firstname: $scope.user.firstname,
 				lastname: $scope.user.lastname,
 				email: $scope.user.email,
 				password: $scope.user.password,
-				group: $scope.user.group,
-				studentClass: $scope.user.studentClass
+				group: $scope.user.group_id,
+				student_class: $scope.user.class_id
 			}, function (user) {
 				$scope.alerts.success = {
 					show: true,
-					text: "Votre utilisateur a bien été modifié, vous allez être redirigé vers sa page."
+					text: "L'utilisateur a bien été modifié, vous allez être redirigé vers sa page."
 				};
 
 				$timeout(function () {
