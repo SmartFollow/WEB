@@ -1,12 +1,13 @@
+<!-- Modal add document -->
 <div id="modal-upload" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Ajoutez un document</h4>
+				<h4 class="modal-title">Ajouter un document</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Nom</label>
 				<input type="text" class="form-control" id="name">
 				<br>
@@ -15,8 +16,7 @@
 				<br>
 				<label class="control-label">Document</label>
 				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document"
-				       style="margin-left: auto;margin-right: auto;">
+				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" ng-click="createDocument();">Ajouter</button>
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal edit document -->
 <div id="modal-upload-edit-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"
      ng-repeat="(key, document) in lesson.documents">
 	<div class="modal-dialog modal-lg">
@@ -33,9 +33,9 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Editez un document</h4>
+				<h4 class="modal-title">Editer un document</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Nom</label>
 				<input type="text" class="form-control" id="name" value="{{document.name}}">
 				<br>
@@ -64,7 +64,7 @@
 				</button>
 				<h4 class="modal-title">{{document.name}}</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Nom</label>
 				<div>{{document.name}}</div>
 				<br>
@@ -82,23 +82,22 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal add homework -->
 <div id="modal-upload-homework" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Ajoutez un devoir maison</h4>
+				<h4 class="modal-title">Ajouter un devoir maison</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Description</label>
 				<textarea class="form-control" rows="5" id="HWdescription"></textarea>
 				<br>
-				<label class="control-label">Et/Ou un document</label>
+				<label class="control-label">Document lié (optionnel)</label>
 				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document"
-				       style="margin-left: auto;margin-right: auto;">
+				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createHW();">Ajouter
@@ -108,7 +107,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal edit homework -->
 <div id="modal-upload-homework-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"
      ng-repeat="(key, document) in lesson.homeworks">
 	<div class="modal-dialog modal-lg">
@@ -116,9 +115,9 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Devoir à la maison N°{{key+1}}</h4>
+				<h4 class="modal-title">Devoir à la maison n°{{key+1}}</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Description</label>
 				<textarea class="form-control" rows="5" id="HWdescription">{{document.description}}</textarea>
 			</div>
@@ -131,8 +130,7 @@
 		</div>
 	</div>
 </div>
-
-
+<!-- Modal show homework -->
 <div id="modal-homework-{{key}}" class="modal fade" tabindex="-1" role="dialog"
      ng-repeat="(key, document) in lesson.homeworks">
 	<div class="modal-dialog modal-lg">
@@ -140,9 +138,9 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Devoir à la maison N°{{key+1}}</h4>
+				<h4 class="modal-title">Devoir à la maison n°{{key+1}}</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Description</label>
 				<div>{{document.description}}</div>
 			</div>
@@ -152,7 +150,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal marks exam -->
 <div id="modal-exam-mark" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -161,7 +159,7 @@
 				</button>
 				<h4 class="modal-title">Noter l'examen</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 			<table class="table">
 				<thead>
 					<tr>
@@ -191,7 +189,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal show exam -->
 <div id="modal-exam-1" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -200,7 +198,7 @@
 				</button>
 				<h4 class="modal-title">Examen</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Description</label>
 				<div>{{lesson.exam.description}}</div>
 			</div>
@@ -210,16 +208,16 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal add exam -->
 <div id="modal-upload-exam" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Ajoutez un examen</h4>
+				<h4 class="modal-title">Ajouter un examen</h4>
 			</div>
-			<div class="modal-body text-center">
+			<div class="modal-body">
 				<label class="control-label">Type</label>
 				<select class="form-control" id="examType">
 					<option value="home">Examen maison</option>
@@ -255,123 +253,6 @@
 		</div>
 	</div>
 </div>
-<div class="row row-eq-height lesson-infos display-table">
-	<div class="col-md-1 hidden-xs teacher-image display-cell">
-		<img ng-src="{{ config.apiUrl + lesson.subject.teacher.avatar }}" class="img-circle"/>
-	</div>
-
-	<div class="col-md-4 col-md-offset-1 lesson-details display-cell">
-		<dl class="" style="margin-top: 20px;">
-			<dt>Professeur</dt>
-			<dd><a ui-sref="users.show({ id : lesson.subject.teacher.id })"><span
-					id="teacher">{{lesson.subject.teacher.firstname}} {{lesson.subject.teacher.lastname}}</span></a>
-			</dd>
-
-			<dt>Classe</dt>
-			<dd><a ui-sref="classes.show({ id : lesson.student_class.id })">{{lesson.student_class.name}}</a></dd>
-
-			<dt>Cours</dt>
-			<dd><span id="title">{{lesson.subject.name}}</span></dd>
-
-			<dt>Salle</dt>
-			<dd><span id="room">{{lesson.reservation.room.identifier}}</span></dd>
-
-			<dt>Date</dt>
-			<dd>Du {{ lesson.start | date: "dd/MM/yyyy 'à' HH'h'mm" }} au
-				{{ lesson.end | date: "dd/MM/yyyy 'à' HH'h'mm" }}
-			</dd>
-		</dl>
-	</div>
-	<div class="col-md-3 display-cell"></div>
-	<div class="col-md-4 lesson-documents display-cell">
-		<div class="list-group documents-list">
-			<strong class="title">Documents liés au cours :</strong>
-			<li href="#" class="list-group-item" ng-repeat="(key, document) in lesson.documents">
-				{{document.name}}
-				<div class="pull-left">
-					<a href="{{ config.apiUrl + document.path}}"
-					   download="{{document.filename}}.{{document.extension}}"><i
-							class="document-type glyphicon glyphicon-download-alt"></i></a>
-					<a id="pdf-tpe" data-toggle="modal" data-target="#modal-file-{{key}}"><i
-							class="document-type glyphicon glyphicon-eye-open"></i></a>
-					<a href="" ng-click="editDocument(document, 'modal')"><i
-							class="document-type glyphicon glyphicon-pencil"></i></a>
-					<a href="" ng-click="deleteDocument(document)"><i
-							class="document-type glyphicon glyphicon-remove"></i></a>
-				</div>
-				<div class="pull-right">
-					<i class="document-type glyphicon glyphicon-file"></i>
-					<i class="document-type glyphicon glyphicon-time" title="{{document.updated_at}}"></i>
-				</div>
-			</li>
-			<a data-toggle="modal" data-target="#modal-upload">
-				<li class="list-group-item" style="text-align:center">
-					Ajouter un document
-					<div class="pull-left">
-						<i class="document-type glyphicon glyphicon-plus"></i>
-					</div>
-				</li>
-			</a>
-			<strong class="title">Devoirs à la maison :</strong>
-			<li href="#" class="list-group-item" ng-repeat="(key, homework) in lesson.homeworks">
-				Devoir à la maison N°{{key+1}}
-				<div class="pull-left">
-					<a id="pdf-tpe" data-toggle="modal" data-target="#modal-homework-{{key}}"><i
-							class="document-type glyphicon glyphicon-eye-open"></i></a>
-					<a href="" ng-click="editHW(homework, 'modal')"><i
-							class="document-type glyphicon glyphicon-pencil"></i></a>
-					<a href="" ng-click="deleteHW(homework)"><i
-							class="document-type glyphicon glyphicon-remove"></i></a>
-				</div>
-				<div class="pull-right">
-					<i class="document-type glyphicon glyphicon-file"></i>
-					<i class="document-type glyphicon glyphicon-time" title="{{document.updated_at}}"></i>
-				</div>
-			</li>
-			<a data-toggle="modal" data-target="#modal-upload-homework">
-				<li class="list-group-item" style="text-align:center">
-					Ajouter un devoir à la maison
-					<div class="pull-left">
-						<i class="document-type glyphicon glyphicon-plus"></i>
-					</div>
-				</li>
-			</a>
-			<strong class="title">Examens :</strong>
-			<li href="#" class="list-group-item" ng-show="lesson.exam">
-				Examen
-				<div class="pull-left">
-					<a id="pdf-tpe" data-toggle="modal" data-target="#modal-exam-1"><i
-							class="document-type glyphicon glyphicon-eye-open"></i></a>
-					<a href="" ng-click="editExam()"><i class="document-type glyphicon glyphicon-pencil"></i></a>
-					<a href="" ng-click="deleteExam()"><i class="document-type glyphicon glyphicon-remove"></i></a>
-					<a href="" data-toggle="modal" data-target="#modal-exam-mark"><i class="document-type glyphicon glyphicon-check"></i></a>
-				</div>
-				<div class="pull-right">
-					<i class="document-type glyphicon glyphicon-file"></i>
-					<i class="document-type glyphicon glyphicon-time" title="{{lesson.exam.updated_at}}"></i>
-				</div>
-			</li>
-			<a data-toggle="modal" data-target="#modal-upload-exam" ng-show="!lesson.exam">
-				<li class="list-group-item" style="text-align:center">
-					Ajouter un examen
-					<div class="pull-left">
-						<i class="document-type glyphicon glyphicon-plus"></i>
-					</div>
-				</li>
-			</a>
-		</div>
-	</div>
-</div>
-
-
-<div class="row breadcrumb-container">
-	<ol class="breadcrumb">
-		<li class="legend">Déroulement du cours</li>
-		<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
-		<li data-toggle="tab" href="#cours" class="clickable" ng-click="tabClick(2)">Cours</li>
-		<!--<li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li>-->
-	</ol>
-</div>
 
 <div id="modal-pdf" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -387,6 +268,163 @@
 	</div>
 </div>
 
+<!-- General lesson info -->
+<div class="row main">
+	<div class=" table-display">
+	<div class="col-md-1 table-cell-display">
+		<img ng-src="{{ config.apiUrl + lesson.subject.teacher.avatar }}" class="img-profile img-circle"/>
+	</div>
+
+	<div class="col-md-4 table-cell-display">
+		<dl>
+			<dt>Professeur</dt>
+			<dd>
+				<a ui-sref="users.show({ id : lesson.subject.teacher.id })">
+					<span id="teacher">{{ lesson.subject.teacher.firstname }} {{ lesson.subject.teacher.lastname }}</span>
+				</a>
+			</dd>
+
+			<dt>Classe</dt>
+			<dd>
+				<a ui-sref="classes.show({ id : lesson.student_class.id })">{{ lesson.student_class.name }}</a>
+			</dd>
+
+			<dt>Matière</dt>
+			<dd>
+				<span id="title">{{ lesson.subject.name }}</span>
+			</dd>
+
+			<dt ng-if-start="lesson.reservation">Salle</dt>
+			<dd ng-if-end>
+				<span id="room">{{ lesson.reservation.room.identifier }}</span>
+			</dd>
+
+			<dt>Date</dt>
+			<dd>
+				Du {{ lesson.start | date: "dd/MM/yyyy 'à' HH'h'mm" }}
+				au {{ lesson.end | date: "dd/MM/yyyy 'à' HH'h'mm" }}
+			</dd>
+		</dl>
+	</div>
+
+	<div class="col-md-3 table-cell-display"></div>
+
+	<div class="col-md-4 linked-data table-cell-display">
+		<!-- Documents -->
+		<span class="data-title">
+			<strong>Documents liés au cours :</strong>
+		</span>
+		<ul class="list-group data-list">
+			<li class="list-group-item" ng-repeat="(key, document) in lesson.documents">
+				<a href="{{ config.apiUrl + document.path}}" download="{{document.filename}}.{{document.extension}}">
+					<span class="glyphicon glyphicon-download-alt data-icon"></span>
+				</a>
+				<a data-toggle="modal" data-target="#modal-file-{{key}}">
+					<span class="glyphicon glyphicon-eye-open data-icon"></span>
+				</a>
+				<a ng-click="editDocument(document, 'modal')">
+					<span class="glyphicon glyphicon-pencil data-icon"></span>
+				</a>
+				<a ng-click="deleteDocument(document)">
+					<span class="glyphicon glyphicon-remove data-icon"></span>
+				</a>
+
+				<div class="pull-right">
+					{{ document.name }}
+					<span class="glyphicon glyphicon-file data-icon"></span>
+					<span class="glyphicon glyphicon-time data-icon" title="{{document.updated_at}}"></span>
+				</div>
+			</li>
+			<a data-toggle="modal" data-target="#modal-upload">
+				<li class="list-group-item text-center">
+					<div class="pull-left">
+						<span class="glyphicon glyphicon-plus"></span>
+					</div>
+					Ajouter un document
+				</li>
+			</a>
+		</ul>
+
+		<!-- Homeworks -->
+		<span class="data-title">
+			<strong>Devoirs à la maison :</strong>
+		</span>
+		<ul class="list-group data-list">
+			<li class="list-group-item" ng-repeat="(key, homework) in lesson.homeworks">
+				<a data-toggle="modal" data-target="#modal-homework-{{key}}">
+					<span class="glyphicon glyphicon-eye-open data-icon"></span>
+				</a>
+				<a ng-click="editHW(homework, 'modal')">
+					<span class="glyphicon glyphicon-pencil data-icon"></span>
+				</a>
+				<a ng-click="deleteHW(homework)">
+					<span class="glyphicon glyphicon-remove data-icon"></span>
+				</a>
+
+				<div class="pull-right">
+					Devoir à la maison n°{{ key + 1 }}
+					<span class="glyphicon glyphicon-file data-icon"></span>
+					<span class="glyphicon glyphicon-time data-icon" title="{{ homework.updated_at }}"></span>
+				</div>
+			</li>
+			<a data-toggle="modal" data-target="#modal-upload-homework">
+				<li class="list-group-item text-center">
+					<div class="pull-left">
+						<span class="glyphicon glyphicon-plus"></span>
+					</div>
+					Ajouter un devoir à la maison
+				</li>
+			</a>
+		</ul>
+
+		<!-- Exam -->
+		<span class="data-title">
+			<strong>Examen :</strong>
+		</span>
+		<ul class="list-group data-list" style="margin-bottom: 0;">
+			<li class="list-group-item" ng-if="lesson.exam">
+				<a data-toggle="modal" data-target="#modal-exam-1">
+					<span class="glyphicon glyphicon-eye-open data-icon"></span>
+				</a>
+				<a ng-click="editExam()">
+					<span class="glyphicon glyphicon-pencil data-icon"></span>
+				</a>
+				<a ng-click="deleteExam()">
+					<span class="glyphicon glyphicon-remove data-icon"></span>
+				</a>
+				<a data-toggle="modal" data-target="#modal-exam-mark">
+					<span class="glyphicon glyphicon-check data-icon"></span>
+				</a>
+
+				<div class="pull-right">
+					Examen
+					<span class="glyphicon glyphicon-file data-icon"></span>
+					<span class="glyphicon glyphicon-time data-icon" title="{{ lesson.exam.updated_at }}"></span>
+				</div>
+			</li>
+			<a data-toggle="modal" data-target="#modal-upload-exam" ng-if="!lesson.exam">
+				<li class="list-group-item text-center">
+					<div class="pull-left">
+						<span class="glyphicon glyphicon-plus"></span>
+					</div>
+					Ajouter un examen
+				</li>
+			</a>
+		</ul>
+	</div>
+	</div>
+</div>
+
+<!-- Lesson breadcrumb -->
+<div class="row breadcrumb-container">
+	<ol class="breadcrumb">
+		<li class="legend">Déroulement du cours</li>
+		<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
+		<li data-toggle="tab" href="#cours" class="clickable" ng-click="tabClick(2)">Cours</li>
+		<!-- <li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li> -->
+	</ol>
+</div>
+
 <div id="modal-{{student.id}}" class="modal fade" tabindex="-1" role="dialog"
      ng-repeat="(key, student) in lesson.student_class.students">
 	<div class="modal-dialog">
@@ -399,13 +437,13 @@
 			<div id="popup-body" class="modal-body">
 				<button ng-repeat="criteria in student.evaluation.criteria"
 				        ng-click="createEvaluationsByCriteria(criteria, student)" ng-if="criteria.impact == 'positive'"
-				        type="button" id="{{criteria.id}}" class="participation btn btn-success btn-lg btn-block">
-					{{criteria.name}} - {{criteria.pivot.value}}
+				        type="button" id="{{ criteria.id }}" class="participation btn btn-success btn-lg btn-block">
+					{{ criteria.name }} - {{ criteria.pivot ? criteria.pivot.value : 0 }}
 				</button>
 				<button ng-repeat="criteria in student.evaluation.criteria"
 				        ng-click="createEvaluationsByCriteria(criteria, student)" ng-if="criteria.impact == 'negative'"
-				        type="button" id="{{criteria.id}}" class="participation btn btn-danger btn-lg btn-block">
-					{{criteria.name}} - {{criteria.pivot.value}}
+				        type="button" id="{{ criteria.id }}" class="participation btn btn-danger btn-lg btn-block">
+					{{ criteria.name }} - {{ criteria.pivot ? criteria.pivot.value : 0 }}
 				</button>
 			</div>
 		</div>
@@ -413,45 +451,39 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-2 col-sm-2 col-md-1">
-		<div class="text-center">
-			<div class="previous-lesson">
-				<div class="icon-previous glyphicon glyphicon-chevron-left"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="tab col-xs-8 col-sm-8 col-md-10">
+	<div class="tab col-xs-8 col-sm-8 col-md-10 col-xs-offset-2 col-sm-offset-2 col-md-offset-1">
 		<div id="appel" class="tab-pane fade in active">
-			<div class="row trombi">
-				<div ng-click="createEvaluations(student.id, student)"
-				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{student.id}}"
-				     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
+			<div class="row img-profile-list">
+				<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
+				     id="student-{{ student.id }}"
+				     ng-click="createEvaluations(student.id, student)"
+				     ng-repeat="(key, student) in lesson.student_class.students">
 					<div ng-show="student.evaluation.absence && student.evaluation.absence != null" class="cross-lesson glyphicon glyphicon-remove"></div>
 					<div ng-show="student.evaluation.delay && student.evaluation.delay != null" class="time-lesson glyphicon glyphicon-time"></div>
-					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
-					<div class="icon-lesson">
-					</div>
-					<br>
-					<span class="text-lesson">{{student.firstname}} {{student.lastname}}</span>
-				</div>
-			</div>
-		</div>
-		<div id="cours" class="tab-pane fade">
-			<div class="row trombi">
-				<div data-toggle="modal" data-target="#modal-{{student.id}}"
-				     ng-repeat="(key, student) in lesson.student_class.students" id="student-{{student.id}}"
-				     class="block-lesson row block-center col-xs-6 col-sm-4 col-md-2">
-					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-lesson"><br>
-					<div class="icon-lesson">
-					</div>
-					<br>
-					<span class="text-lesson">{{student.firstname}} {{student.lastname}}</span>
-				</div>
-			</div>
-		</div>
-		<div id="fin" class="tab-pane fade">
 
+					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile" />
+					<span>{{student.firstname}} {{student.lastname}}</span>
+				</div>
+			</div>
+		</div>
+
+		<div id="cours" class="tab-pane fade" style="display: none;">
+			<div class="row img-profile-list">
+				<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
+				     id="student-{{ student.id }}"
+				     data-toggle="modal" data-target="#modal-{{student.id}}"
+				     ng-repeat="(key, student) in lesson.student_class.students">
+					<div ng-show="student.evaluation.absence && student.evaluation.absence != null" class="cross-lesson glyphicon glyphicon-remove"></div>
+					<div ng-show="student.evaluation.delay && student.evaluation.delay != null" class="time-lesson glyphicon glyphicon-time"></div>
+
+					<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile" />
+					<span>{{student.firstname}} {{student.lastname}}</span>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="fin" class="tab-pane fade">
 			<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			  <div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="headingOne">
@@ -487,13 +519,5 @@
 			</div>-->
 		</div>
 	</div>
-	<!--
-	<div class="col-xs-2 col-sm-2 col-md-1">
-		<div class="text-center">
-			<div class="next-lesson">
-				<div class="icon-next glyphicon glyphicon-chevron-right"></div>
-			</div>
-		</div>
-	</div>-->
 </div>
 

@@ -7,6 +7,7 @@ angular.module('app', [
 	'StudentClassesModule',
 	'RoomsModule',
 	'NotificationsModule',
+	'CriteriaModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'
 ]);

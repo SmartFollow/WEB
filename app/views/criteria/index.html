@@ -1,0 +1,44 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="criteria.create" class="btn btn-danger" ng-if="accessRules.includes('criteria.create')" style="margin-bottom: 15px;">Ajouter un critère</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Nom</th>
+					<th>Impact</th>
+					<th>Pourcentage de vérification</th>
+					<th>Interval de vérification</th>
+					<th>Type de stats</th>
+					<th ng-if="accessRules.includes('criteria.show')">Voir</th>
+					<th ng-if="accessRules.includes('criteria.edit')">Modifier</th>
+					<th ng-if="accessRules.includes('criteria.destroy')">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="criterion in criteria track by criterion.id">
+					<td>{{ criterion.id }}</td>
+					<td>{{ criterion.name }}</td>
+					<td>{{ { positive: 'Positif', neutral: 'Neutre', negative: 'Négatif' }[criterion.impact] }}</td>
+					<td>{{ criterion.difference_limit_percentage }}%</td>
+					<td>{{ criterion.check_interval }} sec</td>
+					<td>{{ { sum: 'Somme', average: 'Moyenne' }[criterion.stats_type] }}</td>
+					<td ng-if="accessRules.includes('criteria.show')">
+						<a ui-sref="criteria.show({ id: criterion.id })">Voir</a>
+					</td>
+					<td ng-if="accessRules.includes('criteria.edit')">
+						<a ui-sref="criteria.edit({ id: criterion.id })">Modifier</a>
+					</td>
+					<td ng-if="accessRules.includes('criteria.destroy')">
+						<a ui-sref="criteria.delete({ id: criterion.id })">Supprimer</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

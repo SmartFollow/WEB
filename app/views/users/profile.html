@@ -8,7 +8,7 @@
 			<div class="block">
 				<div class="row">
 					<div class="col-md-5">
-						<img src="{{ config.apiUrl + profile.avatar }}" class="img-circle img-profile"><br>
+						<img ng-src="{{ config.apiUrl + profile.avatar }}" class="img-circle img-profile"><br>
 					</div>
 					<div class="col-md-7">
 						<h2 class="text-left">{{profile.firstname}} <span class="text-uppercase">{{profile.lastname}}</span></h2>
@@ -95,7 +95,7 @@
 						<span>Kris Kunde</span>
 					</a>
 					<a href="#!/users/18" class="col-md-4 text-center block-img-profile">
-						<img src="{{ config.apiUrl }}/storage/avatars/18.jpg" class="img-circle img-profile" />
+						<img ng-src="{{ config.apiUrl }}/storage/avatars/18.jpg" class="img-circle img-profile" />
 						<span>Marie Lathug</span>
 					</a>
 					<a href="#!/users/72" class="col-md-4 text-center block-img-profile">

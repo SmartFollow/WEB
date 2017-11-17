@@ -62,6 +62,7 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'UserController@delete'
 		})
+
 		/**
 		 * Groups-related states
 		 */
@@ -251,6 +252,42 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'StudentClassController@show',
 			templateUrl: 'app/views/student-classes/show.html'
 		})
+
+		/**
+		 * Criteria-related states
+		 */
+		.state('criteria', {})
+		.state('criteria.index', {
+			url: '/criteria',
+			parent: 'root',
+			controller: 'CriterionController@index',
+			templateUrl: 'app/views/criteria/index.html'
+		})
+		.state('criteria.create', {
+			url: '/criteria/create',
+			parent: 'root',
+			controller: 'CriterionController@create',
+			controllerAs: 'GroupCtrl',
+			templateUrl: 'app/views/criteria/create.html'
+		})
+		.state('criteria.show', {
+			url: '/criteria/{id:int}',
+			parent: 'root',
+			controller: 'CriterionController@show',
+			templateUrl: 'app/views/criteria/show.html'
+		})
+		.state('criteria.edit', {
+			url: '/criteria/{id:int}/edit',
+			parent: 'root',
+			controller: 'CriterionController@edit',
+			templateUrl: 'app/views/criteria/edit.html'
+		})
+		.state('criteria.delete', {
+			url: '/criteria/{id:int}/delete',
+			parent: 'root',
+			controller: 'CriterionController@delete'
+		})
+
 
 		// Planning view
 		.state('planning', {
