@@ -136,14 +136,6 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons/show.html'
 		})
-		.state('lessons_id_student', { // ToDo: Replace by access-rules management
-			url: '/lessons-student/{id:int}',
-			parent: 'root',
-			controller: 'lessonsIdStudent',
-			data: {pageTitle: 'Déroulement du cours'},
-			css: '/assets/css/lessons.css',
-			templateUrl: 'app/views/lessons_id_student.html'
-		})
 
 		/**
 		 * Reservations-related states

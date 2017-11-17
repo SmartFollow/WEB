@@ -32,7 +32,7 @@ angular.module('app')
 						title: title,
 						start: lesson.start.split(" ")[1],
 						end: lesson.end.split(" ")[1],
-						url: $rootScope.user && $rootScope.user.group_id <= 2 ? "#!/lessons/" + lesson.id : "#!/lessons-student/" + lesson.id,
+						url: "#!/lessons/" + lesson.id,
 						stick: true,
 						dow: [new Date(lesson.start).getDay()],
 						ranges: [{start: lesson.start.split(" ")[0], end: lesson.end.split(" ")[0]}]

@@ -30,6 +30,10 @@
 	{
 		margin-bottom: 15px;
 
+		.list-group-item {
+			background: #f1f1f1;
+		}
+
 		a {
 			text-decoration: none;
 			cursor: pointer;
@@ -48,6 +52,10 @@
 				padding-left: 10px;
 				border-left: 1px solid #c3c3c3;
 			}
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
 		}
 	}
 }
@@ -102,6 +110,7 @@
 				background: $theme-darker-background;
 				z-index: 500;
 				padding-left: $block-padding + 5px;
+				cursor: default;
 
 				&:before {
 					display: none;

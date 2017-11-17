@@ -42,7 +42,7 @@ angular.module('NotificationsModule')
 			});
 		});
 
-		$scope.updateNotification= function () {
+		$scope.updateNotification = function () {
 			NotificationFactory.updateNotification ($stateParams.id, {
 				resource_link: $scope.resource_link,
 				message: $scope.message,
@@ -99,7 +99,7 @@ angular.module('NotificationsModule')
 			});
 		};
 
-		$scope.createNotification= function () {
+		$scope.createNotification = function () {
 			NotificationFactory.storeNotification ({
 				resource_link: $scope.resource_link,
 				message: $scope.message,

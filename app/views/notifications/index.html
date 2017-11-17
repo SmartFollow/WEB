@@ -11,7 +11,7 @@
 				<tr>
 					<th>#</th>
 					<th>Emetteur</th>
-					<th>Récepteur</th>
+					<th>Nombre de destinataires</th>
 					<th>Message</th>
 					<th>Lien</th>
 					<th>Voir</th>
@@ -22,8 +22,8 @@
 			<tbody>
 				<tr ng-repeat="notification in notifications track by notification.id">
 					<td>{{ notification.id }}</td>
-					<td>{{ notification.transmitter.lastname }} {{ notification.transmitter.firstname }}</td>
-					<td>{{ notification.pivot.user_id }}</td>
+					<td>{{ notification.transmitter.firstname }} {{ notification.transmitter.lastname }}</td>
+					<td>{{ notification.users_count }}</td>
 					<td>{{ notification.message }}</td>
 					<td ng-if="notification.resource_link">
 						<a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a>

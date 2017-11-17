@@ -18,6 +18,8 @@
   display: block; }
 .linked-data .data-list {
   margin-bottom: 15px; }
+  .linked-data .data-list .list-group-item {
+    background: #f1f1f1; }
   .linked-data .data-list a {
     text-decoration: none;
     cursor: pointer; }
@@ -29,6 +31,8 @@
     margin-left: 10px;
     padding-left: 10px;
     border-left: 1px solid #c3c3c3; }
+  .linked-data .data-list:last-of-type {
+    margin-bottom: 0; }
 
 .breadcrumb-container {
   padding-left: 15px; }
@@ -72,7 +76,8 @@
       .breadcrumb-container .breadcrumb li.legend {
         background: #c0392b;
         z-index: 500;
-        padding-left: 15px; }
+        padding-left: 15px;
+        cursor: default; }
         .breadcrumb-container .breadcrumb li.legend:before {
           display: none; }
         .breadcrumb-container .breadcrumb li.legend:after {

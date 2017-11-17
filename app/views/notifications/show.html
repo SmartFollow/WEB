@@ -11,7 +11,16 @@
 		</div>
 
 		<dl class="spaced">
-			<dt>Emetteur</dt>
+			<dt>Émetteur</dt>
+			<dd>{{ notification.transmitter.firstname }} {{ notification.transmitter.lastname }}</dd>
+
+			<dt>Message</dt>
+			<dd>{{ notification.message }}</dd>
+			
+			<dt ng-if="notification.resource_link" >Lien</dt>
+			<dd ng-if="notification.resource_link"><a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a></dd>
+
+			<dt>Destinataires</dt>
 			<dd>
 				<table class="table">
 					<thead>
@@ -24,7 +33,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr ng-repeat="user in notification.users">
 							<td>{{ user.id }}</td>
 							<td>{{ user.firstname }}</td>
 							<td>{{ user.lastname }}</td>
@@ -36,12 +45,6 @@
 					</tbody>
 				</table>
 			</dd>
-
-			<dt>Message</dt>
-			<dd>{{ notification.message }}</dd>
-			
-			<dt ng-if="notification.resource_link" >Lien</dt>
-			<dd ng-if="notification.resource_link"><a href="{{ notification.resource_link }}">{{ notification.resource_link }}</a></dd>
 		</dl>
 
 	</div>
