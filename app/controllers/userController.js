@@ -21,7 +21,6 @@ angular.module('UsersModule')
 		$rootScope.pageTitle = "Liste des utilisateurs";
 
 		UserFactory.getUsers(function (users) {
-			console.log(users);
 			$scope.users = users;
 		});
 	}])
