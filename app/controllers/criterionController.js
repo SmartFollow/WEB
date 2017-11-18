@@ -2,8 +2,8 @@ angular.module('CriteriaModule')
 	.controller('CriterionController@index', ['$rootScope', '$scope', '$state', 'CriterionFactory', function ($rootScope, $scope, $state, CriterionFactory) {
 		$rootScope.pageTitle = "Critères d'évaluation";
 
-		CriterionFactory.getCriteria(function (groups) {
-			$scope.criteria = groups;
+		CriterionFactory.getCriteria(function (criteria) {
+			$scope.criteria = criteria;
 		});
 	}])
 	.controller('CriterionController@create', ['$rootScope', '$scope', '$state', '$timeout', 'CriterionFactory', function ($rootScope, $scope, $state, $timeout, CriterionFactory) {

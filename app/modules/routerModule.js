@@ -280,6 +280,40 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'CriterionController@delete'
 		})
 
+		/**
+		 * Graphs-related states
+		 */
+		.state('graphs', {})
+		.state('graphs.index', {
+			url: '/graphs',
+			parent: 'root',
+			controller: 'GraphController@index',
+			templateUrl: 'app/views/graphs/index.html'
+		})
+		.state('graphs.create', {
+			url: '/graphs/create',
+			parent: 'root',
+			controller: 'GraphController@create',
+			controllerAs: 'GroupCtrl',
+			templateUrl: 'app/views/graphs/create.html'
+		})
+		.state('graphs.show', {
+			url: '/graphs/{id:int}',
+			parent: 'root',
+			controller: 'GraphController@show',
+			templateUrl: 'app/views/graphs/show.html'
+		})
+		.state('graphs.edit', {
+			url: '/graphs/{id:int}/edit',
+			parent: 'root',
+			controller: 'GraphController@edit',
+			templateUrl: 'app/views/graphs/edit.html'
+		})
+		.state('graphs.delete', {
+			url: '/graphs/{id:int}/delete',
+			parent: 'root',
+			controller: 'GraphController@delete'
+		})
 
 		// Planning view
 		.state('planning', {

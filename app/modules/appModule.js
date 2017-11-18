@@ -8,6 +8,7 @@ angular.module('app', [
 	'RoomsModule',
 	'NotificationsModule',
 	'CriteriaModule',
+	'GraphsModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'
 ]);

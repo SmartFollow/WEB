@@ -1,0 +1,43 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="graphs.create" class="btn btn-danger" ng-if="accessRules.includes('graphs.create')" style="margin-bottom: 15px;">Ajouter un graphique</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Critère</th>
+					<th>Type</th>
+					<th>Période</th>
+					<th ng-if="accessRules.includes('graphs.show')">Voir</th>
+					<th ng-if="accessRules.includes('graphs.edit')">Modifier</th>
+					<th ng-if="accessRules.includes('graphs.destroy')">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="graph in graphs track by graph.id">
+					<td>{{ graph.id }}</td>
+					<td>{{ graph.criterion.name }}</td>
+					<td>{{ { bar: 'Barres', line: 'Ligne' }[graph.type] }}</td>
+					<td>{{ graph.days_range }} jours</td>
+					<td ng-if="accessRules.includes('graphs.show')">
+						<a ui-sref="graphs.show({ id: graph.id })">Voir</a>
+					</td>
+					<td ng-if="accessRules.includes('graphs.edit')">
+						<a ui-sref="graphs.edit({ id: graph.id })">Modifier</a>
+					</td>
+					<td ng-if="accessRules.includes('graphs.destroy')">
+						<a ui-sref="graphs.delete({ id: graph.id })">Supprimer</a>
+					</td>
+				</tr>
+				<tr ng-if="graphs.length == 0">
+					<td colspan="7">Aucun graphique enregistré</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
