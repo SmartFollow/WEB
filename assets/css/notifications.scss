@@ -2,112 +2,32 @@
 
 .notifications-list
 {
-
-	.notification-block
+	.notification
 	{
-		$band-width: 10px;
-
-		display: block;
-		margin-bottom: $block-padding;
-		margin-top: $block-padding;
-		padding: $block-padding;
-		background: $dark-background;
-		color: white;
-		text-decoration: none;
-		position: relative;
-		cursor: pointer;
-
-		.notification-summary
-		{
-			position: relative;
+		blockquote {
+			font-size: inherit;
+			margin-top: 10px;
+			margin-bottom: 0;
 		}
 
-		.notification-details
-		{
-			margin-top: $block-padding;
-			display: none;
-			margin-right: $band-width * 4;
-		}
+		.mark-as-read {
+			opacity: 0.3;
 
-		dl
-		{
-			margin: 0;
-			display: inline-block;
-			vertical-align: middle;
-		}
-
-		dd
-		{
-			padding-left: $block-padding;
-		}
-
-		.content
-		{
-			position: absolute;
-			top: $block-padding; bottom: $block-padding; right: $block-padding;
-
-			&:before
-			{
-				content: '';
+			span {
+				display: none;
+			}
+			span.glyphicon {
 				display: inline-block;
-				height: 100%;
-				vertical-align: middle;
-				margin-right: -0.25em;
+			}
+
+			&:hover {
+				color: #3c763d;
+				opacity: 1;
+
+				span { display: inline-block; }
+				span.glyphicon { padding-left: 5px; }
 			}
 		}
 
-		.image-block
-		{
-			img
-			{
-				border: 4px solid $theme-darker-background;
-			}
-		}
-
-		&:before
-		{
-			opacity: 0.2;
-			font-family: 'Glyphicons Halflings';
-			font-size: 2em;
-			position: absolute;
-			top: calc(50% - 0.7em);
-			right: $band-width * 3;
-		}
-		&:after
-		{
-			content: "";
-			width: $band-width;
-			position: absolute;
-			top: 0; right: $band-width; bottom: 0;
-			background-color: #c3c3c3;
-			opacity: 0.2
-		}
-
-		&:hover
-		{
-			&:before { opacity: 1; }
-			&:after { opacity: 1; }
-		}
-
-		&.danger
-		{
-			&:after { background-color: #c0392b; }
-			&:before { color: #c0392b; content: "\e104"; }
-		}
-		&.warning
-		{
-			&:after { background-color: #d35400; }
-			&:before { color: #d35400; content: "\e107"; }
-		}
-		&.success
-		{
-			&:after { background-color: #27ae60; }
-			&:before { color: #27ae60; content: "\e084"; }
-		}
-		&.info
-		{
-			&:after { background-color: #2980b9; }
-			&:before { color: #2980b9; content: "\e086"; }
-		}
 	}
 }

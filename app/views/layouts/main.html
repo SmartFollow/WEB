@@ -112,8 +112,8 @@
 					<button class="row header collapsed" role="button" data-toggle="collapse"
 					        data-target="#notifications-list-collapse" aria-expanded="false"
 					        aria-controls="notifications-list-collapse">
-						<span class="glyphicon glyphicon glyphicon-th-list"></span> Vos notifications ({{ notifications
-						? notifications.length : '0' }})
+						<span class="glyphicon glyphicon glyphicon-th-list"></span> Vos notifications ({{ menuNotifications
+						? menuNotifications.length : '0' }})
 
 						<div class="pull-right">
 							<span class="glyphicon glyphicon glyphicon-plus collapsed"></span>
@@ -121,14 +121,14 @@
 						</div>
 					</button>
 					<div class="row notifications-list collapse" id="notifications-list-collapse">
-						<div class="col-md-12 notification" ng-repeat="notification in notifications">
+						<div class="col-md-12 notification" ng-repeat="notification in menuNotifications">
 							<div class="info">
 								<strong>Envoyé par</strong>
 								{{ notification.transmitter.firstname }} {{ notification.transmitter.lastname }}
 								<span ng-if="notification.updated_at">
-								<strong>le</strong>
-								<em>{{ notification.updated_at | date: "dd/mm 'à' HH'h'mm" }}</em>
-							</span>
+									<strong>le</strong>
+									<em>{{ notification.updated_at | date: "dd/MM 'à' HH'h'mm" }}</em>
+								</span>
 							</div>
 							<div class="resource" ng-if="notification.resource_link">
 								<strong>Activité concernée :</strong>
@@ -137,7 +137,7 @@
 							<div class="message">
 								{{ notification.message }}
 							</div>
-							<a href="#" class="mark-as-read" ng-click="markNotificationAsRead(notification)">
+							<a class="mark-as-read" ng-click="markMenuNotificationAsRead(notification)">
 								<span>marquer comme lue </span><span class="glyphicon glyphicon-check"></span>
 							</a>
 						</div>

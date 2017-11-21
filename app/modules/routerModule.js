@@ -202,7 +202,8 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/notifications',
 			parent: 'root',
 			controller: 'NotificationController@index',
-			templateUrl: 'app/views/notifications/index.html'
+			templateUrl: 'app/views/notifications/index.html',
+			css: '/assets/css/notifications.css'
 		})
 		.state('notifications.create', {
 			url: '/notifications/create',

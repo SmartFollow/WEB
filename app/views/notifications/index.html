@@ -1,5 +1,44 @@
 <div class="main">
-	<div class="page-block">
+	<div class="page-block" ng-if="accessRules.includes('notifications.self.index')">
+		<h2>Vos notifications reçues</h2>
+
+		<div ng-if="selfNotifications.length == 0">
+				Aucune notification non lue à afficher.
+		</div>
+		<div class="row notifications-list">
+			<div class="col-md-4 col-sm-6 col-xs-12 notification" ng-repeat="notification in selfNotifications track by notification.id">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="info">
+							<strong>Envoyé par</strong>
+							{{ notification.transmitter.firstname }} {{ notification.transmitter.lastname }}
+							<span ng-if="notification.updated_at">
+								<strong>le</strong>
+								<em>{{ notification.updated_at | date: "dd/MM 'à' HH'h'mm" }}</em>
+							</span>
+
+							<a class="mark-as-read pull-right" ng-click="markNotificationAsRead(notification)">
+								<span>marquer comme lue </span><span class="glyphicon glyphicon-check"></span>
+							</a>
+						</div>
+						<div class="resource">
+							<strong>Activité concernée :</strong>
+
+							<a href="{{ notification.resource_link }}" ng-if="notification.resource_link">lien</a>
+							<em ng-if="!notification.resource_link">aucune activité liée</em>
+						</div>
+						<blockquote class="message">
+							{{ notification.message }}
+						</blockquote>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-block" ng-if="accessRules.includes('notifications.index')">
+		<h2>Liste des notifications</h2>
+
 		<div class="row">
 			<div class="col-md-6 col-md-offset-6 text-right">
 				<a ui-sref="notifications.create" class="btn btn-danger" ng-if="accessRules.includes('notifications.create')" style="margin-bottom: 15px;">Créer une notification</a>

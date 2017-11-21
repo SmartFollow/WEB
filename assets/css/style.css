@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,300,300italic);
 .navbar {
   background-color: #282828;
   border-bottom: none; }
@@ -187,6 +188,9 @@ body {
   padding-top: 60px;
   background-color: #e3e8ec; }
 
+a[ng-click] {
+  cursor: pointer; }
+
 .site-body {
   height: 100%;
   width: 100%; }
@@ -251,5 +255,8 @@ table.table {
     background-color: white;
     padding: 15px;
     margin-bottom: 15px; }
+    .main .page-block h2 {
+      margin-top: 0;
+      margin-bottom: 15px; }
 
 /*# sourceMappingURL=style.css.map */

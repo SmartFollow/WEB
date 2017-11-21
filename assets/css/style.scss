@@ -22,6 +22,10 @@ body {
     background-color: #e3e8ec;
 }
 
+a[ng-click] {
+	cursor: pointer;
+}
+
 .site-body {
 	height: 100%;
 	width: 100%;
@@ -109,5 +113,10 @@ table.table {
 		background-color: white;
 		padding: 15px;
 		margin-bottom: 15px;
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: 15px;
+		}
 	}
 }

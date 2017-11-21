@@ -2,9 +2,18 @@ angular.module('NotificationsModule')
 	.controller('NotificationController@index', ['$scope', '$state', '$rootScope','NotificationFactory', function ($scope, $state, $rootScope, NotificationFactory) {
 		$rootScope.pageTitle = "Notifications";
 
-		NotificationFactory.getNotifications(function (notifications) {
-			$scope.notifications = notifications;
+		NotificationFactory.getUnreadNotifications(function (notifications) {
+			$scope.notifications = notifications.notifications;
+
+			$scope.selfNotifications = notifications.self_notifications;
+			$scope.selfNotifications.forEach(notification => notification.updated_at = notification.updated_at ? new Date(notification.updated_at.replace('/-/g',"/")) : null);
 		});
+
+		$scope.markNotificationAsRead = function markNotificationAsRead(notification) {
+			NotificationFactory.markAsRead(notification.id, function () {
+				$scope.selfNotifications = $scope.selfNotifications.filter(n => n.id != notification.id);
+			});
+		};
 	}])
 	.controller('NotificationController@show', ['$rootScope', '$scope', '$state', '$stateParams', 'NotificationFactory', 'UserFactory', function ($rootScope, $scope, $state, $stateParams, NotificationFactory, UserFactory) {
 		$rootScope.pageTitle = "Notification";
