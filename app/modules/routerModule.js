@@ -71,7 +71,6 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/groups',
 			parent: 'root',
 			controller: 'GroupController@index',
-			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/index.html'
 		})
 		.state('groups.create', {
@@ -79,21 +78,18 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'GroupController@create',
 			controllerAs: 'GroupCtrl',
-			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/create.html'
 		})
 		.state('groups.show', {
 			url: '/groups/{id:int}',
 			parent: 'root',
 			controller: 'GroupController@show',
-			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/show.html'
 		})
 		.state('groups.edit', {
 			url: '/groups/{id:int}/edit',
 			parent: 'root',
 			controller: 'GroupController@edit',
-			css: '/assets/css/groups.css',
 			templateUrl: 'app/views/groups/edit.html'
 		})
 		.state('groups.delete', {
@@ -171,21 +167,18 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/rooms',
 			parent: 'root',
 			controller: 'RoomController@index',
-			css: '/assets/css/rooms.css',
 			templateUrl: 'app/views/rooms/index.html'
 		})
 		.state('rooms.create', {
 			url: '/rooms/create',
 			parent: 'root',
 			controller: 'RoomController@create',
-			css: '/assets/css/rooms.css',
 			templateUrl: 'app/views/rooms/create.html'
 		})
 		.state('rooms.edit', {
 			url: '/rooms/{id:int}/edit',
 			parent: 'root',
 			controller: 'RoomController@edit',
-			css: '/assets/css/rooms.css',
 			templateUrl: 'app/views/rooms/edit.html'
 		})
 		.state('rooms.delete', {
