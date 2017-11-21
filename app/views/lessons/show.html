@@ -188,7 +188,7 @@
 						<td class="ng-binding">
 							<button type="submit" class="valid btn btn-danger disabled"
 							        ng-click="postExam(lesson.exam.id, student.id, student.mark.mark, student.mark.comment)">
-								valider
+								Valider
 							</button>
 						</td>
 					</tr>
@@ -437,7 +437,7 @@
 	</div>
 
 	<!-- Lesson breadcrumb -->
-	<div class="row breadcrumb-container" ng-if="accessRules.includes('criteria.store')">
+	<div class="row breadcrumb-container" ng-if="accessRules.includes('evaluations.store')">
 		<ol class="breadcrumb">
 			<li class="legend">Déroulement du cours</li>
 			<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
@@ -470,7 +470,7 @@
 	</div>
 
 	<!-- Students list -->
-	<div class="row" ng-if="accessRules.includes('criteria.store')">
+	<div class="row" ng-if="accessRules.includes('evaluations.store')">
 		<div class="tab col-xs-8 col-sm-8 col-md-10 col-xs-offset-2 col-sm-offset-2 col-md-offset-1">
 			<div id="appel" class="tab-pane fade in active">
 				<div class="row img-profile-list">
