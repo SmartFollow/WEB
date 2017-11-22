@@ -9,6 +9,7 @@ angular.module('app', [
 	'NotificationsModule',
 	'CriteriaModule',
 	'GraphsModule',
+	'ConversationModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'
 ]);
