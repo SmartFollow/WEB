@@ -1,23 +1,22 @@
 angular.module('app')
-	.controller('MessagingController', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$q', function (UserFactory, $scope, $state, $rootScope, $http, $filter, config, $q) {
+	.controller('MessagingController', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', 'config', '$q', 'ConversationFactory', function (UserFactory, $scope, $state, $rootScope, $http, $filter, config, $q, ConversationFactory) {
 
 	if ($state.current.data != null)
 		$rootScope.pageTitle = $state.current.data.pageTitle;
 
-	/*
-	$http.get(config.apiUrl + "api/users").success(function (data) {
-		console.log(data);
-		$scope.users = data;
-	});*/
+	ConversationFactory.getCreateConversation(function (data) {
+		$scope.users = data.users;
+	});
 
-	$http({
-		method: 'GET',
-		url: config.apiUrl + "api/conversations"
-	}).then(function successCallback(response) {
-		$scope.conversations = response.data;
-		console.log(response);
-	}, function errorCallback(response) {
-		console.log(response);
+	$scope.loadUsers = function($query) {
+		var users = $scope.users;
+		return users.filter(function(user) {
+			return user.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
+		});
+	};
+
+	ConversationFactory.getConversation(function (data) {
+		$scope.conversations = data;
 	});
 
 	$scope.formatDate = function (date) {
@@ -29,43 +28,21 @@ angular.module('app')
 		$("#create_conversation").toggle();
 	}
 
-	function getUserByEmail(email, users) {
-		var tmpUser = null;
-		angular.forEach(users, function (u, key) {
-			if (u.email == email)
-				tmpUser = u;
-		});
-		return tmpUser;
-	}
-
 	$scope.createConversation = function () {
-		var ids = [];
-		angular.forEach($scope.tags, function (tag, key) {
-			this.push(tag.id);
-		}, ids);
-		var message = {
-			subject: $("#subject").val(),
-			participants: ids
-		};
-		$http({
-			method: 'POST',
-			url: config.apiUrl + "api/conversations",
-			data: message
-		}).then(function successCallback(response) {
-			$state.reload();
-		}, function errorCallback(response) {
-			console.log(response);
-		});
+		ConversationFactory.createConversation(
+			{
+				subject: $("#subject").val(),
+				participants: $scope.usersList.map(a => a.id)
+			},
+			function (data) {
+				$state.reload();
+			}
+		);
 	}
 
 	$scope.deleteConversation = function () {
-		$http({
-			method: 'DELETE',
-			url: config.apiUrl + "api/conversations/" + $(".ng-scope .selected").attr('id')
-		}).then(function successCallback(response) {
+		ConversationFactory.deleteConversation($(".ng-scope .selected").attr('id'), function (data) {
 			$state.reload();
-		}, function errorCallback(response) {
-			console.log(response);
 		});
 	}
 

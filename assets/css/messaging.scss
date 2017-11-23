@@ -943,3 +943,17 @@ a:hover {
 .white-space {
 	white-space: pre-wrap;
 }
+
+#create_conversation {
+	display: none;
+	.users {
+		margin-left: 60px;
+	}
+	.subject {
+		padding-top: 9px;
+	}
+}
+.tag-item {
+	height: 26px !important;
+	line-height: 26px !important;
+}

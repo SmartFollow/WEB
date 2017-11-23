@@ -14,16 +14,19 @@
 	<div id="main-nano-wrapper" class="nano">
 		<div class="nano-content">
 			<ul class="message-list">
-				<li id="create_conversation" style="display:none;">
+				<li id="create_conversation" class="row">
 					<div class="col col-1"><span class="dot"></span>
-						<p class="title" style="margin-top: 4px;z-index: 1;">
-							<tags-input ng-model="tags" min-length="1" max-length="3" display-property="id"
-							            placeholder="Participants id" allowed-tags-pattern="^[0-9]+$">
-							</tags-input>
-						</p>
+						<div class="subject">
+							<tags-input class="users" ng-model="usersList" display-property="email" add-from-autocomplete-only="true" placeholder="Ajouter un utilisateur">
+						  <auto-complete source="loadUsers($query)"
+							 					min-length="0"
+		                     load-on-focus="true"
+		                     max-results-to-show="10"></auto-complete>
+		          </tags-input>
+						</div>
 					</div>
 					<div class="col col-2">
-						<div class="subject" style="margin-top: 9px;"><input type="text" class="form-control"
+						<div class="subject"><input type="text" class="form-control"
 						                                                     placeholder="Sujet" id="subject"></div>
 						<div class="date">
 							<button type="button" class="btn btn-secondary" ng-click="createConversation()">Créer

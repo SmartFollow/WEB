@@ -808,4 +808,15 @@ a:hover {
 .white-space {
   white-space: pre-wrap; }
 
+#create_conversation {
+  display: none; }
+  #create_conversation .users {
+    margin-left: 60px; }
+  #create_conversation .subject {
+    padding-top: 9px; }
+
+.tag-item {
+  height: 26px !important;
+  line-height: 26px !important; }
+
 /*# sourceMappingURL=messaging.css.map */
