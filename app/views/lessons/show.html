@@ -360,6 +360,9 @@
 								Ajouter un document
 							</li>
 						</a>
+						<li class="list-group-item text-center" ng-if="!accessRules.includes('documents.store') && lesson.documents.length == 0">
+							Aucun document à afficher
+						</li>
 					</ul>
 
 					<!-- Homeworks -->
@@ -394,14 +397,17 @@
 								Ajouter un devoir à la maison
 							</li>
 						</a>
+						<li class="list-group-item text-center" ng-if="!accessRules.includes('homeworks.store') && lesson.homeworks.length == 0">
+							Aucun devoir à afficher
+						</li>
 					</ul>
 
 					<!-- Exam -->
-					<span class="data-title" ng-if="lesson.exam && (lesson.exam.type == 'home' || accessRules.includes('exams.index'))">
+					<span class="data-title">
 						<strong>Examen :</strong>
 					</span>
-					<ul class="list-group data-list" ng-if="lesson.exam && (lesson.exam.type == 'home' || accessRules.includes('exams.index'))">
-						<li class="list-group-item">
+					<ul class="list-group data-list">
+						<li class="list-group-item" ng-if="lesson.exam && (lesson.exam.type == 'home' || accessRules.includes('exams.index'))">
 							<a data-toggle="modal" data-target="#modal-exam-1">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
@@ -430,6 +436,9 @@
 								Ajouter un examen
 							</li>
 						</a>
+						<li class="list-group-item text-center" ng-if="!accessRules.includes('exams.store') && (!lesson.exam || (lesson.exam.type != 'home' && !accessRules.includes('exams.index')))">
+							Aucun examen à afficher
+						</li>
 					</ul>
 				</div>
 			</div>
