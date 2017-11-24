@@ -138,15 +138,18 @@ angular.module('app')
 			}).then(function successCallback(response) {
 				$scope.evaluations = response.data;
 				angular.forEach($scope.lesson.student_class.students, function (student, key) {
-					$scope.getExistingMark($scope.lesson.exam.id, student.id).then(function(result){
-						if (result == null)
-							student.mark = {
-								mark: -1,
-								comment: ""
-							};
-						else
-							student.mark = result;
-					});
+					if ($scope.lesson.exam)
+					{
+						$scope.getExistingMark($scope.lesson.exam.id, student.id).then(function(result){
+							if (result == null)
+								student.mark = {
+									mark: -1,
+									comment: ""
+								};
+							else
+								student.mark = result;
+						});
+					}
 					student.evaluation = $scope.getEvaluation(student.id);
 					if (student.evaluation == null)
 					{
