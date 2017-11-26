@@ -33,12 +33,9 @@ angular.module('UsersModule')
 
 		$scope.user = {};
 
-		GroupFactory.getGroups(function (groups) {
-			$scope.groups = groups;
-		});
-
-		StudentClassFactory.getStudentClasses(function (classes) {
-			$scope.classes = classes;
+		UserFactory.getCreateFormData(function (data) {
+			$scope.groups = data.groups;
+			$scope.studentClasses = data.student_classes;
 		});
 
 		$scope.createUser = function () {
@@ -68,24 +65,17 @@ angular.module('UsersModule')
 			danger: {}
 		};
 
-		UserFactory.getUser($stateParams.id, function (user) {
-			$scope.user = user;
-		});
-
-		GroupFactory.getGroups(function (groups) {
-			$scope.groups = groups;
-		});
-
-		StudentClassFactory.getStudentClasses(function (classes) {
-			$scope.classes = classes;
+		UserFactory.getEditFormData($stateParams.id, function (data) {
+			$scope.user = data.user;
+			$scope.groups = data.groups;
+			$scope.studentClasses = data.student_classes;
 		});
 
 		$scope.editUser = function () {
-			UserFactory.updateUser ($scope.user.id, {
+			UserFactory.updateUser($scope.user.id, {
 				firstname: $scope.user.firstname,
 				lastname: $scope.user.lastname,
 				email: $scope.user.email,
-				password: $scope.user.password,
 				group: $scope.user.group_id,
 				student_class: $scope.user.class_id
 			}, function (user) {

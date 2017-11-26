@@ -337,7 +337,7 @@ routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($roo
 		else if (next.name != 'login') {
 			// Get user profile
 			UserFactory.getProfile(function (user) {
-				$rootScope.user = user;
+				$rootScope.connectedUser = user;
 
 				if (user.group_id > next.group_id) {
 					$state.go('login');

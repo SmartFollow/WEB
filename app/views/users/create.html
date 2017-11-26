@@ -35,7 +35,7 @@
 			<div class="form-group">
 				<label for="student_class">Classe</label>
 				<select class="form-control" id="student_class" ng-model="user.class_id">
-					<option ng-repeat="class in classes" value="{{class.id}}">{{class.name}}</option>
+					<option ng-repeat="class in studentClasses" value="{{class.id}}">{{class.name}}</option>
 				</select>
 			</div>
 			<button ng-click="createUser()" class="btn btn-danger">Créer l'utilisateur</button>
