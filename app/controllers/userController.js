@@ -5,6 +5,22 @@ angular.module('UsersModule')
 
 		UserFactory.getProfile(function (response) {
 			$scope.profile = response;
+
+			// Generating alert messages
+			$scope.profile.alerts.forEach(function (alert) {
+				var message = "Vos " + alert.criterion.name.toLowerCase() + (alert.criterion.name[alert.criterion.name.length - 1] == 's' ? '' : 's');
+				if (alert.previous_student_value !== null) {
+					message +=  " ont ";
+					message += (alert.student_value >= alert.previous_student_value ? 'augmenté' : 'baissé') + " depuis la dernière évaluation, ";
+				}
+				else {
+					message +=  " sont ";
+					message += (alert.student_value >= alert.class_value ? 'supérieurs' : 'inférieurs') + " à votre classe, ";
+				}
+				message += { success: 'félicitations', info: 'continuez ainsi', warning: 'attention', danger: 'attention' }[alert.type] + " !";
+
+				alert.message = message;
+			});
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
@@ -13,6 +29,22 @@ angular.module('UsersModule')
 
 		UserFactory.getUser($stateParams.id, function (response) {
 			$scope.profile = response;
+
+			// Generating alert messages
+			$scope.profile.alerts.forEach(function (alert) {
+				var message = "Vos " + alert.criterion.name.toLowerCase() + (alert.criterion.name[alert.criterion.name.length - 1] == 's' ? '' : 's');
+				if (alert.previous_student_value !== null) {
+					message +=  " ont ";
+					message += (alert.student_value >= alert.previous_student_value ? 'augmenté' : 'baissé') + " depuis la dernière évaluation, ";
+				}
+				else {
+					message +=  " sont ";
+					message += (alert.student_value >= alert.class_value ? 'supérieurs' : 'inférieurs') + " à votre classe, ";
+				}
+				message += { success: 'félicitations', info: 'continuez ainsi', warning: 'attention', danger: 'attention' }[alert.type] + " !";
+
+				alert.message = message;
+			});
 
 			$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;
 		});

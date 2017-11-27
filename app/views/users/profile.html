@@ -96,6 +96,9 @@
 					</a>
 				</div>
 				<div class="row">
+					<div class="col-md-12 text-center" ng-if="profile.assigned_difficulties.length == 0">
+						<p>Aucun étudiant en difficulté ne vous a été assigné actuellement.</p>
+					</div>
 					<div class="col-md-12 text-center">
 						<a ui-sref="difficulties.index">Voir tous les élèves en difficulté</a>
 					</div>
@@ -129,31 +132,28 @@
 			</div>
 
 			<!-- Alerts -->
-			<div class="block" ng-if="accessRules.includes('notifications.self.index')">
+			<div class="block" ng-if="accessRules.includes('alerts.self.index')">
 				<h2>Alertes</h2>
 
-				<div ng-controller="AlertController">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Type</th>
-								<th>Message</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="item in items"
-							    ng-class="{ success : item.Type == 'ok',
-											danger : item.Type == 'remove',
-											warning : item.Type == 'warning',
-											info : item.Type == 'info'}">
-								<td>{{item.id}}</td>
-								<td><span class="glyphicon glyphicon-{{item.Type}}-sign"></span></td>
-								<td>{{item.Message}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Type</th>
+							<th>Message</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="alert in profile.alerts" ng-class="alert.type">
+							<td>{{ alert.id }}</td>
+							<td><span class="glyphicon glyphicon-{{ { success: 'ok', danger: 'remove', warning: 'warning', info: 'info' }[alert.type] }}-sign"></span></td>
+							<td>{{ alert.message }}</td>
+						</tr>
+						<tr ng-if="profile.alerts.length == 0" class="text-center">
+							<td colspan="3">Aucune alerte à afficher.</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 
 			<!-- Marks -->
