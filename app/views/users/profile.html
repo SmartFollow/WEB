@@ -90,22 +90,14 @@
 			<div class="block" ng-if="accessRules.includes('difficulties.index') || accessRules.includes('difficulties.self.index')">
 				<h2>Elèves en difficultés</h2>
 				<div class="row img-profile-list">
-					<a href="#!/users/20" class="col-md-4 text-center block-img-profile">
-						<img src="/assets/img/20.jpg" class="img-circle img-profile" />
-						<span>Kris Kunde</span>
-					</a>
-					<a href="#!/users/18" class="col-md-4 text-center block-img-profile">
-						<img ng-src="{{ config.apiUrl }}/storage/avatars/18.jpg" class="img-circle img-profile" />
-						<span>Marie Lathug</span>
-					</a>
-					<a href="#!/users/72" class="col-md-4 text-center block-img-profile">
-						<img src="/assets/img/72.jpg" class="img-circle img-profile" />
-						<span>Miles Prosacco</span>
+					<a ui-sref="users.show({ id: difficulty.student.id })" class="col-md-4 text-center block-img-profile" ng-repeat="difficulty in profile.assigned_difficulties | limitTo: 3">
+						<img ng-src="{{ config.apiUrl + difficulty.student.avatar }}" class="img-circle img-profile" />
+						<span>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</span>
 					</a>
 				</div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<a href="#">Voir tous les élèves en difficulté</a>
+						<a ui-sref="difficulties.index">Voir tous les élèves en difficulté</a>
 					</div>
 				</div>
 			</div>

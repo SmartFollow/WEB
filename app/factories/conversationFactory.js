@@ -1,4 +1,4 @@
-angular.module('ConversationModule')
+angular.module('ConversationsModule')
 	.factory('ConversationFactory', ['$http', 'OAuth', 'config', function ($http, OAuth, config) {
     return {
       getCreateConversation: function (callback) {

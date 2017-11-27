@@ -309,6 +309,17 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'GraphController@delete'
 		})
 
+		/**
+		 * Difficulties-related states
+		 */
+		.state('difficulties', {})
+		.state('difficulties.index', {
+			url: '/difficulties',
+			parent: 'root',
+			controller: 'DifficultyController@index',
+			templateUrl: 'app/views/difficulties/index.html'
+		})
+
 		// Planning view
 		.state('planning', {
 			url: '/planning',
