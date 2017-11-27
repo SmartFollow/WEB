@@ -104,6 +104,11 @@
 							<span class="glyphicon glyphicon-send"></span> Notifications
 						</a>
 					</li>
+					<li ng-if="accessRules.includes('ai.index')">
+						<a ui-sref="ai-controllers.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-object-align-horizontal"></span> Contrôleurs de l'IA
+						</a>
+					</li>
 				</ul>
 			</div>
 

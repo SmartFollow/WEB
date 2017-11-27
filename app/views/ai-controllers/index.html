@@ -1,0 +1,36 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Commandes exécutables</h2>
+			</div>
+
+			<div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="controller in controllers">
+				<div class="thumbnail controller">
+					<div class="caption">
+						<h4>{{ controller.title }}</h4>
+
+						<p>
+							{{ controller.description }}
+						</p>
+						<p>
+							<a class="btn btn-primary" role="button" ng-click="controller.runFunction()">Exécuter la fonction</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-block">
+		<h2>
+			Résultat de l'exécution
+			<small class="loading hidden" id="loading">
+				<img src="/assets/img/loading.gif" alt="Chargement des résultats" />
+				<em>Chargement des résultats</em>
+			</small>
+		</h2>
+
+		<pre>{{ results || "Aucun résultat d'exécution à afficher" }}</pre>
+	</div>
+</div>

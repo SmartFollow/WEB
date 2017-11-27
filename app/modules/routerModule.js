@@ -320,6 +320,15 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/difficulties/index.html'
 		})
 
+		.state('ai-controllers', {})
+		.state('ai-controllers.index', {
+			url: '/ai-controllers',
+			parent: 'root',
+			controller: 'AIController@index',
+			templateUrl: 'app/views/ai-controllers/index.html',
+			css: '/assets/css/ai-controllers.css'
+		})
+
 		// Planning view
 		.state('planning', {
 			url: '/planning',

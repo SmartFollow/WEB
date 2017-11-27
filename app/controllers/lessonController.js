@@ -138,6 +138,7 @@ angular.module('app')
 			}).then(function successCallback(response) {
 				$scope.evaluations = response.data;
 				angular.forEach($scope.lesson.student_class.students, function (student, key) {
+					/* TODO : Fix so that you don't call the API once per student to get their mark...
 					if ($scope.lesson.exam)
 					{
 						$scope.getExistingMark($scope.lesson.exam.id, student.id).then(function(result){
@@ -150,6 +151,7 @@ angular.module('app')
 								student.mark = result;
 						});
 					}
+					*/
 					student.evaluation = $scope.getEvaluation(student.id);
 					if (student.evaluation == null)
 					{

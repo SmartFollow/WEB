@@ -1,0 +1,57 @@
+<div class="main">
+	<div class="page-block" ng-if="accessRules.includes('difficulties.self.index')">
+		<h2>Étudiants en difficulté qui vous sont assignés</h2>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Étudiant en difficulté</th>
+					<th>Généré à</th>
+					<th>Voir l'étudiant</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="difficulty in self_difficulties track by difficulty.id">
+					<td>{{ difficulty.id }}</td>
+					<td>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</td>
+					<td>{{ difficulty.created_at || '-' }}</td>
+					<td><a ui-sref="users.show({ id: difficulty.student.id })">Voir l'étudiant</a></td>
+				</tr>
+				<tr ng-if="self_difficulties.length == 0" class="text-center">
+					<td colspan="4">Aucun étudiant en difficulté ne vous a été assigné.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="page-block" ng-if="accessRules.includes('difficulties.index')">
+		<h2>Liste des étudiants en difficulté</h2>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Étudiant en difficulté</th>
+					<th>Professeur assigné</th>
+					<th>Généré à</th>
+					<th>Voir l'étudiant</th>
+					<th>Voir le professeur</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="difficulty in difficulties track by difficulty.id">
+					<td>{{ difficulty.id }}</td>
+					<td>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</td>
+					<td>{{ difficulty.assigned_teacher.firstname }} {{ difficulty.assigned_teacher.lastname }}</td>
+					<td>{{ difficulty.created_at || '-' }}</td>
+					<td><a ui-sref="users.show({ id: difficulty.student.id })">Voir l'étudiant</a></td>
+					<td><a ui-sref="users.show({ id: difficulty.assigned_teacher.id })">Voir le professeur</a></td>
+				</tr>
+				<tr ng-if="difficulties.length == 0" class="text-center">
+					<td colspan="6">Aucun étudiant en difficulté.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
