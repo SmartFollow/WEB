@@ -21,6 +21,8 @@ angular.module('UsersModule')
 
 				alert.message = message;
 			});
+
+			$scope.profile.avatar = config.apiUrl + $scope.profile.avatar;
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
@@ -46,6 +48,7 @@ angular.module('UsersModule')
 				alert.message = message;
 			});
 
+			$scope.profile.avatar = config.apiUrl + $scope.profile.avatar;
 			$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;
 		});
 	}])

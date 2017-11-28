@@ -3,7 +3,6 @@ angular.module('DifficultiesModule')
 		$rootScope.pageTitle = "Étudiants en difficulté";
 
 		DifficultyFactory.getDifficulties(function (data) {
-			console.log(data);
 			$scope.difficulties = data.difficulties;
 			$scope.self_difficulties = data.self_difficulties;
 		});
