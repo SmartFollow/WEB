@@ -7,6 +7,7 @@
 				<tr>
 					<th>#</th>
 					<th>Étudiant en difficulté</th>
+					<th>Email de l'étudiant</th>
 					<th>Généré à</th>
 					<th>Voir l'étudiant</th>
 				</tr>
@@ -15,6 +16,7 @@
 				<tr ng-repeat="difficulty in self_difficulties track by difficulty.id">
 					<td>{{ difficulty.id }}</td>
 					<td>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</td>
+					<td>{{ difficulty.student.email }}</td>
 					<td>{{ difficulty.created_at || '-' }}</td>
 					<td><a ui-sref="users.show({ id: difficulty.student.id })">Voir l'étudiant</a></td>
 				</tr>
@@ -33,6 +35,7 @@
 				<tr>
 					<th>#</th>
 					<th>Étudiant en difficulté</th>
+					<th>Email de l'étudiant</th>
 					<th>Professeur assigné</th>
 					<th>Généré à</th>
 					<th>Voir l'étudiant</th>
@@ -43,6 +46,7 @@
 				<tr ng-repeat="difficulty in difficulties track by difficulty.id">
 					<td>{{ difficulty.id }}</td>
 					<td>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</td>
+					<td>{{ difficulty.student.email }}</td>
 					<td>{{ difficulty.assigned_teacher.firstname }} {{ difficulty.assigned_teacher.lastname }}</td>
 					<td>{{ difficulty.created_at || '-' }}</td>
 					<td><a ui-sref="users.show({ id: difficulty.student.id })">Voir l'étudiant</a></td>
