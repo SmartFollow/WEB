@@ -107,7 +107,22 @@
 						</span>
 					</li>
 				</ul>
-				<div class="text-center" ng-if="profile.criteria_sums.length == 0 && profile.criteria_averages.length == 0">
+
+				<ul class="list-group" ng-if="profile.last_absences_delays_sum">
+					<li class="list-group-item list-group-item-{{ profile.last_absences_delays_sum.absences == 0 ? 'success' : 'danger' }}">
+						<strong>Absences de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.last_absences_delays_sum.absences }}
+						</span>
+					</li>
+					<li class="list-group-item list-group-item-{{ profile.last_absences_delays_sum.delays == 0 ? 'success' : 'danger' }}">
+						<strong>Retards de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.last_absences_delays_sum.delays }}
+						</span>
+					</li>
+				</ul>
+				<div class="text-center" ng-if="profile.criteria_sums.length == 0 && profile.criteria_averages.length == 0 && !profile.last_absences_delays_sum">
 					Aucun critère enregistré récemment
 				</div>
 			</div>
