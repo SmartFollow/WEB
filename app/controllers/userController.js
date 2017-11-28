@@ -23,6 +23,8 @@ angular.module('UsersModule')
 			});
 
 			$scope.profile.avatar = config.apiUrl + $scope.profile.avatar;
+
+			console.log($scope.profile);
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
