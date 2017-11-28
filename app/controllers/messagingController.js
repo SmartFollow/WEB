@@ -11,7 +11,7 @@ angular.module('app')
 	$scope.loadUsers = function($query) {
 		var users = $scope.users;
 		return users.filter(function(user) {
-			return user.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
+			return user.firstname.toLowerCase().indexOf($query.toLowerCase()) != -1 || user.lastname.toLowerCase().indexOf($query.toLowerCase()) != -1 || user.email.toLowerCase().indexOf($query.toLowerCase()) != -1;
 		});
 	};
 
