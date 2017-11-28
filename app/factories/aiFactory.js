@@ -61,5 +61,35 @@ angular.module('AIModule')
 					console.log(response);
 				});
 			},
+			runCriteriaGivenSum: function (callback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/ai/given/sum"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
+			runCriteriaGivenAverage: function (callback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/ai/given/average"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
+			runAbsenceDelaysGiven: function (callback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/ai/given/absence-delay"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
 		};
 	}]);
