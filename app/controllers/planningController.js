@@ -127,7 +127,10 @@ angular.module('app')
 
 		$scope.eventSources = [$scope.reservations, $scope.lessons];
 
-		function hashCode(str) { // java String#hashCode
+		/*
+		 * Functions used to generate a random color from a string (the name of the subject)
+		 */
+		function hashCode(str) {
 			var hash = 0;
 			for (var i = 0; i < str.length; i++) {
 				hash = str.charCodeAt(i) + ((hash << 5) - hash);

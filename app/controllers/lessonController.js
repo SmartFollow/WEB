@@ -480,50 +480,37 @@ angular.module('app')
 
 		$scope.postEvaluation = function (key, student) {
 			if ($("#student-" + key).find('.time-lesson').is(":hidden") && $("#student-" + key).find('.cross-lesson').is(":hidden")) {
-				// Si absent
-				student.evaluation.absence = true;
-				student.evaluation.delay = null;
-
 				$http({
 					method: 'POST',
 					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/absences"
 				}).then(function successCallback(response) {
-					console.log(response);
+					// Si absent
+					student.evaluation.absence = response.data;
+					student.evaluation.delay = null;
 				}, function errorCallback(response) {
 					console.log(response);
 				});
 			}
 			else if ($("#student-" + key).find('.time-lesson').is(":visible") && $("#student-" + key).find('.cross-lesson').is(":hidden")) {
-				// Annulation de l'absence
-				student.evaluation.absence = null;
-				student.evaluation.delay = null;
 				$http({
 					method: 'DELETE',
-					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/delays",
-					data: {
-						id: student.evaluation.id
-					}
+					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/delays/" + student.evaluation.delay.id
 				}).then(function successCallback(response) {
-					console.log(response);
+					// Annulation de l'absence
+					student.evaluation.absence = null;
+					student.evaluation.delay = null;
 				}, function errorCallback(response) {
 					console.log(response);
 				});
 			}
 			else {
-				// Si en retard
-				student.evaluation.absence = null;
-				student.evaluation.delay = true;
-
-				var currentTime = new Date();
-
 				$http({
 					method: 'POST',
 					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/delays",
-					data: {
-						arrived_at: currentTime.getHours() + ":" + currentTime.getMinutes()
-					}
 				}).then(function successCallback(response) {
-					console.log(response);
+					// Si en retard
+					student.evaluation.absence = null;
+					student.evaluation.delay = response.data;
 				}, function errorCallback(response) {
 					console.log(response);
 				});
