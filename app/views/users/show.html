@@ -86,9 +86,9 @@
 		<!-- Right column -->
 		<div class="col-md-6" style="padding-left: 7.5px;">
 
-			<!-- Criteria summary -->
+			<!-- Received criteria summary -->
 			<div class="block">
-				<h2 class="title_h2">Résumé des critères récents</h2>
+				<h2 class="title_h2">Résumé des critères récents reçus</h2>
 				<ul class="list-group" ng-if="profile.criteria_sums.length > 0 || profile.criteria_averages.length > 0">
 					<li ng-repeat="criterion_sum in profile.criteria_sums"
 					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}">
@@ -103,7 +103,7 @@
 						<strong>{{ criterion_avg.criterion.name }}</strong>
 						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
 						<span class="pull-right badge">
-							{{ criterion_avg.sum | number: 1 }}
+							{{ criterion_avg.average | number: 1 }}
 						</span>
 					</li>
 				</ul>

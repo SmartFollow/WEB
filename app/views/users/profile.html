@@ -105,9 +105,9 @@
 				</div>
 			</div>
 
-			<!-- Criteria summary -->
-			<div class="block">
-				<h2 class="title_h2">Résumé des critères récents</h2>
+			<!-- Received criteria summary -->
+			<div class="block" ng-if="accessRules.includes('criteria.summary.received')">
+				<h2 class="title_h2">Résumé des critères récents reçus</h2>
 				<ul class="list-group" ng-if="profile.criteria_sums.length > 0 || profile.criteria_averages.length > 0">
 					<li ng-repeat="criterion_sum in profile.criteria_sums"
 					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}">
@@ -122,7 +122,7 @@
 						<strong>{{ criterion_avg.criterion.name }}</strong>
 						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
 						<span class="pull-right badge">
-							{{ criterion_avg.sum | number: 1 }}
+							{{ criterion_avg.average | number: 1 }}
 						</span>
 					</li>
 				</ul>
@@ -142,6 +142,47 @@
 					</li>
 				</ul>
 				<div class="text-center" ng-if="profile.criteria_sums.length == 0 && profile.criteria_averages.length == 0 && !profile.last_absences_delays_sum">
+					Aucun critère enregistré récemment
+				</div>
+			</div>
+
+			<!-- Given criteria summary -->
+			<div class="block" ng-if="accessRules.includes('criteria.summary.given')">
+				<h2 class="title_h2">Résumé des critères récents donnés</h2>
+				<ul class="list-group" ng-if="profile.given_criteria_sums.length > 0 || profile.given_criteria_averages.length > 0">
+					<li ng-repeat="criterion_sum in profile.given_criteria_sums"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}">
+						<strong>{{ criterion_sum.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_sum.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_sum.sum | number: 0 }}
+						</span>
+					</li>
+					<li ng-repeat="criterion_avg in profile.given_criteria_averages"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_avg.criterion.impact] }}">
+						<strong>{{ criterion_avg.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_avg.average | number: 1 }}
+						</span>
+					</li>
+				</ul>
+
+				<ul class="list-group" ng-if="profile.given_last_absences_delays_sum">
+					<li class="list-group-item list-group-item-{{ profile.given_last_absences_delays_sum.absences == 0 ? 'success' : 'danger' }}">
+						<strong>Absences de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.given_last_absences_delays_sum.absences }}
+						</span>
+					</li>
+					<li class="list-group-item list-group-item-{{ profile.given_last_absences_delays_sum.delays == 0 ? 'success' : 'danger' }}">
+						<strong>Retards de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.given_last_absences_delays_sum.delays }}
+						</span>
+					</li>
+				</ul>
+				<div class="text-center" ng-if="profile.given_criteria_sums.length == 0 && profile.given_criteria_averages.length == 0 && !profile.given_last_absences_delays_sum">
 					Aucun critère enregistré récemment
 				</div>
 			</div>
