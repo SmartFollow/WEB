@@ -4,11 +4,15 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/profile');
 
 	$stateProvider
-
 		.state('root', {
 			abstract: true,
 			controller: 'MenuController',
-			templateUrl: 'app/views/layouts/main.html'
+			templateUrl: 'app/views/layouts/main.html',
+			resolve: { // Loading access rules before any other controller is called
+				init: function (AccessRuleFactory) {
+					return AccessRuleFactory.resolver();
+				}
+			}
 		})
 
 		/**
@@ -360,8 +364,8 @@ routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($roo
 				$rootScope.connectedUser = user;
 
 				if (user.group_id > next.group_id) {
-					$state.go('login');
 					event.preventDefault();
+					$state.go('login');
 				}
 			});
 

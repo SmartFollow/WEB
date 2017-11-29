@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('PlanningController', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config) {
+	.controller('PlanningController', ['UserFactory', '$http', '$rootScope', '$scope', 'OAuth', '$state', 'config', 'AccessRuleFactory', function (UserFactory, $http, $rootScope, $scope, OAuth, $state, config, AccessRuleFactory) {
 	if ($state.current.data != null)
 		$rootScope.pageTitle = $state.current.data.pageTitle;
 
@@ -48,36 +48,45 @@ angular.module('app')
 		}
 	};
 
-	$scope.reservations = function (start, end, timezone, callback) {
-		if (reservations)
-			callback(reservations);
-		else {
-			$http({
-				method: 'GET',
-				url: config.apiUrl + "api/reservations"
-			}).then(function successCallback(response) {
-				var events = [];
-				response.data.forEach(function (reservation) {
-					if (!reservation.has_lesson) {
-						events.push({
-							id: reservation.id,
-							title: "Reservation de la salle " + reservation.room.identifier,
-							start: reservation.time_start,
-							end: reservation.time_end,
-							url: "#!/reservations/" + reservation.id + "/edit",
-							stick: true,
-							color: "#888888",
-							dow: [weekday[reservation.day]],
-							ranges: [{start: reservation.date_start, end: reservation.date_end}]
-						});
-					}
-				});
 
-				reservations = events;
-				callback(events);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
+	$scope.reservations = function (start, end, timezone, callback) {
+		if (AccessRuleFactory.get().includes('reservations.index'))
+		{
+			if (reservations)
+				callback(reservations);
+			else {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/reservations"
+				}).then(function successCallback(response) {
+					var events = [];
+					response.data.forEach(function (reservation) {
+						if (!reservation.has_lesson) {
+							events.push({
+								id: reservation.id,
+								title: "Reservation de la salle " + reservation.room.identifier,
+								start: reservation.time_start,
+								end: reservation.time_end,
+								url: "#!/reservations/" + reservation.id + "/edit",
+								stick: true,
+								color: "#888888",
+								dow: [weekday[reservation.day]],
+								ranges: [{start: reservation.date_start, end: reservation.date_end}]
+							});
+						}
+					});
+
+					reservations = events;
+					callback(events);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
+		}
+		else
+		{
+			reservations = [];
+			callback([]);
 		}
 	};
 

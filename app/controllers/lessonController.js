@@ -132,6 +132,7 @@ angular.module('app')
 			$scope.lesson = response.data;
 			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
 			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
+			$scope.lesson.subject.teacher.avatar = config.apiUrl + $scope.lesson.subject.teacher.avatar;
 			$http({
 				method: 'GET',
 				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/evaluations/create"
@@ -176,7 +177,6 @@ angular.module('app')
 						}
 					});
 				});
-				console.log(response);
 			}, function errorCallback(response) {
 				console.log(response);
 			});
