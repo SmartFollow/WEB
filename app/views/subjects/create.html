@@ -1,0 +1,39 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="subjects.index">Voir la liste des matières <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="level_id">Niveau</label>
+				<select class="form-control" name="level_id" id="level" ng-model="level_id">
+					<option ng-repeat="level in create.levels" value="{{level.id}}">{{level.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name" ng-model="name" placeholder="Nom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea name="description" id="description" ng-model="description" placeholder="Description" class="form-control" rows="1"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="teacher">Professeur</label>
+				<select class="form-control" name="teacher_id" id="teacher" ng-model="teacher_id">
+					<option ng-repeat="user in create.users" value="{{user.id}}">{{user.firstname}} {{user.lastname}}</option>
+				</select>
+			</div>
+			<button ng-click="createSubject()" class="btn btn-danger">Créer la matière</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>

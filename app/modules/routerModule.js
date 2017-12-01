@@ -244,6 +244,40 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		/**
+		 * Subjects-related states
+		 */
+		.state('subjects', {})
+		.state('subjects.index', {
+			url: '/subjects',
+			parent: 'root',
+			controller: 'SubjectController@index',
+			templateUrl: 'app/views/subjects/index.html'
+		})
+		.state('subjects.create', {
+			url: '/subjects/create',
+			parent: 'root',
+			controller: 'SubjectController@create',
+			templateUrl: 'app/views/subjects/create.html'
+		})
+		.state('subjects.edit', {
+			url: '/subjects/{id:int}/edit',
+			parent: 'root',
+			controller: 'SubjectController@edit',
+			templateUrl: 'app/views/subjects/edit.html'
+		})
+		.state('subjects.show', {
+			url: '/subjects/{id:int}',
+			parent: 'root',
+			controller: 'SubjectController@show',
+			templateUrl: 'app/views/subjects/show.html'
+		})
+		.state('subjects.delete', {
+			url: '/subjects/{id:int}/delete',
+			parent: 'root',
+			controller: 'SubjectController@delete'
+		})
+
+		/**
 		 * Criteria-related states
 		 */
 		.state('criteria', {})

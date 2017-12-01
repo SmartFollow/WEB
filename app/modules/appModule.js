@@ -12,6 +12,7 @@ angular.module('app', [
 	'ConversationsModule',
 	'DifficultiesModule',
 	'AIModule',
+	'SubjectsModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'
 ]);

@@ -1,0 +1,28 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px">
+			<div class="col-md-6">
+				<a ui-sref="subjects.edit({ id: subject.id })" class="btn btn-info" ng-if="accessRules.includes('subjects.update')">Modifier la matière</a>
+				<a ui-sref="subjects.delete({ id: subject.id })" class="btn btn-danger" ng-if="accessRules.includes('subjects.destroy')">Supprimer la matière</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="subjects.index" ng-if="accessRules.includes('subjects.index')">Voir la liste des matières <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<dl class="spaced">
+			<dt>level_id</dt>
+			<dd>{{ subject.level_id }}</dd>
+
+			<dt>Nom</dt>
+			<dd>{{ subject.name }}</dd>
+
+			<dt>Description</dt>
+			<dd>{{ subject.description }}</dd>
+			
+			<dt>teacher_id</dt>
+			<dd>{{ subject.teacher_id }}</dd>
+		</dl>
+
+	</div>
+</div>

@@ -84,6 +84,11 @@
 							<span class="glyphicon glyphicon-option-vertical"></span> Niveaux
 						</a>
 					</li>
+					<li ng-if="accessRules.includes('subjects.index')">
+						<a ui-sref="subjects.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-th"></span> Matières
+						</a>
+					</li>
 					<li ng-if="accessRules.includes('criteria.index')">
 						<a ui-sref="criteria.index" ui-sref-active="active">
 							<span class="glyphicon glyphicon-tasks"></span> Critères d'évaluation
