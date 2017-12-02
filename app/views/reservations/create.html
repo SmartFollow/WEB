@@ -34,7 +34,7 @@
 
 				<div class="form-group">
 					<label for="room_id">Salle</label>
-					<select class="form-control" id="room_id">
+					<select class="form-control" id="room_id" required>
 						<option selected="{{room.id == reservation.id}}" ng-repeat="room in reservations.rooms"
 						        value="{{room.id}}">
 							{{room.identifier}} ({{room.seats}} places)
@@ -44,7 +44,7 @@
 
 				<div class="form-group">
 					<label for="day">Jour de la semaine</label>
-					<select class="form-control" id="day">
+					<select class="form-control" id="day" required>
 						<option value="MONDAY">Lundi</option>
 						<option value="TUESDAY">Mardi</option>
 						<option value="WEDNESDAY">Mercredi</option>
