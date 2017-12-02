@@ -85,17 +85,20 @@ angular.module('GraphsModule')
 		GraphFactory.getCreateFormData(function (data) {
 			$scope.criteria = data.criteria;
 			$scope.types = data.types;
+			$scope.summary_types = data.summary_types;
 		});
 
 		$scope.createGraph = function () {
 			var criterionId = $('select[name="criterion_id"]').val();
 			var type = $('select[name="type"]').val();
 			var daysRange = $('input[name="days_range"]').val();
+			var summaryType = $('select[name="summary_type"]').val();
 
 			GraphFactory.storeGraph({
 				criterion_id: criterionId,
 				type: type,
-				days_range: daysRange
+				days_range: daysRange,
+				summary_type: summaryType
 			}, function (graph) {
 				$scope.alerts.success = {
 					show: true,
@@ -126,17 +129,20 @@ angular.module('GraphsModule')
 			$scope.criteria = data.criteria;
 			$scope.types = data.types;
 			$scope.graph = data.graph;
+			$scope.summary_types = data.summary_types;
 		});
 
 		$scope.editGraph = function () {
 			var criterionId = $('select[name="criterion_id"]').val();
 			var type = $('select[name="type"]').val();
 			var daysRange = $('input[name="days_range"]').val();
+			var summaryType = $('select[name="summary_type"]').val();
 
 			GraphFactory.updateGraph($scope.graph.id, {
 				criterion_id: criterionId,
 				type: type,
-				days_range: daysRange
+				days_range: daysRange,
+				summary_type: summaryType
 			}, function (graph) {
 				$scope.alerts.success = {
 					show: true,

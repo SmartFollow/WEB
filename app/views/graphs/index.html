@@ -13,6 +13,7 @@
 					<th>Critère</th>
 					<th>Type</th>
 					<th>Période</th>
+					<th>Type des données</th>
 					<th ng-if="accessRules.includes('graphs.show')">Voir</th>
 					<th ng-if="accessRules.includes('graphs.edit')">Modifier</th>
 					<th ng-if="accessRules.includes('graphs.destroy')">Supprimer</th>
@@ -24,6 +25,7 @@
 					<td>{{ graph.criterion.name }}</td>
 					<td>{{ { bar: 'Barres', line: 'Ligne' }[graph.type] }}</td>
 					<td>{{ graph.days_range }} jours</td>
+					<td>{{ { given: 'Critères donnés', received: 'Critères reçus' }[graph.summary_type] }}</td>
 					<td ng-if="accessRules.includes('graphs.show')">
 						<a ui-sref="graphs.show({ id: graph.id })">Voir</a>
 					</td>
@@ -34,7 +36,7 @@
 						<a ui-sref="graphs.delete({ id: graph.id })">Supprimer</a>
 					</td>
 				</tr>
-				<tr ng-if="graphs.length == 0">
+				<tr ng-if="graphs.length == 8">
 					<td colspan="7">Aucun graphique enregistré</td>
 				</tr>
 			</tbody>
