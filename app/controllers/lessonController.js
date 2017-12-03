@@ -209,6 +209,24 @@ angular.module('app')
 		};
 
 		/**
+		 * Update an evaluation's comment
+		 * 
+		 * @param student
+		 */
+		$scope.updateComment = function(student) {
+			if (!student.inUpdate) {
+				student.inUpdate = true;
+				$scope.execAfterEvaluationExists(student, function (student) {
+					EvaluationFactory.updateEvaluation(student.lesson_evaluation.id, {
+						comment: student.lesson_evaluation.comment
+					}, function (evaluation) {
+						student.inUpdate = false;
+					});
+				});
+			}
+		};
+
+		/**
 		 * Execute a function after making sure the student evaluation exists
 		 * or after creating it otherwise
 		 *

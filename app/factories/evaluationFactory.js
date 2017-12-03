@@ -22,6 +22,17 @@ angular.module('LessonsModule')
 					console.log(response);
 				});
 			},
+			updateEvaluation: function (evaluationId, data, callback) {
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + "api/evaluations/" + evaluationId,
+					data: data
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
 			storeAbsence: function (evaluationId, callback) {
 				$http({
 					method: 'POST',

@@ -558,9 +558,12 @@
 								</td>
 								<td>
 									<div class="input-group">
-										<input type="text" ng-model="student.lesson_evaluation.comment" placeholder="Ajouter un commentaire sur l'élève" class="form-control" />
+										<input type="text" ng-model="student.lesson_evaluation.comment" placeholder="Ajouter un commentaire sur l'élève" class="form-control" ng-disabled="student.inUpdate" />
 										<span class="input-group-btn">
-								            <button class="btn btn-default" type="button">Envoyer</button>
+								            <button class="btn btn-default" type="button" ng-disabled="student.inUpdate" ng-click="updateComment(student)">
+									            <img src="assets/img/loading.gif" ng-if="student.inUpdate" alt="Mise à jour de l'évaluation" />
+									            {{ !student.inUpdate ? 'Envoyer' : '' }}
+								            </button>
 										</span>
 									</div>
 								</td>
@@ -568,39 +571,6 @@
 						</tbody>
 					</table>
 				</div>
-				<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				  <div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingOne">
-					  <h4 class="panel-title">
-						<a class="collapse in" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						  <i class="more-less glyphicon glyphicon-plus"></i>
-						  Ajouter un commentaire sur un élève.
-						</a>
-					  </h4>
-					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
-					  <div class="panel-body">
-						<table class="table table-hover"></table>
-						 </div>
-					  </div>
-				  </div>
-				  <div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingTwo">
-					  <h4 class="panel-title">
-						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						  <i class="more-less glyphicon glyphicon-plus"></i>
-						  Ajouter des documents.
-						</a>
-					  </h4>
-					</div>
-					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-					  <div class="panel-body">
-						<label class="control-label">Sélectionnez Fichier</label>
-						<input id="input-fr" name="inputfr[]" type="file" multiple class="file-loading">
-					  </div>
-					</div>
-				  </div>
-				</div>-->
 			</div>
 		</div>
 	</div>
