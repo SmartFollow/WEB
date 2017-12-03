@@ -159,8 +159,8 @@
 			cursor: pointer;
 			text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);
 		}
-		.evaluation-absent { color: #C0392B; }
-		.evaluation-delay { color: #FFFFFF; }
+		.evaluation-absent { color: #c0392b; }
+		.evaluation-delay { color: #ffffff; }
 
 		.evaluation-loading {
 			position: absolute;
@@ -195,5 +195,11 @@
 				display: block;
 			}
 		}
+	}
+}
+
+.evaluations-summary {
+	.img-profile {
+		max-width: 34px;
 	}
 }

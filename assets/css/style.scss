@@ -77,6 +77,10 @@ table.table {
 			&.warning .glyphicon { color: orange; }
 			&.danger .glyphicon { color: red; }
 		}
+
+		&.vertically-aligned {
+			td { vertical-align: middle; }
+		}
 	}
 }
 

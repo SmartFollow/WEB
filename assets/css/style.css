@@ -229,6 +229,8 @@ table.table {
     color: orange; }
   table.table tbody tr.danger .glyphicon {
     color: red; }
+  table.table tbody.vertically-aligned td {
+    vertical-align: middle; }
 
 .img-profile {
   border: 8px solid #e74c3c;

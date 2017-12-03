@@ -451,7 +451,7 @@
 			<li class="legend">Déroulement du cours</li>
 			<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
 			<li data-toggle="tab" href="#cours" class="clickable" ng-click="tabClick(2)">Cours</li>
-			<!-- <li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li> -->
+			<li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li>
 		</ol>
 	</div>
 
@@ -487,17 +487,15 @@
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
 					     ng-click="updateStatus(student)"
-					     ng-repeat="student in lesson.student_class.students">
-						<div ng-show="student.lesson_evaluation.absence && student.lesson_evaluation.absence != null"
-						     class="evaluation-absent glyphicon glyphicon-remove"></div>
-						<div ng-show="student.lesson_evaluation.delay && student.lesson_evaluation.delay != null"
-						     class="evaluation-delay glyphicon glyphicon-time"></div>
+					     ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
+						<div ng-show="student.lesson_evaluation.absence" class="evaluation-absent glyphicon glyphicon-remove"></div>
+						<div ng-show="student.lesson_evaluation.delay" class="evaluation-delay glyphicon glyphicon-time"></div>
 						<div ng-show="student.inUpdate" class="evaluation-loading">
 							<div class="align-helper"></div><img src="assets/img/loading.gif" alt="Mise à jour de l'évaluation" />
 						</div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
-						<span>{{student.firstname}} {{student.lastname}}</span>
+						<span>{{student.firstname}} <strong>{{student.lastname}}</strong></span>
 					</div>
 				</div>
 			</div>
@@ -505,17 +503,15 @@
 			<div id="cours" class="tab-pane fade" style="display: none;">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
-					     ng-repeat="student in lesson.student_class.students">
-						<div ng-show="student.lesson_evaluation.absence && student.lesson_evaluation.absence != null"
-						     class="evaluation-absent glyphicon glyphicon-remove"></div>
-						<div ng-show="student.lesson_evaluation.delay && student.lesson_evaluation.delay != null"
-						     class="evaluation-delay glyphicon glyphicon-time"></div>
+					     ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
+						<div ng-show="student.lesson_evaluation.absence" class="evaluation-absent glyphicon glyphicon-remove"></div>
+						<div ng-show="student.lesson_evaluation.delay" class="evaluation-delay glyphicon glyphicon-time"></div>
 						<div ng-show="student.inUpdate" class="evaluation-loading">
 							<div class="align-helper"></div><img src="assets/img/loading.gif" alt="Mise à jour de l'évaluation" />
 						</div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
-						<span>{{student.firstname}} {{student.lastname}}</span>
+						<span>{{student.firstname}} <strong>{{student.lastname}}</strong></span>
 
 						<div class="criteria-container" ng-show="!student.lesson_evaluation || !student.lesson_evaluation.absence">
 							<button ng-repeat="criterion in criteria"
@@ -528,7 +524,50 @@
 				</div>
 			</div>
 
-			<div id="fin" class="tab-pane fade">
+			<div id="fin" class="tab-pane fade" style="display: none;">
+				<div class="page-block">
+					<table class="table evaluations-summary">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Étudiant</th>
+								<th>Statut</th>
+								<th>Critères</th>
+								<th>Commentaire</th>
+							</tr>
+						</thead>
+						<tbody class="vertically-aligned">
+							<tr ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
+								<td><img src="{{ config.apiUrl + student.avatar }}" alt="Photo de profil" class="img-circle img-profile" /></td>
+								<td>{{ student.firstname }} <strong>{{ student.lastname }}</strong></td>
+								<td>
+									<span ng-class="student.lesson_evaluation.absence ? 'text-danger' : student.lesson_evaluation.delay ? 'text-warning' : 'text-success'">
+										<span ng-show="student.lesson_evaluation.absence" class="glyphicon glyphicon-remove"></span>
+										<span ng-show="student.lesson_evaluation.delay" class="glyphicon glyphicon-time"></span>
+
+										{{ student.lesson_evaluation.absence ? 'Absent' : student.lesson_evaluation.delay ? 'En retard' : 'Présent' }}
+									</span>
+								</td>
+								<td>
+									<span ng-repeat="(idx, criterion) in student.lesson_evaluation.criteria"
+									      ng-class="{ positive: 'text-success', negative: 'text-danger', neutral: 'text-info'}[criterion.impact]">
+										<span ng-if="idx > 0" class="text-muted">/</span>
+										{{ criterion.name }} ({{ criterion.pivot.value}})
+									</span>
+									<span ng-if="!student.lesson_evaluation.criteria || student.lesson_evaluation.criteria.length == 0">-</span>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" ng-model="student.lesson_evaluation.comment" placeholder="Ajouter un commentaire sur l'élève" class="form-control" />
+										<span class="input-group-btn">
+								            <button class="btn btn-default" type="button">Envoyer</button>
+										</span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				  <div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingOne">
