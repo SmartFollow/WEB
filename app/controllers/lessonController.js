@@ -121,10 +121,86 @@ angular.module('app')
 		});
 
 	}])
-	.controller('LessonController@show', ['$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function ($scope, $state, $rootScope, $http, $filter, $stateParams, config) {
+	.controller('LessonController@show', ['$scope', '$state', '$rootScope', '$http', '$stateParams', 'config', 'LessonFactory', 'EvaluationFactory', function ($scope, $state, $rootScope, $http, $stateParams, config, LessonFactory, EvaluationFactory) {
 		$rootScope.pageTitle = "Déroulement du cours";
 		$scope.config = config;
 
+		EvaluationFactory.getCreateFormData($stateParams.id, function (data) {
+			$scope.criteria = data.criteria;
+		});
+
+		LessonFactory.getLesson($stateParams.id, function (lesson) {
+			$scope.lesson = lesson;
+
+			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
+			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
+			if ($scope.lesson.subject.teacher)
+				$scope.lesson.subject.teacher.avatar = config.apiUrl + $scope.lesson.subject.teacher.avatar;
+		});
+
+		/**
+		 * Updating the status (present / absent / delay) of a student
+		 *
+		 * @param student
+		 */
+		$scope.updateStatus = function(student) {
+			$scope.execAfterEvaluationExists(student, function (student) {
+				// ToDo: add an "inUpdate" bool to avoid updating the status before the previous update has ended
+				if (student.lesson_evaluation.absence) {
+					EvaluationFactory.storeDelay(student.lesson_evaluation.id, function (delay) {
+						student.lesson_evaluation.absence = null;
+						student.lesson_evaluation.delay = delay;
+					});
+				}
+				else if (student.lesson_evaluation.delay) {
+					EvaluationFactory.deleteDelay(student.lesson_evaluation.id, student.lesson_evaluation.delay.id, function (data) {
+						student.lesson_evaluation.delay = null;
+					});
+				}
+				else {
+					EvaluationFactory.storeAbsence(student.lesson_evaluation.id, function (absence) {
+						student.lesson_evaluation.absence = absence;
+					});
+				}
+			});
+		};
+
+		/**
+		 * Change the value of the criterion evaluation for a specific student by
+		 * the value of "valueUpdate"
+		 *
+		 * @param student
+		 * @param criterion
+		 * @param valueUpdate
+		 */
+		$scope.updateEvaluationCriterion = function(student, criterion, valueUpdate) {
+			$scope.execAfterEvaluationExists(student, function (student) {
+
+			});
+		};
+
+		/**
+		 * Execute a function after making sure the student evaluation exists
+		 * or after creating it otherwise
+		 *
+		 * @param student
+		 * @param callback
+		 */
+		$scope.execAfterEvaluationExists = function(student, callback) {
+			if (!student.lesson_evaluation) {
+				EvaluationFactory.storeEvaluation({
+					student_id: student.id,
+					lesson_id: $stateParams.id
+				}, function (evaluation) {
+					student.lesson_evaluation = evaluation;
+					callback(student);
+				});
+			}
+			else
+				callback(student);
+		};
+
+		/*
 		$http({
 			method: 'GET',
 			url: config.apiUrl + "api/lessons/" + $stateParams.id
@@ -132,14 +208,16 @@ angular.module('app')
 			$scope.lesson = response.data;
 			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
 			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
-			$scope.lesson.subject.teacher.avatar = config.apiUrl + $scope.lesson.subject.teacher.avatar;
+			if ($scope.lesson.subject.teacher)
+				$scope.lesson.subject.teacher.avatar = config.apiUrl + $scope.lesson.subject.teacher.avatar;
 			$http({
 				method: 'GET',
 				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/evaluations/create"
 			}).then(function successCallback(response) {
 				$scope.evaluations = response.data;
+				console.log($scope.evaluations);
 				angular.forEach($scope.lesson.student_class.students, function (student, key) {
-					/* TODO : Fix so that you don't call the API once per student to get their mark...
+					// TODO : Fix so that you don't call the API once per student to get their mark...
 					if ($scope.lesson.exam)
 					{
 						$scope.getExistingMark($scope.lesson.exam.id, student.id).then(function(result){
@@ -152,7 +230,7 @@ angular.module('app')
 								student.mark = result;
 						});
 					}
-					*/
+					// END TODO
 					student.evaluation = $scope.getEvaluation(student.id);
 					if (student.evaluation == null)
 					{
@@ -185,6 +263,7 @@ angular.module('app')
 			alert("Impossible de trouver la leçon souhaitée, vous allez être redirigé.");
 			$state.go('users.profile');
 		});
+		*/
 
 		$scope.range = function(min, max, step) {
 		    step = step || 1;

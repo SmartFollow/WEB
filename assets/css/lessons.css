@@ -102,10 +102,24 @@
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0; }
+  right: 0;
+  cursor: pointer; }
 .img-profile-list .block-img-profile .cross-lesson {
   color: #C0392B; }
 .img-profile-list .block-img-profile .time-lesson {
   color: #FFFFFF; }
+.img-profile-list .block-img-profile .criteria-container {
+  position: absolute;
+  top: 0;
+  background-color: #282828;
+  border-radius: 4px;
+  padding: 2.5px 5px;
+  z-index: 1000;
+  display: none; }
+  .img-profile-list .block-img-profile .criteria-container button {
+    width: 100%;
+    margin: 2.5px 0; }
+.img-profile-list .block-img-profile:hover .criteria-container, .img-profile-list .block-img-profile.active .criteria-container {
+  display: block; }
 
 /*# sourceMappingURL=lessons.css.map */

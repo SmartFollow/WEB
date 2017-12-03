@@ -150,8 +150,30 @@
 			z-index: 100;
 			position: absolute;
 			top: 0; bottom: 0; left: 0; right: 0;
+			cursor: pointer;
 		}
 		.cross-lesson { color: #C0392B; }
 		.time-lesson { color: #FFFFFF; }
+
+		.criteria-container {
+			position: absolute;
+			top: 0;
+			background-color: $dark-background;
+			border-radius: 4px;
+			padding: 2.5px 5px;
+			z-index: 1000;
+			display: none;
+
+			button {
+				width: 100%;
+				margin: 2.5px 0;
+			}
+		}
+
+		&:hover, &.active {
+			.criteria-container {
+				display: block;
+			}
+		}
 	}
 }

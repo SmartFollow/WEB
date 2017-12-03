@@ -484,12 +484,11 @@
 			<div id="appel" class="tab-pane fade in active">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
-					     id="student-{{ student.id }}"
-					     ng-click="createEvaluations(student.id, student)"
-					     ng-repeat="(key, student) in lesson.student_class.students">
-						<div ng-show="student.evaluation.absence && student.evaluation.absence != null"
+					     ng-click="updateStatus(student)"
+					     ng-repeat="student in lesson.student_class.students">
+						<div ng-show="student.lesson_evaluation.absence && student.lesson_evaluation.absence != null"
 						     class="cross-lesson glyphicon glyphicon-remove"></div>
-						<div ng-show="student.evaluation.delay && student.evaluation.delay != null"
+						<div ng-show="student.lesson_evaluation.delay && student.lesson_evaluation.delay != null"
 						     class="time-lesson glyphicon glyphicon-time"></div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
@@ -503,17 +502,24 @@
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
 					     id="student-{{ student.id }}"
 					     data-toggle="modal" data-target="#modal-{{student.id}}"
-					     ng-repeat="(key, student) in lesson.student_class.students">
-						<div ng-show="student.evaluation.absence && student.evaluation.absence != null"
+					     ng-repeat="student in lesson.student_class.students">
+						<div ng-show="student.lesson_evaluation.absence && student.lesson_evaluation.absence != null"
 						     class="cross-lesson glyphicon glyphicon-remove"></div>
-						<div ng-show="student.evaluation.delay && student.evaluation.delay != null"
+						<div ng-show="student.lesson_evaluation.delay && student.lesson_evaluation.delay != null"
 						     class="time-lesson glyphicon glyphicon-time"></div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
 						<span>{{student.firstname}} {{student.lastname}}</span>
+
+						<div class="criteria-container" ng-show="!student.lesson_evaluation || !student.lesson_evaluation.absence">
+							<button ng-repeat="criterion in criteria"
+							        ng-click="updateEvaluationCriterion(student, criterion, 1)"
+							        class="btn btn-{{ { positive: 'success', negative: 'danger' }[criterion.impact] }}">
+								{{ criterion.name }} ({{ 0 }})
+							</button>
+						</div>
 					</div>
 				</div>
-
 			</div>
 
 			<div id="fin" class="tab-pane fade">
