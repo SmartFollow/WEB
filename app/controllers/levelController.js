@@ -61,7 +61,7 @@ angular.module('LevelsModule')
         }
     }])
     .controller('LevelController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'LevelFactory', function ($rootScope, $scope, $state, $stateParams, LevelFactory) {
-        if (confirm('Êtes-vous sûr de vouloir supprimer le niveaux ?'))
+        if (confirm('Êtes-vous sûr de vouloir supprimer le niveau ?'))
         {
             LevelFactory.deleteLevel($stateParams.id, function () {
                 $state.go('levels.index');
