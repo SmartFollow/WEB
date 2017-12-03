@@ -52,5 +52,27 @@ angular.module('LessonsModule')
 					console.log(response);
 				});
 			},
+			storeCriterionEvaluation: function (evaluationId, data, callback) {
+				$http({
+					method: 'POST',
+					url: config.apiUrl + "api/evaluations/" + evaluationId + "/criteria",
+					data: data
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
+			updateCriterionEvaluation: function (evaluationId, criterionId, data, callback) {
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + "api/evaluations/" + evaluationId + "/criteria/" + criterionId,
+					data: data
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			}
 		};
 	}]);

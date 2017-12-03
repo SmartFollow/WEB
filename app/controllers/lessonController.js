@@ -144,25 +144,30 @@ angular.module('app')
 		 * @param student
 		 */
 		$scope.updateStatus = function(student) {
-			$scope.execAfterEvaluationExists(student, function (student) {
-				// ToDo: add an "inUpdate" bool to avoid updating the status before the previous update has ended
-				if (student.lesson_evaluation.absence) {
-					EvaluationFactory.storeDelay(student.lesson_evaluation.id, function (delay) {
-						student.lesson_evaluation.absence = null;
-						student.lesson_evaluation.delay = delay;
-					});
-				}
-				else if (student.lesson_evaluation.delay) {
-					EvaluationFactory.deleteDelay(student.lesson_evaluation.id, student.lesson_evaluation.delay.id, function (data) {
-						student.lesson_evaluation.delay = null;
-					});
-				}
-				else {
-					EvaluationFactory.storeAbsence(student.lesson_evaluation.id, function (absence) {
-						student.lesson_evaluation.absence = absence;
-					});
-				}
-			});
+			if (!student.inUpdate) {
+				student.inUpdate = true;
+				$scope.execAfterEvaluationExists(student, function (student) {
+					if (student.lesson_evaluation.absence) {
+						EvaluationFactory.storeDelay(student.lesson_evaluation.id, function (delay) {
+							student.lesson_evaluation.absence = null;
+							student.lesson_evaluation.delay = delay;
+							student.inUpdate = false;
+						});
+					}
+					else if (student.lesson_evaluation.delay) {
+						EvaluationFactory.deleteDelay(student.lesson_evaluation.id, student.lesson_evaluation.delay.id, function (data) {
+							student.lesson_evaluation.delay = null;
+							student.inUpdate = false;
+						});
+					}
+					else {
+						EvaluationFactory.storeAbsence(student.lesson_evaluation.id, function (absence) {
+							student.lesson_evaluation.absence = absence;
+							student.inUpdate = false;
+						});
+					}
+				});
+			}
 		};
 
 		/**
@@ -174,9 +179,33 @@ angular.module('app')
 		 * @param valueUpdate
 		 */
 		$scope.updateEvaluationCriterion = function(student, criterion, valueUpdate) {
-			$scope.execAfterEvaluationExists(student, function (student) {
+			if (!student.inUpdate) {
+				student.inUpdate = true;
+				$scope.execAfterEvaluationExists(student, function (student) {
 
-			});
+					var criterionEvaluation = student.lesson_evaluation.criteria.filter(e => e.id == criterion.id);
+					criterionEvaluation = criterionEvaluation && criterionEvaluation.length > 0 ? criterionEvaluation[0] : null;
+
+					if (criterionEvaluation) { // This criterion already has an evaluation, update the value
+						var newValue = criterionEvaluation.pivot.value + valueUpdate;
+						newValue = newValue < 0 ? 0 : newValue;
+
+						EvaluationFactory.updateCriterionEvaluation(student.lesson_evaluation.id, criterion.id, {value: newValue}, function (criteria) {
+							student.lesson_evaluation.criteria = criteria;
+							student.inUpdate = false;
+						});
+					}
+					else { // This criterion doesn't have an evaluation, create the evaluation
+						EvaluationFactory.storeCriterionEvaluation(student.lesson_evaluation.id, {
+							criterion_id: criterion.id,
+							value: 1
+						}, function (criteria) {
+							student.lesson_evaluation.criteria = criteria;
+							student.inUpdate = false;
+						});
+					}
+				});
+			}
 		};
 
 		/**
@@ -200,70 +229,27 @@ angular.module('app')
 				callback(student);
 		};
 
-		/*
-		$http({
-			method: 'GET',
-			url: config.apiUrl + "api/lessons/" + $stateParams.id
-		}).then(function successCallback(response) {
-			$scope.lesson = response.data;
-			$scope.lesson.start = new Date($scope.lesson.start.replace('/-/g',"/"));
-			$scope.lesson.end = new Date($scope.lesson.end.replace('/-/g',"/"));
-			if ($scope.lesson.subject.teacher)
-				$scope.lesson.subject.teacher.avatar = config.apiUrl + $scope.lesson.subject.teacher.avatar;
-			$http({
-				method: 'GET',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/evaluations/create"
-			}).then(function successCallback(response) {
-				$scope.evaluations = response.data;
-				console.log($scope.evaluations);
-				angular.forEach($scope.lesson.student_class.students, function (student, key) {
-					// TODO : Fix so that you don't call the API once per student to get their mark...
-					if ($scope.lesson.exam)
-					{
-						$scope.getExistingMark($scope.lesson.exam.id, student.id).then(function(result){
-							if (result == null)
-								student.mark = {
-									mark: -1,
-									comment: ""
-								};
-							else
-								student.mark = result;
-						});
-					}
-					// END TODO
-					student.evaluation = $scope.getEvaluation(student.id);
-					if (student.evaluation == null)
-					{
-						student.evaluation = {
-							criteria : angular.copy($scope.evaluations.criteria),
-							absence : null,
-							delay : null
-						}
-					}
-					angular.forEach($scope.evaluations.criteria, function (criteria, key) {
-						var has = false;
-						angular.forEach(student.evaluation.criteria, function (c, key) {
-							if (c.id == criteria.id)
-								has = true;
-						});
-						if (has == false)
-						{
-							criteria.pivot = {
-								value : 0
-							};
-							student.evaluation.criteria.push(angular.copy(criteria));
-						}
-					});
-				});
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		}, function errorCallback(response) {
-			console.log(response);
-			alert("Impossible de trouver la leçon souhaitée, vous allez être redirigé.");
-			$state.go('users.profile');
-		});
-		*/
+		/**
+		 * Return the criterion evaluation from the specified criterion from an evaluation
+		 *
+		 * @param evaluation
+		 * @param criterion
+		 * @returns {null}
+		 */
+		$scope.criterionFromEvaluation = function (evaluation, criterion) {
+			if (!evaluation || !criterion)
+				return null;
+
+			var result = evaluation.criteria.filter(e => e.id == criterion.id);
+
+			return result && result.length > 0 ? result[0] : null;
+		};
+
+
+
+
+
+
 
 		$scope.range = function(min, max, step) {
 		    step = step || 1;
@@ -509,116 +495,6 @@ angular.module('app')
 			}*/
 		};
 
-		$scope.postEvaluationCriteria = function (criteria, student) {
-			$http({
-				method: 'POST',
-				url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/criteria",
-				data: {
-					criterion_id: criteria.id,
-					value: "1"
-				}
-			}).then(function successCallback(response) {
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
-		$scope.createEvaluationsByCriteria = function (criteria, student) {
-			criteria.pivot.value += 1;
-			console.log(criteria.pivot.value == 1);
-			if (criteria.pivot.value == 1) {
-				var file = {
-					student_id: student.id,
-					lesson_id: $stateParams.id
-				};
-				$http({
-					method: 'POST',
-					url: config.apiUrl + "api/evaluations",
-					data: file
-				}).then(function successCallback(response) {
-					//student.evaluation = response.data;
-					console.log(response);
-					$scope.postEvaluationCriteria(criteria, student);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-			else
-				$scope.postEvaluationCriteria(criteria, student);
-		};
-
-		$scope.getEvaluation = function (id) {
-			var result = null;
-    		angular.forEach($scope.lesson.evaluations, function (evaluation, key) {
-    			if (evaluation.student_id == id)
-    				result = evaluation;
-			});
-			return (result);
-		};
-
-		$scope.postEvaluation = function (key, student) {
-			if ($("#student-" + key).find('.time-lesson').is(":hidden") && $("#student-" + key).find('.cross-lesson').is(":hidden")) {
-				$http({
-					method: 'POST',
-					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/absences"
-				}).then(function successCallback(response) {
-					// Si absent
-					student.evaluation.absence = response.data;
-					student.evaluation.delay = null;
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-			else if ($("#student-" + key).find('.time-lesson').is(":visible") && $("#student-" + key).find('.cross-lesson').is(":hidden")) {
-				$http({
-					method: 'DELETE',
-					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/delays/" + student.evaluation.delay.id
-				}).then(function successCallback(response) {
-					// Annulation de l'absence
-					student.evaluation.absence = null;
-					student.evaluation.delay = null;
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-			else {
-				$http({
-					method: 'POST',
-					url: config.apiUrl + "api/evaluations/" + student.evaluation.id + "/delays",
-				}).then(function successCallback(response) {
-					// Si en retard
-					student.evaluation.absence = null;
-					student.evaluation.delay = response.data;
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-		};
-
-		$scope.createEvaluations = function (key, student) {
-
-			if (angular.isUndefined(student.evaluation)) {
-				var file = {
-					student_id: student.id,
-					lesson_id: $stateParams.id
-				};
-
-				$http({
-					method: 'POST',
-					url: config.apiUrl + "api/evaluations",
-					data: file
-				}).then(function successCallback(response) {
-					student.evaluation = response.data;
-					console.log(response);
-					$scope.postEvaluation(key, student);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-			else
-				$scope.postEvaluation(key, student);
-		}
 	}])
 	.controller('lessonsIdStudent', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function (UserFactory, $scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 		$http({

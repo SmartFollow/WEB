@@ -456,6 +456,7 @@
 	</div>
 
 	<!-- Modal store criteria -->
+	<!--
 	<div id="modal-{{student.id}}" class="modal fade" tabindex="-1" role="dialog"
 	     ng-repeat="(key, student) in lesson.student_class.students">
 		<div class="modal-dialog">
@@ -477,6 +478,7 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<!-- Students list -->
 	<div class="row" ng-if="accessRules.includes('evaluations.store')">
@@ -487,9 +489,12 @@
 					     ng-click="updateStatus(student)"
 					     ng-repeat="student in lesson.student_class.students">
 						<div ng-show="student.lesson_evaluation.absence && student.lesson_evaluation.absence != null"
-						     class="cross-lesson glyphicon glyphicon-remove"></div>
+						     class="evaluation-absent glyphicon glyphicon-remove"></div>
 						<div ng-show="student.lesson_evaluation.delay && student.lesson_evaluation.delay != null"
-						     class="time-lesson glyphicon glyphicon-time"></div>
+						     class="evaluation-delay glyphicon glyphicon-time"></div>
+						<div ng-show="student.inUpdate" class="evaluation-loading">
+							<div class="align-helper"></div><img src="assets/img/loading.gif" alt="Mise à jour de l'évaluation" />
+						</div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
 						<span>{{student.firstname}} {{student.lastname}}</span>
@@ -500,13 +505,14 @@
 			<div id="cours" class="tab-pane fade" style="display: none;">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
-					     id="student-{{ student.id }}"
-					     data-toggle="modal" data-target="#modal-{{student.id}}"
 					     ng-repeat="student in lesson.student_class.students">
 						<div ng-show="student.lesson_evaluation.absence && student.lesson_evaluation.absence != null"
-						     class="cross-lesson glyphicon glyphicon-remove"></div>
+						     class="evaluation-absent glyphicon glyphicon-remove"></div>
 						<div ng-show="student.lesson_evaluation.delay && student.lesson_evaluation.delay != null"
-						     class="time-lesson glyphicon glyphicon-time"></div>
+						     class="evaluation-delay glyphicon glyphicon-time"></div>
+						<div ng-show="student.inUpdate" class="evaluation-loading">
+							<div class="align-helper"></div><img src="assets/img/loading.gif" alt="Mise à jour de l'évaluation" />
+						</div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
 						<span>{{student.firstname}} {{student.lastname}}</span>
@@ -515,7 +521,7 @@
 							<button ng-repeat="criterion in criteria"
 							        ng-click="updateEvaluationCriterion(student, criterion, 1)"
 							        class="btn btn-{{ { positive: 'success', negative: 'danger' }[criterion.impact] }}">
-								{{ criterion.name }} ({{ 0 }})
+								{{ criterion.name }} ({{ criterionFromEvaluation(student.lesson_evaluation, criterion).pivot.value || 0 }})
 							</button>
 						</div>
 					</div>

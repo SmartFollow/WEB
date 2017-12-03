@@ -93,8 +93,12 @@
 
 .img-profile-list .block-img-profile img, .img-profile-list .block-img-profile span {
   cursor: pointer; }
-.img-profile-list .block-img-profile .cross-lesson,
-.img-profile-list .block-img-profile .time-lesson {
+.img-profile-list .block-img-profile .align-helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle; }
+.img-profile-list .block-img-profile .evaluation-absent,
+.img-profile-list .block-img-profile .evaluation-delay {
   font-size: 7em;
   padding-top: 0.3em;
   z-index: 100;
@@ -103,18 +107,33 @@
   bottom: 0;
   left: 0;
   right: 0;
-  cursor: pointer; }
-.img-profile-list .block-img-profile .cross-lesson {
+  cursor: pointer;
+  text-shadow: 0px 2px 0px black; }
+.img-profile-list .block-img-profile .evaluation-absent {
   color: #C0392B; }
-.img-profile-list .block-img-profile .time-lesson {
+.img-profile-list .block-img-profile .evaluation-delay {
   color: #FFFFFF; }
+.img-profile-list .block-img-profile .evaluation-loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 300;
+  text-align: center;
+  border-radius: 4px; }
+  .img-profile-list .block-img-profile .evaluation-loading img {
+    vertical-align: middle; }
 .img-profile-list .block-img-profile .criteria-container {
   position: absolute;
   top: 0;
+  left: 15px;
+  right: 15px;
   background-color: #282828;
   border-radius: 4px;
   padding: 2.5px 5px;
-  z-index: 1000;
+  z-index: 200;
   display: none; }
   .img-profile-list .block-img-profile .criteria-container button {
     width: 100%;
