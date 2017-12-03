@@ -10,7 +10,7 @@
 					{{ pageTitle }}
 				</h2>
 				<div class="controls pull-right">
-					<span>{{ connectedUser.firstname }} {{ connectedUser.lastname }}</span>
+					<span>{{ connectedUser.firstname }} <strong>{{ connectedUser.lastname }}</strong></span>
 					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile"
 					                                                       class="glyphicon glyphicon-user"></a></span>
 					<span><a href="#" ng-controller="AuthController@logout" ng-click="logout()"

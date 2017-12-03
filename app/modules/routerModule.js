@@ -136,6 +136,12 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons/show.html'
 		})
+		.state('lessons.show.homeworks', {})
+		.state('lessons.show.homeworks.delete', {
+			url: '/lessons/{lessonId:int}/homeworks/{id:int}/delete',
+			parent: 'root',
+			controller: 'HomeworkController@delete'
+		})
 
 		/**
 		 * Reservations-related states
@@ -358,6 +364,9 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/difficulties/index.html'
 		})
 
+		/**
+		 * AI-related states
+		 */
 		.state('ai-controllers', {})
 		.state('ai-controllers.index', {
 			url: '/ai-controllers',
@@ -366,6 +375,8 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/ai-controllers/index.html',
 			css: '/assets/css/ai-controllers.css'
 		})
+
+
 
 		// Planning view
 		.state('planning', {

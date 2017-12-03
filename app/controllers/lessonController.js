@@ -210,7 +210,7 @@ angular.module('app')
 
 		/**
 		 * Update an evaluation's comment
-		 * 
+		 *
 		 * @param student
 		 */
 		$scope.updateComment = function(student) {
@@ -263,9 +263,13 @@ angular.module('app')
 			return result && result.length > 0 ? result[0] : null;
 		};
 
+		$scope.setEditHomework = function (homework) {
+			$scope.editHomework = homework;
+		};
 
-
-
+		$scope.setShowHomework = function (homework) {
+			$scope.showHomework = homework;
+		};
 
 
 
@@ -346,23 +350,6 @@ angular.module('app')
 				method: 'DELETE',
 				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/documents",
 				data: param
-			}).then(function successCallback(response) {
-				$state.reload();
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
-		$scope.createHW = function () {
-			console.log($("#HWdescription").val());
-			var file = {
-				description: $("#HWdescription").val()
-			};
-			$http({
-				method: 'POST',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/homeworks",
-				data: file
 			}).then(function successCallback(response) {
 				$state.reload();
 				console.log(response);

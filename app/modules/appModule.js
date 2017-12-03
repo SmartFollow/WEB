@@ -13,6 +13,7 @@ angular.module('app', [
 	'DifficultiesModule',
 	'LessonsModule',
 	'AIModule',
+	'HomeworksModule',
 	'SubjectsModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'

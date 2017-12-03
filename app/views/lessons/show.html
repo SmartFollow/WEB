@@ -82,74 +82,13 @@
 		</div>
 	</div>
 </div>
-<!-- Modal add homework -->
-<div id="modal-upload-homework" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Ajouter un devoir maison</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="5" id="HWdescription"></textarea>
-				<br>
-				<label class="control-label">Document lié (optionnel)</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createHW();">Ajouter
-				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal edit homework -->
-<div id="modal-upload-homework-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.homeworks">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Devoir à la maison n°{{key+1}}</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="5" id="HWdescription">{{document.description}}</textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editHW(document, 'send')">
-					Editer
-				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- Modal show homework -->
-<div id="modal-homework-{{key}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.homeworks">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Devoir à la maison n°{{key+1}}</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<div>{{document.description}}</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
+<modal src="/app/views/lessons/modals/homeworks/show"></modal>
+<!-- Modal add homework -->
+<modal src="/app/views/lessons/modals/homeworks/create"></modal>
+<!-- Modal edit homework -->
+<modal src="/app/views/lessons/modals/homeworks/edit"></modal>
+
 <!-- Modal marks exam -->
 <div id="modal-exam-mark" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -162,36 +101,36 @@
 			<div class="modal-body">
 				<table class="table">
 					<thead>
-					<tr>
-						<th>Nom Prénom</th>
-						<th>Note</th>
-						<th>Commentaire</th>
-						<th>Valider</th>
-					</tr>
+						<tr>
+							<th>Nom Prénom</th>
+							<th>Note</th>
+							<th>Commentaire</th>
+							<th>Valider</th>
+						</tr>
 					</thead>
 					<tbody>
-					<tr ng-repeat="student in lesson.student_class.students" class="ng-scope"
-					    id="student-{{student.id}}-mark">
-						<td class="ng-binding">{{student.lastname}} {{student.firstname}}</td>
-						<td class="ng-binding">
-							<select ng-model="student.mark.mark" ng-change="enableBtnForChanges(student.id)"
-							        class="form-control mark">
-								<option ng-repeat="n in range(lesson.exam.min_mark, lesson.exam.max_mark)"
-								        ng-selected="student.mark.mark == n" value="{{n}}">{{n}}
-								</option>
-							</select>
-						</td>
-						<td class="ng-binding"><textarea ng-model="student.mark.comment"
-						                                 ng-change="enableBtnForChanges(student.id)"
-						                                 class="form-control comment"
-						                                 rows="1">{{student.mark.comment}}</textarea></td>
-						<td class="ng-binding">
-							<button type="submit" class="valid btn btn-danger disabled"
-							        ng-click="postExam(lesson.exam.id, student.id, student.mark.mark, student.mark.comment)">
-								Valider
-							</button>
-						</td>
-					</tr>
+						<tr ng-repeat="student in lesson.student_class.students" class="ng-scope"
+						    id="student-{{student.id}}-mark">
+							<td class="ng-binding">{{student.lastname}} {{student.firstname}}</td>
+							<td class="ng-binding">
+								<select ng-model="student.mark.mark" ng-change="enableBtnForChanges(student.id)"
+								        class="form-control mark">
+									<option ng-repeat="n in range(lesson.exam.min_mark, lesson.exam.max_mark)"
+									        ng-selected="student.mark.mark == n" value="{{n}}">{{n}}
+									</option>
+								</select>
+							</td>
+							<td class="ng-binding"><textarea ng-model="student.mark.comment"
+							                                 ng-change="enableBtnForChanges(student.id)"
+							                                 class="form-control comment"
+							                                 rows="1">{{student.mark.comment}}</textarea></td>
+							<td class="ng-binding">
+								<button type="submit" class="valid btn btn-danger disabled"
+								        ng-click="postExam(lesson.exam.id, student.id, student.mark.mark, student.mark.comment)">
+									Valider
+								</button>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -294,7 +233,7 @@
 						<dt>Professeur</dt>
 						<dd>
 							<a ui-sref="users.show({ id : lesson.subject.teacher.id })">
-								<span id="teacher">{{ lesson.subject.teacher.firstname }} {{ lesson.subject.teacher.lastname }}</span>
+								<span id="teacher">{{ lesson.subject.teacher.firstname }} <strong>{{ lesson.subject.teacher.lastname }}</strong></span>
 							</a>
 						</dd>
 
@@ -371,13 +310,13 @@
 					</span>
 					<ul class="list-group data-list">
 						<li class="list-group-item" ng-repeat="(key, homework) in lesson.homeworks">
-							<a data-toggle="modal" data-target="#modal-homework-{{key}}">
+							<a ng-click="setShowHomework(homework)" data-toggle="modal" data-target="#modal-homework-show" ng-if="accessRules.includes('homeworks.show')">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
-							<a ng-click="editHW(homework, 'modal')" ng-if="accessRules.includes('homeworks.update')">
+							<a ng-click="setEditHomework(homework)" data-toggle="modal" data-target="#modal-homework-edit" ng-if="accessRules.includes('homeworks.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ng-click="deleteHW(homework)" ng-if="accessRules.includes('homeworks.destroy')">
+							<a ui-sref="lessons.show.homeworks.delete({ lessonId: lesson.id, id: homework.id})" ng-if="accessRules.includes('homeworks.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
 
@@ -388,8 +327,7 @@
 								      title="{{ homework.updated_at }}"></span>
 							</div>
 						</li>
-						<a data-toggle="modal" data-target="#modal-upload-homework"
-						   ng-if="accessRules.includes('homeworks.store')">
+						<a data-toggle="modal" data-target="#modal-homework-create" ng-if="accessRules.includes('homeworks.store')">
 							<li class="list-group-item text-center">
 								<div class="pull-left">
 									<span class="glyphicon glyphicon-plus"></span>
@@ -407,7 +345,7 @@
 						<strong>Examen :</strong>
 					</span>
 					<ul class="list-group data-list">
-						<li class="list-group-item" ng-if="lesson.exam && (lesson.exam.type == 'home' || accessRules.includes('exams.index'))">
+						<li class="list-group-item" ng-if="lesson.exam && (lesson.exam.type != 'surprise' || accessRules.includes('exams.index'))">
 							<a data-toggle="modal" data-target="#modal-exam-1">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
@@ -436,7 +374,7 @@
 								Ajouter un examen
 							</li>
 						</a>
-						<li class="list-group-item text-center" ng-if="!accessRules.includes('exams.store') && (!lesson.exam || (lesson.exam.type != 'home' && !accessRules.includes('exams.index')))">
+						<li class="list-group-item text-center" ng-if="!accessRules.includes('exams.store') && (!lesson.exam || (lesson.exam.type == 'surprise' && !accessRules.includes('exams.index')))">
 							Aucun examen à afficher
 						</li>
 					</ul>
@@ -529,7 +467,7 @@
 					<table class="table evaluations-summary">
 						<thead>
 							<tr>
-								<th></th>
+								<th style="width: 50px;"></th>
 								<th>Étudiant</th>
 								<th>Statut</th>
 								<th>Critères</th>
@@ -538,7 +476,7 @@
 						</thead>
 						<tbody class="vertically-aligned">
 							<tr ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
-								<td><img src="{{ config.apiUrl + student.avatar }}" alt="Photo de profil" class="img-circle img-profile" /></td>
+								<td><img ng-src="{{ config.apiUrl + student.avatar }}" alt="Photo de profil" class="img-circle img-profile" /></td>
 								<td>{{ student.firstname }} <strong>{{ student.lastname }}</strong></td>
 								<td>
 									<span ng-class="student.lesson_evaluation.absence ? 'text-danger' : student.lesson_evaluation.delay ? 'text-warning' : 'text-success'">
