@@ -192,6 +192,34 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		/**
+		 * Levels-related states
+		 */
+		.state('levels', {})
+		.state('levels.index', {
+			url: '/levels',
+			parent: 'root',
+			controller: 'LevelController@index',
+			templateUrl: 'app/views/levels/index.html'
+		})
+		.state('levels.create', {
+			url: '/levels/create',
+			parent: 'root',
+			controller: 'LevelController@create',
+			templateUrl: 'app/views/levels/create.html'
+		})
+		.state('levels.edit', {
+			url: '/levels/{id:int}/edit',
+			parent: 'root',
+			controller: 'LevelController@edit',
+			templateUrl: 'app/views/levels/edit.html'
+		})
+		.state('levels.delete', {
+			url: '/levels/{id:int}/delete',
+			parent: 'root',
+			controller: 'LevelController@delete'
+		})
+
+		/**
 		 * Notifications-related states
 		 */
 		.state('notifications', {})

@@ -1,0 +1,23 @@
+<div class="main">
+    <div class="page-block">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-6 text-right">
+                <a ui-sref="levels.index">Voir la liste des niveaux <span class="glyphicon glyphicon-arrow-right"></span></a>
+            </div>
+        </div>
+
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+        <form>
+            <div class="form-group">
+                <label for="identifier">Identifiant</label>
+                <input type="text" name="identifier" id="identifier" ng-model="identifier" placeholder="Identifiant du niveau" class="form-control">
+            </div>
+            <button ng-click="createLevel()" class="btn btn-danger">Créer le niveau</button>
+        </form>
+        <br />
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+    </div>
+</div>
