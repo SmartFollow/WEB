@@ -10,15 +10,15 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Identifiant</th>
+                <th>Nom</th>
                 <th ng-if="accessRules.includes('levels.edit')">Modifier</th>
                 <th ng-if="accessRules.includes('levels.destroy')">Supprimer</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="level in levels | orderBy: 'level.identifier'">
+            <tr ng-repeat="level in levels | orderBy: 'level.name'">
                 <td>{{ level.id }}</td>
-                <td>{{ level.identifier }}</td>
+                <td>{{ level.name }}</td>
                 <td ng-if="accessRules.includes('levels.edit')">
                     <a ui-sref="levels.edit({ id: level.id })">Modifier</a>
                 </td>

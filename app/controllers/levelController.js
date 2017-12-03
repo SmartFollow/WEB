@@ -14,10 +14,10 @@ angular.module('LevelsModule')
         };
 
         $scope.createLevel = function () {
-            var identifier = $('input[name="identifier"]').val();
+            var name = $('input[name="name"]').val();
 
             LevelFactory.storeLevel({
-                identifier: identifier,
+                name: name,
             }, function (level) {
                 $scope.alerts.success = {
                     show: true,
@@ -40,14 +40,14 @@ angular.module('LevelsModule')
         LevelFactory.getEditFormData($stateParams.id, function (level) {
             $scope.level = level;
 
-            $rootScope.pageTitle = "Modification d'un niveau : " + $scope.level.identifier;
+            $rootScope.pageTitle = "Modification d'un niveau : " + $scope.level.name;
         });
 
         $scope.editLevel = function () {
-            var identifier = $('input[name="identifier"]').val();
+            var name = $('input[name="name"]').val();
 
             LevelFactory.updateLevel($stateParams.id, {
-                identifier: identifier,
+                name: name,
             }, function (level) {
                 $scope.alerts.success = {
                     show: true,
