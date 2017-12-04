@@ -38,4 +38,28 @@ angular.module('ExamsModule')
 		else {
 			$state.go('lessons.show', { id: $stateParams.lessonId });
 		}
+	}])
+	.controller('ExamController@marks', ['$rootScope', '$scope', '$stateParams', 'config', '$state', 'MarkFactory', function ($rootScope, $scope, $stateParams, config, $state, MarkFactory) {
+		$scope.updateMark = function (student) {
+			student.inUpdate = true;
+			if (!student.exam_mark.id) { // There is no mark for the student yet
+				MarkFactory.storeMark($scope.lesson.exam.id, {
+					student_id: student.id,
+					mark: student.exam_mark.mark,
+					comment: student.exam_mark.comment
+				}, function (mark) {
+					student.exam_mark = mark;
+					student.inUpdate = false;
+				});
+			}
+			else {
+				MarkFactory.updateMark($scope.lesson.exam.id, student.exam_mark.id, {
+					mark: student.exam_mark.mark,
+					comment: student.exam_mark.comment
+				}, function (mark) {
+					student.exam_mark = mark;
+					student.inUpdate = false;
+				});
+			}
+		};
 	}]);

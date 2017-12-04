@@ -75,58 +75,8 @@
 <modal src="/app/views/lessons/modals/exams/create"></modal>
 <!-- Modal edit exam -->
 <modal src="/app/views/lessons/modals/exams/edit"></modal>
-
 <!-- Modal marks exam -->
-<div id="modal-exam-mark" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Noter l'examen</h4>
-			</div>
-			<div class="modal-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Nom Prénom</th>
-							<th>Note</th>
-							<th>Commentaire</th>
-							<th>Valider</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="student in lesson.student_class.students" class="ng-scope"
-						    id="student-{{student.id}}-mark">
-							<td class="ng-binding">{{student.lastname}} {{student.firstname}}</td>
-							<td class="ng-binding">
-								<select ng-model="student.mark.mark" ng-change="enableBtnForChanges(student.id)"
-								        class="form-control mark">
-									<option ng-repeat="n in range(lesson.exam.min_mark, lesson.exam.max_mark)"
-									        ng-selected="student.mark.mark == n" value="{{n}}">{{n}}
-									</option>
-								</select>
-							</td>
-							<td class="ng-binding"><textarea ng-model="student.mark.comment"
-							                                 ng-change="enableBtnForChanges(student.id)"
-							                                 class="form-control comment"
-							                                 rows="1">{{student.mark.comment}}</textarea></td>
-							<td class="ng-binding">
-								<button type="submit" class="valid btn btn-danger disabled"
-								        ng-click="postExam(lesson.exam.id, student.id, student.mark.mark, student.mark.comment)">
-									Valider
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
+<modal src="/app/views/lessons/modals/exams/marks"></modal>
 
 <div class="main">
 	<div class="page-block">
@@ -264,8 +214,7 @@
 							<a ui-sref="lessons.show.exams.delete({ lessonId: lesson.id, id: lesson.exam.id })" ng-if="accessRules.includes('exams.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
-							<a data-toggle="modal" data-target="#modal-exam-mark"
-							   ng-if="accessRules.includes('marks.store')">
+							<a data-toggle="modal" data-target="#modal-exam-marks" ng-if="accessRules.includes('marks.store')">
 								<span class="glyphicon glyphicon-check data-icon"></span>
 							</a>
 
@@ -301,31 +250,6 @@
 			<li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li>
 		</ol>
 	</div>
-
-	<!-- Modal store criteria -->
-	<!--
-	<div id="modal-{{student.id}}" class="modal fade" tabindex="-1" role="dialog"
-	     ng-repeat="(key, student) in lesson.student_class.students">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title"></h4>
-				</div>
-				<div id="popup-body" class="modal-body">
-					<button ng-repeat="criteria in student.evaluation.criteria"
-					        ng-click="createEvaluationsByCriteria(criteria, student)"
-					        type="button" id="{{ criteria.id }}"
-					        class="participation btn btn-{{ { positive: 'success', negative: 'danger' }[criteria.impact] }} btn-lg btn-block">
-						{{ criteria.name }} - {{ criteria.pivot ? criteria.pivot.value : 0 }}
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
 
 	<!-- Students list -->
 	<div class="row" ng-if="accessRules.includes('evaluations.store')">
