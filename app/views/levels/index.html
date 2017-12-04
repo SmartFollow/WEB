@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="level in levels | orderBy: 'level.name'">
+            <tr ng-repeat="level in levels | orderBy: 'name'">
                 <td>{{ level.id }}</td>
                 <td>{{ level.name }}</td>
                 <td ng-if="accessRules.includes('levels.edit')">
