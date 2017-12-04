@@ -6,9 +6,12 @@ angular.module('DocumentsModule')
 		$scope.createDocument = {};
 
 		$scope.storeDocument = function () {
-			DocumentFactory.storeDocument($stateParams.id, {
-				description: $scope.createDocument.description
-			}, function (document) {
+			var formData = new FormData();
+			formData.append('name', $scope.createDocument.name);
+			formData.append('description', $scope.createDocument.description);
+			formData.append('document', $('input[name="document_file"]')[0].files[0]);
+
+			DocumentFactory.storeDocument($stateParams.id, formData, function (document) {
 				$scope.lesson.documents.push(document);
 			});
 		}
@@ -16,6 +19,7 @@ angular.module('DocumentsModule')
 	.controller('DocumentController@edit', ['$rootScope', '$scope', '$stateParams', 'config', 'DocumentFactory', function ($rootScope, $scope, $stateParams, config, DocumentFactory) {
 		$scope.updateDocument = function () {
 			DocumentFactory.updateDocument($scope.editDocument.id, {
+				name: $scope.editDocument.name,
 				description: $scope.editDocument.description
 			}, function (document) {
 				$scope.editDocument = document;

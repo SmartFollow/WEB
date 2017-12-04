@@ -1,60 +1,3 @@
-<!-- Modal add document -->
-<div id="modal-upload" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Ajouter un document</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Nom</label>
-				<input type="text" class="form-control" id="name">
-				<br>
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="2" id="description"></textarea>
-				<br>
-				<label class="control-label">Document</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" ng-click="createDocument();">Ajouter</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal edit document -->
-<div id="modal-upload-edit-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.documents">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Editer un document</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Nom</label>
-				<input type="text" class="form-control" id="name" value="{{document.name}}">
-				<br>
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="2" id="description">{{document.description}}</textarea>
-				<br>
-				<label class="control-label">Document</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document"
-				       style="margin-left: auto;margin-right: auto;">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" ng-click="editDocument(document, 'send')">Editer</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!-- Modal show document -->
 <modal src="/app/views/lessons/modals/documents/show"></modal>
 <!-- Modal add document -->
@@ -181,7 +124,7 @@
 
 							<div class="pull-right">
 								Devoir à la maison n°{{ key + 1 }}
-								<span class="glyphicon glyphicon-file data-icon"></span>
+								<span class="glyphicon glyphicon-file data-icon" ng-if="homework.document_id"></span>
 								<span class="glyphicon glyphicon-time data-icon"
 								      title="{{ homework.updated_at }}"></span>
 							</div>
@@ -220,7 +163,7 @@
 
 							<div class="pull-right">
 								Examen
-								<span class="glyphicon glyphicon-file data-icon"></span>
+								<span class="glyphicon glyphicon-file data-icon" ng-if="lesson.exam.document_id"></span>
 								<span class="glyphicon glyphicon-time data-icon" title="{{ lesson.exam.updated_at }}"></span>
 							</div>
 						</li>
@@ -245,16 +188,16 @@
 	<div class="row breadcrumb-container" ng-if="accessRules.includes('evaluations.store')">
 		<ol class="breadcrumb">
 			<li class="legend">Déroulement du cours</li>
-			<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
-			<li data-toggle="tab" href="#cours" class="clickable" ng-click="tabClick(2)">Cours</li>
-			<li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li>
+			<li data-toggle="tab" href="#rollcall" class="active clickable" ng-click="tabClick(1)">Appel</li>
+			<li data-toggle="tab" href="#lesson" class="clickable" ng-click="tabClick(2)">Cours</li>
+			<li data-toggle="tab" href="#end" class="clickable" ng-click="tabClick(3)">Fin</li>
 		</ol>
 	</div>
 
 	<!-- Students list -->
 	<div class="row" ng-if="accessRules.includes('evaluations.store')">
 		<div class="tab col-xs-8 col-sm-8 col-md-10 col-xs-offset-2 col-sm-offset-2 col-md-offset-1">
-			<div id="appel" class="tab-pane fade in active">
+			<div id="rollcall" class="tab-pane fade in active">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
 					     ng-click="updateStatus(student)"
@@ -271,7 +214,7 @@
 				</div>
 			</div>
 
-			<div id="cours" class="tab-pane fade" style="display: none;">
+			<div id="lesson" class="tab-pane fade" style="display: none;">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
 					     ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
@@ -295,7 +238,7 @@
 				</div>
 			</div>
 
-			<div id="fin" class="tab-pane fade" style="display: none;">
+			<div id="end" class="tab-pane fade" style="display: none;">
 				<div class="page-block">
 					<table class="table evaluations-summary">
 						<thead>

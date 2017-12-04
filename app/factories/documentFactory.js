@@ -5,7 +5,8 @@ angular.module('DocumentsModule')
 				$http({
 					method: 'POST',
 					url: config.apiUrl + "api/lessons/" + lessonId + "/documents",
-					data: data
+					data: data,
+					headers: { 'Content-Type': undefined }
 				}).then(function successCallback(response) {
 					callback(response.data);
 				}, function errorCallback(response) {

@@ -280,20 +280,6 @@ angular.module('app')
 		};
 
 
-
-		$scope.range = function(min, max, step) {
-		    step = step || 1;
-		    var input = [];
-		    for (var i = min; i <= max; i += step) {
-		        input.push(i);
-		    }
-		    return input;
-		};
-
-		$scope.enableBtnForChanges = function (id) {
-			$("#student-"+id+"-mark").find(".valid").removeClass("disabled");
-		};
-
 		$scope.tabClick = function (nb) {
 			var button = $(".breadcrumb li").eq(nb);
 			if (!button.hasClass("legend") && !button.hasClass("active")) {
@@ -306,78 +292,6 @@ angular.module('app')
 				$(".breadcrumb").find(".active").removeClass("active");
 			}
 		};
-
-		$scope.createDocument = function () {
-			console.log($("#document")[0].files[0]);
-			var file = {
-				name: $("#name").val(),
-				description: $("#description").val(),
-				document: $("#document")[0].files[0]
-			};
-			$http({
-				method: 'POST',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/documents",
-				data: file
-			}).then(function successCallback(response) {
-				$state.reload();
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
-		$scope.editDocument = function (document, type) {
-			if (type == "modal") {
-				$('#modal-upload-edit-' + document.id).modal();
-			}
-			else if (type == "send") {
-				var file = {
-					name: $("#name").val(),
-					description: $("#description").val(),
-					document: $("#document")[0].files[0],
-					id: document.id
-				};
-				$http({
-					method: 'PUT',
-					url: config.apiUrl + "api/lessons/" + $stateParams.id + "/documents",
-					data: file
-				}).then(function successCallback(response) {
-					$state.reload();
-					console.log(response);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-		};
-
-		$scope.getExistingMark = function (examId, studentId) {
-			var studentMark = null;
-			if ($scope.existingMark == null)
-			{
-				return ($http({
-					method: 'GET',
-					url: config.apiUrl + "api/exams/"+examId+"/marks"
-				}).then(function successCallback(response) {
-					$scope.existingMark = response.data;
-					angular.forEach($scope.existingMark, function (mark, key) {
-						if (mark.student_id == studentId)
-							studentMark = mark;
-					});
-					return (studentMark);
-				}, function errorCallback(response) {
-					console.log(response);
-				}));
-			}
-			else
-			{
-				angular.forEach($scope.existingMark, function (mark, key) {					
-					if (mark.student_id == studentId)
-						studentMark = mark;
-				});
-			}
-			return (studentMark);
-		};
-
 	}])
 	.controller('lessonsIdStudent', ['UserFactory', '$scope', '$state', '$rootScope', '$http', '$filter', '$stateParams', 'config', function (UserFactory, $scope, $state, $rootScope, $http, $filter, $stateParams, config) {
 		$http({
