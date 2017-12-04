@@ -24,8 +24,6 @@ angular.module('UsersModule')
 				});
 
 			$scope.profile.avatar = config.apiUrl + $scope.profile.avatar;
-
-			console.log($scope.profile);
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
@@ -84,7 +82,8 @@ angular.module('UsersModule')
 				email: $scope.user.email,
 				password: $scope.user.password,
 				group: $scope.user.group_id,
-				student_class: $scope.user.class_id
+				student_class: $scope.user.class_id,
+				avatar: $scope.user.avatar
 			}, function (user) {
 				$scope.alerts.success = {
 					show: true,

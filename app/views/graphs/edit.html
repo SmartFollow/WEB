@@ -33,6 +33,12 @@
 				<input type="number" name="days_range" id="days_range" ng-model="graph.days_range" placeholder="Période d'affichage des valeurs (en jours)" class="form-control" required="required">
 			</div>
 
+			<div class="form-group">
+				<label for="type">Critères donnés ou reçus</label>
+				<select name="summary_type" ng-model="graph.summary_type" id="summary_type" class="form-control" required="required">
+					<option value="{{ key }}" ng-selected="graph.summary_type == key" ng-repeat="(key, summary_type) in summary_types">{{ summary_type }}</option>
+				</select>
+			</div>
 			<button ng-click="editGraph()" class="btn btn-danger">Modifier le graphique</button>
 		</form>
 		<br />

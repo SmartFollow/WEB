@@ -86,25 +86,6 @@
 		<!-- Right column -->
 		<div class="col-md-6" style="padding-left: 7.5px;">
 
-			<!-- Student difficulties -->
-			<div class="block" ng-if="accessRules.includes('difficulties.index') || accessRules.includes('difficulties.self.index')">
-				<h2>Elèves en difficultés</h2>
-				<div class="row img-profile-list">
-					<a ui-sref="users.show({ id: difficulty.student.id })" class="col-md-4 text-center block-img-profile" ng-repeat="difficulty in profile.assigned_difficulties | limitTo: 3">
-						<img ng-src="{{ config.apiUrl + difficulty.student.avatar }}" class="img-circle img-profile" />
-						<span>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</span>
-					</a>
-				</div>
-				<div class="row">
-					<div class="col-md-12 text-center" ng-if="profile.assigned_difficulties.length == 0">
-						<p>Aucun étudiant en difficulté ne vous a été assigné actuellement.</p>
-					</div>
-					<div class="col-md-12 text-center">
-						<a ui-sref="difficulties.index">Voir tous les élèves en difficulté</a>
-					</div>
-				</div>
-			</div>
-
 			<!-- Received criteria summary -->
 			<div class="block" ng-if="accessRules.includes('criteria.summary.received')">
 				<h2 class="title_h2">Résumé des critères récents reçus</h2>
@@ -184,6 +165,25 @@
 				</ul>
 				<div class="text-center" ng-if="profile.given_criteria_sums.length == 0 && profile.given_criteria_averages.length == 0 && !profile.given_last_absences_delays_sum">
 					Aucun critère enregistré récemment
+				</div>
+			</div>
+
+			<!-- Student difficulties -->
+			<div class="block" ng-if="accessRules.includes('difficulties.index') || accessRules.includes('difficulties.self.index')">
+				<h2>Elèves en difficultés</h2>
+				<div class="row img-profile-list">
+					<a ui-sref="users.show({ id: difficulty.student.id })" class="col-md-4 text-center block-img-profile" ng-repeat="difficulty in profile.assigned_difficulties | limitTo: 3">
+						<img ng-src="{{ config.apiUrl + difficulty.student.avatar }}" class="img-circle img-profile" />
+						<span>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</span>
+					</a>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center" ng-if="profile.assigned_difficulties.length == 0">
+						<p>Aucun étudiant en difficulté ne vous a été assigné actuellement.</p>
+					</div>
+					<div class="col-md-12 text-center">
+						<a ui-sref="difficulties.index">Voir tous les élèves en difficulté</a>
+					</div>
 				</div>
 			</div>
 

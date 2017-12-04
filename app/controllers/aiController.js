@@ -37,7 +37,7 @@ angular.module('AIModule')
 				description: "Lance le calcul des moyennes des critères reçus par toutes les classes d'étudiants ayant reçu une évaluation récemment.",
 				runFunction: function() {
 					$('#loading').removeClass('hidden');
-					AIFactory.runCriteriaClassesSum($scope.displayResults);
+					AIFactory.runCriteriaClassesAverage($scope.displayResults);
 				}
 			},
 			{
@@ -45,7 +45,7 @@ angular.module('AIModule')
 				description: "Lance le calcul des sommes des critères reçus par toutes les classes d'étudiants ayant reçu une évaluation récemment.",
 				runFunction: function() {
 					$('#loading').removeClass('hidden');
-					AIFactory.runCriteriaClassesAverage($scope.displayResults);
+					AIFactory.runCriteriaClassesSum($scope.displayResults);
 				}
 			},
 			{

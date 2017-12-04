@@ -1,284 +1,25 @@
+<!-- Modal show document -->
+<modal src="/app/views/lessons/modals/documents/show"></modal>
 <!-- Modal add document -->
-<div id="modal-upload" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Ajouter un document</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Nom</label>
-				<input type="text" class="form-control" id="name">
-				<br>
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="2" id="description"></textarea>
-				<br>
-				<label class="control-label">Document</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" ng-click="createDocument();">Ajouter</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
+<modal src="/app/views/lessons/modals/documents/create"></modal>
 <!-- Modal edit document -->
-<div id="modal-upload-edit-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.documents">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Editer un document</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Nom</label>
-				<input type="text" class="form-control" id="name" value="{{document.name}}">
-				<br>
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="2" id="description">{{document.description}}</textarea>
-				<br>
-				<label class="control-label">Document</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document"
-				       style="margin-left: auto;margin-right: auto;">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" ng-click="editDocument(document, 'send')">Editer</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
+<modal src="/app/views/lessons/modals/documents/edit"></modal>
 
-<div id="modal-file-{{key}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.documents">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">{{document.name}}</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Nom</label>
-				<div>{{document.name}}</div>
-				<br>
-				<label class="control-label">Description</label>
-				<div>{{document.description}}</div>
-				<br>
-				<label class="control-label">Document</label>
-				<br>
-				<a href="{{ config.apiUrl + document.path}}" download="{{document.filename}}.{{document.extension}}"><i
-						class="document-type glyphicon glyphicon-download-alt"></i></a>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal add homework -->
-<div id="modal-upload-homework" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Ajouter un devoir maison</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="5" id="HWdescription"></textarea>
-				<br>
-				<label class="control-label">Document lié (optionnel)</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createHW();">Ajouter
-				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal edit homework -->
-<div id="modal-upload-homework-{{document.id}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.homeworks">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Devoir à la maison n°{{key+1}}</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="5" id="HWdescription">{{document.description}}</textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editHW(document, 'send')">
-					Editer
-				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- Modal show homework -->
-<div id="modal-homework-{{key}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.homeworks">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Devoir à la maison n°{{key+1}}</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<div>{{document.description}}</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal marks exam -->
-<div id="modal-exam-mark" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Noter l'examen</h4>
-			</div>
-			<div class="modal-body">
-				<table class="table">
-					<thead>
-					<tr>
-						<th>Nom Prénom</th>
-						<th>Note</th>
-						<th>Commentaire</th>
-						<th>Valider</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr ng-repeat="student in lesson.student_class.students" class="ng-scope"
-					    id="student-{{student.id}}-mark">
-						<td class="ng-binding">{{student.lastname}} {{student.firstname}}</td>
-						<td class="ng-binding">
-							<select ng-model="student.mark.mark" ng-change="enableBtnForChanges(student.id)"
-							        class="form-control mark">
-								<option ng-repeat="n in range(lesson.exam.min_mark, lesson.exam.max_mark)"
-								        ng-selected="student.mark.mark == n" value="{{n}}">{{n}}
-								</option>
-							</select>
-						</td>
-						<td class="ng-binding"><textarea ng-model="student.mark.comment"
-						                                 ng-change="enableBtnForChanges(student.id)"
-						                                 class="form-control comment"
-						                                 rows="1">{{student.mark.comment}}</textarea></td>
-						<td class="ng-binding">
-							<button type="submit" class="valid btn btn-danger disabled"
-							        ng-click="postExam(lesson.exam.id, student.id, student.mark.mark, student.mark.comment)">
-								Valider
-							</button>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal show exam -->
-<div id="modal-exam-1" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Examen</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<div>{{lesson.exam.description}}</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal add exam -->
-<div id="modal-upload-exam" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Ajouter un examen</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Type</label>
-				<select class="form-control" id="examType">
-					<option value="home">Examen maison</option>
-					<option value="class">Examen en classe</option>
-					<option value="surprise">Examen surprise</option>
-				</select>
-				<br>
-				<label class="control-label">Notation</label>
-				<div class="form-group row">
-					<div class="col-md-6">
-						<label class="control-label">min</label>
-						<input class="form-control" type="number" value="0" id="examMin">
-					</div>
-					<div class="col-md-6">
-						<label class="control-label">max</label>
-						<input class="form-control" type="number" value="20" id="examMax">
-					</div>
-				</div>
-				<br>
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="5" id="examDescription"></textarea>
-				<br>
-				<label class="control-label">Et/Ou un document</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document"
-				       style="margin-left: auto;margin-right: auto;">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createExam();">Ajoutez
-				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
+<modal src="/app/views/lessons/modals/homeworks/show"></modal>
+<!-- Modal add homework -->
+<modal src="/app/views/lessons/modals/homeworks/create"></modal>
+<!-- Modal edit homework -->
+<modal src="/app/views/lessons/modals/homeworks/edit"></modal>
 
-<div id="modal-pdf" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title"></h4>
-			</div>
-			<div class="modal-body text-center">
-			</div>
-		</div>
-	</div>
-</div>
+<!-- Modal show exam -->
+<modal src="/app/views/lessons/modals/exams/show"></modal>
+<!-- Modal add exam -->
+<modal src="/app/views/lessons/modals/exams/create"></modal>
+<!-- Modal edit exam -->
+<modal src="/app/views/lessons/modals/exams/edit"></modal>
+<!-- Modal marks exam -->
+<modal src="/app/views/lessons/modals/exams/marks"></modal>
 
 <div class="main">
 	<div class="page-block">
@@ -286,7 +27,7 @@
 		<div class="row">
 			<div class="table-display">
 				<div class="col-md-1 table-cell-display">
-					<img ng-src="{{ config.apiUrl + lesson.subject.teacher.avatar }}" class="img-profile img-circle"/>
+					<img ng-src="{{ lesson.subject.teacher.avatar }}" class="img-profile img-circle" />
 				</div>
 
 				<div class="col-md-4 table-cell-display">
@@ -294,7 +35,7 @@
 						<dt>Professeur</dt>
 						<dd>
 							<a ui-sref="users.show({ id : lesson.subject.teacher.id })">
-								<span id="teacher">{{ lesson.subject.teacher.firstname }} {{ lesson.subject.teacher.lastname }}</span>
+								<span id="teacher">{{ lesson.subject.teacher.firstname }} <strong>{{ lesson.subject.teacher.lastname }}</strong></span>
 							</a>
 						</dd>
 
@@ -334,14 +75,14 @@
 							   download="{{document.filename}}.{{document.extension}}">
 								<span class="glyphicon glyphicon-download-alt data-icon"></span>
 							</a>
-							<a data-toggle="modal" data-target="#modal-file-{{key}}">
+							<a ng-click="setShowDocument(document)" data-toggle="modal" data-target="#modal-document-show">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
-							<a ng-click="editDocument(document, 'modal')"
+							<a ng-click="setEditDocument(document)" data-toggle="modal" data-target="#modal-document-edit"
 							   ng-if="accessRules.includes('documents.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ng-click="deleteDocument(document)" ng-if="accessRules.includes('documents.destroy')">
+							<a ui-sref="lessons.show.documents.delete({ lessonId: lesson.id, id: document.id })" ng-if="accessRules.includes('documents.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
 
@@ -351,7 +92,7 @@
 								<span class="glyphicon glyphicon-time data-icon" title="{{document.updated_at}}"></span>
 							</div>
 						</li>
-						<a data-toggle="modal" data-target="#modal-upload"
+						<a data-toggle="modal" data-target="#modal-document-create"
 						   ng-if="accessRules.includes('documents.store')">
 							<li class="list-group-item text-center">
 								<div class="pull-left">
@@ -371,25 +112,24 @@
 					</span>
 					<ul class="list-group data-list">
 						<li class="list-group-item" ng-repeat="(key, homework) in lesson.homeworks">
-							<a data-toggle="modal" data-target="#modal-homework-{{key}}">
+							<a ng-click="setShowHomework(homework)" data-toggle="modal" data-target="#modal-homework-show" ng-if="accessRules.includes('homeworks.show')">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
-							<a ng-click="editHW(homework, 'modal')" ng-if="accessRules.includes('homeworks.update')">
+							<a ng-click="setEditHomework(homework)" data-toggle="modal" data-target="#modal-homework-edit" ng-if="accessRules.includes('homeworks.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ng-click="deleteHW(homework)" ng-if="accessRules.includes('homeworks.destroy')">
+							<a ui-sref="lessons.show.homeworks.delete({ lessonId: lesson.id, id: homework.id })" ng-if="accessRules.includes('homeworks.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
 
 							<div class="pull-right">
 								Devoir à la maison n°{{ key + 1 }}
-								<span class="glyphicon glyphicon-file data-icon"></span>
+								<span class="glyphicon glyphicon-file data-icon" ng-if="homework.document_id"></span>
 								<span class="glyphicon glyphicon-time data-icon"
 								      title="{{ homework.updated_at }}"></span>
 							</div>
 						</li>
-						<a data-toggle="modal" data-target="#modal-upload-homework"
-						   ng-if="accessRules.includes('homeworks.store')">
+						<a data-toggle="modal" data-target="#modal-homework-create" ng-if="accessRules.includes('homeworks.store')">
 							<li class="list-group-item text-center">
 								<div class="pull-left">
 									<span class="glyphicon glyphicon-plus"></span>
@@ -407,28 +147,27 @@
 						<strong>Examen :</strong>
 					</span>
 					<ul class="list-group data-list">
-						<li class="list-group-item" ng-if="lesson.exam && (lesson.exam.type == 'home' || accessRules.includes('exams.index'))">
-							<a data-toggle="modal" data-target="#modal-exam-1">
+						<li class="list-group-item" ng-if="lesson.exam && (lesson.exam.type != 'surprise' || accessRules.includes('exams.index'))">
+							<a data-toggle="modal" data-target="#modal-exam-show">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
-							<a ng-click="editExam()" ng-if="accessRules.includes('exams.update')">
+							<a data-toggle="modal" data-target="#modal-exam-edit" ng-if="accessRules.includes('exams.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ng-click="deleteExam()" ng-if="accessRules.includes('exams.destroy')">
+							<a ui-sref="lessons.show.exams.delete({ lessonId: lesson.id, id: lesson.exam.id })" ng-if="accessRules.includes('exams.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
-							<a data-toggle="modal" data-target="#modal-exam-mark"
-							   ng-if="accessRules.includes('marks.store')">
+							<a data-toggle="modal" data-target="#modal-exam-marks" ng-if="accessRules.includes('marks.store')">
 								<span class="glyphicon glyphicon-check data-icon"></span>
 							</a>
 
 							<div class="pull-right">
 								Examen
-								<span class="glyphicon glyphicon-file data-icon"></span>
+								<span class="glyphicon glyphicon-file data-icon" ng-if="lesson.exam.document_id"></span>
 								<span class="glyphicon glyphicon-time data-icon" title="{{ lesson.exam.updated_at }}"></span>
 							</div>
 						</li>
-						<a data-toggle="modal" data-target="#modal-upload-exam" ng-if="!lesson.exam && accessRules.includes('exams.store')">
+						<a data-toggle="modal" data-target="#modal-exam-create" ng-if="!lesson.exam && accessRules.includes('exams.store')">
 							<li class="list-group-item text-center">
 								<div class="pull-left">
 									<span class="glyphicon glyphicon-plus"></span>
@@ -436,7 +175,7 @@
 								Ajouter un examen
 							</li>
 						</a>
-						<li class="list-group-item text-center" ng-if="!accessRules.includes('exams.store') && (!lesson.exam || (lesson.exam.type != 'home' && !accessRules.includes('exams.index')))">
+						<li class="list-group-item text-center" ng-if="!accessRules.includes('exams.store') && (!lesson.exam || (lesson.exam.type == 'surprise' && !accessRules.includes('exams.index')))">
 							Aucun examen à afficher
 						</li>
 					</ul>
@@ -449,107 +188,103 @@
 	<div class="row breadcrumb-container" ng-if="accessRules.includes('evaluations.store')">
 		<ol class="breadcrumb">
 			<li class="legend">Déroulement du cours</li>
-			<li data-toggle="tab" href="#appel" class="active clickable" ng-click="tabClick(1)">Appel</li>
-			<li data-toggle="tab" href="#cours" class="clickable" ng-click="tabClick(2)">Cours</li>
-			<!-- <li data-toggle="tab" href="#fin" class="clickable" ng-click="tabClick(3)">Fin</li> -->
+			<li data-toggle="tab" href="#rollcall" class="active clickable" ng-click="tabClick(1)">Appel</li>
+			<li data-toggle="tab" href="#lesson" class="clickable" ng-click="tabClick(2)">Cours</li>
+			<li data-toggle="tab" href="#end" class="clickable" ng-click="tabClick(3)">Fin</li>
 		</ol>
-	</div>
-
-	<!-- Modal store criteria -->
-	<div id="modal-{{student.id}}" class="modal fade" tabindex="-1" role="dialog"
-	     ng-repeat="(key, student) in lesson.student_class.students">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title"></h4>
-				</div>
-				<div id="popup-body" class="modal-body">
-					<button ng-repeat="criteria in student.evaluation.criteria"
-					        ng-click="createEvaluationsByCriteria(criteria, student)"
-					        type="button" id="{{ criteria.id }}"
-					        class="participation btn btn-{{ { positive: 'success', negative: 'danger' }[criteria.impact] }} btn-lg btn-block">
-						{{ criteria.name }} - {{ criteria.pivot ? criteria.pivot.value : 0 }}
-					</button>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<!-- Students list -->
 	<div class="row" ng-if="accessRules.includes('evaluations.store')">
 		<div class="tab col-xs-8 col-sm-8 col-md-10 col-xs-offset-2 col-sm-offset-2 col-md-offset-1">
-			<div id="appel" class="tab-pane fade in active">
+			<div id="rollcall" class="tab-pane fade in active">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
-					     id="student-{{ student.id }}"
-					     ng-click="createEvaluations(student.id, student)"
-					     ng-repeat="(key, student) in lesson.student_class.students">
-						<div ng-show="student.evaluation.absence && student.evaluation.absence != null"
-						     class="cross-lesson glyphicon glyphicon-remove"></div>
-						<div ng-show="student.evaluation.delay && student.evaluation.delay != null"
-						     class="time-lesson glyphicon glyphicon-time"></div>
+					     ng-click="updateStatus(student)"
+					     ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
+						<div ng-show="student.lesson_evaluation.absence" class="evaluation-absent glyphicon glyphicon-remove"></div>
+						<div ng-show="student.lesson_evaluation.delay" class="evaluation-delay glyphicon glyphicon-time"></div>
+						<div ng-show="student.inUpdate" class="evaluation-loading">
+							<div class="align-helper"></div><img src="assets/img/loading.gif" alt="Mise à jour de l'évaluation" />
+						</div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
-						<span>{{student.firstname}} {{student.lastname}}</span>
+						<span>{{student.firstname}} <strong>{{student.lastname}}</strong></span>
 					</div>
 				</div>
 			</div>
 
-			<div id="cours" class="tab-pane fade" style="display: none;">
+			<div id="lesson" class="tab-pane fade" style="display: none;">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"
-					     id="student-{{ student.id }}"
-					     data-toggle="modal" data-target="#modal-{{student.id}}"
-					     ng-repeat="(key, student) in lesson.student_class.students">
-						<div ng-show="student.evaluation.absence && student.evaluation.absence != null"
-						     class="cross-lesson glyphicon glyphicon-remove"></div>
-						<div ng-show="student.evaluation.delay && student.evaluation.delay != null"
-						     class="time-lesson glyphicon glyphicon-time"></div>
+					     ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
+						<div ng-show="student.lesson_evaluation.absence" class="evaluation-absent glyphicon glyphicon-remove"></div>
+						<div ng-show="student.lesson_evaluation.delay" class="evaluation-delay glyphicon glyphicon-time"></div>
+						<div ng-show="student.inUpdate" class="evaluation-loading">
+							<div class="align-helper"></div><img src="assets/img/loading.gif" alt="Mise à jour de l'évaluation" />
+						</div>
 
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
-						<span>{{student.firstname}} {{student.lastname}}</span>
+						<span>{{student.firstname}} <strong>{{student.lastname}}</strong></span>
+
+						<div class="criteria-container" ng-show="!student.lesson_evaluation || !student.lesson_evaluation.absence">
+							<button ng-repeat="criterion in criteria"
+							        ng-click="updateEvaluationCriterion(student, criterion, 1)"
+							        class="btn btn-{{ { positive: 'success', negative: 'danger' }[criterion.impact] }}">
+								{{ criterion.name }} ({{ criterionFromEvaluation(student.lesson_evaluation, criterion).pivot.value || 0 }})
+							</button>
+						</div>
 					</div>
 				</div>
-
 			</div>
 
-			<div id="fin" class="tab-pane fade">
-				<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				  <div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingOne">
-					  <h4 class="panel-title">
-						<a class="collapse in" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						  <i class="more-less glyphicon glyphicon-plus"></i>
-						  Ajouter un commentaire sur un élève.
-						</a>
-					  </h4>
-					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
-					  <div class="panel-body">
-						<table class="table table-hover"></table>
-						 </div>
-					  </div>
-				  </div>
-				  <div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingTwo">
-					  <h4 class="panel-title">
-						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						  <i class="more-less glyphicon glyphicon-plus"></i>
-						  Ajouter des documents.
-						</a>
-					  </h4>
-					</div>
-					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-					  <div class="panel-body">
-						<label class="control-label">Sélectionnez Fichier</label>
-						<input id="input-fr" name="inputfr[]" type="file" multiple class="file-loading">
-					  </div>
-					</div>
-				  </div>
-				</div>-->
+			<div id="end" class="tab-pane fade" style="display: none;">
+				<div class="page-block">
+					<table class="table evaluations-summary">
+						<thead>
+							<tr>
+								<th style="width: 50px;"></th>
+								<th>Étudiant</th>
+								<th>Statut</th>
+								<th>Critères</th>
+								<th>Commentaire</th>
+							</tr>
+						</thead>
+						<tbody class="vertically-aligned">
+							<tr ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname']">
+								<td><img ng-src="{{ config.apiUrl + student.avatar }}" alt="Photo de profil" class="img-circle img-profile" /></td>
+								<td>{{ student.firstname }} <strong>{{ student.lastname }}</strong></td>
+								<td>
+									<span ng-class="student.lesson_evaluation.absence ? 'text-danger' : student.lesson_evaluation.delay ? 'text-warning' : 'text-success'">
+										<span ng-show="student.lesson_evaluation.absence" class="glyphicon glyphicon-remove"></span>
+										<span ng-show="student.lesson_evaluation.delay" class="glyphicon glyphicon-time"></span>
+
+										{{ student.lesson_evaluation.absence ? 'Absent' : student.lesson_evaluation.delay ? 'En retard' : 'Présent' }}
+									</span>
+								</td>
+								<td>
+									<span ng-repeat="(idx, criterion) in student.lesson_evaluation.criteria"
+									      ng-class="{ positive: 'text-success', negative: 'text-danger', neutral: 'text-info'}[criterion.impact]">
+										<span ng-if="idx > 0" class="text-muted">/</span>
+										{{ criterion.name }} ({{ criterion.pivot.value}})
+									</span>
+									<span ng-if="!student.lesson_evaluation.criteria || student.lesson_evaluation.criteria.length == 0">-</span>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" ng-model="student.lesson_evaluation.comment" placeholder="Ajouter un commentaire sur l'élève" class="form-control" ng-disabled="student.inUpdate" />
+										<span class="input-group-btn">
+								            <button class="btn btn-default" type="button" ng-disabled="student.inUpdate" ng-click="updateComment(student)">
+									            <img src="assets/img/loading.gif" ng-if="student.inUpdate" alt="Mise à jour de l'évaluation" />
+									            {{ !student.inUpdate ? 'Envoyer' : '' }}
+								            </button>
+										</span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

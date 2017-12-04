@@ -4,11 +4,15 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/profile');
 
 	$stateProvider
-
 		.state('root', {
 			abstract: true,
 			controller: 'MenuController',
-			templateUrl: 'app/views/layouts/main.html'
+			templateUrl: 'app/views/layouts/main.html',
+			resolve: { // Loading access rules before any other controller is called
+				init: function (AccessRuleFactory) {
+					return AccessRuleFactory.resolver();
+				}
+			}
 		})
 
 		/**
@@ -132,6 +136,24 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/assets/css/lessons.css',
 			templateUrl: 'app/views/lessons/show.html'
 		})
+		.state('lessons.show.homeworks', {})
+		.state('lessons.show.homeworks.delete', {
+			url: '/lessons/{lessonId:int}/homeworks/{id:int}/delete',
+			parent: 'root',
+			controller: 'HomeworkController@delete'
+		})
+		.state('lessons.show.documents', {})
+		.state('lessons.show.documents.delete', {
+			url: '/lessons/{lessonId:int}/documents/{id:int}/delete',
+			parent: 'root',
+			controller: 'DocumentController@delete'
+		})
+		.state('lessons.show.exams', {})
+		.state('lessons.show.exams.delete', {
+			url: '/lessons/{lessonId:int}/exam/{id:int}/delete',
+			parent: 'root',
+			controller: 'ExamController@delete'
+		})
 
 		/**
 		 * Reservations-related states
@@ -188,6 +210,34 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		/**
+		 * Levels-related states
+		 */
+		.state('levels', {})
+		.state('levels.index', {
+			url: '/levels',
+			parent: 'root',
+			controller: 'LevelController@index',
+			templateUrl: 'app/views/levels/index.html'
+		})
+		.state('levels.create', {
+			url: '/levels/create',
+			parent: 'root',
+			controller: 'LevelController@create',
+			templateUrl: 'app/views/levels/create.html'
+		})
+		.state('levels.edit', {
+			url: '/levels/{id:int}/edit',
+			parent: 'root',
+			controller: 'LevelController@edit',
+			templateUrl: 'app/views/levels/edit.html'
+		})
+		.state('levels.delete', {
+			url: '/levels/{id:int}/delete',
+			parent: 'root',
+			controller: 'LevelController@delete'
+		})
+
+		/**
 		 * Notifications-related states
 		 */
 		.state('notifications', {})
@@ -237,6 +287,40 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'StudentClassController@show',
 			templateUrl: 'app/views/student-classes/show.html'
+		})
+
+		/**
+		 * Subjects-related states
+		 */
+		.state('subjects', {})
+		.state('subjects.index', {
+			url: '/subjects',
+			parent: 'root',
+			controller: 'SubjectController@index',
+			templateUrl: 'app/views/subjects/index.html'
+		})
+		.state('subjects.create', {
+			url: '/subjects/create',
+			parent: 'root',
+			controller: 'SubjectController@create',
+			templateUrl: 'app/views/subjects/create.html'
+		})
+		.state('subjects.edit', {
+			url: '/subjects/{id:int}/edit',
+			parent: 'root',
+			controller: 'SubjectController@edit',
+			templateUrl: 'app/views/subjects/edit.html'
+		})
+		.state('subjects.show', {
+			url: '/subjects/{id:int}',
+			parent: 'root',
+			controller: 'SubjectController@show',
+			templateUrl: 'app/views/subjects/show.html'
+		})
+		.state('subjects.delete', {
+			url: '/subjects/{id:int}/delete',
+			parent: 'root',
+			controller: 'SubjectController@delete'
 		})
 
 		/**
@@ -320,6 +404,9 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/difficulties/index.html'
 		})
 
+		/**
+		 * AI-related states
+		 */
 		.state('ai-controllers', {})
 		.state('ai-controllers.index', {
 			url: '/ai-controllers',
@@ -328,6 +415,8 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/ai-controllers/index.html',
 			css: '/assets/css/ai-controllers.css'
 		})
+
+
 
 		// Planning view
 		.state('planning', {
@@ -360,8 +449,8 @@ routerModule.run(['$rootScope', '$state', 'OAuth', 'UserFactory', function ($roo
 				$rootScope.connectedUser = user;
 
 				if (user.group_id > next.group_id) {
-					$state.go('login');
 					event.preventDefault();
+					$state.go('login');
 				}
 			});
 

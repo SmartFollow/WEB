@@ -23,7 +23,7 @@ angular.module('RoomsModule')
 			}, function (room) {
 				$scope.alerts.success = {
 					show: true,
-					text: "Votre salle a bien été enregistreé, vous allez être redirigé vers la liste des salles."
+					text: "Votre salle a bien été enregistrée, vous allez être redirigé vers la liste des salles."
 				};
 
 				$timeout(function () {

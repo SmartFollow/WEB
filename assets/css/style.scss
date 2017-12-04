@@ -40,6 +40,9 @@ dl.spaced {
 		}
 	}
 }
+dl.no-bottom-margin {
+	margin-bottom: 0;
+}
 
 table.table {
 	border-collapse: collapse;
@@ -76,6 +79,10 @@ table.table {
 			&.info .glyphicon { color: dodgerblue; }
 			&.warning .glyphicon { color: orange; }
 			&.danger .glyphicon { color: red; }
+		}
+
+		&.vertically-aligned {
+			td { vertical-align: middle; }
 		}
 	}
 }

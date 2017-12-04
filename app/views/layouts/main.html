@@ -10,7 +10,7 @@
 					{{ pageTitle }}
 				</h2>
 				<div class="controls pull-right">
-					<span>{{ connectedUser.firstname }} {{ connectedUser.lastname }}</span>
+					<span>{{ connectedUser.firstname }} <strong>{{ connectedUser.lastname }}</strong></span>
 					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile"
 					                                                       class="glyphicon glyphicon-user"></a></span>
 					<span><a href="#" ng-controller="AuthController@logout" ng-click="logout()"
@@ -24,25 +24,6 @@
 	<div class="row">
 		<div class="col-sm-3 col-md-3 col-lg-2 sidebar">
 			<div class="row">
-				<!--
-				<div class="infos-block" ng-show="showEval">
-					<div class="row quick-evaluations">
-						<div class="col-md-12 title">Vos évaluations de la semaine :</div>
-						<div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top"
-							title="Participation"><span class="glyphicon glyphicon-star"></span> 0
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top" title="Bavardage">
-							<span class="glyphicon glyphicon-comment"></span> 0
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top"
-							title="Devoirs non réalisés"><span class="glyphicon glyphicon-book"></span> 0
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-3" data-toggle="tooltip" data-placement="top"
-							title="Avertissements"><span class="glyphicon glyphicon-alert"></span> 0
-						</div>
-					</div>
-				</div>
-				-->
 				<ul class="menu">
 					<li ng-if="accessRules.includes('users.profile')">
 						<a ui-sref="users.profile" ui-sref-active="active">
@@ -80,8 +61,13 @@
 						</a>
 					</li>
 					<li ng-if="accessRules.includes('levels.index')">
-						<a ui-sref="levels" ui-sref-active="active">
+						<a ui-sref="levels.index" ui-sref-active="active">
 							<span class="glyphicon glyphicon-option-vertical"></span> Niveaux
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('subjects.index')">
+						<a ui-sref="subjects.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-th"></span> Matières
 						</a>
 					</li>
 					<li ng-if="accessRules.includes('criteria.index')">
@@ -89,13 +75,6 @@
 							<span class="glyphicon glyphicon-tasks"></span> Critères d'évaluation
 						</a>
 					</li>
-					<!--
-					<li ng-if="accessRules.includes('alerts.index')">
-						<a ui-sref="alerts" ui-sref-active="active">
-							<span class="glyphicon glyphicon-alert"></span> Alertes
-						</a>
-					</li>
-					-->
 					<li ng-if="accessRules.includes('graphs.index')">
 						<a ui-sref="graphs.index" ui-sref-active="active">
 							<span class="glyphicon glyphicon-stats"></span> Graphiques

@@ -21,7 +21,7 @@
 					<td><a ui-sref="users.show({ id: difficulty.student.id })">Voir l'étudiant</a></td>
 				</tr>
 				<tr ng-if="self_difficulties.length == 0" class="text-center">
-					<td colspan="4">Aucun étudiant en difficulté ne vous a été assigné.</td>
+					<td colspan="5">Aucun étudiant en difficulté ne vous a été assigné.</td>
 				</tr>
 			</tbody>
 		</table>
@@ -53,7 +53,7 @@
 					<td><a ui-sref="users.show({ id: difficulty.assigned_teacher.id })">Voir le professeur</a></td>
 				</tr>
 				<tr ng-if="difficulties.length == 0" class="text-center">
-					<td colspan="6">Aucun étudiant en difficulté.</td>
+					<td colspan="7">Aucun étudiant en difficulté.</td>
 				</tr>
 			</tbody>
 		</table>

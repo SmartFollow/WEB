@@ -6,12 +6,18 @@ angular.module('app', [
 	'GroupsModule',
 	'StudentClassesModule',
 	'RoomsModule',
+	'LevelsModule',
 	'NotificationsModule',
 	'CriteriaModule',
 	'GraphsModule',
 	'ConversationsModule',
 	'DifficultiesModule',
+	'LessonsModule',
 	'AIModule',
+	'HomeworksModule',
+	'DocumentsModule',
+	'ExamsModule',
+	'SubjectsModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'
 ]);

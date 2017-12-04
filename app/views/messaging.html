@@ -17,17 +17,18 @@
 				<li id="create_conversation" class="row">
 					<div class="col col-1"><span class="dot"></span>
 						<div class="subject">
-							<tags-input class="users" ng-model="usersList" display-property="email" add-from-autocomplete-only="true" placeholder="Ajouter un utilisateur">
-						  <auto-complete source="loadUsers($query)"
-							 					min-length="0"
-		                     load-on-focus="true"
-		                     max-results-to-show="10"></auto-complete>
-		          </tags-input>
+							<tags-input class="users" ng-model="usersList" display-property="email"
+							            add-from-autocomplete-only="true" placeholder="Ajouter un utilisateur">
+								<auto-complete source="loadUsers($query)"
+								               min-length="0"
+								               load-on-focus="true"
+								               max-results-to-show="10"></auto-complete>
+							</tags-input>
 						</div>
 					</div>
 					<div class="col col-2">
 						<div class="subject"><input type="text" class="form-control"
-						                                                     placeholder="Sujet" id="subject"></div>
+						                            placeholder="Sujet" id="subject"></div>
 						<div class="date">
 							<button type="button" class="btn btn-secondary" ng-click="createConversation()">Créer
 							</button>
