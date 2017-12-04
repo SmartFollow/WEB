@@ -6,6 +6,7 @@ angular.module('app', [
 	'GroupsModule',
 	'StudentClassesModule',
 	'RoomsModule',
+	'LevelsModule',
 	'NotificationsModule',
 	'CriteriaModule',
 	'GraphsModule',

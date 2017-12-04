@@ -1,0 +1,32 @@
+<div class="main">
+    <div class="page-block">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-6 text-right">
+                <a ui-sref="levels.create" class="btn btn-danger" ng-if="accessRules.includes('levels.create')" style="margin-bottom: 15px;">Ajouter un niveau</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th ng-if="accessRules.includes('levels.edit')">Modifier</th>
+                <th ng-if="accessRules.includes('levels.destroy')">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="level in levels | orderBy: 'level.name'">
+                <td>{{ level.id }}</td>
+                <td>{{ level.name }}</td>
+                <td ng-if="accessRules.includes('levels.edit')">
+                    <a ui-sref="levels.edit({ id: level.id })">Modifier</a>
+                </td>
+                <td ng-if="accessRules.includes('levels.destroy')">
+                    <a ui-sref="levels.delete({ id: level.id })">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

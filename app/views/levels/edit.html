@@ -1,0 +1,26 @@
+<div class="main">
+    <div class="page-block">
+        <div class="row">
+            <div class="col-md-6">
+                <a ui-sref="levels.delete({ id: level.id })" class="btn btn-danger" ng-if="accessRules.includes('levels.destroy')">Supprimer le niveau</a>
+            </div>
+            <div class="col-md-6 text-right">
+                <a ui-sref="levels.index">Voir la liste des niveaux <span class="glyphicon glyphicon-arrow-right"></span></a>
+            </div>
+        </div>
+
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+        <form>
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <input type="text" name="name" id="name" ng-model="level.name" placeholder="Nom du niveau" class="form-control">
+            </div>
+            <button ng-click="editLevel()" class="btn btn-danger">Modifier le niveau</button>
+        </form>
+        <br />
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+    </div>
+</div>
