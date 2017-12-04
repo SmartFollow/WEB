@@ -9,8 +9,8 @@ angular.module('HomeworksModule')
 			HomeworkFactory.storeHomework($stateParams.id, {
 				description: $scope.createHomework.description,
 				document_id: $scope.createHomework.document_id
-			}, function (document) {
-				$scope.lesson.homeworks.push(document);
+			}, function (homework) {
+				$scope.lesson.homeworks.push(homework);
 			});
 		}
 	}])
@@ -19,8 +19,8 @@ angular.module('HomeworksModule')
 			HomeworkFactory.updateHomework($stateParams.id, $scope.editHomework.id, {
 				description: $scope.editHomework.description,
 				document_id: $scope.editHomework.document_id || undefined
-			}, function (document) {
-				$scope.editHomework = document;
+			}, function (homework) {
+				$scope.editHomework = homework;
 			});
 		}
 	}])

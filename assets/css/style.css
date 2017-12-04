@@ -200,6 +200,9 @@ dl.spaced dd {
   dl.spaced dd:last-of-type {
     margin-bottom: 0; }
 
+dl.no-bottom-margin {
+  margin-bottom: 0; }
+
 table.table {
   border-collapse: collapse;
   width: 100%;

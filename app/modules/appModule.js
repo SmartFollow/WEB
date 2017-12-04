@@ -14,6 +14,8 @@ angular.module('app', [
 	'LessonsModule',
 	'AIModule',
 	'HomeworksModule',
+	'DocumentsModule',
+	'ExamsModule',
 	'SubjectsModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'

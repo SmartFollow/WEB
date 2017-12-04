@@ -142,6 +142,18 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			parent: 'root',
 			controller: 'HomeworkController@delete'
 		})
+		.state('lessons.show.documents', {})
+		.state('lessons.show.documents.delete', {
+			url: '/lessons/{lessonId:int}/documents/{id:int}/delete',
+			parent: 'root',
+			controller: 'DocumentController@delete'
+		})
+		.state('lessons.show.exams', {})
+		.state('lessons.show.exams.delete', {
+			url: '/lessons/{lessonId:int}/exam/{id:int}/delete',
+			parent: 'root',
+			controller: 'ExamController@delete'
+		})
 
 		/**
 		 * Reservations-related states

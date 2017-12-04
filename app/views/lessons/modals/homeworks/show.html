@@ -8,18 +8,18 @@
 				<h4 class="modal-title">Voir un devoir maison</h4>
 			</div>
 			<div class="modal-body">
-				<div class="form-group">
-					<label>Description du devoir</label>
-					{{ showHomework.description }}
-				</div>
+				<dl class="spaced no-bottom-margin">
+					<dt>Description du devoir</dt>
+					<dd>{{ showHomework.description }}</dd>
 
-				<div class="form-group">
-					<label>Document lié</label>
-					<div ng-if="showHomework.document">
-						<embed ng-src="{{ (config.apiUrl + showHomework.document.path) | trusted }}" width="100%" height="375" type="application/pdf">
-					</div>
-					<div ng-if="!showHomework.document">Aucun document lié</div>
-				</div>
+					<dt>Document lié</dt>
+					<dd>
+						<div ng-if="showHomework.document">
+							<embed ng-src="{{ (config.apiUrl + showHomework.document.path) | trusted }}" width="100%" height="450" type="application/pdf">
+						</div>
+						<em ng-if="!showHomework.document">Aucun document lié</em>
+					</dd>
+				</dl>
 			</div>
 		</div>
 	</div>

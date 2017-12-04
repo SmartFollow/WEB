@@ -55,39 +55,26 @@
 	</div>
 </div>
 
-<div id="modal-file-{{key}}" class="modal fade" tabindex="-1" role="dialog"
-     ng-repeat="(key, document) in lesson.documents">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">{{document.name}}</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Nom</label>
-				<div>{{document.name}}</div>
-				<br>
-				<label class="control-label">Description</label>
-				<div>{{document.description}}</div>
-				<br>
-				<label class="control-label">Document</label>
-				<br>
-				<a href="{{ config.apiUrl + document.path}}" download="{{document.filename}}.{{document.extension}}"><i
-						class="document-type glyphicon glyphicon-download-alt"></i></a>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- Modal show document -->
+<modal src="/app/views/lessons/modals/documents/show"></modal>
+<!-- Modal add document -->
+<modal src="/app/views/lessons/modals/documents/create"></modal>
+<!-- Modal edit document -->
+<modal src="/app/views/lessons/modals/documents/edit"></modal>
+
 <!-- Modal show homework -->
 <modal src="/app/views/lessons/modals/homeworks/show"></modal>
 <!-- Modal add homework -->
 <modal src="/app/views/lessons/modals/homeworks/create"></modal>
 <!-- Modal edit homework -->
 <modal src="/app/views/lessons/modals/homeworks/edit"></modal>
+
+<!-- Modal show exam -->
+<modal src="/app/views/lessons/modals/exams/show"></modal>
+<!-- Modal add exam -->
+<modal src="/app/views/lessons/modals/exams/create"></modal>
+<!-- Modal edit exam -->
+<modal src="/app/views/lessons/modals/exams/edit"></modal>
 
 <!-- Modal marks exam -->
 <div id="modal-exam-mark" class="modal fade" tabindex="-1" role="dialog">
@@ -140,84 +127,6 @@
 		</div>
 	</div>
 </div>
-<!-- Modal show exam -->
-<div id="modal-exam-1" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Examen</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Description</label>
-				<div>{{lesson.exam.description}}</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal add exam -->
-<div id="modal-upload-exam" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Ajouter un examen</h4>
-			</div>
-			<div class="modal-body">
-				<label class="control-label">Type</label>
-				<select class="form-control" id="examType">
-					<option value="home">Examen maison</option>
-					<option value="class">Examen en classe</option>
-					<option value="surprise">Examen surprise</option>
-				</select>
-				<br>
-				<label class="control-label">Notation</label>
-				<div class="form-group row">
-					<div class="col-md-6">
-						<label class="control-label">min</label>
-						<input class="form-control" type="number" value="0" id="examMin">
-					</div>
-					<div class="col-md-6">
-						<label class="control-label">max</label>
-						<input class="form-control" type="number" value="20" id="examMax">
-					</div>
-				</div>
-				<br>
-				<label class="control-label">Description</label>
-				<textarea class="form-control" rows="5" id="examDescription"></textarea>
-				<br>
-				<label class="control-label">Et/Ou un document</label>
-				<br>
-				<input type="file" name="pic" accept=".jpg, .png, .pdf" id="document"
-				       style="margin-left: auto;margin-right: auto;">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createExam();">Ajoutez
-				</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div id="modal-pdf" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title"></h4>
-			</div>
-			<div class="modal-body text-center">
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="main">
 	<div class="page-block">
@@ -225,7 +134,7 @@
 		<div class="row">
 			<div class="table-display">
 				<div class="col-md-1 table-cell-display">
-					<img ng-src="{{ lesson.subject.teacher.avatar }}" class="img-profile img-circle"/>
+					<img ng-src="{{ lesson.subject.teacher.avatar }}" class="img-profile img-circle" />
 				</div>
 
 				<div class="col-md-4 table-cell-display">
@@ -273,14 +182,14 @@
 							   download="{{document.filename}}.{{document.extension}}">
 								<span class="glyphicon glyphicon-download-alt data-icon"></span>
 							</a>
-							<a data-toggle="modal" data-target="#modal-file-{{key}}">
+							<a ng-click="setShowDocument(document)" data-toggle="modal" data-target="#modal-document-show">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
-							<a ng-click="editDocument(document, 'modal')"
+							<a ng-click="setEditDocument(document)" data-toggle="modal" data-target="#modal-document-edit"
 							   ng-if="accessRules.includes('documents.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ng-click="deleteDocument(document)" ng-if="accessRules.includes('documents.destroy')">
+							<a ui-sref="lessons.show.documents.delete({ lessonId: lesson.id, id: document.id })" ng-if="accessRules.includes('documents.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
 
@@ -290,7 +199,7 @@
 								<span class="glyphicon glyphicon-time data-icon" title="{{document.updated_at}}"></span>
 							</div>
 						</li>
-						<a data-toggle="modal" data-target="#modal-upload"
+						<a data-toggle="modal" data-target="#modal-document-create"
 						   ng-if="accessRules.includes('documents.store')">
 							<li class="list-group-item text-center">
 								<div class="pull-left">
@@ -316,7 +225,7 @@
 							<a ng-click="setEditHomework(homework)" data-toggle="modal" data-target="#modal-homework-edit" ng-if="accessRules.includes('homeworks.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ui-sref="lessons.show.homeworks.delete({ lessonId: lesson.id, id: homework.id})" ng-if="accessRules.includes('homeworks.destroy')">
+							<a ui-sref="lessons.show.homeworks.delete({ lessonId: lesson.id, id: homework.id })" ng-if="accessRules.includes('homeworks.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
 
@@ -346,13 +255,13 @@
 					</span>
 					<ul class="list-group data-list">
 						<li class="list-group-item" ng-if="lesson.exam && (lesson.exam.type != 'surprise' || accessRules.includes('exams.index'))">
-							<a data-toggle="modal" data-target="#modal-exam-1">
+							<a data-toggle="modal" data-target="#modal-exam-show">
 								<span class="glyphicon glyphicon-eye-open data-icon"></span>
 							</a>
-							<a ng-click="editExam()" ng-if="accessRules.includes('exams.update')">
+							<a data-toggle="modal" data-target="#modal-exam-edit" ng-if="accessRules.includes('exams.update')">
 								<span class="glyphicon glyphicon-pencil data-icon"></span>
 							</a>
-							<a ng-click="deleteExam()" ng-if="accessRules.includes('exams.destroy')">
+							<a ui-sref="lessons.show.exams.delete({ lessonId: lesson.id, id: lesson.exam.id })" ng-if="accessRules.includes('exams.destroy')">
 								<span class="glyphicon glyphicon-remove data-icon"></span>
 							</a>
 							<a data-toggle="modal" data-target="#modal-exam-mark"
@@ -366,7 +275,7 @@
 								<span class="glyphicon glyphicon-time data-icon" title="{{ lesson.exam.updated_at }}"></span>
 							</div>
 						</li>
-						<a data-toggle="modal" data-target="#modal-upload-exam" ng-if="!lesson.exam && accessRules.includes('exams.store')">
+						<a data-toggle="modal" data-target="#modal-exam-create" ng-if="!lesson.exam && accessRules.includes('exams.store')">
 							<li class="list-group-item text-center">
 								<div class="pull-left">
 									<span class="glyphicon glyphicon-plus"></span>

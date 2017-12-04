@@ -271,6 +271,14 @@ angular.module('app')
 			$scope.showHomework = homework;
 		};
 
+		$scope.setEditDocument = function (document) {
+			$scope.editDocument = document;
+		};
+
+		$scope.setShowDocument = function (document) {
+			$scope.showDocument = document;
+		};
+
 
 
 		$scope.range = function(min, max, step) {
@@ -342,94 +350,6 @@ angular.module('app')
 			}
 		};
 
-		$scope.deleteDocument = function (document) {
-			var param = {
-				id: document.id
-			};
-			$http({
-				method: 'DELETE',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/documents",
-				data: param
-			}).then(function successCallback(response) {
-				$state.reload();
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
-		$scope.editHW = function (homework, type) {
-			$("#HWdescription").val(homework.description);
-
-			if (type == "modal") {
-				$('#modal-upload-homework-' + homework.id).modal();
-			}
-			else if (type == "send") {
-				var file = {
-					description: $("#HWdescription").val(),
-					id: homework.id
-				};
-				$http({
-					method: 'PUT',
-					url: config.apiUrl + "api/lessons/" + $stateParams.id + "/homeworks",
-					data: file
-				}).then(function successCallback(response) {
-					$state.reload();
-					console.log(response);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-		};
-
-		$scope.deleteHW = function (homework) {
-			var param = {
-				id: homework.id
-			};
-			$http({
-				method: 'DELETE',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/homeworks",
-				data: param
-			}).then(function successCallback(response) {
-				$state.reload();
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
-		$scope.createExam = function () {
-			console.log($("#examDescription").val());
-			var file = {
-				type: $("#examType").val(),
-				min_mark: $("#examMin").val(),
-				max_mark: $("#examMax").val(),
-				description: $("#examDescription").val()
-			};
-			$http({
-				method: 'POST',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/exam",
-				data: file
-			}).then(function successCallback(response) {
-				$state.reload();
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
-		$scope.deleteExam = function () {
-			$http({
-				method: 'DELETE',
-				url: config.apiUrl + "api/lessons/" + $stateParams.id + "/exam"
-			}).then(function successCallback(response) {
-				$state.reload();
-				console.log(response);
-			}, function errorCallback(response) {
-				console.log(response);
-			});
-		};
-
 		$scope.getExistingMark = function (examId, studentId) {
 			var studentMark = null;
 			if ($scope.existingMark == null)
@@ -456,48 +376,6 @@ angular.module('app')
 				});
 			}
 			return (studentMark);
-		};
-
-		$scope.postExam = function (examId, studentId, mark, comment) {
-			/*var studentMark = $scope.getExistingMark(examId, studentId);
-			console.log(studentMark);*/
-			var studentMark = null;
-			if (studentMark == null)
-			{
-				$http({
-					method: 'POST',
-					url: config.apiUrl + "api/exams/"+ examId+"/marks",
-					data: {
-						student_id: studentId,
-						mark: mark,
-						comment: comment
-					}
-				}).then(function successCallback(response) {
-					$("#student-"+studentId+"-mark").find(".valid").addClass("disabled");
-					console.log(response);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}
-			else
-				$("#student-"+studentId+"-mark").find(".valid").addClass("disabled");
-			/*else
-			{
-				$http({
-					method: 'PUT',
-					url: config.apiUrl + "api/exams/"+ examId+"/marks",
-					data: {
-						id: mark.id,
-						mark: mark,
-						comment: comment
-					}
-				}).then(function successCallback(response) {
-					$("#student-"+studentId+"-mark").find(".valid").addClass("disabled");
-					console.log(response);
-				}, function errorCallback(response) {
-					console.log(response);
-				});
-			}*/
 		};
 
 	}])
