@@ -26,7 +26,8 @@ angular.module('UsersModule')
 					$http({
 						method: 'POST',
 						url: config.apiUrl + "api/users",
-						data: data
+						data: data,
+						headers: { 'Content-Type': undefined }
 					}).then(function successCallback(response) {
 						callback(response.data);
 					}, function errorCallback(response) {

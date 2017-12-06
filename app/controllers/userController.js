@@ -76,15 +76,18 @@ angular.module('UsersModule')
 		});
 
 		$scope.createUser = function () {
-			UserFactory.storeUser ({
-				firstname: $scope.user.firstname,
-				lastname: $scope.user.lastname,
-				email: $scope.user.email,
-				password: $scope.user.password,
-				group: $scope.user.group_id,
-				student_class: $scope.user.class_id,
-				avatar: $scope.user.avatar
-			}, function (user) {
+			var formData = new FormData();
+			formData.append('firstname', $scope.user.firstname);
+			formData.append('lastname', $scope.user.lastname);
+			formData.append('email', $scope.user.email);
+			formData.append('password', $scope.user.password);
+			formData.append('group', $scope.user.group_id);
+			angular.isDefined($scope.user.class_id)
+				formData.append('student_class', $scope.user.class_id);
+			angular.isDefined($('input[name="avatar"]')[0].files[0])
+				formData.append('avatar', $('input[name="avatar"]')[0].files[0]);
+
+			UserFactory.storeUser (formData, function (user) {
 				$scope.alerts.success = {
 					show: true,
 					text: "L'utilisateur a bien été enregistré, vous allez être redirigé vers sa page."
