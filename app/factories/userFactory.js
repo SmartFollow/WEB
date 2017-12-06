@@ -48,7 +48,8 @@ angular.module('UsersModule')
 					$http({
 						method: 'PUT',
 						url: config.apiUrl + "api/users/" + id,
-						data: data
+						data: data,
+						headers: { 'Content-Type': undefined }
 					}).then(function successCallback(response) {
 						callback(response.data);
 					}, function errorCallback(response) {

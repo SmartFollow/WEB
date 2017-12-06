@@ -82,9 +82,9 @@ angular.module('UsersModule')
 			formData.append('email', $scope.user.email);
 			formData.append('password', $scope.user.password);
 			formData.append('group', $scope.user.group_id);
-			angular.isDefined($scope.user.class_id)
+			if ($scope.user.class_id)
 				formData.append('student_class', $scope.user.class_id);
-			angular.isDefined($('input[name="avatar"]')[0].files[0])
+			if ($('input[name="avatar"]')[0].files[0])
 				formData.append('avatar', $('input[name="avatar"]')[0].files[0]);
 
 			UserFactory.storeUser (formData, function (user) {
@@ -113,13 +113,18 @@ angular.module('UsersModule')
 		});
 
 		$scope.editUser = function () {
-			UserFactory.updateUser($scope.user.id, {
-				firstname: $scope.user.firstname,
-				lastname: $scope.user.lastname,
-				email: $scope.user.email,
-				group: $scope.user.group_id,
-				student_class: $scope.user.class_id
-			}, function (user) {
+			var formData = new FormData();
+			formData.append('firstname', $scope.user.firstname);
+			formData.append('lastname', $scope.user.lastname);
+			formData.append('email', $scope.user.email);
+			formData.append('password', $scope.user.password);
+			formData.append('group', $scope.user.group_id);
+			if ($scope.user.class_id)
+				formData.append('student_class', $scope.user.class_id);
+			if ($('input[name="avatar"]')[0].files[0])
+				formData.append('avatar', $('input[name="avatar"]')[0].files[0]);
+
+			UserFactory.updateUser($scope.user.id, formData, function (user) {
 				$scope.alerts.success = {
 					show: true,
 					text: "L'utilisateur a bien été modifié, vous allez être redirigé vers sa page."
