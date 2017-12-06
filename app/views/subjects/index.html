@@ -22,10 +22,10 @@
 			<tbody>
 				<tr ng-repeat="subject in subjects track by subject.id">
 					<td>{{ subject.id }}</td>
-					<td>{{ subject.level_id }}</td>
+					<td>{{ subject.level.name }}</td>
 					<td>{{ subject.name }}</td>
 					<td>{{ subject.description ? subject.description : '-' }}</td>
-					<td>{{ subject.teacher_id }}</td>
+					<td><a ui-sref="users.show({ id: subject.teacher.id })">{{ subject.teacher.firstname }} {{ subject.teacher.lastname }}</a></td>
 					<td><a ui-sref="subjects.show({ id: subject.id })">Voir</a></td>
 					<td ng-if="accessRules.includes('subjects.edit')">
 						<a ui-sref="subjects.edit({ id: subject.id })">Modifier</a>
