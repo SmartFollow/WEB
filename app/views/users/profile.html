@@ -77,6 +77,12 @@
 						</tr>
 					</tbody>
 				</table>
+
+				<div class="text-center"
+				     ng-if="(!profile.today_received_lessons || profile.today_received_lessons.length <= 0)
+							&& (!profile.today_given_lessons || profile.today_given_lessons.length <= 0)">
+					Aucun évènement à afficher aujourd'hui
+				</div>
 			</div>
 
 			<!-- Homeworks -->
