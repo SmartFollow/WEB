@@ -1,5 +1,5 @@
 angular.module('UsersModule')
-	.controller('UserController@profile', ['UserFactory', '$rootScope', '$scope', '$state', 'config', function (UserFactory, $rootScope, $scope, $state, config) {
+	.controller('UserController@profile', ['UserFactory', '$rootScope', '$scope', '$state', 'config', 'GraphFactory', function (UserFactory, $rootScope, $scope, $state, config, GraphFactory) {
 		$rootScope.pageTitle = 'Votre profil';
 		$scope.config = config;
 
@@ -33,6 +33,10 @@ angular.module('UsersModule')
 				e.start = new Date(e.start.replace('/-/g',"/"));
 				e.end = new Date(e.end.replace('/-/g',"/"));
 			});
+		});
+
+		GraphFactory.getProfileGraphs(function (graphs) {
+			$scope.graphs = graphs;
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {

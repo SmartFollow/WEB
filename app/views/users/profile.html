@@ -270,6 +270,13 @@
 					</table>
 				</div>
 			</div>
+
+			<!-- Graphs -->
+			<div class="block" ng-repeat="graph in graphs">
+				<h2>Progression de "{{ graph.criterion.name }}"</h2>
+
+				<graph data="graph"></graph>
+			</div>
 		</div>
 	</div>
 </div>
