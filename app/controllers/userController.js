@@ -24,6 +24,15 @@ angular.module('UsersModule')
 				});
 
 			$scope.profile.avatar = config.apiUrl + $scope.profile.avatar;
+
+			$scope.profile.today_given_lessons.forEach(function (e) {
+				e.start = new Date(e.start.replace('/-/g',"/"));
+				e.end = new Date(e.end.replace('/-/g',"/"));
+			});
+			$scope.profile.today_received_lessons.forEach(function (e) {
+				e.start = new Date(e.start.replace('/-/g',"/"));
+				e.end = new Date(e.end.replace('/-/g',"/"));
+			});
 		});
 	}])
 	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
