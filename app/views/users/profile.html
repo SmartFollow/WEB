@@ -112,6 +112,15 @@
 					</table>
 				</div>
 			</div>
+
+			<!-- Graphs -->
+			<div class="block" ng-repeat="(idx, graph) in graphs" ng-if="idx % 2 == 0">
+				<h2>Progression de "{{ graph.criterion.name }}"</h2>
+
+				<graph data="graph" ng-if="graph.values.length > 0"></graph>
+				<div class="text-center" ng-if="graph.values.length == 0">Pas de données à afficher sur les derniers {{ graph.days_range }} jours</div>
+			</div>
+
 		</div>
 
 		<!-- Right column -->
@@ -272,10 +281,11 @@
 			</div>
 
 			<!-- Graphs -->
-			<div class="block" ng-repeat="graph in graphs">
+			<div class="block" ng-repeat="(idx, graph) in graphs" ng-if="idx % 2 != 0">
 				<h2>Progression de "{{ graph.criterion.name }}"</h2>
 
-				<graph data="graph"></graph>
+				<graph data="graph" ng-if="graph.values.length > 0"></graph>
+				<div class="text-center" ng-if="graph.values.length == 0">Pas de données à afficher sur les derniers {{ graph.days_range }} jours</div>
 			</div>
 		</div>
 	</div>
