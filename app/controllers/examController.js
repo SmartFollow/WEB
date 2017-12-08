@@ -12,6 +12,9 @@ angular.module('ExamsModule')
 				document_id: $scope.lesson.exam.document_id || undefined
 			}, function (exam) {
 				$scope.lesson.exam = exam;
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre examen a bien été ajouté.' });
+				$('#modal-exam-create').modal('hide');
 			});
 		}
 	}])
@@ -25,6 +28,9 @@ angular.module('ExamsModule')
 				document_id: $scope.lesson.exam.document_id || undefined
 			}, function (exam) {
 				$scope.lesson.exam = exam;
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre examen a bien été modifié.' });
+				$('#modal-exam-edit').modal('hide');
 			});
 		}
 	}])

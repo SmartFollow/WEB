@@ -11,6 +11,9 @@ angular.module('HomeworksModule')
 				document_id: $scope.createHomework.document_id
 			}, function (homework) {
 				$scope.lesson.homeworks.push(homework);
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre devoir maison a bien été ajouté.' });
+				$('#modal-homework-create').modal('hide');
 			});
 		}
 	}])
@@ -21,6 +24,9 @@ angular.module('HomeworksModule')
 				document_id: $scope.editHomework.document_id || undefined
 			}, function (homework) {
 				$scope.editHomework = homework;
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre devoir maison a bien été modifié.' });
+				$('#modal-homework-edit').modal('hide');
 			});
 		}
 	}])

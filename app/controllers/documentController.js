@@ -13,6 +13,9 @@ angular.module('DocumentsModule')
 
 			DocumentFactory.storeDocument($stateParams.id, formData, function (document) {
 				$scope.lesson.documents.push(document);
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre document a bien été ajouté.' });
+				$('#modal-document-create').modal('hide');
 			});
 		}
 	}])
@@ -23,6 +26,9 @@ angular.module('DocumentsModule')
 				description: $scope.editDocument.description
 			}, function (document) {
 				$scope.editDocument = document;
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre document a bien été modifié.' });
+				$('#modal-document-edit').modal('hide');
 			});
 		}
 	}])
