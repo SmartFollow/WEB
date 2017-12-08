@@ -21,6 +21,16 @@ angular.module('GraphsModule')
 					console.log(response);
 				});
 			},
+			getUserGraphs: function (userId, callback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/users/" + userId + "/graphs"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function errorCallback(response) {
+					console.log(response);
+				});
+			},
 			getGraph: function (id, callback) {
 				$http({
 					method: 'GET',

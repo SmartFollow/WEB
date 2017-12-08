@@ -1,5 +1,5 @@
 angular.module('UsersModule')
-	.controller('UserController@profile', ['UserFactory', '$rootScope', '$scope', '$state', 'config', 'GraphFactory', function (UserFactory, $rootScope, $scope, $state, config, GraphFactory) {
+	.controller('UserController@profile', ['$rootScope', '$scope', '$state', 'config', 'UserFactory', 'GraphFactory', function ($rootScope, $scope, $state, config, UserFactory, GraphFactory) {
 		$rootScope.pageTitle = 'Votre profil';
 		$scope.config = config;
 
@@ -37,9 +37,16 @@ angular.module('UsersModule')
 
 		GraphFactory.getProfileGraphs(function (graphs) {
 			$scope.graphs = graphs;
+
+			$scope.showGraphs = false;
+			$scope.graphs.forEach(function (graph) {
+				graph.hasValues = graph.values.length > 0;
+
+				$scope.showGraphs = graph.hasValues || $scope.showGraphs;
+			});
 		});
 	}])
-	.controller('UserController@show', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope, $stateParams, config) {
+	.controller('UserController@show', ['$rootScope', '$scope', '$stateParams', 'config', 'UserFactory', 'GraphFactory', function ($rootScope, $scope, $stateParams, config, UserFactory, GraphFactory) {
 		$rootScope.pageTitle = "Voir un utilisateur";
 		$scope.config = config;
 
@@ -65,6 +72,17 @@ angular.module('UsersModule')
 
 			$scope.profile.avatar = config.apiUrl + $scope.profile.avatar;
 			$rootScope.pageTitle = 'Profil de ' + $scope.profile.firstname + ' ' + $scope.profile.lastname;
+		});
+
+		GraphFactory.getUserGraphs($stateParams.id, function (graphs) {
+			$scope.graphs = graphs;
+
+			$scope.showGraphs = false;
+			$scope.graphs.forEach(function (graph) {
+				graph.hasValues = graph.values.length > 0;
+
+				$scope.showGraphs = graph.hasValues || $scope.showGraphs;
+			});
 		});
 	}])
 	.controller('UserController@index', ['UserFactory', '$rootScope', '$scope', '$stateParams', 'config', function (UserFactory, $rootScope, $scope) {

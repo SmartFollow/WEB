@@ -5,7 +5,8 @@ body {
   text-align: center;
   color: #ffffff;
   font-size: 54px;
-  margin-bottom: 50px; }
+  margin-bottom: 50px;
+  font-weight: lighter; }
 
 .auth-block {
   max-width: 350px;
