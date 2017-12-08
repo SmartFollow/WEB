@@ -32,7 +32,7 @@ angular.module('app')
 		ConversationFactory.createConversation(
 			{
 				subject: $("#subject").val(),
-				participants: $scope.usersList.map(a => a.id)
+				participants: $scope.usersList ? $scope.usersList.map(a => a.id) : null
 			},
 			function (data) {
 				$state.reload();

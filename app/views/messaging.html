@@ -43,7 +43,7 @@
 							<label for="chk1" class="toggle" style="margin-bottom: 0px;"></label>
 						</div>
 						<p class="title"><span ng-if="user.id != participant.id"
-						                       ng-repeat="participant in conversation.participants">{{participant.firstname}} {{participant.lastname}}<span
+						                       ng-repeat="participant in conversation.participants">{{participant.firstname}} <strong>{{participant.lastname}}</strong><span
 								ng-if="!$last">, </span></span></p>
 					</div>
 					<div class="col col-2">

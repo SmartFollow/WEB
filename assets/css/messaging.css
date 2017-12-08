@@ -486,7 +486,8 @@ a:hover {
   right: 0;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap; }
+  white-space: nowrap;
+  font-weight: normal; }
 
 #main .message-list li .col-2 {
   position: absolute;
