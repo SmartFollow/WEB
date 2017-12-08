@@ -1,5 +1,5 @@
 angular.module('HomeworksModule')
-	.controller('HomeworkController@show', ['$rootScope', '$scope', '$stateParams', 'config', 'HomeworkFactory', function ($rootScope, $scope, $stateParams, config, HomeworkFactory) {
+.controller('HomeworkController@show', ['$rootScope', '$scope', '$stateParams', 'config', 'HomeworkFactory', function ($rootScope, $scope, $stateParams, config, HomeworkFactory) {
 
 	}])
 	.controller('HomeworkController@create', ['$rootScope', '$scope', '$stateParams', 'config', 'HomeworkFactory', function ($rootScope, $scope, $stateParams, config, HomeworkFactory) {
@@ -26,6 +26,8 @@ angular.module('HomeworksModule')
 				document_id: $scope.editHomework.document_id || undefined
 			}, function (homework) {
 				$scope.editHomework = homework;
+
+				$scope.lesson.homeworks[$scope.lesson.homeworks.findIndex(e => e.id == homework.id)] = homework;
 
 				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre devoir maison a bien été modifié.' });
 				$('#modal-homework-edit').modal('hide');

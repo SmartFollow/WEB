@@ -13,7 +13,10 @@
 					<dd>{{ showDocument.name }}</dd>
 
 					<dt>Description</dt>
-					<dd>{{ showDocument.description }}</dd>
+					<dd>
+						{{ showDocument.description }}
+						<em ng-if="!showDocument.description">Aucune description</em>
+					</dd>
 
 					<dt>Nom du fichier original</dt>
 					<dd>{{ showDocument.filename }}.{{ showDocument.extension }}</dd>

@@ -8,7 +8,8 @@ angular.module('DocumentsModule')
 		$scope.storeDocument = function () {
 			var formData = new FormData();
 			formData.append('name', $scope.createDocument.name);
-			formData.append('description', $scope.createDocument.description);
+			if ($scope.createDocument.description)
+				formData.append('description', $scope.createDocument.description);
 			formData.append('document', $('input[name="document_file"]')[0].files[0]);
 
 			DocumentFactory.storeDocument($stateParams.id, formData, function (document) {
@@ -28,6 +29,8 @@ angular.module('DocumentsModule')
 				description: $scope.editDocument.description
 			}, function (document) {
 				$scope.editDocument = document;
+
+				$scope.lesson.documents[$scope.lesson.documents.findIndex(e => e.id == document.id)] = document;
 
 				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre document a bien été modifié.' });
 				$('#modal-document-edit').modal('hide');

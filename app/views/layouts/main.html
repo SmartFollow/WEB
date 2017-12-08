@@ -138,7 +138,7 @@
 </div>
 
 <div class="global-alerts-wrapper" ng-if="globalAlerts.length > 0">
-	<div class="alert alert-{{ alert.type }} alert-dismissible fade in" role="alert" ng-repeat-start="alert in globalAlerts">
+	<div class="alert alert-{{ alert.type }} alert-dismissible fade in" role="alert" ng-repeat-start="alert in globalAlerts | orderBy: '-'">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 		<span class="glyphicon glyphicon-exclamation-sign"></span>
