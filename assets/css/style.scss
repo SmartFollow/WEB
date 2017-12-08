@@ -127,3 +127,25 @@ table.table {
 		}
 	}
 }
+
+.global-alerts-wrapper {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 9000;
+	padding: 0 15px;
+	text-align: center;
+
+	.alert {
+		display: inline-block;
+		width: auto;
+		min-width: 50%;
+		text-align: left;
+
+		&:last-of-type { margin-bottom: 0; }
+
+		.glyphicon {
+			margin-right: 10px;
+		}
+	}
+}

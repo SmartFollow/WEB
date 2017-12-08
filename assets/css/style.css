@@ -264,4 +264,21 @@ table.table {
       margin-top: 0;
       margin-bottom: 15px; }
 
+.global-alerts-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 9000;
+  padding: 0 15px;
+  text-align: center; }
+  .global-alerts-wrapper .alert {
+    display: inline-block;
+    width: auto;
+    min-width: 50%;
+    text-align: left; }
+    .global-alerts-wrapper .alert:last-of-type {
+      margin-bottom: 0; }
+    .global-alerts-wrapper .alert .glyphicon {
+      margin-right: 10px; }
+
 /*# sourceMappingURL=style.css.map */
