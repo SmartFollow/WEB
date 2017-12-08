@@ -12,6 +12,8 @@ angular.module('DocumentsModule')
 			formData.append('document', $('input[name="document_file"]')[0].files[0]);
 
 			DocumentFactory.storeDocument($stateParams.id, formData, function (document) {
+				$scope.createDocument = {};
+
 				$scope.lesson.documents.push(document);
 
 				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre document a bien été ajouté.' });

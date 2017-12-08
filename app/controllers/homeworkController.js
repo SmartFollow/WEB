@@ -10,6 +10,8 @@ angular.module('HomeworksModule')
 				description: $scope.createHomework.description,
 				document_id: $scope.createHomework.document_id
 			}, function (homework) {
+				$scope.createHomework = {};
+
 				$scope.lesson.homeworks.push(homework);
 
 				$rootScope.globalAlerts.push({ type: 'success', text: 'Votre devoir maison a bien été ajouté.' });
