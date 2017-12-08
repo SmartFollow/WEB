@@ -12,7 +12,7 @@
 					</div>
 					<div class="col-md-8">
 						<h2 class="text-left">{{profile.firstname}} <span class="text-uppercase">{{profile.lastname}}</span></h2>
-						<dl>
+						<dl class="indented">
 							<dt>Groupe</dt>
 							<dd ng-if="accessRules.includes('groups.show')"><a ui-sref="groups.show({ id: profile.group.id })">{{ profile.group.description }}</a></dd>
 							<dd ng-if="!accessRules.includes('groups.show')">{{ profile.group.description }}</dd>

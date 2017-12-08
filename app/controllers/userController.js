@@ -136,26 +136,27 @@ angular.module('UsersModule')
 			success: {},
 			danger: {}
 		};
+		$scope.config = config;
 
 		UserFactory.getEditFormData($stateParams.id, function (data) {
 			$scope.user = data.user;
 			$scope.groups = data.groups;
 			$scope.studentClasses = data.student_classes;
+
+			$scope.user.avatar = config.apiUrl + $scope.user.avatar;
 		});
 
 		$scope.editUser = function () {
-			var formData = new FormData();
-			formData.append('firstname', $scope.user.firstname);
-			formData.append('lastname', $scope.user.lastname);
-			formData.append('email', $scope.user.email);
-			formData.append('password', $scope.user.password);
-			formData.append('group', $scope.user.group_id);
-			if ($scope.user.class_id)
-				formData.append('student_class', $scope.user.class_id);
-			if ($('input[name="avatar"]')[0].files[0])
-				formData.append('avatar', $('input[name="avatar"]')[0].files[0]);
+			UserFactory.updateUser($scope.user.id, {
+				firstname: $scope.user.firstname,
+				lastname: $scope.user.lastname,
+				email: $scope.user.email,
+				group: $scope.user.group_id || undefined,
+				student_class: $scope.user.class_id || undefined
+			}, function (user) {
+				$scope.user = user;
+				$scope.user.avatar = config.apiUrl + $scope.user.avatar;
 
-			UserFactory.updateUser($scope.user.id, formData, function (user) {
 				$scope.alerts.success = {
 					show: true,
 					text: "L'utilisateur a bien été modifié, vous allez être redirigé vers sa page."
@@ -165,7 +166,33 @@ angular.module('UsersModule')
 					$state.go('users.show', { id: user.id });
 				}, 3000);
 			});
-		}
+		};
+
+		$scope.newPassword = null;
+		$scope.updatePassword = function () {
+			UserFactory.updateUserPassword($scope.user.id, {
+				password: $scope.newPassword
+			}, function (user) {
+				$scope.newPassword = null;
+
+				$scope.user = user;
+				$scope.user.avatar = config.apiUrl + $scope.user.avatar;
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'Le mot de passe a bien été modifié.' });
+			});
+		};
+
+		$scope.updateAvatar = function () {
+			var formData = new FormData();
+			formData.append('avatar', $('input[name="avatar"]')[0].files[0]);
+
+			UserFactory.updateUserAvatar($scope.user.id, formData, function (user) {
+				$scope.user = user;
+				$scope.user.avatar = config.apiUrl + $scope.user.avatar;
+
+				$rootScope.globalAlerts.push({ type: 'success', text: 'La photo de profil a bien été modifiée.' });
+			});
+		};
 	}])
 	.controller('UserController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'UserFactory', function ($rootScope, $scope, $state, $stateParams, UserFactory) {
 		UserFactory.deleteUser($stateParams.id, function () {

@@ -1,7 +1,10 @@
 <div class="main">
 	<div class="page-block">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-6 text-right">
+			<div class="col-md-6">
+				<a ui-sref="users.show({ id: user.id })" class="btn btn-info">Voir l'utilisateur</a>
+			</div>
+			<div class="col-md-6 text-right">
 				<a ui-sref="users.index">Voir la liste des utilisateurs <span class="glyphicon glyphicon-arrow-right"></span></a>
 			</div>
 		</div>
@@ -9,7 +12,9 @@
 		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
 		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
 
-		<form>
+		<h4 class="section-title">Modifier les informations de l'utilisateur</h4>
+
+		<form style="margin-bottom: 30px;">
 			<div class="form-group">
 				<label for="firstname">Prénom</label>
 				<input type="text" name="firstname" id="firstname" ng-model="user.firstname" placeholder="Nom" class="form-control" required>
@@ -22,17 +27,6 @@
 				<label for="email">Email</label>
 				<input type="email" name="email" id="email" ng-model="user.email" placeholder="Email" class="form-control" required>
 			</div>
-			<!--
-			<div class="form-group">
-				<label for="password">Mot de passe</label>
-				<input type="password" name="password" id="password" ng-model="user.password" placeholder="Mot de passe" class="form-control">
-			</div>
-			-->
-			<div class="form-group">
-				<label for="avatar">Avatar</label><br>
-				<img class="img-circle img-profile" ng-src="http://api.dev.smartfollow.org/{{ user.avatar }}">
-				<input type="file" class="form-control-file" name="avatar" id="avatar" aria-describedby="fileHelp">
-			</div>
 			<div class="form-group">
 				<label for="group">Groupe</label>
 				<select class="form-control" id="group" ng-model="user.group_id" ng-options="group.id as group.name for group in groups" required></select>
@@ -41,8 +35,49 @@
 				<label for="studentClass">Classe</label>
 				<select class="form-control" id="studentClass" ng-model="user.class_id" ng-options="studentClass.id as studentClass.name for studentClass in studentClasses" required></select>
 			</div>
-			<button ng-click="editUser()" class="btn btn-danger">Editer l'utilisateur</button>
+			<div class="form-group">
+				<button ng-click="editUser()" class="btn btn-danger">Modifier l'utilisateur</button>
+			</div>
 		</form>
+
+		<div class="row">
+			<div class="col-md-6">
+				<h4 class="section-title">Modifier le mot de passe</h4>
+
+				<form>
+					<div class="form-group">
+						<label for="password">Nouveau mot de passe</label>
+						<input type="password" id="password" name="password" ng-model="newPassword" class="form-control" />
+					</div>
+					<button class="btn btn-danger" ng-click="updatePassword()">Modifier le mot de passe</button>
+				</form>
+			</div>
+
+			<div class="col-md-6">
+				<h4 class="section-title">Modifier la photo de profil</h4>
+
+				<form>
+					<div class="form-group">
+						<label>Nouvelle photo de profil</label>
+						<table>
+							<tbody class="vertically-aligned">
+								<tr>
+									<td style="width: 50px; padding: 0 8px;">
+										<img class="img-circle" ng-src="{{ user.avatar }}" style="max-width: 100%;">
+									</td>
+									<td style="padding-left: 2px;">
+										<input type="file" name="avatar" id="avatar">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<button class="btn btn-danger" ng-click="updateAvatar()">Modifier la photo de profil</button>
+				</form>
+			</div>
+		</div>
+
 		<br />
 		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
 		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>

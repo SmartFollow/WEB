@@ -59,8 +59,7 @@ angular.module('UsersModule')
 				$http({
 					method: 'PUT',
 					url: config.apiUrl + "api/users/" + id,
-					data: data,
-					headers: {'Content-Type': undefined}
+					data: data
 				}).then(function successCallback(response) {
 					callback(response.data);
 				}, function (response) {
@@ -121,7 +120,64 @@ angular.module('UsersModule')
 					else
 						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
 				});
+			},
+			updateProfilePassword: function (data, callback, errorCallback) {
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + "api/users/profile/password",
+					data: data,
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			updateUserPassword: function (userId, data, callback, errorCallback) {
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + "api/users/" + userId + "/password",
+					data: data,
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			updateProfileAvatar: function (data, callback, errorCallback) {
+				$http({
+					method: 'POST',
+					url: config.apiUrl + "api/users/profile/avatar",
+					data: data,
+					headers: { 'Content-Type': undefined }
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			updateUserAvatar: function (userId, data, callback, errorCallback) {
+				$http({
+					method: 'POST',
+					url: config.apiUrl + "api/users/" + userId + "/avatar",
+					data: data,
+					headers: { 'Content-Type': undefined }
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
 			}
 		};
-	}
-	]);
+	}]);

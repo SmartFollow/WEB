@@ -11,10 +11,15 @@
 				</h2>
 				<div class="controls pull-right">
 					<span>{{ connectedUser.firstname }} <strong>{{ connectedUser.lastname }}</strong></span>
-					<span ng-if="accessRules.includes('users.profile')"><a ui-sref="users.profile"
-					                                                       class="glyphicon glyphicon-user"></a></span>
-					<span><a href="#" ng-controller="AuthController@logout" ng-click="logout()"
-					         class="glyphicon glyphicon-off"></a></span>
+					<span ng-if="accessRules.includes('users.profile')">
+						<a ui-sref="users.profile" class="glyphicon glyphicon-user"></a>
+					</span>
+					<span>
+						<a ui-sref="configuration.index" class="glyphicon glyphicon-cog"></a>
+					</span>
+					<span>
+						<a href="#" ng-controller="AuthController@logout" ng-click="logout()" class="glyphicon glyphicon-off"></a>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -137,9 +142,9 @@
 	</div>
 </div>
 
-<div class="global-alerts-wrapper" ng-if="globalAlerts.length > 0">
-	<div class="alert alert-{{ alert.type }} alert-dismissible fade in" role="alert" ng-repeat-start="alert in globalAlerts | orderBy: '-'">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<div class="global-alerts-wrapper" ng-if="globalAlerts.length > 0" ng-controller="AppController@globalAlerts">
+	<div class="alert alert-{{ alert.type }} alert-dismissible fade in" role="alert" ng-repeat-start="(index, alert) in globalAlerts | orderBy: '-'" ng-if="alert">
+		<button type="button" class="close" ng-click="dismiss(index)"><span aria-hidden="true">&times;</span></button>
 
 		<span class="glyphicon glyphicon-exclamation-sign"></span>
 		{{ alert.text }}

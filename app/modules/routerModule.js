@@ -416,6 +416,17 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/assets/css/ai-controllers.css'
 		})
 
+		/**
+		 * Configuration-related states
+		 */
+		.state('configuration', {})
+		.state('configuration.index', {
+			url: '/configuration',
+			parent: 'root',
+			controller: 'ConfigurationController@index',
+			templateUrl: 'app/views/configuration/index.html',
+			css: '/assets/css/configuration.css'
+		})
 
 
 		// Planning view
