@@ -30,6 +30,19 @@ a[ng-click] {
 	width: 100%;
 }
 
+.table-display {
+	display: table;
+	width: 100%;
+
+	.table-cell-display {
+		display: table-cell;
+		vertical-align: middle;
+		height: auto;
+		max-height: 100%;
+		float: none;
+	}
+}
+
 dl.spaced {
 	dd {
 		margin-bottom: 15px;

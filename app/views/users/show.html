@@ -1,4 +1,26 @@
 <div class="main">
+
+	<!-- User controls -->
+	<div class="row" ng-if="accessRules.includes('users.update')
+							|| accessRules.includes('')">
+		<div class="col-md-12">
+			<div class="block">
+				<div class="row">
+					<div class="col-md-6">
+						<a ui-sref="users.edit({ id: profile.id })" class="btn btn-primary" ng-if="accessRules.includes('users.update')">Modifier l'utilisateur</a>
+
+
+					</div>
+					<div class="col-md-6 text-right">
+						<a ui-sref="users.show.processes.index({ id: profile.id })" class="btn btn-success">Processus de l'utilisateur</a>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
 	<!-- Main row for the page -->
 	<div class="row">
 		<!-- Left column -->

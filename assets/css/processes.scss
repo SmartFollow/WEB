@@ -1,0 +1,50 @@
+@import "variables";
+
+.process {
+	.panel-heading {
+		position: relative;
+
+		.controls {
+			position: absolute;
+			right: 0; bottom: 10px;
+		}
+	}
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.steps {
+	list-style-type: none;
+	margin-bottom: 0;
+
+	li {
+		text-align: center;
+		position: relative;
+		margin-bottom: 15px;
+		font-size: 1.3em;
+
+		&.active {
+			font-weight: bold;
+			color: $theme-background;
+		}
+
+		&:before {
+			content: "\e092";
+			font-family: 'Glyphicons Halflings';
+			position: absolute;
+			left: 0;
+			font-weight: 400;
+			color: #333;
+		}
+
+		&:first-of-type {
+			&:before {
+				content: "\e165";
+			}
+		}
+
+		a { color: inherit; }
+	}
+}

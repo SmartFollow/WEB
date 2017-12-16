@@ -1,0 +1,33 @@
+.process .panel-heading {
+  position: relative; }
+  .process .panel-heading .controls {
+    position: absolute;
+    right: 0;
+    bottom: 10px; }
+.process:last-of-type {
+  margin-bottom: 0; }
+
+.steps {
+  list-style-type: none;
+  margin-bottom: 0; }
+  .steps li {
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px;
+    font-size: 1.3em; }
+    .steps li.active {
+      font-weight: bold;
+      color: #e74c3c; }
+    .steps li:before {
+      content: "\e092";
+      font-family: 'Glyphicons Halflings';
+      position: absolute;
+      left: 0;
+      font-weight: 400;
+      color: #333; }
+    .steps li:first-of-type:before {
+      content: "\e165"; }
+    .steps li a {
+      color: inherit; }
+
+/*# sourceMappingURL=processes.css.map */

@@ -394,6 +394,20 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		/**
+		 * Processes-related states
+		 */
+		.state('processes', {})
+
+		.state('users.show.processes', {})
+		.state('users.show.processes.index', {
+			url: '/users/{id:int}/processes',
+			parent: 'root',
+			controller: 'ProcessUserController@index',
+			templateUrl: 'app/views/users/processes/index.html',
+			css: '/assets/css/processes.css'
+		})
+
+		/**
 		 * Difficulties-related states
 		 */
 		.state('difficulties', {})

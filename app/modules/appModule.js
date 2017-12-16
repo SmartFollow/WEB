@@ -11,6 +11,7 @@ angular.module('app', [
 	'CriteriaModule',
 	'GraphsModule',
 	'ConversationsModule',
+	'ProcessesModule',
 	'DifficultiesModule',
 	'LessonsModule',
 	'AIModule',
