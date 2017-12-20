@@ -11,7 +11,7 @@
 						<p style="margin-bottom: 0;"><em>{{ process.description }}</em></p>
 					</div>
 					<div class="col-md-6 text-right controls">
-						<a href="#" class="btn btn-danger">Retirer le processus</a>
+						<a ng-click="deleteProcess(process)" class="btn btn-danger">Retirer le processus</a>
 					</div>
 				</div>
 			</div>
@@ -41,9 +41,7 @@
 	<div class="page-block">
 		<h2>Ajouter un nouveau processus à {{ user.firstname }} <strong>{{ user.lastname }}</strong></h2>
 
-		<div class="alert alert-warning">Attention, un utilisateur ne peut pas avoir 2 fois le même processus associé.</div>
-
-		<div class="panel panel-default process" ng-repeat="process in processes">
+		<div class="panel panel-default process" ng-repeat="process in processes" ng-if="!process.used">
 			<div class="panel-heading">
 				{{ process.name }}
 				<p style="margin-bottom: 0;"><em>{{ process.description }}</em></p>
@@ -62,7 +60,7 @@
 		</div>
 
 		<div ng-if="processes.length == 0">
-			Aucun processus ne peut être ajouté
+			Aucun processus ne peut être ajouté.
 		</div>
 	</div>
 
