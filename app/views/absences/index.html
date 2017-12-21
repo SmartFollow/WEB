@@ -1,0 +1,65 @@
+<div class="main">
+	<div class="page-block">
+		<h2>Absences non-justifiées</h2>
+
+		<div class="form-group">
+			<label>
+				<input type="checkbox" ng-model="reverse" ng-init="reverse = true" /> Afficher les plus récentes en premier
+			</label>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Étudiant</th>
+					<th>Leçon</th>
+					<th>Professeur</th>
+					<th>Date et heure de l'absence</th>
+					<th style="width: 190px;" ng-if="accessRules.includes('absences.update')">Marquer comme justifiée</th>
+				</tr>
+			</thead>
+			<tbody class="vertically-aligned">
+				<tr ng-repeat="absence in absences | filter: { justified_at: null } | orderBy: 'evaluation.lesson.start':reverse">
+					<td>{{ absence.evaluation.student.firstname }} <strong>{{ absence.evaluation.student.lastname }}</strong></td>
+					<td>{{ absence.evaluation.lesson.subject.name }}</td>
+					<td>{{ absence.evaluation.lesson.subject.teacher.firstname }} <strong>{{ absence.evaluation.lesson.subject.teacher.lastname }}</strong></td>
+					<td>{{ absence.evaluation.lesson.start | date: "dd/MM/yyyy 'à' HH'h'mm" }}</td>
+					<td ng-if="accessRules.includes('absences.update')">
+						<button class="btn btn-danger" ng-click="justify(absence)">Marquer comme justifiée</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="page-block">
+		<h2>Absences justifiées</h2>
+
+		<div class="form-group">
+			<label>
+				<input type="checkbox" ng-model="reverse" ng-init="reverse = true" /> Afficher les plus récentes en premier
+			</label>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Étudiant</th>
+					<th>Leçon</th>
+					<th>Professeur</th>
+					<th>Date et heure de l'absence</th>
+					<th>Date et heure de la justification</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="absence in absences | filter: { justified_at: '' } | orderBy: 'evaluation.lesson.start':reverse">
+					<td>{{ absence.evaluation.student.firstname }} <strong>{{ absence.evaluation.student.lastname }}</strong></td>
+					<td>{{ absence.evaluation.lesson.subject.name }}</td>
+					<td>{{ absence.evaluation.lesson.subject.teacher.firstname }} <strong>{{ absence.evaluation.lesson.subject.teacher.lastname }}</strong></td>
+					<td>{{ absence.evaluation.lesson.start | date: "dd/MM/yyyy 'à' HH'h'mm" }}</td>
+					<td>{{ absence.justified_at | date: "dd/MM/yyyy 'à' HH'h'mm" }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

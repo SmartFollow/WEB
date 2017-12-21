@@ -442,6 +442,16 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			css: '/assets/css/configuration.css'
 		})
 
+		/**
+		 * Absences-related states
+		 */
+		.state('absences', {})
+		.state('absences.index', {
+			url: '/absences',
+			parent: 'root',
+			controller: 'AbsenceController@index',
+			templateUrl: 'app/views/absences/index.html'
+		})
 
 		// Planning view
 		.state('planning', {

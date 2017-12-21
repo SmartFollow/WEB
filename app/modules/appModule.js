@@ -19,6 +19,7 @@ angular.module('app', [
 	'DocumentsModule',
 	'ExamsModule',
 	'SubjectsModule',
+	'AbsencesModule',
 	'ui.bootstrap.datetimepicker',
 	'ui.calendar'
 ]);
