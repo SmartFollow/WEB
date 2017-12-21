@@ -11,7 +11,7 @@
 						<p style="margin-bottom: 0;"><em>{{ process.description }}</em></p>
 					</div>
 					<div class="col-md-6 text-right controls">
-						<a ng-click="deleteProcess(process)" class="btn btn-danger">Retirer le processus</a>
+						<a ng-click="deleteProcess(process)" class="btn btn-danger" ng-if="accessRules.includes('processes-users.destroy')">Retirer le processus</a>
 					</div>
 				</div>
 			</div>
@@ -19,11 +19,11 @@
 				<ul class="row steps">
 					<li ng-repeat="step in process.steps"
 						class="col-md-2" ng-class="step.id == process.pivot.step_id ? 'active' : ''">
-						<a ng-click="setStep(step)" ng-if="step.id != process.pivot.step_id"
+						<a ng-click="setStep(step)" ng-if="step.id != process.pivot.step_id && accessRules.includes('processes-users.update')"
 						   data-toggle="tooltip" data-placement="bottom" title="Sélectionner cette étape">
 							{{ step.name }}
 						</a>
-						<span ng-if="step.id == process.pivot.step_id">{{ step.name }}</span>
+						<span ng-if="step.id == process.pivot.step_id || !accessRules.includes('processes-users.update')">{{ step.name }}</span>
 					</li>
 				</ul>
 
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 
-	<div class="page-block">
+	<div class="page-block" ng-if="accessRules.includes('processes-users.store')">
 		<h2>Ajouter un nouveau processus à {{ user.firstname }} <strong>{{ user.lastname }}</strong></h2>
 
 		<div class="panel panel-default process" ng-repeat="process in processes" ng-if="!process.used">

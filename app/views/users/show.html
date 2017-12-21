@@ -2,7 +2,7 @@
 
 	<!-- User controls -->
 	<div class="row" ng-if="accessRules.includes('users.update')
-							|| accessRules.includes('')">
+							|| accessRules.includes('processes-users.index')">
 		<div class="col-md-12">
 			<div class="block">
 				<div class="row">
@@ -12,7 +12,7 @@
 
 					</div>
 					<div class="col-md-6 text-right">
-						<a ui-sref="users.show.processes.index({ id: profile.id })" class="btn btn-success">Processus de l'utilisateur</a>
+						<a ui-sref="users.show.processes.index({ id: profile.id })" class="btn btn-success" ng-if="accessRules.includes('processes-users.index')">Processus de l'utilisateur</a>
 					</div>
 				</div>
 
