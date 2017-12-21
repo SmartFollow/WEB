@@ -11,17 +11,17 @@
 		</div>
 
 		<dl class="spaced">
-			<dt>level_id</dt>
-			<dd>{{ subject.level_id }}</dd>
+			<dt>Niveau</dt>
+			<dd>{{ subject.level.name }}</dd>
 
 			<dt>Nom</dt>
 			<dd>{{ subject.name }}</dd>
 
 			<dt>Description</dt>
-			<dd>{{ subject.description }}</dd>
+			<dd><em>{{ subject.description || 'Aucune description' }}</em></dd>
 			
-			<dt>teacher_id</dt>
-			<dd>{{ subject.teacher_id }}</dd>
+			<dt>Professeur</dt>
+			<dd><a ui-sref="users.show({ id: subject.teacher_id })">{{ subject.teacher.firstname }} <strong>{{ subject.teacher.lastname }}</strong></a></dd>
 		</dl>
 
 	</div>
