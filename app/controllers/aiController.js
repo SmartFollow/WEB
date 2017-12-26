@@ -79,6 +79,14 @@ angular.module('AIModule')
 					$('#loading').removeClass('hidden');
 					AIFactory.runAbsenceDelaysGiven($scope.displayResults);
 				}
+			},
+			{
+				title: "Génération des alertes",
+				description: "Lance la génération des alertes pour la semaine actuelle qui seront ensuite affichées sur le profil de chaque utilisateur concerné.",
+				runFunction: function() {
+					$('#loading').removeClass('hidden');
+					AIFactory.runAlerts($scope.displayResults);
+				}
 			}
 		];
 	}]);

@@ -118,5 +118,18 @@ angular.module('AIModule')
 						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
 				});
 			},
+			runAlerts: function (callback, errorCallback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/ai/alerts"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			}
 		};
 	}]);

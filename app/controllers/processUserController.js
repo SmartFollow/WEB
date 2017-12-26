@@ -1,5 +1,5 @@
 angular.module('ProcessesModule')
-	.controller('ProcessUserController@index', ['$rootScope', '$scope', '$stateParams', 'ProcessFactory', function ($rootScope, $scope, $stateParams, ProcessFactory) {
+	.controller('ProcessUserController@index', ['$rootScope', '$scope', '$stateParams', 'ProcessFactory', 'AccessRuleFactory', function ($rootScope, $scope, $stateParams, ProcessFactory, AccessRuleFactory) {
 		ProcessFactory.getUserProcesses($stateParams.id, function (user) {
 			$scope.user = user;
 
@@ -9,15 +9,20 @@ angular.module('ProcessesModule')
 				$('[data-toggle="tooltip"]').tooltip()
 			});
 
-			ProcessFactory.getProcesses(function (processes) {
-				$scope.processes = processes;
+			if (AccessRuleFactory.get().includes('processes-users.store'))
+			{
+				ProcessFactory.getProcesses(function (processes) {
+					$scope.processes = processes;
 
-				$scope.user.processes.forEach(function (process) {
-					let index = $scope.processes.findIndex(e => e.id === process.id);
-					if (index > -1)
-						$scope.processes.splice(index, 1);
+					$scope.user.processes.forEach(function (process) {
+						let index = $scope.processes.findIndex(e => e.id === process.id);
+						if (index > -1)
+							$scope.processes.splice(index, 1);
+					});
 				});
-			});
+			}
+			else
+				$scope.processes = [];
 		});
 
 		/**
