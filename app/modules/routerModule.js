@@ -238,6 +238,34 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		/**
+		 * Process-related states
+		 */
+		.state('process', {})
+		.state('process.index', {
+			url: '/process',
+			parent: 'root',
+			controller: 'ProcessController@index',
+			templateUrl: 'app/views/process/index.html'
+		})
+		.state('process.create', {
+			url: '/process/create',
+			parent: 'root',
+			controller: 'ProcessController@create',
+			templateUrl: 'app/views/process/create.html'
+		})
+		.state('process.edit', {
+			url: '/process/{id:int}/edit',
+			parent: 'root',
+			controller: 'ProcessController@edit',
+			templateUrl: 'app/views/process/edit.html'
+		})
+		.state('process.delete', {
+			url: '/process/{id:int}/delete',
+			parent: 'root',
+			controller: 'ProcessController@delete'
+		})
+
+		/**
 		 * Notifications-related states
 		 */
 		.state('notifications', {})

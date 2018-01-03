@@ -1,0 +1,27 @@
+<div class="main">
+    <div class="page-block">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-6 text-right">
+                <a ui-sref="process.index">Voir la liste des processus <span class="glyphicon glyphicon-arrow-right"></span></a>
+            </div>
+        </div>
+
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+        <form>
+            <div class="form-group">
+                <label for="name">Nom du processus</label>
+                <input type="text" name="name" id="name" ng-model="name" placeholder="Nom du processus" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" ng-model="description" placeholder="Courte description" class="form-control" required="required">
+            </div>
+            <button ng-click="createProcess()" class="btn btn-danger">Créer le processus</button>
+        </form>
+        <br />
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+    </div>
+</div>

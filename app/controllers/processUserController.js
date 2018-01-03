@@ -1,4 +1,4 @@
-angular.module('ProcessesModule')
+	angular.module('ProcessesModule')
 	.controller('ProcessUserController@index', ['$rootScope', '$scope', '$stateParams', 'ProcessFactory', 'AccessRuleFactory', function ($rootScope, $scope, $stateParams, ProcessFactory, AccessRuleFactory) {
 		ProcessFactory.getUserProcesses($stateParams.id, function (user) {
 			$scope.user = user;
