@@ -87,6 +87,14 @@ angular.module('AIModule')
 					$('#loading').removeClass('hidden');
 					AIFactory.runAlerts($scope.displayResults);
 				}
+			},
+			{
+				title: "Génération des difficultés",
+				description: "Lance la génération des difficultés pour la semaine actuelle qui seront ensuite affichées sur le profil de chaque professeur concerné.",
+				runFunction: function() {
+					$('#loading').removeClass('hidden');
+					AIFactory.runDifficulties($scope.displayResults);
+				}
 			}
 		];
 	}]);

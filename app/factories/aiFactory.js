@@ -130,6 +130,19 @@ angular.module('AIModule')
 					else
 						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
 				});
+			},
+			runDifficulties: function (callback, errorCallback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/ai/difficulties"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
 			}
 		};
 	}]);
