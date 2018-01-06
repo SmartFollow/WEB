@@ -38,11 +38,11 @@
 				<li class="unread" id="{{conversation.id}}" ng-repeat="conversation in conversations | orderBy:'-'"
 				    ng-init="$last && loadMyScript()">
 					<div class="col col-1"><span class="dot"></span>
-						<div class="checkbox-wrapper">
+						<div class="checkbox-wrapper" ng-if="connectedUser.id == conversation.creator_id">
 							<input type="checkbox" id="chk1">
 							<label for="chk1" class="toggle" style="margin-bottom: 0px;"></label>
 						</div>
-						<p class="title"><span ng-if="user.id != participant.id"
+						<p class="title"><span ng-if="connectedUser.id != participant.id"
 						                       ng-repeat="participant in conversation.participants">{{participant.firstname}} <strong>{{participant.lastname}}</strong><span
 								ng-if="!$last">, </span></span></p>
 					</div>
