@@ -95,6 +95,11 @@
 							<span class="glyphicon glyphicon-hourglass"></span> Absences
 						</a>
 					</li>
+					<li ng-if="accessRules.includes('processes.index')">
+						<a ui-sref="processes.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-equalizer"></span> Processus
+						</a>
+					</li>
 					<li ng-if="accessRules.includes('ai.index')">
 						<a ui-sref="ai-controllers.index" ui-sref-active="active">
 							<span class="glyphicon glyphicon-object-align-horizontal"></span> Contrôleurs de l'IA

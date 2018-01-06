@@ -2,10 +2,10 @@
     <div class="page-block">
         <div class="row" style="margin-bottom: 15px;">
             <div class="col-md-6">
-                <a ui-sref="process.delete({ id: process.id })" class="btn btn-danger" ng-if="accessRules.includes('process.destroy')">Supprimer le processus</a>
+                <a ui-sref="processes.delete({ id: process.id })" class="btn btn-danger" ng-if="accessRules.includes('process.destroy')">Supprimer le processus</a>
             </div>
             <div class="col-md-6 text-right">
-                <a ui-sref="process.index">Voir la liste des processus <span class="glyphicon glyphicon-arrow-right"></span></a>
+                <a ui-sref="processes.index">Voir la liste des processus <span class="glyphicon glyphicon-arrow-right"></span></a>
             </div>
         </div>
 

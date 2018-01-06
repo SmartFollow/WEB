@@ -2,8 +2,8 @@ angular.module('ProcessesModule')
     .controller('ProcessController@index', ['$rootScope', '$scope', '$state', 'ProcessFactory', function ($rootScope, $scope, $state, ProcessFactory) {
         $rootScope.pageTitle = "Liste des processus";
 
-        ProcessFactory.getProcesses(function (process) {
-            $scope.process = process;
+        ProcessFactory.getProcesses(function (processes) {
+            $scope.processes = processes;
         });
     }])
     .controller('ProcessController@create', ['$rootScope', '$scope', '$state', '$timeout', 'ProcessFactory', function ($rootScope, $scope, $state, $timeout, ProcessFactory) {
@@ -27,7 +27,7 @@ angular.module('ProcessesModule')
                 };
 
                 $timeout(function () {
-                    $state.go('process.index');
+                    $state.go('processes.index');
                 }, 3000);
             });
         }
@@ -51,7 +51,7 @@ angular.module('ProcessesModule')
 
             ProcessFactory.updateProcess($stateParams.id, {
                 name: name,
-                description: description,
+                description: description
             }, function (process) {
                 $scope.alerts.success = {
                     show: true,
@@ -59,19 +59,19 @@ angular.module('ProcessesModule')
                 };
 
                 $timeout(function () {
-                    $state.go('process.index');
+                    $state.go('processes.index');
                 }, 3000);
             });
         }
     }])
-    .controller('ProcessController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'PorcessFactory', function ($rootScope, $scope, $state, $stateParams, ProcessFactory) {
+    .controller('ProcessController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'ProcessFactory', function ($rootScope, $scope, $state, $stateParams, ProcessFactory) {
         if (confirm('Êtes-vous sûr de vouloir supprimer le processus ?'))
         {
             ProcessFactory.deleteProcess($stateParams.id, function () {
-                $state.go('process.index');
+                $state.go('processes.index');
             });
         }
         else {
-            $state.go('process.index')
+            $state.go('processes.index')
         }
     }]);

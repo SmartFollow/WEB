@@ -2,7 +2,7 @@
     <div class="page-block">
         <div class="row">
             <div class="col-md-6 col-md-offset-6 text-right">
-                <a ui-sref="process.create" class="btn btn-danger" ng-if="accessRules.includes('process.create')" style="margin-bottom: 15px;">Ajouter un processus</a>
+                <a ui-sref="processes.create" class="btn btn-danger" ng-if="accessRules.includes('processes.create')" style="margin-bottom: 15px;">Ajouter un processus</a>
             </div>
         </div>
 
@@ -12,8 +12,8 @@
                 <th>#</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th ng-if="accessRules.includes('process.edit')">Modifier</th>
-                <th ng-if="accessRules.includes('process.destroy')">Supprimer</th>
+                <th ng-if="accessRules.includes('processes.edit')">Modifier</th>
+                <th ng-if="accessRules.includes('processes.destroy')">Supprimer</th>
             </tr>
             </thead>
             <tbody>
@@ -21,12 +21,11 @@
                 <td>{{ process.id }}</td>
                 <td>{{ process.name }}</td>
                 <td>{{ process.description }}</td>
-
-                <td ng-if="accessRules.includes('process.edit')">
-                    <a ui-sref="process.edit({ id: process.id })">Modifier</a>
+                <td ng-if="accessRules.includes('processes.edit')">
+                    <a ui-sref="processes.edit({ id: process.id })">Modifier</a>
                 </td>
-                <td ng-if="accessRules.includes('process.destroy')">
-                    <a ui-sref="process.delete({ id: process.id })">Supprimer</a>
+                <td ng-if="accessRules.includes('processes.destroy')">
+                    <a ui-sref="processes.delete({ id: process.id })">Supprimer</a>
                 </td>
             </tr>
             </tbody>
