@@ -195,7 +195,13 @@ angular.module('UsersModule')
 		};
 	}])
 	.controller('UserController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'UserFactory', function ($rootScope, $scope, $state, $stateParams, UserFactory) {
-		UserFactory.deleteUser($stateParams.id, function () {
-			$state.go('users.index');
-		});
+		if (confirm('Êtes-vous sûr de vouloir supprimer le processus ?'))
+		{
+			UserFactory.deleteUser($stateParams.id, function () {
+				$state.go('users.index');
+			});
+		}
+		else {
+			$state.go('users.index')
+		}
 	}]);
