@@ -14,6 +14,19 @@ angular.module('ProcessesModule')
 						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
 				});
 			},
+			getProcess: function (id, callback, errorCallback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/processes/" + id
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
 			getUserProcesses: function (userId, callback, errorCallback) {
 				$http({
 					method: 'GET',

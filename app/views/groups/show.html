@@ -30,30 +30,23 @@
 				</div>
 			</dd>
 
-			<dt>Membres du groupe ({{ group.users.length }})</dt>
+			<dt>Steps</dt>
 			<dd>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Prénom</th>
 							<th>Nom</th>
-							<th>Classe</th>
-							<th>Voir</th>
+							<th>Description</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="user in group.users | orderBy: ['lastname', 'firstname']">
-							<td>{{ user.id }}</td>
-							<td>{{ user.firstname }}</td>
-							<td>{{ user.lastname }}</td>
-							<td>{{ user.student_class.name || '-' }}</td>
-							<td>
-								<a ui-sref="users.show({ id: user.id })">Voir</a>
-							</td>
+						<tr ng-repeat="step in process.steps">
+							<td>{{ step.name }}</td>
+							<td>{{ step.description }}</td>
 						</tr>
-						<tr ng-if="group.users.length == 0">
-							<td colspan="5" class="text-center">Le groupe ne comporte aucun membre</td>
+						<tr ng-if="process.steps.length == 0">
+							<td colspan="5" class="text-center">Le processus ne comporte aucun step</td>
 						</tr>
 					</tbody>
 				</table>

@@ -12,6 +12,7 @@
                 <th>#</th>
                 <th>Nom</th>
                 <th>Description</th>
+                <th ng-if="accessRules.includes('processes.show')">Voir</th>
                 <th ng-if="accessRules.includes('processes.edit')">Modifier</th>
                 <th ng-if="accessRules.includes('processes.destroy')">Supprimer</th>
             </tr>
@@ -21,6 +22,9 @@
                 <td>{{ process.id }}</td>
                 <td>{{ process.name }}</td>
                 <td>{{ process.description }}</td>
+                <td ng-if="accessRules.includes('processes.show')">
+                    <a ui-sref="processes.show({ id: process.id })">Voir</a>
+                </td>
                 <td ng-if="accessRules.includes('processes.edit')">
                     <a ui-sref="processes.edit({ id: process.id })">Modifier</a>
                 </td>

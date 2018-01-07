@@ -415,6 +415,12 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'ProcessController@edit',
 			templateUrl: 'app/views/processes/edit.html'
 		})
+		.state('processes.show', {
+			url: '/processes/{id:int}',
+			parent: 'root',
+			controller: 'ProcessController@show',
+			templateUrl: 'app/views/processes/show.html'
+		})
 		.state('processes.delete', {
 			url: '/processes/{id:int}/delete',
 			parent: 'root',

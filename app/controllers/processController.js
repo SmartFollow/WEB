@@ -6,6 +6,37 @@ angular.module('ProcessesModule')
             $scope.processes = processes;
         });
     }])
+    .controller('ProcessController@show', ['$rootScope', '$scope', '$state', '$stateParams', 'ProcessFactory', "StepFactory", function ($rootScope, $scope, $state, $stateParams, ProcessFactory, StepFactory) {
+        $rootScope.pageTitle = "Affichage d'un processus";
+
+        ProcessFactory.getProcess($stateParams.id, function (process) {
+            $scope.process = process;
+
+            $rootScope.pageTitle = "Affichage d'un processus : " + $scope.process.name;
+        });
+
+        $scope.createStep = function () {
+            var name = $('input[name="name"]').val();
+            var description = $('input[name="description"]').val();
+
+            StepFactory.storeStep({
+                name: name,
+                description: description,
+                process_id: $stateParams.id
+            }, function (step) {
+                $rootScope.globalAlerts.push({ type: 'success', text: 'Votre étape a bien été ajoutée.' });
+
+                $scope.process.steps.push(step);
+            });
+        };
+
+        $scope.deleteStep = function (step) {
+            StepFactory.deleteStep(step.id, function () {
+                $rootScope.globalAlerts.push({ type: 'success', text: 'Votre étape a bien été supprimée.' });
+                $scope.process.steps = $scope.process.steps.filter(s => s.id != step.id);
+            });
+        };
+    }])
     .controller('ProcessController@create', ['$rootScope', '$scope', '$state', '$timeout', 'ProcessFactory', function ($rootScope, $scope, $state, $timeout, ProcessFactory) {
         $rootScope.pageTitle = "Ajouter un processus";
         $scope.alerts = {
