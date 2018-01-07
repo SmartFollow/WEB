@@ -397,6 +397,35 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 		 * Processes-related states
 		 */
 		.state('processes', {})
+		.state('processes.index', {
+			url: '/processes',
+			parent: 'root',
+			controller: 'ProcessController@index',
+			templateUrl: 'app/views/processes/index.html'
+		})
+		.state('processes.create', {
+			url: '/processes/create',
+			parent: 'root',
+			controller: 'ProcessController@create',
+			templateUrl: 'app/views/processes/create.html'
+		})
+		.state('processes.edit', {
+			url: '/processes/{id:int}/edit',
+			parent: 'root',
+			controller: 'ProcessController@edit',
+			templateUrl: 'app/views/processes/edit.html'
+		})
+		.state('processes.show', {
+			url: '/processes/{id:int}',
+			parent: 'root',
+			controller: 'ProcessController@show',
+			templateUrl: 'app/views/processes/show.html'
+		})
+		.state('processes.delete', {
+			url: '/processes/{id:int}/delete',
+			parent: 'root',
+			controller: 'ProcessController@delete'
+		})
 
 		.state('users.show.processes', {})
 		.state('users.show.processes.index', {

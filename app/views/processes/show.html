@@ -1,0 +1,61 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6">
+				<a ui-sref="processes.edit({ id: processes.id })" class="btn btn-info" ng-if="accessRules.includes('processes.update') && processes.editable">Modifier le processus</a>
+				<a ui-sref="processes.delete({ id: processes.id })" class="btn btn-danger" ng-if="accessRules.includes('processes.destroy') && processes.deletable">Supprimer le processus</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="processes.index" ng-if="accessRules.includes('processes.index')">Voir la liste des étapes <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<dl class="spaced">
+			<dt>Nom</dt>
+			<dd>{{ process.name }}</dd>
+
+			<dt>Description</dt>
+			<dd>{{ process.description }}</dd>
+
+			<dt>Étapes</dt>
+			<dd>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nom</th>
+							<th>Description</th>
+                            <th>Supprimer</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="(id,step) in process.steps">
+							<td>{{ id + 1 }}</td>
+							<td>{{ step.name }}</td>
+							<td>{{ step.description }}</td>
+                            <td>
+                                <button ng-click="deleteStep(step)" class="btn btn-danger">Supprimer</button>
+                            </td>
+						</tr>
+						<tr ng-if="process.steps.length == 0">
+							<td colspan="5" class="text-center">Le processus ne comporte aucune étape</td>
+						</tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="text" name="name" placeholder="Nom de l'étape" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" name="description" placeholder="Courte description" class="form-control">
+                            </td>
+                            <td>
+                                <button ng-click="createStep()" class="btn btn-primary">Créer l'étape</button>
+                            </td>
+                        </tr>
+					</tbody>
+				</table>
+			</dd>
+		</dl>
+
+	</div>
+</div>

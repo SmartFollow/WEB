@@ -14,6 +14,19 @@ angular.module('ProcessesModule')
 						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
 				});
 			},
+			getProcess: function (id, callback, errorCallback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/processes/" + id
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
 			getUserProcesses: function (userId, callback, errorCallback) {
 				$http({
 					method: 'GET',
@@ -59,6 +72,60 @@ angular.module('ProcessesModule')
 				$http({
 					method: 'DELETE',
 					url: config.apiUrl + "api/users/" + userId + "/processes/" + processId
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			storeProcess: function (data, callback, errorCallback) {
+				$http({
+					method: 'POST',
+					url: config.apiUrl + "api/processes",
+					data: data
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			getEditFormData: function (id, callback, errorCallback) {
+				$http({
+					method: 'GET',
+					url: config.apiUrl + "api/processes/" + id + "/edit"
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			updateProcess: function (id, data, callback, errorCallback) {
+				$http({
+					method: 'PUT',
+					url: config.apiUrl + "api/processes/" + id,
+					data: data
+				}).then(function successCallback(response) {
+					callback(response.data);
+				}, function (response) {
+					if (errorCallback)
+						errorCallback(response.data);
+					else
+						$rootScope.globalAlerts.push({ type: 'danger', text: 'Erreur lors du traitement de votre requête' });
+				});
+			},
+			deleteProcess: function (id, callback, errorCallback) {
+				$http({
+					method: 'DELETE',
+					url: config.apiUrl + "api/processes/" + id
 				}).then(function successCallback(response) {
 					callback(response.data);
 				}, function (response) {
