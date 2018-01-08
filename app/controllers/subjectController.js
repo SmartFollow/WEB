@@ -78,6 +78,8 @@ angular.module('SubjectsModule')
 
 		SubjectFactory.getSubject($stateParams.id, function (subject) {
 			$scope.subject = subject;
+
+			console.log($scope.subject);
 		});
 	}])
 	.controller('SubjectController@delete', ['$rootScope', '$scope', '$state', '$stateParams', 'SubjectFactory', function ($rootScope, $scope, $state, $stateParams, SubjectFactory) {
