@@ -124,7 +124,8 @@
 				<h2 class="title_h2">Résumé des critères récents reçus</h2>
 				<ul class="list-group" ng-if="profile.criteria_sums.length > 0 || profile.criteria_averages.length > 0">
 					<li ng-repeat="criterion_sum in profile.criteria_sums"
-					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}">
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}"
+						ng-if="criterion_sum.sum > 0">
 						<strong>{{ criterion_sum.criterion.name }}</strong>
 						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_sum.criterion.impact] }})
 						<span class="pull-right badge">
@@ -132,7 +133,8 @@
 						</span>
 					</li>
 					<li ng-repeat="criterion_avg in profile.criteria_averages"
-					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_avg.criterion.impact] }}">
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_avg.criterion.impact] }}"
+						ng-if="criterion_avg.average > 0">
 						<strong>{{ criterion_avg.criterion.name }}</strong>
 						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
 						<span class="pull-right badge">

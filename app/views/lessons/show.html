@@ -228,11 +228,17 @@
 						<span>{{student.firstname}} <strong>{{student.lastname}}</strong></span>
 
 						<div class="criteria-container" ng-show="!student.lesson_evaluation || !student.lesson_evaluation.absence">
-							<button ng-repeat="criterion in criteria"
-							        ng-click="updateEvaluationCriterion(student, criterion, 1)"
-							        class="btn btn-{{ { positive: 'success', negative: 'danger' }[criterion.impact] }}">
-								{{ criterion.name }} ({{ criterionFromEvaluation(student.lesson_evaluation, criterion).pivot.value || 0 }})
-							</button>
+							<div class="btn-group" ng-repeat="criterion in criteria">
+								<button ng-click="updateEvaluationCriterion(student, criterion, 1)"
+								        class="left btn btn-{{ { positive: 'success', negative: 'danger' }[criterion.impact] }}">
+									{{ criterion.name }} ({{ criterionFromEvaluation(student.lesson_evaluation, criterion).pivot.value || 0 }})
+								</button>
+								<button ng-click="updateEvaluationCriterion(student, criterion, -1)"
+								        class="right btn btn-{{ { positive: 'success', negative: 'danger' }[criterion.impact] }}"
+										ng-disabled="!criterionFromEvaluation(student.lesson_evaluation, criterion).pivot.value">
+									-
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
