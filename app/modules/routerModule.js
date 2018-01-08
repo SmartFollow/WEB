@@ -288,6 +288,23 @@ routerModule.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'StudentClassController@show',
 			templateUrl: 'app/views/student-classes/show.html'
 		})
+		.state('student-classes.create', {
+			url: '/student-classes/create',
+			parent: 'root',
+			controller: 'StudentClassController@create',
+			templateUrl: 'app/views/student-classes/create.html'
+		})
+		.state('student-classes.edit', {
+			url: '/student-classes/{id:int}/edit',
+			parent: 'root',
+			controller: 'StudentClassController@edit',
+			templateUrl: 'app/views/student-classes/edit.html'
+		})
+		.state('student-classes.delete', {
+			url: '/student-classes/{id:int}/delete',
+			parent: 'root',
+			controller: 'StudentClassController@delete'
+		})
 
 		/**
 		 * Subjects-related states
