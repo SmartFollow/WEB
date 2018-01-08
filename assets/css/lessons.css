@@ -111,7 +111,7 @@
   left: 15px;
   right: 15px;
   background: rgba(255, 255, 255, 0.7);
-  z-index: 300;
+  z-index: 400;
   text-align: center;
   border-radius: 4px; }
   .img-profile-list .block-img-profile .evaluation-loading img {
@@ -126,9 +126,24 @@
   padding: 2.5px 5px;
   z-index: 200;
   display: none; }
-  .img-profile-list .block-img-profile .criteria-container button {
+  .img-profile-list .block-img-profile .criteria-container .btn-group {
     width: 100%;
+    position: relative;
+    height: 34px;
     margin: 2.5px 0; }
+    .img-profile-list .block-img-profile .criteria-container .btn-group button {
+      position: absolute;
+      padding-left: 7px;
+      padding-right: 7px; }
+      .img-profile-list .block-img-profile .criteria-container .btn-group button.right {
+        right: 0;
+        font-weight: bold;
+        z-index: 300; }
+      .img-profile-list .block-img-profile .criteria-container .btn-group button.left {
+        left: 0;
+        width: calc(100% - 21px);
+        text-align: left;
+        z-index: 250; }
 .img-profile-list .block-img-profile:hover .criteria-container, .img-profile-list .block-img-profile.active .criteria-container {
   display: block; }
 

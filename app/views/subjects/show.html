@@ -22,6 +22,15 @@
 			
 			<dt>Professeur</dt>
 			<dd><a ui-sref="users.show({ id: subject.teacher_id })">{{ subject.teacher.firstname }} <strong>{{ subject.teacher.lastname }}</strong></a></dd>
+
+			<dt>Classes liées à la matière</dt>
+			<dd>
+				<ul>
+					<li ng-repeat="student_class in subject.student_classes">
+						<a ui-sref="student-classes.show({ id: student_class.id })">{{ student_class.name }}</a>
+					</li>
+				</ul>
+			</dd>
 		</dl>
 
 	</div>

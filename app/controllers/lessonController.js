@@ -196,9 +196,11 @@ angular.module('app')
 						});
 					}
 					else { // This criterion doesn't have an evaluation, create the evaluation
+						var value = valueUpdate;
+
 						EvaluationFactory.storeCriterionEvaluation(student.lesson_evaluation.id, {
 							criterion_id: criterion.id,
-							value: 1
+							value: value >= 0 ? value : 0
 						}, function (criteria) {
 							student.lesson_evaluation.criteria = criteria;
 							student.inUpdate = false;
