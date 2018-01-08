@@ -18,15 +18,6 @@
 				<label for="resource_link">Lien (optionnel)</label>
 				<input type="text" name="resource_link" id="resource_link" ng-model="resource_link" placeholder="Lien vers une page web" class="form-control">
 			</div>
-			<div class="form-group">
-				<label for="users">Emetteur</label>
-				  <tags-input ng-model="transmittersList" display-property="email" placeholder="Ajouter un émetteur">
-				  <auto-complete source="loadUsers($query)"
-                     min-length="0"
-                     load-on-focus="true"
-                     max-results-to-show="10"></auto-complete>
-                  </tags-input>
-			</div>
 			<button ng-click="updateNotification()" class="btn btn-danger">Editer la notification</button>
 		</form>
 		<br />
