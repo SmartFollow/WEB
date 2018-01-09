@@ -1,12 +1,37 @@
 <div class="main">
 	<div class="page-block">
-
-		<div class="row img-profile-list">
-			<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile"ng-repeat="(key, student) in class.students">
-				<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
-				<span>{{student.firstname}} {{student.lastname}}</span>
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6">
+				<a ui-sref="student-classes.edit({ id: class.id })" class="btn btn-info" ng-if="accessRules.includes('student-classes.update')">Modifier la classe</a>
+				<a ui-sref="student-classes.delete({ id: class.id })" class="btn btn-danger" ng-if="accessRules.includes('student-classes.destroy')">Supprimer la classe</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="student-classes.index" ng-if="accessRules.includes('student-classes.index')">Voir la liste des classes <span class="glyphicon glyphicon-arrow-right"></span></a>
 			</div>
 		</div>
 
+		<dl class="spaced">
+			<dt>Nom</dt>
+			<dd>{{ class.name }}</dd>
+			<dt>Niveau</dt>
+			<dd>{{ class.level.name }}</dd>
+			<dt>Matières</dt>
+			<dd>
+				<ul>
+				  <li ng-repeat="(key, subject) in class.subjects">{{ subject.name }}</li>
+				</ul>
+			</dd>
+			<dt>Professeur principal</dt>
+			<dd>{{ class.main_teacher.name || '-' }}</dd>
+			<dt>Elèves</dt>
+			<dd>
+				<div class="row img-profile-list">
+					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile" ng-repeat="(key, student) in class.students">
+						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
+						<span><a ui-sref="users.show({ id: student.id })">{{student.firstname}} {{student.lastname}}</a></span>
+					</div>
+				</div>
+			</dd>
+		</dl>
 	</div>
 </div>
