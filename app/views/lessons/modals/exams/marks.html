@@ -32,7 +32,7 @@
 								<input type="text" ng-model="student.exam_mark.comment" class="form-control" ng-disabled="student.inUpdate">
 							</td>
 							<td>
-								<button class="btn btn-default" style="width: 100%;" ng-click="updateMark(student)" ng-disabled="student.inUpdate">
+								<button class="btn btn-default" style="width: 100%;" ng-click="updateMark(student)" ng-disabled="student.inUpdate || !student.exam_mark || student.exam_mark.mark === undefined || student.exam_mark.mark === null">
 									<img src="assets/img/loading.gif" ng-if="student.inUpdate" alt="Mise à jour de la note" />
 									{{ !student.inUpdate ? 'Valider' : '' }}
 								</button>

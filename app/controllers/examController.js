@@ -48,7 +48,7 @@ angular.module('ExamsModule')
 	.controller('ExamController@marks', ['$rootScope', '$scope', '$stateParams', 'config', '$state', 'MarkFactory', function ($rootScope, $scope, $stateParams, config, $state, MarkFactory) {
 		$scope.updateMark = function (student) {
 			student.inUpdate = true;
-			if (!student.exam_mark.id) { // There is no mark for the student yet
+			if (!student.exam_mark || !student.exam_mark.id) { // There is no mark for the student yet
 				MarkFactory.storeMark($scope.lesson.exam.id, {
 					student_id: student.id,
 					mark: student.exam_mark.mark,

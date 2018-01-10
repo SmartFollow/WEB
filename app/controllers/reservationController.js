@@ -9,14 +9,10 @@ angular.module('app')
 			url: config.apiUrl + "api/reservations/create"
 		}).then(function successCallback(response) {
 			$scope.reservations = response.data;
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
 		});
 		$scope.create = function () {
 			var room = $('#room_id').val();
 			var day = $('#day').val() != "" ? $('#day').val() : $filter('date')($scope.data.date1, 'EEEE').toUpperCase();
-			console.log(day);
 			var reservation = {
 				room_id: room,
 				time_start: $filter('date')($scope.data.date1, 'HH:mm'),
@@ -30,7 +26,6 @@ angular.module('app')
 				url: config.apiUrl + "api/reservations",
 				data: reservation
 			}).then(function successCallback(response) {
-				console.log(response);
 				if (response.data.error) {
 					if (response.data.error == "reservations.conflict")
 						$(".alert-danger").html("<strong>Erreur !</strong> La salle que vous essayez de réserver l'est déjà à cette horaire.");
@@ -43,7 +38,6 @@ angular.module('app')
 				}, 3000);
 			}, function errorCallback(response) {
 				$(".alert-danger").show();
-				console.log(response);
 			});
 		};
 	}])

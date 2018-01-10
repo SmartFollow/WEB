@@ -1,5 +1,10 @@
 <div class="main">
 	<div class="page-block">
+		<div class="text-center">
+			<a ui-sref="reservations.create" class="btn btn-default" ng-if="accessRules.includes('reservations.create')">Réserver une salle</a>
+			<a ui-sref="lessons.create" class="btn btn-default" ng-if="accessRules.includes('lessons.create')">Ajouter une leçon</a>
+		</div>
+
 		<div id="planning" calendar="myCalendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
 	</div>
 </div>

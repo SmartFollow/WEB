@@ -96,20 +96,6 @@ angular.module('app')
 				defaultView: 'agendaWeek',
 				minTime: '07:00:00',
 				maxTime: '22:00:00',
-				customButtons: {
-					lesson: {
-						text: 'Ajouter une leçon',
-						click: function () {
-							$state.go('lessons.create');
-						}
-					},
-					reservation: {
-						text: 'Réserver une salle',
-						click: function () {
-							$state.go('reservations.create');
-						}
-					}
-				},
 				header: {
 					left: 'title',
 					center: $rootScope.user && $rootScope.user.group_id <= 2 ? 'lesson reservation' : '',
