@@ -121,13 +121,16 @@ angular.module('app')
 		});
 
 	}])
-	.controller('LessonController@show', ['$scope', '$state', '$rootScope', '$http', '$stateParams', 'config', 'LessonFactory', 'EvaluationFactory', function ($scope, $state, $rootScope, $http, $stateParams, config, LessonFactory, EvaluationFactory) {
+	.controller('LessonController@show', ['$scope', '$state', '$rootScope', '$http', '$stateParams', 'config', 'LessonFactory', 'EvaluationFactory', 'AccessRuleFactory', function ($scope, $state, $rootScope, $http, $stateParams, config, LessonFactory, EvaluationFactory, AccessRuleFactory) {
 		$rootScope.pageTitle = "Déroulement du cours";
 		$scope.config = config;
 
-		EvaluationFactory.getCreateFormData($stateParams.id, function (data) {
-			$scope.criteria = data.criteria;
-		});
+		if (AccessRuleFactory.get().includes('evaluations.create'))
+		{
+			EvaluationFactory.getCreateFormData($stateParams.id, function (data) {
+				$scope.criteria = data.criteria;
+			});
+		}
 
 		LessonFactory.getLesson($stateParams.id, function (lesson) {
 			$scope.lesson = lesson;
