@@ -169,19 +169,17 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>#</th>
 							<th>Type</th>
 							<th>Message</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="alert in profile.alerts" ng-class="alert.type">
-							<td>{{ alert.id }}</td>
 							<td><span class="glyphicon glyphicon-{{ { success: 'ok', danger: 'remove', warning: 'warning', info: 'info' }[alert.type] }}-sign"></span></td>
 							<td>{{ alert.message }}</td>
 						</tr>
 						<tr ng-if="profile.alerts.length == 0" class="text-center">
-							<td colspan="3">Aucune alerte à afficher</td>
+							<td colspan="2">Aucune alerte à afficher</td>
 						</tr>
 					</tbody>
 				</table>
