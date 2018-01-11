@@ -20,7 +20,9 @@
 			<dt>Matières</dt>
 			<dd ng-if="class.subjects.length > 0">
 				<ul>
-				  <li ng-repeat="(key, subject) in class.subjects">{{ subject.name }}</li>
+				    <li ng-repeat="(key, subject) in class.subjects">
+					    <a ui-sref="subjects.show({ id: subject.id })">{{ subject.name }}</a>
+				    </li>
 				</ul>
 			</dd>
 			<dd ng-if="class.subjects.length == 0">
@@ -28,7 +30,9 @@
 			</dd>
 
 			<dt>Professeur principal</dt>
-			<dd ng-if="class.main_teacher">{{ class.main_teacher.firstname }} <strong>{{ class.main_teacher.lastname }}</strong></dd>
+			<dd ng-if="class.main_teacher">
+				<a ui-sref="users.show({ id: class.main_teacher.id })">{{ class.main_teacher.firstname }} <strong>{{ class.main_teacher.lastname }}</strong></a>
+			</dd>
 			<dd ng-if="!class.main_teacher"><em>Professeur principal non défini</em></dd>
 
 			<dt>Elèves</dt>

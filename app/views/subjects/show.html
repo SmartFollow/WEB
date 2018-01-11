@@ -21,7 +21,12 @@
 			<dd><em>{{ subject.description || 'Aucune description' }}</em></dd>
 			
 			<dt>Professeur</dt>
-			<dd><a ui-sref="users.show({ id: subject.teacher_id })">{{ subject.teacher.firstname }} <strong>{{ subject.teacher.lastname }}</strong></a></dd>
+			<dd ng-if="subject.teacher">
+				<a ui-sref="users.show({ id: subject.teacher_id })">{{ subject.teacher.firstname }} <strong>{{ subject.teacher.lastname }}</strong></a>
+			</dd>
+			<dd ng-if="!subject.teacher">
+				<em>Cette matière n'est pas affectée à un professeur</em>
+			</dd>
 
 			<dt>Classes liées à la matière</dt>
 			<dd>
