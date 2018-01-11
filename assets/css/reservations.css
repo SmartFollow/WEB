@@ -1,0 +1,12 @@
+.datetimepicker {
+  margin-bottom: 15px;
+  width: 100%;
+  border-bottom: 1px solid #f5f5f5; }
+  .datetimepicker table.table thead th {
+    background-color: #e74c3c; }
+  .datetimepicker table.table thead tr:nth-child(2n-1) th {
+    background-color: #c0392b; }
+  .datetimepicker table.table td, .datetimepicker table.table th {
+    border-radius: 0; }
+
+/*# sourceMappingURL=reservations.css.map */

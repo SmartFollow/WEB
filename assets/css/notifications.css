@@ -1,0 +1,19 @@
+.notifications-list .notification blockquote {
+  font-size: inherit;
+  margin-top: 10px;
+  margin-bottom: 0; }
+.notifications-list .notification .mark-as-read {
+  opacity: 0.3; }
+  .notifications-list .notification .mark-as-read span {
+    display: none; }
+  .notifications-list .notification .mark-as-read span.glyphicon {
+    display: inline-block; }
+  .notifications-list .notification .mark-as-read:hover {
+    color: #3c763d;
+    opacity: 1; }
+    .notifications-list .notification .mark-as-read:hover span {
+      display: inline-block; }
+    .notifications-list .notification .mark-as-read:hover span.glyphicon {
+      padding-left: 5px; }
+
+/*# sourceMappingURL=notifications.css.map */

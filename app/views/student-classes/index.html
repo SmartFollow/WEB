@@ -1,0 +1,40 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="student-classes.create" class="btn btn-danger" ng-if="accessRules.includes('student-classes.create')" style="margin-bottom: 15px;">Ajouter une salle</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>Niveau</th>
+				<th>Nom</th>
+				<th>Professeur principal</th>
+				<th ng-if="accessRules.includes('student-classes.show')">Voir</th>
+				<th ng-if="accessRules.includes('student-classes.edit')">Modifier</th>
+				<th ng-if="accessRules.includes('student-classes.destroy')">Supprimer</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="class in classes | orderBy: 'class.id'">
+				<td>{{ class.id }}</td>
+				<td>{{ class.level.name }}</td>
+				<td>{{ class.name }}</td>
+				<td>{{ class.main_teacher.name || '-' }}</td>
+				<td ng-if="accessRules.includes('student-classes.show')">
+					<a ui-sref="student-classes.show({ id: class.id })">Voir</a>
+				</td>
+				<td ng-if="accessRules.includes('student-classes.edit')">
+					<a ui-sref="student-classes.edit({ id: class.id })">Modifier</a>
+				</td>
+				<td ng-if="accessRules.includes('student-classes.destroy')">
+					<a ui-sref="student-classes.delete({ id: class.id })">Supprimer</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

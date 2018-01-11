@@ -1,0 +1,30 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6">
+				<a ui-sref="criteria.edit({ id: criterion.id })" class="btn btn-info" ng-if="accessRules.includes('criteria.update')">Modifier le critère</a>
+				<a ui-sref="criteria.delete({ id: criterion.id })" class="btn btn-danger" ng-if="accessRules.includes('criteria.destroy')">Supprimer le critère</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="criteria.index" ng-if="accessRules.includes('criteria.index')">Voir la liste des critères <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<dl class="spaced">
+			<dt>Nom</dt>
+			<dd>{{ criterion.name }}</dd>
+
+			<dt>Impact</dt>
+			<dd>{{ { positive: 'Positif', neutral: 'Neutre', negative: 'Négatif' }[criterion.impact] }}</dd>
+
+			<dt>Pourcentage de vérification</dt>
+			<dd>{{ criterion.difference_limit_percentage }}%</dd>
+
+			<dt>Interval de vérification</dt>
+			<dd>{{ criterion.check_interval }} sec</dd>
+
+			<dt>Type de stats</dt>
+			<dd>{{ { sum: 'Somme', average: 'Moyenne' }[criterion.stats_type] }}</dd>
+		</dl>
+	</div>
+</div>

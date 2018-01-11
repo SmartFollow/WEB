@@ -1,0 +1,30 @@
+<div class="main">
+    <div class="page-block">
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-md-6">
+                <a ui-sref="processes.delete({ id: process.id })" class="btn btn-danger" ng-if="accessRules.includes('process.destroy')">Supprimer le processus</a>
+            </div>
+            <div class="col-md-6 text-right">
+                <a ui-sref="processes.index">Voir la liste des processus <span class="glyphicon glyphicon-arrow-right"></span></a>
+            </div>
+        </div>
+
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+        <form>
+            <div class="form-group">
+                <label for="name">Nom du processus</label>
+                <input type="text" name="name" id="name" ng-model="process.name" placeholder="Nom du processus" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" ng-model="process.description" placeholder="Courte description" class="form-control" required>
+            </div>
+            <button ng-click="editProcess()" class="btn btn-danger">Modifier le processus</button>
+        </form>
+        <br />
+        <div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+        <div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+    </div>
+</div>

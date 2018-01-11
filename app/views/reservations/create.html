@@ -1,0 +1,64 @@
+<div class="main">
+	<div class="row">
+		<div class="col-md-6" style="padding-right: 7.5px;">
+			<div class="page-block">
+
+				<div class="alert alert-success" style="display:none;">
+					<strong>Succès !</strong> Votre réservation a été créé avec succès, vous allez être redirigé vers le planning.
+				</div>
+				<div class="alert alert-danger" style="display:none;">
+					<strong>Erreur !</strong> Une erreur c'est produite lors de la réservation, veuillez réessayer ou contactez un administrateur.
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<strong>Date de début</strong>
+						<br />
+						<span class="edit" id="edit1">
+							Le {{reservation.date_start}} à {{reservation.time_start}}
+							<button class="btn btn-info" ng-click="editDate1()" style="margin-left: 10px;">Modifier</button>
+						</span>
+						<datetimepicker id="date1" data-ng-model="data.date1"></datetimepicker>
+					</div>
+
+					<div class="col-md-6 text-center">
+						<strong>Date de fin</strong>
+						<br />
+						<span class="edit" id="edit2">
+							Le {{reservation.date_end}} à {{reservation.time_end}}
+							<button class="btn btn-info" ng-click="editDate2()" style="margin-left: 10px;">Modifier</button>
+						</span>
+						<datetimepicker id="date2" data-ng-model="data.date2"></datetimepicker>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="room_id">Salle</label>
+					<select class="form-control" id="room_id" required>
+						<option selected="{{room.id == reservation.id}}" ng-repeat="room in reservations.rooms"
+						        value="{{room.id}}">
+							{{room.identifier}} ({{room.seats}} places)
+						</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="day">Jour de la semaine</label>
+					<select class="form-control" id="day" required>
+						<option value="MONDAY">Lundi</option>
+						<option value="TUESDAY">Mardi</option>
+						<option value="WEDNESDAY">Mercredi</option>
+						<option value="THURSDAY">Jeudi</option>
+						<option value="FRIDAY">Vendredi</option>
+						<option value="SATURDAY">Samedi</option>
+						<option value="SUNDAY">Dimanche</option>
+					</select>
+				</div>
+
+				<button type="button" class="btn btn-danger" ng-click="create()">{{button}}</button>
+
+				<a type="button" class="btn btn-default delete" href="#/reservations/{{reservation.id}}/delete" style="display: none;">Supprimer</a>
+			</div>
+		</div>
+	</div>
+</div>

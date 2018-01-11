@@ -1,0 +1,27 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row" style="margin-bottom: 15px;">
+			<div class="col-md-6">
+				<a ui-sref="graphs.edit({ id: graph.id })" class="btn btn-info" ng-if="accessRules.includes('graphs.update')">Modifier le graphique</a>
+				<a ui-sref="graphs.delete({ id: graph.id })" class="btn btn-danger" ng-if="accessRules.includes('graphs.destroy')">Supprimer le graphique</a>
+			</div>
+			<div class="col-md-6 text-right">
+				<a ui-sref="graphs.index" ng-if="accessRules.includes('graphs.index')">Voir la liste des graphiques <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<dl class="spaced">
+			<dt>Critère affiché en ordonnée</dt>
+			<dd>{{ graph.criterion.name }}</dd>
+
+			<dt>Type de graphique</dt>
+			<dd>{{ { bar: 'Barres', line: 'Ligne' }[graph.type] }}</dd>
+
+			<dt>Période d'affichage des valeurs</dt>
+			<dd>{{ graph.days_range }} jours</dd>
+
+			<dt>Type des données</dt>
+			<dd>{{ { given: 'Critères donnés', received: 'Critères reçus' }[graph.summary_type] }}</dd>
+		</dl>
+	</div>
+</div>

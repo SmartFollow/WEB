@@ -1,0 +1,42 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="users.create" class="btn btn-danger" ng-if="accessRules.includes('users.store')" style="margin-bottom: 15px;">Créer un utilisateur</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Email</th>
+					<th>Prénom</th>
+					<th>Nom</th>
+					<th>Classe</th>
+					<th>Groupe</th>
+					<th>Voir</th>
+					<th ng-if="accessRules.includes('users.edit')">Modifier</th>
+					<th ng-if="accessRules.includes('users.destroy')">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in users track by user.id">
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.firstname }}</td>
+					<td>{{ user.lastname }}</td>
+					<td>{{ user.student_class ? user.student_class.name : '-' }}</td>
+					<td>{{ user.group.name }}</td>
+					<td><a ui-sref="users.show({ id: user.id })">Voir</a></td>
+					<td ng-if="accessRules.includes('users.edit')">
+						<a ui-sref="users.edit({ id: user.id })">Modifier</a>
+					</td>
+					<td ng-if="accessRules.includes('users.destroy')">
+						<a ui-sref="users.delete({ id: user.id })">Supprimer</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

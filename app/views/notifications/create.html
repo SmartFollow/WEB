@@ -1,0 +1,55 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="notifications.index">Voir la liste des notifications <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" ng-model="message" rows="1" placeholder="Message de la notification" class="form-control" required></textarea>
+			</div>
+			<div class="form-group">
+				<label for="resource_link">Lien (optionnel)</label>
+				<input type="text" name="resource_link" id="resource_link" ng-model="resource_link" placeholder="Lien vers une page web" class="form-control">
+			</div>
+			<h4>Récepteur(s)</h4>
+			<div class="form-group">
+				<label for="users">Utilisateur(s)</label>
+				  <tags-input ng-model="usersList" display-property="email" placeholder="Ajouter un utilisateur">
+				  <auto-complete source="loadUsers($query)"
+                     min-length="0"
+                     load-on-focus="true"
+                     max-results-to-show="10"></auto-complete>
+                  </tags-input>
+			</div>
+			<div class="form-group">
+				<label for="groups">Et / ou groupe (un maximum)</label>
+				  <tags-input ng-model="groupsList" display-property="name" placeholder="Ajouter un groupe" min-tags="0" max-tags="1">
+				  <auto-complete source="loadGroups($query)"
+                     min-length="0"
+                     load-on-focus="true"
+                     max-results-to-show="10"></auto-complete>
+                  </tags-input>
+			</div>
+			<div class="form-group">
+				<label for="classes">Et / ou classe (une maximum)</label>
+				  <tags-input ng-model="classesList" display-property="name" placeholder="Ajouter une classe" min-tags="0" max-tags="1">
+				  <auto-complete source="loadClasses($query)"
+                     min-length="0"
+                     load-on-focus="true"
+                     max-results-to-show="10"></auto-complete>
+                  </tags-input>
+			</div>
+			<button ng-click="createNotification()" class="btn btn-danger">Créer la notification</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>

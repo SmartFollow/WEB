@@ -1,0 +1,67 @@
+<div class="main">
+
+	<div class="page-block">
+		<h2>Liste des processus de {{ user.firstname }} <strong>{{ user.lastname }}</strong></h2>
+
+		<div class="panel panel-default process" ng-repeat="process in user.processes">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-6">
+						{{ process.name }}
+						<p style="margin-bottom: 0;"><em>{{ process.description }}</em></p>
+					</div>
+					<div class="col-md-6 text-right controls">
+						<a ng-click="deleteProcess(process)" class="btn btn-danger" ng-if="accessRules.includes('processes-users.destroy')">Retirer le processus</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<ul class="row steps">
+					<li ng-repeat="step in process.steps"
+						class="col-md-2" ng-class="step.id == process.pivot.step_id ? 'active' : ''">
+						<a ng-click="setStep(step)" ng-if="step.id != process.pivot.step_id && accessRules.includes('processes-users.update')"
+						   data-toggle="tooltip" data-placement="bottom" title="Sélectionner cette étape">
+							{{ step.name }}
+						</a>
+						<span ng-if="step.id == process.pivot.step_id || !accessRules.includes('processes-users.update')">{{ step.name }}</span>
+					</li>
+				</ul>
+
+				<p style="margin-bottom: 0;" ng-if="accessRules.includes('processes-users.update')">
+					<em>Cliquez sur une étape pour la sélectionner comme étape active pour cet utilisateur.</em>
+				</p>
+			</div>
+		</div>
+
+		<div ng-if="user.processes.length == 0">
+			Aucun processus à afficher
+		</div>
+	</div>
+
+	<div class="page-block" ng-if="accessRules.includes('processes-users.store')">
+		<h2>Ajouter un nouveau processus à {{ user.firstname }} <strong>{{ user.lastname }}</strong></h2>
+
+		<div class="panel panel-default process" ng-repeat="process in processes" ng-if="!process.used">
+			<div class="panel-heading">
+				{{ process.name }}
+				<p style="margin-bottom: 0;"><em>{{ process.description }}</em></p>
+			</div>
+			<div class="panel-body">
+				<ul class="row steps">
+					<li ng-repeat="step in process.steps" class="col-md-2">
+						<a ng-click="addProcess(step)">{{ step.name }}</a>
+					</li>
+				</ul>
+
+				<p style="margin-bottom: 0;">
+					<em>Cliquez sur une étape pour ajouter ce processus à l'utilisateur et le régler sur cette étape.</em>
+				</p>
+			</div>
+		</div>
+
+		<div ng-if="processes.length == 0">
+			Aucun processus ne peut être ajouté.
+		</div>
+	</div>
+
+</div>

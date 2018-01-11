@@ -1,0 +1,163 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="navbar-header col-sm-3 col-md-3 col-lg-2 hidden-xs">
+				<h1 class="title"><strong>Smart</strong>Follow</h1>
+			</div>
+			<div class="navbar-controls col-md-9 col-sm-9 col-lg-10">
+				<h2 class="page-title">
+					<span class="glyphicon glyphicon-adjust"></span>
+					{{ pageTitle }}
+				</h2>
+				<div class="controls pull-right">
+					<span>{{ connectedUser.firstname }} <strong>{{ connectedUser.lastname }}</strong></span>
+					<span ng-if="accessRules.includes('users.profile')">
+						<a ui-sref="users.profile" class="glyphicon glyphicon-user"></a>
+					</span>
+					<span>
+						<a ui-sref="configuration.index" class="glyphicon glyphicon-cog"></a>
+					</span>
+					<span>
+						<a href="#" ng-controller="AuthController@logout" ng-click="logout()" class="glyphicon glyphicon-off"></a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-md-3 col-lg-2 sidebar">
+			<div class="row">
+				<ul class="menu">
+					<li ng-if="accessRules.includes('users.profile')">
+						<a ui-sref="users.profile" ui-sref-active="active">
+							<span class="glyphicon glyphicon-user"></span> Votre profil
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('lessons.index') || accessRules.includes('lessons.self.index')">
+						<a ui-sref="planning" ui-sref-active="active">
+							<span class="glyphicon glyphicon-calendar"></span> Planning
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('rooms.index')">
+						<a ui-sref="rooms.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-blackboard"></span> Salles
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('conversations.index')">
+						<a ui-sref="messaging" ui-sref-active="active">
+							<span class="glyphicon glyphicon-envelope"></span> Messagerie
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('groups.index')">
+						<a ui-sref="groups.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-equalizer"></span> Groupes
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('users.index')">
+						<a ui-sref="users.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-user"></span> Utilisateurs
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('student-classes.index')">
+						<a ui-sref="student-classes.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-erase"></span> Classes d'étudiants
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('levels.index')">
+						<a ui-sref="levels.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-option-vertical"></span> Niveaux
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('subjects.index')">
+						<a ui-sref="subjects.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-th"></span> Matières
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('criteria.index')">
+						<a ui-sref="criteria.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-tasks"></span> Critères d'évaluation
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('graphs.index')">
+						<a ui-sref="graphs.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-stats"></span> Graphiques
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('notifications.index') || accessRules.includes('notifications.self.index')">
+						<a ui-sref="notifications.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-send"></span> Notifications
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('absences.index')">
+						<a ui-sref="absences.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-hourglass"></span> Absences
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('processes.index')">
+						<a ui-sref="processes.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-th-large"></span> Processus
+						</a>
+					</li>
+					<li ng-if="accessRules.includes('ai.index')">
+						<a ui-sref="ai-controllers.index" ui-sref-active="active">
+							<span class="glyphicon glyphicon-object-align-horizontal"></span> Contrôleurs de l'IA
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="row notifications" ng-if="accessRules.includes('notifications.self.index')">
+				<div class="col-md-12">
+					<button class="row header collapsed" role="button" data-toggle="collapse"
+					        data-target="#notifications-list-collapse" aria-expanded="false"
+					        aria-controls="notifications-list-collapse">
+						<span class="glyphicon glyphicon glyphicon-th-list"></span> Vos notifications ({{ menuNotifications
+						? menuNotifications.length : '0' }})
+
+						<div class="pull-right">
+							<span class="glyphicon glyphicon glyphicon-plus collapsed"></span>
+							<span class="glyphicon glyphicon glyphicon-minus expanded"></span>
+						</div>
+					</button>
+					<div class="row notifications-list collapse" id="notifications-list-collapse">
+						<div class="col-md-12 notification" ng-repeat="notification in menuNotifications">
+							<div class="info">
+								<strong>Envoyé par</strong>
+								{{ notification.transmitter.firstname }} {{ notification.transmitter.lastname }}
+								<span ng-if="notification.updated_at">
+									<strong>le</strong>
+									<em>{{ notification.updated_at | date: "dd/MM 'à' HH'h'mm" }}</em>
+								</span>
+							</div>
+							<div class="resource" ng-if="notification.resource_link">
+								<strong>Activité concernée :</strong>
+								<a href="{{ notification.resource_link }}">lien</a>
+							</div>
+							<div class="message">
+								{{ notification.message }}
+							</div>
+							<a class="mark-as-read" ng-click="markMenuNotificationAsRead(notification)">
+								<span>marquer comme lue </span><span class="glyphicon glyphicon-check"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2">
+			<div ui-view></div>
+		</div>
+	</div>
+</div>
+
+<div class="global-alerts-wrapper" ng-if="globalAlerts.length > 0" ng-controller="AppController@globalAlerts">
+	<div class="alert alert-{{ alert.type }} alert-dismissible fade in" role="alert" ng-repeat-start="(index, alert) in globalAlerts | orderBy: '-'" ng-if="alert">
+		<button type="button" class="close" ng-click="dismiss(index)"><span aria-hidden="true">&times;</span></button>
+
+		<span class="glyphicon glyphicon-exclamation-sign"></span>
+		{{ alert.text }}
+	</div>
+	<div class="clearfix" ng-repeat-end></div>
+</div>

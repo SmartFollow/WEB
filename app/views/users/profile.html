@@ -1,0 +1,285 @@
+<div class="main">
+	<!-- Main row for the page -->
+	<div class="row">
+		<!-- Left column -->
+		<div class="col-md-6" style="padding-right: 7.5px;">
+
+			<!-- User information -->
+			<div class="block">
+				<div class="row">
+					<div class="col-md-4">
+						<img ng-src="{{ profile.avatar }}" class="img-circle img-profile">
+					</div>
+					<div class="col-md-8">
+						<h2 class="text-left">{{profile.firstname}} <span class="text-uppercase">{{profile.lastname}}</span></h2>
+						<dl class="indented">
+							<dt>Groupe</dt>
+							<dd ng-if="accessRules.includes('groups.show')"><a ui-sref="groups.show({ id: profile.group.id })">{{ profile.group.description }}</a></dd>
+							<dd ng-if="!accessRules.includes('groups.show')">{{ profile.group.description }}</dd>
+
+							<div ng-if="profile.student_class !== null">
+								<dt>Classe</dt>
+								<dd ng-if="accessRules.includes('student-classes.show')"><a ui-sref="student-classes.show({ id: profile.student_class.id })">{{ profile.student_class.name }}</a></dd>
+								<dd ng-if="!accessRules.includes('student-classes.show')">{{ profile.student_class.name }}</dd>
+							</div>
+
+							<dt>Email</dt>
+							<dd>{{ profile.email }}</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+
+			<!-- Daily Planning -->
+			<div class="block" ng-if="accessRules.includes('lessons.self.index')">
+				<h2>Evènements du jour</h2>
+
+				<h3 ng-if-start="profile.today_given_lessons && profile.today_given_lessons.length > 0">Leçons données</h3>
+				<table class="table" ng-if-end>
+					<thead>
+					<tr>
+						<th>Heure</th>
+						<th>Salle</th>
+						<th>Matière</th>
+						<th>Classe</th>
+						<th>Voir</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="lesson in profile.today_given_lessons">
+							<td>{{ lesson.start | date: "HH'h'mm" }} - {{ lesson.end | date: "HH'h'mm" }}</td>
+							<td>{{ lesson.reservation.room.identifier }}</td>
+							<td>{{ lesson.subject.name }}</td>
+							<td>{{ lesson.student_class.name }}</td>
+							<td><a ui-sref="lessons.show({ id: lesson.id })">Voir</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3 ng-if-start="profile.today_received_lessons && profile.today_received_lessons.length > 0">Leçons reçues</h3>
+				<table class="table" ng-if-end>
+					<thead>
+					<tr>
+						<th>Heure</th>
+						<th>Salle</th>
+						<th>Matière</th>
+						<th>Professeur</th>
+						<th>Voir</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="lesson in profile.today_received_lessons">
+							<td>{{ lesson.start | date: "HH'h'mm" }} - {{ lesson.end | date: "HH'h'mm" }}</td>
+							<td>{{ lesson.reservation.room.identifier }}</td>
+							<td>{{ lesson.subject.name }}</td>
+							<td>{{ lesson.subject.teacher.firstname }} {{ lesson.subject.teacher.lastname }}</td>
+							<td><a ui-sref="lessons.show({ id: lesson.id })">Voir</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="text-center"
+				     ng-if="(!profile.today_received_lessons || profile.today_received_lessons.length <= 0)
+							&& (!profile.today_given_lessons || profile.today_given_lessons.length <= 0)">
+					Aucun évènement à afficher aujourd'hui
+				</div>
+			</div>
+
+			<!-- Homeworks -->
+			<div class="block" ng-if="accessRules.includes('users.profile.homeworks')">
+				<h2>Devoirs</h2>
+				<div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Matière</th>
+								<th>Description</th>
+								<th>Leçon</th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="lesson in profile.homeworks">
+							<tr ng-repeat="homework in lesson.homeworks">
+								<td>{{ lesson.subject.name }}</td>
+								<td>{{ homework.description }}</td>
+								<td><a ui-sref="lessons.show({ id: lesson.id })">Voir la leçon</a></td>
+							</tr>
+						</tbody>
+							<tbody ng-if="profile.homeworks.length == 0">
+								<tr>
+									<td colspan="3" class="text-center">Aucun devoir enregistré</td>
+								</tr>
+							</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Graphs -->
+			<div class="block" ng-if="accessRules.includes('criteria.summary.received') || accessRules.includes('criteria.summary.given')">
+				<h2>Progression des critères</h2>
+
+				<graph data="graphs" ng-if="graphs.length > 0 && showGraphs"></graph>
+				<div class="text-center" ng-if="graphs.length == 0 || !showGraphs">Aucune donnée à afficher</div>
+			</div>
+		</div>
+
+		<!-- Right column -->
+		<div class="col-md-6" style="padding-left: 7.5px;">
+
+			<!-- Received criteria summary -->
+			<div class="block" ng-if="accessRules.includes('criteria.summary.received')">
+				<h2 class="title_h2">Résumé des critères récents reçus</h2>
+				<ul class="list-group" ng-if="profile.criteria_sums.length > 0 || profile.criteria_averages.length > 0">
+					<li ng-repeat="criterion_sum in profile.criteria_sums"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}"
+					    ng-if="criterion_sum.sum > 0">
+						<strong>{{ criterion_sum.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_sum.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_sum.sum | number: 0 }}
+						</span>
+					</li>
+					<li ng-repeat="criterion_avg in profile.criteria_averages"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_avg.criterion.impact] }}"
+					    ng-if="criterion_avg.average > 0">
+						<strong>{{ criterion_avg.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_avg.average | number: 1 }}
+						</span>
+					</li>
+				</ul>
+
+				<ul class="list-group" ng-if="profile.last_absences_delays_sum">
+					<li class="list-group-item list-group-item-{{ profile.last_absences_delays_sum.absences == 0 ? 'success' : 'danger' }}">
+						<strong>Absences de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.last_absences_delays_sum.absences }}
+						</span>
+					</li>
+					<li class="list-group-item list-group-item-{{ profile.last_absences_delays_sum.delays == 0 ? 'success' : 'danger' }}">
+						<strong>Retards de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.last_absences_delays_sum.delays }}
+						</span>
+					</li>
+				</ul>
+				<div class="text-center" ng-if="profile.criteria_sums.length == 0 && profile.criteria_averages.length == 0 && !profile.last_absences_delays_sum">
+					Aucun critère enregistré récemment
+				</div>
+			</div>
+
+			<!-- Given criteria summary -->
+			<div class="block" ng-if="accessRules.includes('criteria.summary.given')">
+				<h2 class="title_h2">Résumé des critères récents donnés</h2>
+				<ul class="list-group" ng-if="profile.given_criteria_sums.length > 0 || profile.given_criteria_averages.length > 0">
+					<li ng-repeat="criterion_sum in profile.given_criteria_sums"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_sum.criterion.impact] }}">
+						<strong>{{ criterion_sum.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_sum.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_sum.sum | number: 0 }}
+						</span>
+					</li>
+					<li ng-repeat="criterion_avg in profile.given_criteria_averages"
+					    class="list-group-item list-group-item-{{ { positive: 'success', negative: 'danger', neutral: 'info' }[criterion_avg.criterion.impact] }}">
+						<strong>{{ criterion_avg.criterion.name }}</strong>
+						({{ { positive: 'positif', negative: 'négatif', neutral: 'neutre' }[criterion_avg.criterion.impact] }})
+						<span class="pull-right badge">
+							{{ criterion_avg.average | number: 1 }}
+						</span>
+					</li>
+				</ul>
+
+				<ul class="list-group" ng-if="profile.given_last_absences_delays_sum">
+					<li class="list-group-item list-group-item-{{ profile.given_last_absences_delays_sum.absences == 0 ? 'success' : 'danger' }}">
+						<strong>Absences de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.given_last_absences_delays_sum.absences }}
+						</span>
+					</li>
+					<li class="list-group-item list-group-item-{{ profile.given_last_absences_delays_sum.delays == 0 ? 'success' : 'danger' }}">
+						<strong>Retards de la semaine</strong>
+						<span class="pull-right badge">
+							{{ profile.given_last_absences_delays_sum.delays }}
+						</span>
+					</li>
+				</ul>
+				<div class="text-center" ng-if="profile.given_criteria_sums.length == 0 && profile.given_criteria_averages.length == 0 && !profile.given_last_absences_delays_sum">
+					Aucun critère enregistré récemment
+				</div>
+			</div>
+
+			<!-- Student difficulties -->
+			<div class="block" ng-if="accessRules.includes('difficulties.index') || accessRules.includes('difficulties.self.index')">
+				<h2>Elèves en difficultés</h2>
+				<div class="row img-profile-list">
+					<a ui-sref="users.show({ id: difficulty.student.id })" class="col-md-4 text-center block-img-profile" ng-repeat="difficulty in profile.assigned_difficulties | limitTo: 3">
+						<img ng-src="{{ config.apiUrl + difficulty.student.avatar }}" class="img-circle img-profile" />
+						<span>{{ difficulty.student.firstname }} {{ difficulty.student.lastname }}</span>
+					</a>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center" ng-if="profile.assigned_difficulties.length == 0">
+						<p>Aucun étudiant en difficulté ne vous a été assigné actuellement.</p>
+					</div>
+					<div class="col-md-12 text-center">
+						<a ui-sref="difficulties.index">Voir tous les élèves en difficulté</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Alerts -->
+			<div class="block" ng-if="accessRules.includes('alerts.self.index')">
+				<h2>Alertes</h2>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Type</th>
+							<th>Message</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="alert in profile.alerts" ng-class="alert.type">
+							<td>{{ alert.id }}</td>
+							<td><span class="glyphicon glyphicon-{{ { success: 'ok', danger: 'remove', warning: 'warning', info: 'info' }[alert.type] }}-sign"></span></td>
+							<td>{{ alert.message }}</td>
+						</tr>
+						<tr ng-if="profile.alerts.length == 0" class="text-center">
+							<td colspan="3">Aucune alerte à afficher</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Marks -->
+			<div class="block" ng-if="accessRules.includes('marks.self.index')">
+				<h2>Notes</h2>
+				<div>
+					<table class="table">
+						<thead>
+						<tr>
+							<th>Matière</th>
+							<th>Note</th>
+							<th>Commentaire</th>
+							<th>Leçon</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="mark in profile.marks">
+							<td>{{ mark.exam.lesson.subject.name }}</td>
+							<td>{{ mark.mark }}</td>
+							<td>{{ mark.comment ? mark.comment : '-' }}</td>
+							<td><a ui-sref="lessons.show({ id: mark.exam.lesson.id })">Voir la leçon</a></td>
+						</tr>
+						<tr ng-if="profile.marks.length == 0">
+							<td colspan="4" class="text-center">Aucune note enregistrée</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

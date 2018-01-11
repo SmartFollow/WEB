@@ -1,0 +1,53 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="student-classes.index" ng-if="accessRules.includes('student-classes.index')">Voir la liste des classes <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name" ng-model="class.name" placeholder="Nom de la classe" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="level">Niveau</label>
+        <select name="level" id="level" ng-model="class.level" class="form-control">
+          <option ng-repeat="(key, level) in class.levels" value="{{ level.id }}">{{ level.name }}</option>
+        </select>
+			</div>
+      <div class="form-group">
+        <label for="subjects">Matière(s) (optionnel)</label>
+          <tags-input ng-model="subjectsList" display-property="name" placeholder="Ajouter une matière">
+            <auto-complete source="loadSubjects($query)"
+             min-length="0"
+             load-on-focus="true"
+             max-results-to-show="10"></auto-complete>
+         </tags-input>
+      </div>
+      <div class="form-group">
+        <label for="main_teacher">Professeur principal (optionnel)</label>
+        <select name="main_teacher" id="main_teacher" ng-model="class.main_teacher" class="form-control">
+          <option ng-repeat="(key, user) in class.users" ng-if="user.group_id == 2" value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
+        </select>
+      </div>
+			<div class="form-group">
+				<label for="users">Elève(s) (optionnel)</label>
+				  <tags-input ng-model="studentsList" display-property="email" placeholder="Ajouter un utilisateur">
+  				  <auto-complete source="loadStudents($query)"
+             min-length="0"
+             load-on-focus="true"
+             max-results-to-show="10"></auto-complete>
+          </tags-input>
+			</div>
+			<button ng-click="createStudentClass()" class="btn btn-danger">Créer</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>

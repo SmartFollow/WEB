@@ -1,0 +1,46 @@
+<div id="modal-exam-marks" class="modal fade" tabindex="-1" role="dialog" ng-controller="ExamController@marks">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Noter l'examen</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<thead>
+					<tr>
+						<th>Étudiant</th>
+						<th style="width: 160px;">Note</th>
+						<th>Commentaire</th>
+						<th style="width: 87px;">Valider</th>
+					</tr>
+					</thead>
+					<tbody class="vertically-aligned">
+						<tr ng-repeat="student in lesson.student_class.students | orderBy: ['lastname', 'firstname'] ">
+							<td>{{ student.firstname }} <strong>{{ student.lastname }}</strong></td>
+							<td>
+								<div class="input-group">
+									<span class="input-group-addon">{{ lesson.exam.min_mark }}</span>
+									<input type="number" min="{{ lesson.exam.min_mark }}" max="{{ lesson.exam.max_mark }}"
+									       ng-model="student.exam_mark.mark" class="form-control text-center" ng-disabled="student.inUpdate">
+									<span class="input-group-addon">{{ lesson.exam.max_mark }}</span>
+								</div>
+							</td>
+							<td>
+								<input type="text" ng-model="student.exam_mark.comment" class="form-control" ng-disabled="student.inUpdate">
+							</td>
+							<td>
+								<button class="btn btn-default" style="width: 100%;" ng-click="updateMark(student)" ng-disabled="student.inUpdate || !student.exam_mark || student.exam_mark.mark === undefined || student.exam_mark.mark === null">
+									<img src="assets/img/loading.gif" ng-if="student.inUpdate" alt="Mise à jour de la note" />
+									{{ !student.inUpdate ? 'Valider' : '' }}
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

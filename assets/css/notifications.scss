@@ -1,0 +1,33 @@
+@import "_variables";
+
+.notifications-list
+{
+	.notification
+	{
+		blockquote {
+			font-size: inherit;
+			margin-top: 10px;
+			margin-bottom: 0;
+		}
+
+		.mark-as-read {
+			opacity: 0.3;
+
+			span {
+				display: none;
+			}
+			span.glyphicon {
+				display: inline-block;
+			}
+
+			&:hover {
+				color: #3c763d;
+				opacity: 1;
+
+				span { display: inline-block; }
+				span.glyphicon { padding-left: 5px; }
+			}
+		}
+
+	}
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Smartfollow</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Libs CSS -->
+	<link rel="stylesheet" type="text/css" href="/assets/libs/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/libs/ng-tags-input/css/ng-tags-input.min.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/libs/ng-tags-input/css/ng-tags-input.bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/libs/fullcalendar/css/fullcalendar.min.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/libs/angular-bootstrap-datetimepicker/css/datetimepicker.css">
+
+	<!-- Libs scripts -->
+		<!-- Frameworks -->
+		<script src="/assets/libs/jquery/jquery.min.js"></script>
+		<script src="/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/assets/libs/moment/moment.js"></script>
+		<script src="/assets/libs/angular/angular.js"></script>
+		<!-- Angular Components -->
+		<script src="/assets/libs/angular-cookies/angular-cookies.min.js"></script>
+		<script src="/assets/libs/query-string/query-string.js"></script>
+		<script src="/assets/libs/angular-oauth2/angular-oauth2.min.js"></script>
+		<script src="/assets/libs/angular-ui-router/angular-ui-router.min.js"></script>
+		<script src="/assets/libs/angular-css/angular-css.min.js"></script>
+		<script src="/assets/libs/angular-ui-calendar/calendar.js"></script>
+		<script src="/assets/libs/angular-bootstrap-datetimepicker/js/datetimepicker.js"></script>
+		<script src="/assets/libs/angular-bootstrap-datetimepicker/js/datetimepicker.templates.js"></script>
+		<!-- Misc -->
+		<script src="/assets/libs/ng-tags-input/js/ng-tags-input.min.js"></script>
+		<script src="/assets/libs/fullcalendar/js/fullcalendar.min.js"></script>
+		<script src="/assets/libs/fullcalendar/js/locale/fr.js"></script>
+		<script src="/assets/libs/chart.js/Chart.min.js"></script>
+
+
+	<!-- App stylesheets -->
+	<link rel="icon" type="svg" href="/assets/img/logo.ico" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+	<!-- App scripts -->
+		<!-- App Configs -->
+		<script src="/app/constants/config.js"></script>
+		<!-- App Modules -->
+		<script src="/app/modules/appModule.js"></script>
+		<script src="/app/modules/authModule.js"></script>
+		<script src="/app/modules/routerModule.js"></script>
+		<script src="/app/modules/usersModule.js"></script>
+		<script src="/app/modules/groupsModule.js"></script>
+		<script src="/app/modules/studentClassesModule.js"></script>
+		<script src="/app/modules/roomsModule.js"></script>
+		<script src="/app/modules/notificationsModule.js"></script>
+		<script src="/app/modules/criteriaModule.js"></script>
+		<script src="/app/modules/graphsModule.js"></script>
+		<script src="/app/modules/conversationsModule.js"></script>
+		<script src="/app/modules/difficultiesModule.js"></script>
+		<script src="/app/modules/aiModule.js"></script>
+		<script src="/app/modules/subjectsModule.js"></script>
+		<script src="/app/modules/lessonsModule.js"></script>
+		<script src="/app/modules/homeworksModule.js"></script>
+		<script src="/app/modules/documentsModule.js"></script>
+		<script src="/app/modules/examsModule.js"></script>
+		<script src="/app/modules/levelsModule.js"></script>
+		<script src="/app/modules/processesModule.js"></script>
+		<script src="/app/modules/absencesModule.js"></script>
+		<!-- App Factories -->
+		<script src="/app/factories/accessRuleFactory.js"></script>
+		<script src="/app/factories/userFactory.js"></script>
+		<script src="/app/factories/groupFactory.js"></script>
+		<script src="/app/factories/studentClassFactory.js"></script>
+		<script src="/app/factories/roomFactory.js"></script>
+		<script src="/app/factories/notificationFactory.js"></script>
+		<script src="/app/factories/criterionFactory.js"></script>
+		<script src="/app/factories/graphFactory.js"></script>
+		<script src="/app/factories/conversationFactory.js"></script>
+		<script src="/app/factories/difficultyFactory.js"></script>
+		<script src="/app/factories/aiFactory.js"></script>
+		<script src="/app/factories/subjectFactory.js"></script>
+		<script src="/app/factories/lessonFactory.js"></script>
+		<script src="/app/factories/evaluationFactory.js"></script>
+		<script src="/app/factories/homeworkFactory.js"></script>
+		<script src="/app/factories/documentFactory.js"></script>
+		<script src="/app/factories/examFactory.js"></script>
+		<script src="/app/factories/markFactory.js"></script>
+		<script src="/app/factories/levelFactory.js"></script>
+		<script src="/app/factories/processFactory.js"></script>
+		<script src="/app/factories/stepFactory.js"></script>
+		<script src="/app/factories/absenceFactory.js"></script>
+		<!-- App Controllers -->
+		<script src="/app/controllers/authController.js"></script>
+		<script src="/app/controllers/menuController.js"></script>
+		<script src="/app/controllers/userController.js"></script>
+		<script src="/app/controllers/groupController.js"></script>
+		<script src="/app/controllers/reservationController.js"></script>
+		<script src="/app/controllers/lessonController.js"></script>
+		<script src="/app/controllers/messagingController.js"></script>
+		<script src="/app/controllers/homeworkController.js"></script>
+		<script src="/app/controllers/alertController.js"></script>
+		<script src="/app/controllers/notificationController.js"></script>
+		<script src="/app/controllers/markController.js"></script>
+		<script src="/app/controllers/graphController.js"></script>
+		<script src="/app/controllers/planningController.js"></script>
+		<script src="/app/controllers/roomController.js"></script>
+		<script src="/app/controllers/studentClassController.js"></script>
+		<script src="/app/controllers/criterionController.js"></script>
+		<script src="/app/controllers/graphController.js"></script>
+		<script src="/app/controllers/difficultyController.js"></script>
+		<script src="/app/controllers/aiController.js"></script>
+		<script src="/app/controllers/subjectController.js"></script>
+		<script src="/app/controllers/documentController.js"></script>
+		<script src="/app/controllers/examController.js"></script>
+		<script src="/app/controllers/levelController.js"></script>
+		<script src="/app/controllers/configurationController.js"></script>
+		<script src="/app/controllers/appController.js"></script>
+		<script src="/app/controllers/processUserController.js"></script>
+		<script src="/app/controllers/processController.js"></script>
+		<script src="/app/controllers/absenceController.js"></script>
+		<!-- App Filters -->
+		<script src="/app/filters/acronym.js"></script>
+		<script src="/app/filters/trusted.js"></script>
+		<!-- App Directives -->
+		<script src="/app/directives/modal.js"></script>
+		<script src="/app/directives/graph.js"></script>
+</head>
+
+<body ng-app="app">
+	<div ui-view></div>
+</body>
+</html>

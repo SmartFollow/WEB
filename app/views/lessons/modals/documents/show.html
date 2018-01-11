@@ -1,0 +1,32 @@
+<div id="modal-document-show" class="modal fade" tabindex="-1" role="dialog" ng-controller="DocumentController@show">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Voir le document</h4>
+			</div>
+			<div class="modal-body">
+				<dl class="spaced no-bottom-margin">
+					<dt>Nom du document</dt>
+					<dd>{{ showDocument.name }}</dd>
+
+					<dt>Description</dt>
+					<dd>
+						{{ showDocument.description }}
+						<em ng-if="!showDocument.description">Aucune description</em>
+					</dd>
+
+					<dt>Nom du fichier original</dt>
+					<dd>{{ showDocument.filename }}.{{ showDocument.extension }}</dd>
+
+					<dt>Document</dt>
+					<dd>
+						<embed ng-src="{{ (config.apiUrl + showDocument.path) | trusted }}" width="100%" height="450" type="application/pdf">
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>

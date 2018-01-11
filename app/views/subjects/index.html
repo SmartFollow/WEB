@@ -1,0 +1,40 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="subjects.create" class="btn btn-danger" ng-if="accessRules.includes('subjects.store')" style="margin-bottom: 15px;">Créer une matière</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Niveau</th>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Professeur</th>
+					<th>Voir</th>
+					<th ng-if="accessRules.includes('subjects.edit')">Modifier</th>
+					<th ng-if="accessRules.includes('subjects.destroy')">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="subject in subjects track by subject.id">
+					<td>{{ subject.id }}</td>
+					<td>{{ subject.level.name }}</td>
+					<td>{{ subject.name }}</td>
+					<td>{{ subject.description ? subject.description : '-' }}</td>
+					<td><a ui-sref="users.show({ id: subject.teacher.id })">{{ subject.teacher.firstname }} {{ subject.teacher.lastname }}</a></td>
+					<td><a ui-sref="subjects.show({ id: subject.id })">Voir</a></td>
+					<td ng-if="accessRules.includes('subjects.edit')">
+						<a ui-sref="subjects.edit({ id: subject.id })">Modifier</a>
+					</td>
+					<td ng-if="accessRules.includes('subjects.destroy')">
+						<a ui-sref="subjects.delete({ id: subject.id })">Supprimer</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

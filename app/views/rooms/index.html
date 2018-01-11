@@ -1,0 +1,34 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="rooms.create" class="btn btn-danger" ng-if="accessRules.includes('rooms.create')" style="margin-bottom: 15px;">Ajouter une salle</a>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>Identifiant</th>
+				<th># de sièges</th>
+				<th ng-if="accessRules.includes('rooms.edit')">Modifier</th>
+				<th ng-if="accessRules.includes('rooms.destroy')">Supprimer</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="room in rooms | orderBy: 'room.identifier'">
+				<td>{{ room.id }}</td>
+				<td>{{ room.identifier }}</td>
+				<td>{{ room.seats }}</td>
+				<td ng-if="accessRules.includes('rooms.edit')">
+					<a ui-sref="rooms.edit({ id: room.id })">Modifier</a>
+				</td>
+				<td ng-if="accessRules.includes('rooms.destroy')">
+					<a ui-sref="rooms.delete({ id: room.id })">Supprimer</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+<div class="main">
+	<div class="page-block">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-6 text-right">
+				<a ui-sref="criteria.index">Voir la liste des critères <span class="glyphicon glyphicon-arrow-right"></span></a>
+			</div>
+		</div>
+
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+
+		<form>
+			<div class="form-group">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name" ng-model="name" placeholder="Nom du critère" class="form-control" required="required">
+			</div>
+
+			<div class="form-group">
+				<label for="impact">Impact</label>
+				<select name="impact" id="impact" ng-model="impact" class="form-control" required="required">
+					<option value="{{ key }}" ng-repeat="(key, impact) in impacts">{{ impact }}</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="difference_limit_percentage">Pourcentage de différence pour alerter</label>
+				<input type="number" name="difference_limit_percentage" id="difference_limit_percentage" ng-model="difference_limit_percentage" placeholder="Pourcentage de différence pour alerter" class="form-control" required="required">
+			</div>
+
+			<div class="form-group">
+				<label for="check_interval">Interval d'aggrégation</label>
+				<input type="number" name="check_interval" id="check_interval" ng-model="check_interval" placeholder="Interval d'aggrégation" class="form-control" required="required">
+			</div>
+
+			<div class="form-group">
+				<label for="stats_type">Type de statistique</label>
+				<select name="stats_type" id="stats_type" ng-model="stats_type" class="form-control" required="required">
+					<option value="{{ key }}" ng-repeat="(key, stats_type) in stats_types">{{ stats_type }}</option>
+				</select>
+			</div>
+
+			<button ng-click="createCriterion()" class="btn btn-danger">Créer le critère</button>
+		</form>
+		<br />
+		<div class="alert alert-success" ng-show="alerts.success.show === true">{{ alerts.success.text }}</div>
+		<div class="alert alert-danger" ng-show="alerts.danger.show === true">{{ alerts.danger.text }}</div>
+	</div>
+</div>
