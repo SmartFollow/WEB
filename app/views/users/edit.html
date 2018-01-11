@@ -33,7 +33,9 @@
 			</div>
 			<div class="form-group">
 				<label for="studentClass">Classe</label>
-				<select class="form-control" id="studentClass" ng-model="user.class_id" ng-options="studentClass.id as studentClass.name for studentClass in studentClasses" required></select>
+				<select class="form-control" id="studentClass" ng-model="user.class_id" ng-options="studentClass.id as studentClass.name for studentClass in studentClasses">
+					<option value="">-- Aucune classe --</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<button ng-click="editUser()" class="btn btn-danger">Modifier l'utilisateur</button>
