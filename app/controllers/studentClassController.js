@@ -145,7 +145,7 @@ angular.module('StudentClassesModule')
 			StudentClassFactory.updateStudentClass ($stateParams.id, {
 				name: $scope.class.name,
 				level: $scope.class.level.id,
-				main_teacher_id: $scope.class.main_teacher.id
+				main_teacher_id: $scope.class.main_teacher ? $scope.class.main_teacher.id : undefined
 			}, function (studentClass) {
 				if ($scope.class.students && $scope.class.students.length > 0 && $scope.class.subjects && $scope.class.subjects.length > 0)
 				{

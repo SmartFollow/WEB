@@ -13,24 +13,39 @@
 		<dl class="spaced">
 			<dt>Nom</dt>
 			<dd>{{ class.name }}</dd>
+
 			<dt>Niveau</dt>
 			<dd>{{ class.level.name }}</dd>
+
 			<dt>Matières</dt>
-			<dd>
+			<dd ng-if="class.subjects.length > 0">
 				<ul>
-				  <li ng-repeat="(key, subject) in class.subjects">{{ subject.name }}</li>
+				    <li ng-repeat="(key, subject) in class.subjects">
+					    <a ui-sref="subjects.show({ id: subject.id })">{{ subject.name }}</a>
+				    </li>
 				</ul>
 			</dd>
+			<dd ng-if="class.subjects.length == 0">
+				<em>Cette classe n'est liée à aucune matière</em>
+			</dd>
+
 			<dt>Professeur principal</dt>
-			<dd>{{ class.main_teacher.name || '-' }}</dd>
+			<dd ng-if="class.main_teacher">
+				<a ui-sref="users.show({ id: class.main_teacher.id })">{{ class.main_teacher.firstname }} <strong>{{ class.main_teacher.lastname }}</strong></a>
+			</dd>
+			<dd ng-if="!class.main_teacher"><em>Professeur principal non défini</em></dd>
+
 			<dt>Elèves</dt>
-			<dd>
+			<dd ng-if="class.students.length > 0">
 				<div class="row img-profile-list">
 					<div class="col-xs-6 col-sm-4 col-md-2 text-center block-img-profile" ng-repeat="(key, student) in class.students">
 						<img ng-src="{{ config.apiUrl + student.avatar }}" class="img-circle img-profile"/>
 						<span><a ui-sref="users.show({ id: student.id })">{{student.firstname}} {{student.lastname}}</a></span>
 					</div>
 				</div>
+			</dd>
+			<dd ng-if="class.students.length == 0">
+				<em>Aucun élève dans cette classe</em>
 			</dd>
 		</dl>
 	</div>

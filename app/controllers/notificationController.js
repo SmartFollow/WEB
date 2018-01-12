@@ -97,9 +97,9 @@ angular.module('NotificationsModule')
 			NotificationFactory.storeNotification ({
 				resource_link: $scope.resource_link,
 				message: $scope.message,
-				users: $scope.usersList.map(a => a.id),
-				group : $scope.groupsList ? $scope.groupsList.map(a => a.id)[0] : "",
-				student_class : $scope.classesList ? $scope.classesList.map(a => a.id)[0] : ""
+				users: $scope.usersList ? $scope.usersList.map(a => a.id) : undefined,
+				group: $scope.groupsList ? $scope.groupsList.map(a => a.id)[0] : undefined,
+				student_class : $scope.classesList ? $scope.classesList.map(a => a.id)[0] : undefined
 			}, function (notification) {
 				$scope.alerts.success = {
 					show: true,
